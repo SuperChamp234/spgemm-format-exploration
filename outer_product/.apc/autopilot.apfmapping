@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="matrix_multiplier.cpp" path="/home/zain/Documents/hls/processing_elements/processing_elements/src/matrix_multiplier.cpp"/>
+    <originFiles name="matrix_multiplier.h" path="/home/zain/Documents/hls/processing_elements/processing_elements/src/matrix_multiplier.h"/>
+    <originFiles name="outer_product.cpp" path="/home/zain/Documents/hls/processing_elements/processing_elements/src/outer_product.cpp"/>
+    <originFiles name="outer_product.h" path="/home/zain/Documents/hls/processing_elements/processing_elements/src/outer_product.h"/>
+  </source>
+  <testbench>
+    <originFiles name="outer_product_tb.cpp" path="/home/zain/Documents/hls/processing_elements/processing_elements/src/outer_product_tb.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

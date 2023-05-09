@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vivadoHLSLog:LogRoot xmlns:vivadoHLSLog="www.xilinx.com/vivadoHLSLog">
+  <errorLogs>
+    <logs>
+      <synLog/>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T12:12:39.832+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T12:09:14.433+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T12:07:54.578+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T12:03:39.320+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T12:03:39.315+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T12:01:34.774+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T12:01:34.767+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T12:01:18.220+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:58:28.682+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:58:28.678+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:58:11.735+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:58:11.728+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:56:08.867+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:56:08.859+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:54:30.930+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:54:30.923+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:54:06.074+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:54:06.068+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:53:58.315+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:53:58.307+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:53:04.276+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:53:04.269+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:52:21.526+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:52:21.521+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:50:24.175+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:50:24.168+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:47:55.542+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:47:55.530+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:43:53.695+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:43:53.689+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:42:10.062+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:42:10.055+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:38:38.201+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:38:38.189+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:37:57.980+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:28:39.871+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:28:39.864+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:28:02.978+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:27:25.243+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T07:51:27.506+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T07:51:27.496+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T07:49:52.350+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T07:49:52.340+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T07:49:22.494+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T07:49:22.480+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T07:47:39.393+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T07:47:39.377+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:34:09.796+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:34:09.755+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:30:12.821+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:30:12.817+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:27:52.016+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:13:18.914+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:11:48.345+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:11:48.342+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:10:50.869+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:10:50.865+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:10:25.578+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:10:25.574+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:10:09.388+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:09:17.198+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:09:17.193+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:07:49.783+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:06:53.992+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:06:12.225+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:05:23.202+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:03:34.286+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:03:34.281+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T01:00:05.259+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:56:50.558+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:32:17.679+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:32:17.675+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:31:19.893+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:31:19.888+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:29:57.399+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:29:57.395+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:29:29.563+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:29:29.559+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:28:51.010+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:28:51.006+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:23:14.679+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-09T00:23:14.674+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:48:24.009+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:48:24.004+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:45:12.664+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:45:12.659+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:40:36.755+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:40:36.752+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:35:08.056+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:35:08.053+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:33:17.977+0530"/>
+        <logs message=" 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:33:17.973+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:30:30.448+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:30:30.443+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:29:25.031+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:46:10.180+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:46:10.176+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:45:25.719+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:45:25.715+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:40:38.683+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:40:38.678+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:35:48.823+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:35:48.819+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:34:30.310+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:34:30.305+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:34:09.268+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:34:09.263+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:24:57.922+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:24:57.917+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:24:01.792+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:24:01.787+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:08:57.732+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:02:17.369+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T21:02:17.365+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T20:59:44.802+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T20:59:44.796+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T20:58:01.505+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T20:58:01.499+0530"/>
+        <logs message="ERROR: [SIM 211-100] CSim failed with errors." projectName="processing_elements" solutionName="solution1" date="2023-05-08T20:57:16.194+0530"/>
+        <logs message="@E Simulation failed: SIGSEGV." projectName="processing_elements" solutionName="solution1" date="2023-05-08T20:57:16.187+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T20:56:46.753+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T20:56:11.585+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T20:55:50.446+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T19:55:29.898+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T19:22:57.975+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T19:22:24.792+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T19:21:29.588+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T19:21:04.765+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T18:35:39.209+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-08T18:34:57.176+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-07T14:53:10.543+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-07T14:51:28.032+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-07T14:46:13.852+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-07T14:45:43.374+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="processing_elements" solutionName="solution1" date="2023-05-07T14:44:38.628+0530"/>
+      </csimLog>
+    </logs>
+  </errorLogs>
+  <warningLogs>
+    <logs>
+      <synLog>
+        <logs message="WARNING: [SCHED 204-69] Unable to schedule bus request on port 'gmem' (processing_elements/src/matrix_multiplier.cpp:40) due to limited memory ports. Please consider using a memory core with more ports or partitioning the array." projectName="processing_elements" solutionName="solution1" date="2023-05-07T01:20:28.244+0530" type="Warning"/>
+        <logs message="WARNING: [XFORM 203-542] Cannot flatten a loop nest 'row_loop' (processing_elements/src/matrix_multiplier.cpp:23:6) in function 'matrix_multiplier' : &#xA;&#xA;&#xA;more than one sub loop." projectName="processing_elements" solutionName="solution1" date="2023-05-07T01:20:28.160+0530" type="Warning"/>
+        <logs message="WARNING: [XFORM 203-503] Ignored partial unroll directive for loop 'mult_loop' (processing_elements/src/matrix_multiplier.cpp:47) because its parent loop or function is pipelined." projectName="processing_elements" solutionName="solution1" date="2023-05-07T01:20:28.051+0530" type="Warning"/>
+        <logs message="WARNING: [XFORM 203-505] Ignored pipeline directive for loop 'col2_loop' (processing_elements/src/matrix_multiplier.cpp:38) because its parent loop or function is pipelined." projectName="processing_elements" solutionName="solution1" date="2023-05-07T01:20:28.039+0530" type="Warning"/>
+      </synLog>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog>
+        <logs message="Done!WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' contains leftover data, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-09T12:10:28.353+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:43:53.680+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging.&#xA;&#xA;" projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:43:53.615+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:43:53.606+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:43:53.598+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:43:53.589+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:42:10.046+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging.&#xA;&#xA;" projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:42:09.982+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:42:09.975+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:42:09.968+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.1' is read while empty, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-09T11:42:09.960+0530" type="Warning"/>
+        <logs message="WARNING: Hls::stream 'hls::stream&lt;ap_fixed&lt;32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> >.5' contains leftover data, which may result in RTL simulation hanging." projectName="processing_elements" solutionName="solution1" date="2023-05-08T23:37:56.010+0530" type="Warning"/>
+      </csimLog>
+    </logs>
+  </warningLogs>
+</vivadoHLSLog:LogRoot>
