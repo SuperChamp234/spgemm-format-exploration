@@ -147,8 +147,6 @@ csr_out_t multiply_outer(stream_t &col_stream, stream_t &row_stream)
     }
     int z_idx = 0;
     z_csr.rowptr[0] = 0;
-    z_csr.colind = new int[M * N];
-    z_csr.data = new data_t[M * N];
     for (int i = 0; i < M; i++)
     {
         data_t col_val = col_stream.read();
@@ -172,9 +170,11 @@ csr_out_t multiply_outer(stream_t &col_stream, stream_t &row_stream)
 }
 
 csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2){
+    #pragma HLS dataflow
     hls::stream<int> out_csr_rowptr;
     hls::stream<int> out_csr_colind;
     stream_t out_csr_data;
+    int data_stream_size = 0;
     
     for(int i = 0; i < M; i++){
         int start_idx_1 = csr1.rowptr[i];
@@ -189,33 +189,36 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2){
                 out_csr_colind.write(csr1.colind[j]);
                 j++;
                 k++;
+                data_stream_size++;
             }
             else if(csr1.colind[j] < csr2.colind[k]){
                 out_csr_data.write(csr1.data[j]);
                 out_csr_colind.write(csr1.colind[j]);
                 j++;
+                data_stream_size++;
             }
             else{
                 out_csr_data.write(csr2.data[k]);
                 out_csr_colind.write(csr2.colind[k]);
                 k++;
+                data_stream_size++;
             }
         }
         while(j < end_idx_1){
             out_csr_data.write(csr1.data[j]);
             out_csr_colind.write(csr1.colind[j]);
             j++;
+            data_stream_size++;
         }
         while(k < end_idx_2){
             out_csr_data.write(csr2.data[k]);
             out_csr_colind.write(csr2.colind[k]);
             k++;
+            data_stream_size++;
         }
-        out_csr_rowptr.write(out_csr_data.size());
+        out_csr_rowptr.write(data_stream_size);
     }
     csr_out_t out_csr;
-    out_csr.colind = new int[out_csr_colind.size()];
-    out_csr.data = new data_t[out_csr_data.size()];
     out_csr.rowptr[0] = 0;
     int i = 0;
     while(!out_csr_rowptr.empty()){

@@ -18,19 +18,19 @@ typedef hls::stream<data_t> stream_t;
 
 struct csc_t {
     int colptr[P+1];
-    int *rowind;
-    data_t *data;
+    int rowind[M*P];
+    data_t data[M*P];
 };
 struct csr_t {
     int rowptr[P+1];
-    int *colind;
-    data_t *data;
+    int colind[M*P];
+    data_t data[M*P];
 };
 
 struct csr_out_t {
     int rowptr[M+1];
-    int *colind;
-    data_t *data;
+    int colind[M*N];
+    data_t data[M*N];
 };
 //extract rows from csr
 void csr_to_stream(csr_t csr, int row_idx , stream_t& row_stream);
