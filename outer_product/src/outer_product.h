@@ -1,8 +1,12 @@
 #ifndef OUTER_PRODUCT_CSR_H
 #define OUTER_PRODUCT_CSR_H
 
+//#define NO_SYNTH
+
 #include <ap_fixed.h>
 #include <hls_stream.h>
+#include <fstream>
+#include <iostream>
 #define M 4
 #define P 5
 #define N 5
@@ -32,7 +36,7 @@ struct csr_out_t {
 void csr_to_stream(csr_t csr, int row_idx , stream_t& row_stream);
 //extract columns from csc
 void csc_to_stream(csc_t csc, int col_idx, stream_t& col_stream);
-void outer_product_opt(csc_t x_csr, csr_t y_csc, csr_out_t &z_csr);
+csr_out_t outer_product_opt(csc_t x_csr, csr_t y_csc);
 csr_out_t multiply_outer(stream_t& col_stream, stream_t& row_stream);
 
 //print csr_out_t
@@ -41,5 +45,9 @@ void print_stream(stream_t& stream);
 
 //accumulate 
 csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2);
+
+//read matrix from file
+csr_t read_matrix_market_file(const char* path);
+void calculate_sparsity(csr_t csr);
 
 #endif // OUTER_PRODUCT_CSR_H

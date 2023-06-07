@@ -2,59 +2,18 @@
 <Messages>
 	<Message severity="INFO" prefix="[SCHED 204-61]" key="SCHED_PIPELINING_STATUS_631" tag="SCHEDULE" content="Option &apos;relax_ii_for_timing&apos; is enabled, will increase II to preserve clock frequency constraints."/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1312" tag="" content="Analyzing design file &apos;outer_product/src/outer_product.cpp&apos; ..."/>
-	<Message severity="ERROR" prefix="[HLS 200-70]" key="HLS_70_1454" tag="" content="Compilation errors found: In file included from outer_product/src/outer_product.cpp:1:
-outer_product/src/outer_product.cpp:46:9: warning: &apos;auto&apos; type specifier is a C++11 extension [-Wc++11-extensions]
-        auto val = s.read();
-        ^
-outer_product/src/outer_product.cpp:48:14: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
-        std::cout &lt;&lt; val &lt;&lt; &quot; &quot;;
-        ~~~~~^
-outer_product/src/outer_product.cpp:53:10: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
-    std::cout &lt;&lt; std::endl;
-    ~~~~~^
-outer_product/src/outer_product.cpp:53:23: error: no member named &apos;endl&apos; in namespace &apos;std&apos;
-    std::cout &lt;&lt; std::endl;
-                 ~~~~~^
-outer_product/src/outer_product.cpp:63:26: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
-                    std::cout &lt;&lt; z_csr.data[k] &lt;&lt; &quot; &quot;;
-                    ~~~~~^
-outer_product/src/outer_product.cpp:69:22: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
-                std::cout &lt;&lt; &quot;0 &quot;;
-                ~~~~~^
-outer_product/src/outer_product.cpp:72:14: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
-        std::cout &lt;&lt; std::endl;
-        ~~~~~^
-outer_product/src/outer_product.cpp:72:27: error: no member named &apos;endl&apos; in namespace &apos;std&apos;
-        std::cout &lt;&lt; std::endl;
-                     ~~~~~^
-outer_product/src/outer_product.cpp:92:14: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
-        std::cout &lt;&lt; std::endl;
-        ~~~~~^
-outer_product/src/outer_product.cpp:92:27: error: no member named &apos;endl&apos; in namespace &apos;std&apos;
-        std::cout &lt;&lt; std::endl;
-                     ~~~~~^
-outer_product/src/outer_product.cpp:127:13: error: use of undeclared identifier &apos;partial_zcsr&apos;; did you mean &apos;partial_z_csr&apos;?
-            partial_zcsr = multiply_outer(x_col_stream, y_row_stream);
-            ^~~~~~~~~~~~
-            partial_z_csr
-outer_product/src/outer_product.cpp:123:23: note: &apos;partial_z_csr&apos; declared here
-            csr_out_t partial_z_csr;
-                      ^
-In file included from outer_product/src/outer_product.cpp:1:
-In file included from outer_product/src/outer_product.cpp:1:
-In file included from outer_product/src/outer_product.h:4:
-In file included from /tools/Xilinx/Vivado/2018.3/common/technology/autopilot/ap_fixed.h:55:
-/tools/Xilinx/Vivado/2018.3/common/technology/autopilot/ap_fixed_base.h:837:13: warning: shift count is negative [-Wshift-count-negative]
-      ret.V &lt;&lt;= (_AP_I - _AP_W);
-            ^   ~~~~~~~~~~~~~~~
-/tools/Xilinx/Vivado/2018.3/common/technology/autopilot/ap_fixed_base.h:868:69: note: in instantiation of member function &apos;ap_fixed_base&lt;32, 16, true, 5, 3, 0&gt;::to_ap_int_base&apos; requested here
-  inline __attribute__((always_inline)) int to_int() const { return to_ap_int_base().to_int(); }
-                                                                    ^
-/tools/Xilinx/Vivado/2018.3/common/technology/autopilot/ap_fixed_base.h:1041:71: note: in instantiation of member function &apos;ap_fixed_base&lt;32, 16, true, 5, 3, 0&gt;::to_int&apos; requested here
-  inline __attribute__((always_inline)) operator int() const { return to_int(); }
-                                                                      ^
-outer_product/src/outer_product.cpp:80:23: note: in instantiation of member function &apos;ap_fixed_base&lt;32, 16, true, 5, 3, 0&gt;::operator int&apos; requested here
-        int row_val = row_stream.read();
-                      ^
-2 warnings and 10 errors generated."/>
+	<Message severity="WARNING" prefix="[HLS 214-111]" key="HLS 214-111" tag="DATAFLOW,SDX_KERNEL" content="Streams will behave like static variables inside a dataflow region: outer_product/src/outer_product.cpp:251:18"/>
+	<Message severity="WARNING" prefix="[HLS 200-471]" key="HLS 200-471" tag="DATAFLOW,SDX_KERNEL" content="Dataflow form checks found 1 issue(s) in file outer_product/src/outer_product.cpp"/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Linking Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 406.648 ; gain = 0.000 ; free physical = 2565 ; free virtual = 17993"/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Checking Pragmas Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 406.648 ; gain = 0.000 ; free physical = 2568 ; free virtual = 17996"/>
+	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1467" tag="" content="Starting code transformations ..."/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Standard Transforms Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 406.648 ; gain = 0.000 ; free physical = 2554 ; free virtual = 17985"/>
+	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1472" tag="" content="Checking synthesizability ..."/>
+	<Message severity="ERROR" prefix="[SYNCHK 200-11]" key="SYNCHK_TYPE_NO_SUPPORT_356" tag="" content="outer_product/src/outer_product.cpp:240: Argument &apos;z_csr.colind&apos; of function &apos;outer_product_opt&apos; (outer_product/src/outer_product.cpp:238) has an unsynthesizable type (possible cause(s): pointer to pointer or global pointer)."/>
+	<Message severity="ERROR" prefix="[SYNCHK 200-43]" key="SYNCHK_PTR_REASSIGN_362" tag="" content="outer_product/src/outer_product.cpp:271: use or assignment of a non-static pointer &apos;&apos; (this pointer may refer to different memory locations)."/>
+	<Message severity="ERROR" prefix="[SYNCHK 200-71]" key="SYNCHK_EXTERNAL_FUNCTION_387" tag="" content="outer_product/src/outer_product.cpp:150: function &apos;operator new[](unsigned long)&apos; has no function body."/>
+	<Message severity="ERROR" prefix="[SYNCHK 200-41]" key="SYNCHK_PTR_REINTERPRET_389" tag="" content="outer_product/src/outer_product.cpp:150: unsupported pointer reinterpretation from type &apos;i8*&apos; to type &apos;ap_fixed&lt;32, 16, 5, 3, 0&gt;&apos;."/>
+	<Message severity="ERROR" prefix="[SYNCHK 200-61]" key="SYNCHK_ARRAY_UNKNOWN_SIZE_354" tag="" content="outer_product/src/outer_product.cpp:161: unsupported memory access on variable &apos;z_csr.data.V&apos; which is (or contains) an array with unknown size at compile time."/>
+	<Message severity="INFO" prefix="[SYNCHK 200-10]" key="SYNCHK_SYNCHK_SUMMARY_377" tag="" content="5 error(s), 0 warning(s)."/>
+	<Message severity="ERROR" prefix="[HLS 200-70]" key="HLS_70_1855" tag="" content="Synthesizability check failed."/>
 </Messages>

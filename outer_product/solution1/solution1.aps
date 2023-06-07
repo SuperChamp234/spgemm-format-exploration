@@ -5,15 +5,12 @@
     <downStreamTool>
         <DownStreamTool name=""/>
     </downStreamTool>
-    <clockList>
-        <clock default="false" name="default" period="10"/>
-    </clockList>
     <config>
         <config_compile blackbox=""/>
         <schedule model="matrix_multiplier"/>
     </config>
     <UIConfigurations>
-        <UIAutosynConf hideTrivialOp="true" isBasedOnBoard="false" isSolutionDirty="true" isStopAskAgain="false" showDetailDesignViewer="false">
+        <UIAutosynConf hideTrivialOp="true" isBasedOnBoard="false" isSolutionDirty="true" isStopAskAgain="true" showDetailDesignViewer="false">
             <Platform>xilinx/aartix7/aartix7</Platform>
             <Platform>xilinx/aartix7/aartix7_fpv6</Platform>
             <customLibs/>
@@ -71,5 +68,8 @@
         <library name="DefaultPlatform" value="xilinx/aartix7/aartix7"/>
         <library name="DefaultPlatform" value="xilinx/aartix7/aartix7_fpv6"/>
     </libraryList>
+    <clockList>
+        <clock name="default" default="false" period="10"/>
+    </clockList>
 </solution>
 

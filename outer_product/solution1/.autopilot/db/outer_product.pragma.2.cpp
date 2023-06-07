@@ -3332,7 +3332,7 @@ struct ap_range_ref {
     unsigned high = reverse ? l_index : h_index;
     for (unsigned i = low; i != high; ++i) {
 
-#pragma HLS unroll
+_ssdm_Unroll(0,0,0, "");
 
  ret &= ({ typeof(d_bv.V) __Val2__ = d_bv.V; bool __Result__ = __builtin_bit_select((void*)(&__Val2__), i); __Result__; });
     }
@@ -3346,7 +3346,7 @@ struct ap_range_ref {
     unsigned high = reverse ? l_index : h_index;
     for (unsigned i = low; i != high; ++i) {
 
-#pragma HLS unroll
+_ssdm_Unroll(0,0,0, "");
 
  ret |= ({ typeof(d_bv.V) __Val2__ = d_bv.V; bool __Result__ = __builtin_bit_select((void*)(&__Val2__), i); __Result__; });
     }
@@ -3360,7 +3360,7 @@ struct ap_range_ref {
     unsigned high = reverse ? l_index : h_index;
     for (unsigned i = low; i != high; ++i) {
 
-#pragma HLS unroll
+_ssdm_Unroll(0,0,0, "");
 
  ret ^= ({ typeof(d_bv.V) __Val2__ = d_bv.V; bool __Result__ = __builtin_bit_select((void*)(&__Val2__), i); __Result__; });
     }
@@ -28292,7 +28292,7 @@ csr_out_t outer_product_opt(csc_t x_csc, csr_t y_csr)
     {
         stream_t col_stream;
         stream_t row_stream;
-#pragma HLS dataflow
+_ssdm_op_SpecDataflowPipeline(-1, 0, "");
  csc_to_stream(x_csc, i, col_stream);
         csr_to_stream(y_csr, i, row_stream);
 # 265 "outer_product/src/outer_product.cpp"

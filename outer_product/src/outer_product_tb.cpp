@@ -28,14 +28,8 @@ void test_streams(csr_t csr, csc_t csc) {
     }
 }
 
-void final_test(csr_t csr, csc_t csc) {
-    csr_out_t z_csr;
-    //initialize z_csr to 0 for MxN matrix
-    z_csr.rowptr[0] = 0;
-    for (int i = 0; i < M; i++) {
-        z_csr.rowptr[i + 1] = 0;
-    }
-    outer_product_opt(csc, csr, z_csr);
+void final_test_multiplication(csr_t csr, csc_t csc) {
+    csr_out_t z_csr = outer_product_opt(csc, csr);
     //print matrix in dense format with 0s
     print_csr_out_t(z_csr);
 }
@@ -116,7 +110,10 @@ int main() {
 
     //accumulator_test(test, test2);
 
-    final_test(B, A);
+    final_test_multiplication(B, A);
+
+    // csr_t bus_matrix = read_matrix_market_file("/home/zain/Documents/hls/processing_elements/outer_product/src/494_bus.mtx");
+    // calculate_sparsity(bus_matrix);
 
     return 0;
 }
