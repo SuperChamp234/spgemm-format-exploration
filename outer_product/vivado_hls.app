@@ -1,10 +1,8 @@
-<project xmlns="com.autoesl.autopilot.project" name="processing_elements" top="outer_product_opt">
+<project xmlns="com.autoesl.autopilot.project" name="outer_product" top="outer_product_opt">
     <files>
-        <file name="processing_elements/src/matrix_multiplier.cpp" sc="0" tb="false" cflags=""/>
-        <file name="processing_elements/src/matrix_multiplier.h" sc="0" tb="false" cflags=""/>
-        <file name="processing_elements/src/outer_product.cpp" sc="0" tb="false" cflags=""/>
-        <file name="processing_elements/src/outer_product.h" sc="0" tb="false" cflags=""/>
         <file name="../src/outer_product_tb.cpp" sc="0" tb="1" cflags=""/>
+        <file name="outer_product/src/outer_product.cpp" sc="0" tb="false" cflags=""/>
+        <file name="outer_product/src/outer_product.h" sc="0" tb="false" cflags=""/>
     </files>
     <includePaths/>
     <libraryPaths/>

@@ -37,5 +37,9 @@ csr_out_t multiply_outer(stream_t& col_stream, stream_t& row_stream);
 
 //print csr_out_t
 void print_csr_out_t(csr_out_t z_csr);
+void print_stream(stream_t& stream);
+
+//accumulate 
+csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2);
 
 #endif // OUTER_PRODUCT_CSR_H

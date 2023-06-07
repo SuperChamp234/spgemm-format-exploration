@@ -1,6 +1,6 @@
 #include "outer_product.h"
 
-void csr_to_stream(csr_t csr, int row_idx, stream_t& row_stream)
+void csr_to_stream(csr_t csr, int row_idx, stream_t &row_stream)
 {
     int start_idx = csr.rowptr[row_idx];
     int end_idx = csr.rowptr[row_idx + 1];
@@ -20,7 +20,7 @@ void csr_to_stream(csr_t csr, int row_idx, stream_t& row_stream)
     }
 }
 
-void csc_to_stream(csc_t csc, int col_idx, stream_t& col_stream)
+void csc_to_stream(csc_t csc, int col_idx, stream_t &col_stream)
 {
     int start_idx = csc.colptr[col_idx];
     int end_idx = csc.colptr[col_idx + 1];
@@ -39,71 +39,146 @@ void csc_to_stream(csc_t csc, int col_idx, stream_t& col_stream)
         }
     }
 }
-//print a stream without consuming it, used for debugging
-void print_stream(stream_t& s) {
+// print a stream without consuming it, used for debugging
+void print_stream(stream_t &s)
+{
     stream_t temp_stream;
-    while (!s.empty()) {
+    while (!s.empty())
+    {
         auto val = s.read();
         temp_stream.write(val);
         std::cout << val << " ";
     }
-    while (!temp_stream.empty()) {
+    while (!temp_stream.empty())
+    {
         s.write(temp_stream.read());
     }
     std::cout << std::endl;
 }
 
-//print csr_out_t, debugging purposes
-void print_csr_out_t(csr_out_t z_csr){
-    for (int i = 0; i < P; i++) {
-        for (int j = 0; j < P; j++) {
+// print csr_out_t, debugging purposes
+void print_csr_out_t(csr_out_t z_csr)
+{
+    for (int i = 0; i < M; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
             bool found = false;
-            for (int k = z_csr.rowptr[i]; k < z_csr.rowptr[i + 1]; k++) {
-                if (z_csr.colind[k] == j) {
+            for (int k = z_csr.rowptr[i]; k < z_csr.rowptr[i + 1]; k++)
+            {
+                if (z_csr.colind[k] == j)
+                {
                     std::cout << z_csr.data[k] << " ";
                     found = true;
                     break;
                 }
             }
-            if (!found) {
+            if (!found)
+            {
                 std::cout << "0 ";
             }
         }
         std::cout << std::endl;
     }
 }
-csr_out_t multiply_outer(stream_t& col_stream, stream_t& row_stream){
+csr_out_t multiply_outer(stream_t &col_stream, stream_t &row_stream)
+{
+    //std::cout << "Multiplying outer" << std::endl;
     csr_out_t z_csr;
+    data_t row[N];
+    int k = 0;
+    while(!row_stream.empty()){
+        row[k] = row_stream.read();
+        k++;
+    }
     int z_idx = 0;
     z_csr.rowptr[0] = 0;
-    for (int i = 0; i < N; i++) {
-        int row_val = row_stream.read();
-        for (int j = 0; j < M; j++) {
-            int col_val = col_stream.read();
-            int prod = row_val * col_val;
-            if (prod != 0) {
-                //std::cout << prod  << " ";
-                z_csr.data[z_idx] = prod;
+    z_csr.colind = new int[M * N];
+    z_csr.data = new data_t[M * N];
+    for (int i = 0; i < M; i++)
+    {
+        data_t col_val = col_stream.read();
+        for(int j = 0; j < N; j++){
+            data_t row_val = row[j];
+            data_t prod = col_val * row_val;
+            //std::cout << col_val << " * " << row_val << " = " << prod << std::endl;
+            if(prod != 0){
                 z_csr.colind[z_idx] = j;
+                z_csr.data[z_idx] = prod;
                 z_idx++;
             }
-            col_stream.write(col_val);
+            z_csr.rowptr[i+1] = z_idx;
         }
-        std::cout << std::endl;
-        z_csr.rowptr[i+1] = z_idx;
+    }
+    //empty the streams
+    while(!col_stream.empty()){
+        col_stream.read();
     }
     return z_csr;
 }
 
-void accumulate(csr_out_t& z_csr, csr_out_t& z_partial){
-    for (int i = 0; i < P + 1; i++) {
-        int start_idx = z_partial.rowptr[i];
-        int end_idx = z_partial.rowptr[i + 1];
-        for (int j = start_idx; j < end_idx; j++) {
-            int col_idx = z_partial.colind[j];
-            z_csr.data[j] += z_partial.data[j];
+csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2){
+    hls::stream<int> out_csr_rowptr;
+    hls::stream<int> out_csr_colind;
+    stream_t out_csr_data;
+    
+    for(int i = 0; i < M; i++){
+        int start_idx_1 = csr1.rowptr[i];
+        int end_idx_1 = csr1.rowptr[i+1];
+        int start_idx_2 = csr2.rowptr[i];
+        int end_idx_2 = csr2.rowptr[i+1];
+        int j = start_idx_1;
+        int k = start_idx_2;
+        while(j < end_idx_1 && k < end_idx_2){
+            if(csr1.colind[j] == csr2.colind[k]){
+                out_csr_data.write(csr1.data[j] + csr2.data[k]);
+                out_csr_colind.write(csr1.colind[j]);
+                j++;
+                k++;
+            }
+            else if(csr1.colind[j] < csr2.colind[k]){
+                out_csr_data.write(csr1.data[j]);
+                out_csr_colind.write(csr1.colind[j]);
+                j++;
+            }
+            else{
+                out_csr_data.write(csr2.data[k]);
+                out_csr_colind.write(csr2.colind[k]);
+                k++;
+            }
         }
+        while(j < end_idx_1){
+            out_csr_data.write(csr1.data[j]);
+            out_csr_colind.write(csr1.colind[j]);
+            j++;
+        }
+        while(k < end_idx_2){
+            out_csr_data.write(csr2.data[k]);
+            out_csr_colind.write(csr2.colind[k]);
+            k++;
+        }
+        out_csr_rowptr.write(out_csr_data.size());
     }
+    csr_out_t out_csr;
+    out_csr.colind = new int[out_csr_colind.size()];
+    out_csr.data = new data_t[out_csr_data.size()];
+    out_csr.rowptr[0] = 0;
+    int i = 0;
+    while(!out_csr_rowptr.empty()){
+        out_csr.rowptr[i+1] = out_csr_rowptr.read();
+        i++;
+    }
+    i = 0;
+    while(!out_csr_colind.empty()){
+        out_csr.colind[i] = out_csr_colind.read();
+        i++;
+    }
+    i = 0;
+    while(!out_csr_data.empty()){
+        out_csr.data[i] = out_csr_data.read();
+        i++;
+    }
+    return out_csr;
 }
 
 void outer_product_opt(csc_t x_csc, csr_t y_csr, csr_out_t &z_csr)
@@ -111,20 +186,28 @@ void outer_product_opt(csc_t x_csc, csr_t y_csr, csr_out_t &z_csr)
     // Step 1: Initialize the partial matrix of Z
     int z_idx = 0;
     z_csr.rowptr[0] = 0;
-    
-    // Step 2: For each column in X and row in Y, extract the corresponding streams
-    for (int x_col = 0; x_col < P; x_col++) {
-        stream_t x_col_stream;
-        csc_to_stream(x_csc, x_col, x_col_stream);
-        print_stream(x_col_stream);
 
-        for (int y_row = 0; y_row < P; y_row++) {
-            stream_t y_row_stream;
-            csr_out_t partial_z_csr;
-            csr_to_stream(y_csr, y_row, y_row_stream);
-            print_stream(y_row_stream);
-            
-            partial_zcsr = multiply_outer(x_col_stream, y_row_stream);
-        }
+    // Step 2: For each column in X and row in Y, extract the corresponding streams
+    for (int i = 0; i < P; i++)
+    {
+        stream_t col_stream;
+        stream_t row_stream;
+        csc_to_stream(x_csc, i, col_stream);
+        csr_to_stream(y_csr, i, row_stream);
+        std::cout << "Column " << i << std::endl;
+        print_stream(col_stream);
+        std::cout << std::endl;
+        std::cout << "Row " << i << std::endl;
+        print_stream(row_stream);
+        std::cout << std::endl;
+        // Step 3: Multiply the streams and accumulate the result in the partial matrix of Z
+        csr_out_t z_partial = multiply_outer(col_stream, row_stream);
+        print_csr_out_t(z_partial);
+        std::cout << std::endl;
+        print_csr_out_t(z_csr);
+        z_csr = accumulate(z_csr, z_partial);
+        std::cout << "Partial result for column " << i << std::endl;
+        print_csr_out_t(z_csr);
+        std::cout << "=============================" << std::endl;
     }
 }

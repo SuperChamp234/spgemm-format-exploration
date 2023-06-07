@@ -1,64 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Messages>
 	<Message severity="INFO" prefix="[SCHED 204-61]" key="SCHED_PIPELINING_STATUS_631" tag="SCHEDULE" content="Option &apos;relax_ii_for_timing&apos; is enabled, will increase II to preserve clock frequency constraints."/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1312" tag="" content="Analyzing design file &apos;processing_elements/src/matrix_multiplier.cpp&apos; ..."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Linking Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 433.945 ; gain = 0.000 ; free physical = 1623 ; free virtual = 24103"/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Checking Pragmas Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 433.945 ; gain = 0.000 ; free physical = 1632 ; free virtual = 24111"/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1467" tag="" content="Starting code transformations ..."/>
-	<Message severity="INFO" prefix="[XFORM 203-501]" key="XFORM_UNROLL_STATUS_311" tag="" content="Unrolling loop &apos;mult_loop&apos; (processing_elements/src/matrix_multiplier.cpp:47) in function &apos;matrix_multiplier(int*, int*, int*)&apos;: changing partial unrolling into complete unrolling since the unrolling factor (=3) is no less than the loop trip count (=3)."/>
-	<Message severity="INFO" prefix="[XFORM 203-603]" key="XFORM_INLINE_STATUS_221" tag="" content="Inlining function &apos;multiply&apos; into &apos;matrix_multiplier&apos; (processing_elements/src/matrix_multiplier.cpp:49)."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Standard Transforms Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 433.945 ; gain = 0.000 ; free physical = 1634 ; free virtual = 24115"/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1472" tag="" content="Checking synthesizability ..."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Checking Synthesizability Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 433.945 ; gain = 0.000 ; free physical = 1634 ; free virtual = 24114"/>
-	<Message severity="INFO" prefix="[XFORM 203-502]" key="XFORM_AUTO_UNROLL_STATUS_246" tag="" content="Unrolling all sub-loops inside loop &apos;col_loop&apos; (processing_elements/src/matrix_multiplier.cpp:34) in function &apos;matrix_multiplier&apos; for pipelining."/>
-	<Message severity="WARNING" prefix="[XFORM 203-505]" key="XFORM_UNROLL_DEAD_PIPELINE_247" tag="" content="Ignored pipeline directive for loop &apos;col2_loop&apos; (processing_elements/src/matrix_multiplier.cpp:38) because its parent loop or function is pipelined."/>
-	<Message severity="WARNING" prefix="[XFORM 203-503]" key="XFORM_UNROLL_INVALID_248" tag="" content="Ignored partial unroll directive for loop &apos;mult_loop&apos; (processing_elements/src/matrix_multiplier.cpp:47) because its parent loop or function is pipelined."/>
-	<Message severity="INFO" prefix="[HLS 200-489]" key="HLS 200-489" tag="" content="Unrolling loop &apos;col2_loop&apos; (processing_elements/src/matrix_multiplier.cpp:38) in function &apos;matrix_multiplier&apos; completely with a factor of 3."/>
-	<Message severity="INFO" prefix="[HLS 200-489]" key="HLS 200-489" tag="" content="Unrolling loop &apos;mult_loop&apos; (processing_elements/src/matrix_multiplier.cpp:47) in function &apos;matrix_multiplier&apos; completely with a factor of 3."/>
-	<Message severity="INFO" prefix="[XFORM 203-102]" key="XFORM_AUTO_PARTITION_STATUS_120" tag="" content="Partitioning array &apos;col2&apos; (processing_elements/src/matrix_multiplier.cpp:19) automatically."/>
-	<Message severity="INFO" prefix="[XFORM 203-102]" key="XFORM_AUTO_PARTITION_STATUS_115" tag="" content="Automatically partitioning small array &apos;row1&apos; (processing_elements/src/matrix_multiplier.cpp:19) completely based on array size."/>
-	<Message severity="INFO" prefix="[XFORM 203-101]" key="XFORM_PARTITION_STATUS_116" tag="" content="Partitioning array &apos;row1&apos; (processing_elements/src/matrix_multiplier.cpp:19) in dimension 1 completely."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Pre-synthesis Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 533.188 ; gain = 99.242 ; free physical = 1612 ; free virtual = 24093"/>
-	<Message severity="WARNING" prefix="[XFORM 203-542]" key="XFORM_LOOPFLAT_INVALID_219" tag="LOOP,SDX_LOOP" content="Cannot flatten a loop nest &apos;row_loop&apos; (processing_elements/src/matrix_multiplier.cpp:23:6) in function &apos;matrix_multiplier&apos; : 
-
-more than one sub loop."/>
-	<Message severity="INFO" prefix="[HLS 200-444]" key="HLS 200-444" tag="AXI,SDX_AXI" content="Inferring multiple bus burst read of a total cumulative length 3 on port &apos;gmem&apos; (processing_elements/src/matrix_multiplier.cpp:29:2). These data requests might be further partitioned to multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings."/>
-	<Message severity="INFO" prefix="[HLS 200-444]" key="HLS 200-444" tag="AXI,SDX_AXI" content="Inferring multiple bus burst write of a total cumulative length 3 on port &apos;gmem&apos; (processing_elements/src/matrix_multiplier.cpp:55:2). These data requests might be further partitioned to multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Architecture Synthesis Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 533.188 ; gain = 99.242 ; free physical = 1620 ; free virtual = 24101"/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1317" tag="" content="Starting hardware synthesis ..."/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1385" tag="" content="Synthesizing &apos;matrix_multiplier&apos; ..."/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1477" tag="" content="----------------------------------------------------------------"/>
-	<Message severity="INFO" prefix="[HLS 200-42]" key="HLS_42_1438" tag="" content="-- Implementing module &apos;matrix_multiplier&apos;"/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1478" tag="" content="----------------------------------------------------------------"/>
-	<Message severity="INFO" prefix="[SCHED 204-11]" key="SCHED_SCHED_STATUS_597" tag="" content="Starting scheduling ..."/>
-	<Message severity="INFO" prefix="[SCHED 204-61]" key="SCHED_PIPELINING_STATUS_41" tag="" content="Pipelining loop &apos;row1_loop&apos;."/>
-	<Message severity="INFO" prefix="[SCHED 204-61]" key="SCHED_PIPELINING_STATUS_44" tag="" content="Pipelining result : Target II = 1, Final II = 1, Depth = 2."/>
-	<Message severity="INFO" prefix="[SCHED 204-61]" key="SCHED_PIPELINING_STATUS_41" tag="" content="Pipelining loop &apos;col_loop&apos;."/>
-	<Message severity="WARNING" prefix="[SCHED 204-69]" key="SCHED_RESOURCE_CONSTRAINT_NOT_MET_38" tag="SDX_KERNEL,SCHEDULE" content="Unable to schedule bus request on port &apos;gmem&apos; (processing_elements/src/matrix_multiplier.cpp:40) due to limited memory ports. Please consider using a memory core with more ports or partitioning the array."/>
-	<Message severity="INFO" prefix="[SCHED 204-61]" key="SCHED_PIPELINING_STATUS_44" tag="" content="Pipelining result : Target II = 1, Final II = 3, Depth = 14."/>
-	<Message severity="INFO" prefix="[SCHED 204-11]" key="SCHED_SCHED_STATUS_596" tag="" content="Finished scheduling."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="" content=" Elapsed time: 4.39 seconds; current allocated memory: 62.874 MB."/>
-	<Message severity="INFO" prefix="[HLS 200-434]" key="HLS 200-434" tag="SDX" content="Only 2 loops out of a total 3 loops have been pipelined in this design."/>
-	<Message severity="INFO" prefix="[BIND 205-100]" key="BIND_100_926" tag="" content="Starting micro-architecture generation ..."/>
-	<Message severity="INFO" prefix="[BIND 205-101]" key="BIND_101_698" tag="" content="Performing variable lifetime analysis."/>
-	<Message severity="INFO" prefix="[BIND 205-101]" key="BIND_101_697" tag="" content="Exploring resource sharing."/>
-	<Message severity="INFO" prefix="[BIND 205-101]" key="BIND_101_693" tag="" content="Binding ..."/>
-	<Message severity="INFO" prefix="[BIND 205-100]" key="BIND_100_925" tag="" content="Finished micro-architecture generation."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="" content=" Elapsed time: 0.09 seconds; current allocated memory: 63.428 MB."/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1483" tag="" content="----------------------------------------------------------------"/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1484" tag="" content="-- Generating RTL for module &apos;matrix_multiplier&apos;"/>
-	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1485" tag="" content="----------------------------------------------------------------"/>
-	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on port &apos;matrix_multiplier/gmem&apos; to &apos;m_axi&apos;."/>
-	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on port &apos;matrix_multiplier/matrix1&apos; to &apos;s_axilite &amp; ap_none&apos;."/>
-	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on port &apos;matrix_multiplier/matrix2&apos; to &apos;s_axilite &amp; ap_none&apos;."/>
-	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on port &apos;matrix_multiplier/output_matrix&apos; to &apos;s_axilite &amp; ap_none&apos;."/>
-	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on function &apos;matrix_multiplier&apos; to &apos;s_axilite &amp; ap_ctrl_hs&apos;."/>
-	<Message severity="INFO" prefix="[RTGEN 206-100]" key="RTGEN_100_851" tag="" content="Bundling port &apos;return&apos;, &apos;matrix2&apos; and &apos;output_matrix&apos; to AXI-Lite port control."/>
-	<Message severity="INFO" prefix="[RTGEN 206-100]" key="RTGEN_100_856" tag="" content="Finished creating RTL model for &apos;matrix_multiplier&apos;."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="" content=" Elapsed time: 0.08 seconds; current allocated memory: 64.801 MB."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished generating all RTL models Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 533.188 ; gain = 99.242 ; free physical = 1596 ; free virtual = 24084"/>
-	<Message severity="INFO" prefix="[SYSC 207-301]" key="SYSC_301_1065" tag="" content="Generating SystemC RTL for matrix_multiplier."/>
-	<Message severity="INFO" prefix="[VHDL 208-304]" key="VHDL_304_1066" tag="" content="Generating VHDL RTL for matrix_multiplier."/>
-	<Message severity="INFO" prefix="[VLOG 209-307]" key="VLOG_307_1067" tag="" content="Generating Verilog RTL for matrix_multiplier."/>
-	<Message severity="INFO" prefix="[HLS 200-112]" key="HLS_112_964" tag="" content="Total elapsed time: 5.25 seconds; peak allocated memory: 64.801 MB."/>
+	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1312" tag="" content="Analyzing design file &apos;outer_product/src/outer_product.cpp&apos; ..."/>
+	<Message severity="ERROR" prefix="[HLS 200-70]" key="HLS_70_1454" tag="" content="Compilation errors found: In file included from outer_product/src/outer_product.cpp:1:
+outer_product/src/outer_product.cpp:46:9: warning: &apos;auto&apos; type specifier is a C++11 extension [-Wc++11-extensions]
+        auto val = s.read();
+        ^
+outer_product/src/outer_product.cpp:48:14: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
+        std::cout &lt;&lt; val &lt;&lt; &quot; &quot;;
+        ~~~~~^
+outer_product/src/outer_product.cpp:53:10: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
+    std::cout &lt;&lt; std::endl;
+    ~~~~~^
+outer_product/src/outer_product.cpp:53:23: error: no member named &apos;endl&apos; in namespace &apos;std&apos;
+    std::cout &lt;&lt; std::endl;
+                 ~~~~~^
+outer_product/src/outer_product.cpp:63:26: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
+                    std::cout &lt;&lt; z_csr.data[k] &lt;&lt; &quot; &quot;;
+                    ~~~~~^
+outer_product/src/outer_product.cpp:69:22: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
+                std::cout &lt;&lt; &quot;0 &quot;;
+                ~~~~~^
+outer_product/src/outer_product.cpp:72:14: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
+        std::cout &lt;&lt; std::endl;
+        ~~~~~^
+outer_product/src/outer_product.cpp:72:27: error: no member named &apos;endl&apos; in namespace &apos;std&apos;
+        std::cout &lt;&lt; std::endl;
+                     ~~~~~^
+outer_product/src/outer_product.cpp:92:14: error: no member named &apos;cout&apos; in namespace &apos;std&apos;
+        std::cout &lt;&lt; std::endl;
+        ~~~~~^
+outer_product/src/outer_product.cpp:92:27: error: no member named &apos;endl&apos; in namespace &apos;std&apos;
+        std::cout &lt;&lt; std::endl;
+                     ~~~~~^
+outer_product/src/outer_product.cpp:127:13: error: use of undeclared identifier &apos;partial_zcsr&apos;; did you mean &apos;partial_z_csr&apos;?
+            partial_zcsr = multiply_outer(x_col_stream, y_row_stream);
+            ^~~~~~~~~~~~
+            partial_z_csr
+outer_product/src/outer_product.cpp:123:23: note: &apos;partial_z_csr&apos; declared here
+            csr_out_t partial_z_csr;
+                      ^
+In file included from outer_product/src/outer_product.cpp:1:
+In file included from outer_product/src/outer_product.cpp:1:
+In file included from outer_product/src/outer_product.h:4:
+In file included from /tools/Xilinx/Vivado/2018.3/common/technology/autopilot/ap_fixed.h:55:
+/tools/Xilinx/Vivado/2018.3/common/technology/autopilot/ap_fixed_base.h:837:13: warning: shift count is negative [-Wshift-count-negative]
+      ret.V &lt;&lt;= (_AP_I - _AP_W);
+            ^   ~~~~~~~~~~~~~~~
+/tools/Xilinx/Vivado/2018.3/common/technology/autopilot/ap_fixed_base.h:868:69: note: in instantiation of member function &apos;ap_fixed_base&lt;32, 16, true, 5, 3, 0&gt;::to_ap_int_base&apos; requested here
+  inline __attribute__((always_inline)) int to_int() const { return to_ap_int_base().to_int(); }
+                                                                    ^
+/tools/Xilinx/Vivado/2018.3/common/technology/autopilot/ap_fixed_base.h:1041:71: note: in instantiation of member function &apos;ap_fixed_base&lt;32, 16, true, 5, 3, 0&gt;::to_int&apos; requested here
+  inline __attribute__((always_inline)) operator int() const { return to_int(); }
+                                                                      ^
+outer_product/src/outer_product.cpp:80:23: note: in instantiation of member function &apos;ap_fixed_base&lt;32, 16, true, 5, 3, 0&gt;::operator int&apos; requested here
+        int row_val = row_stream.read();
+                      ^
+2 warnings and 10 errors generated."/>
 </Messages>

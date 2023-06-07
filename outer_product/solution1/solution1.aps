@@ -62,7 +62,7 @@
         <value string="solution1"/>
     </name>
     <project>
-        <value string="processing_elements"/>
+        <value string="outer_product"/>
     </project>
     <targetInfo>
         <TargetInfo value="xa7a12t:csg325:-1q"/>

@@ -1,5 +1,5 @@
 # ==============================================================
-# File generated on Tue May 09 12:12:36 IST 2023
+# File generated on Wed Jun 07 15:27:09 IST 2023
 # Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
@@ -23,7 +23,7 @@ __SIM_DDS__ = 1
 
 ObjDir = obj
 
-HLS_SOURCES = ../../../src/outer_product_tb.cpp ../../../src/matrix_multiplier.cpp ../../../src/outer_product.cpp
+HLS_SOURCES = ../../../src/outer_product_tb.cpp ../../../src/outer_product.cpp
 
 TARGET := csim.exe
 
@@ -81,12 +81,6 @@ $(ObjDir)/outer_product_tb.o: ../../../src/outer_product_tb.cpp $(ObjDir)/.dir
 	$(Verb)  $(CC) ${CCFLAG} -c -MMD  $(IFLAG) $(DFLAG) $< -o $@ ; \
 
 -include $(ObjDir)/outer_product_tb.d
-
-$(ObjDir)/matrix_multiplier.o: ../../../src/matrix_multiplier.cpp $(ObjDir)/.dir
-	$(Echo) "   Compiling ../../../src/matrix_multiplier.cpp in $(BuildMode) mode" $(AVE_DIR_DLOG)
-	$(Verb)  $(CC) ${CCFLAG} -c -MMD  $(IFLAG) $(DFLAG) $< -o $@ ; \
-
--include $(ObjDir)/matrix_multiplier.d
 
 $(ObjDir)/outer_product.o: ../../../src/outer_product.cpp $(ObjDir)/.dir
 	$(Echo) "   Compiling ../../../src/outer_product.cpp in $(BuildMode) mode" $(AVE_DIR_DLOG)
