@@ -1,60 +1,77 @@
-#include <iostream>
 #include "outer_product.h"
 
-void test_streams(csr_t csr, csc_t csc) {
-    stream_t row_stream;
-    stream_t col_stream;
-
-    // Print the csc stream
-    std::cout << "CSC stream: " << std::endl;
-    for (int i = 0; i < P; i++) {
-        std::cout << "Column " << i << ": ";
-        csc_to_stream(csc, i, col_stream);
-        while (!col_stream.empty()) {
-            std::cout << col_stream.read() << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    // Print the csr stream
-    std::cout << "CSR stream: " << std::endl;
-    for (int i = 0; i < P; i++) {
-        std::cout << "Row " << i << ": ";
-        csr_to_stream(csr, i, row_stream);
-        while (!row_stream.empty()) {
-            std::cout << row_stream.read() << " ";
+void test_extract_row(csr_t test_case){
+    for (int i = 0; i < N; i++) {
+        std::cout << "row " << i << std::endl;
+        data_t* out_row = extract_row(test_case, i);
+        for (int j = 0; j < P; j++) {
+            std::cout << out_row[j] << " ";
         }
         std::cout << std::endl;
     }
 }
 
-void final_test_multiplication(csr_t csr, csc_t csc) {
-    csr_out_t z_csr = outer_product_opt(csc, csr);
-    //print matrix in dense format with 0s
-    print_csr_out_t(z_csr);
-}
-
-void multiply_outer_test(csc_t csc, csr_t csr, stream_t& col_stream, stream_t& row_stream) {
+void test_extract_col(csc_t test_case){
     for (int i = 0; i < P; i++) {
-        std::cout << "Column " << i << ": ";
-        csc_to_stream(csc, i, col_stream);
-        print_stream(col_stream);
-        csr_to_stream(csr, i, row_stream);
-        std::cout << "Row " << i << ": ";
-        print_stream(row_stream);
-        std::cout << "Result: " << std::endl;
-        csr_out_t z_csr;
-        z_csr = multiply_outer(col_stream, row_stream);
-        print_csr_out_t(z_csr);
+        std::cout << "col " << i << std::endl;
+        data_t* out_col = extract_col(test_case, i);
+        for (int j = 0; j < M; j++) {
+            std::cout << out_col[j] << " ";
+        }
         std::cout << std::endl;
     }
 }
 
-void accumulator_test(csr_out_t mat, csr_out_t mat2){
-    csr_out_t mat3;
-    mat3 = accumulate(mat, mat2);
-    std::cout << "Accumulator: " << std::endl;
-    print_csr_out_t(mat3);
+void print_csr_out_t(csr_out_t z_csr)
+{
+    for (int i = 0; i < M; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            bool found = false;
+            for (int k = z_csr.rowptr[i]; k < z_csr.rowptr[i + 1]; k++)
+            {
+                if (z_csr.colind[k] == j)
+                {
+                    std::cout << z_csr.data[k] << " ";
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                std::cout << "0 ";
+            }
+        }
+        std::cout << std::endl;
+    }
+}
+
+void test_mult(csr_t test_case1, csc_t test_case2){
+    data_t* row; 
+    data_t* col;
+    for(int i = 0; i < P; i++){
+        row = extract_row(test_case1, i);
+        col = extract_col(test_case2, i);
+        std::cout << "row " << i << std::endl;
+        for (int j = 0; j < P; j++) {
+            std::cout << row[j] << " ";
+        }
+        std::cout << std::endl;
+        std::cout << "col " << i << std::endl;
+        for (int j = 0; j < M; j++) {
+            std::cout << col[j] << " ";
+        }
+        std::cout << std::endl;
+        csr_out_t out = multiply_row_col(row, col);
+        print_csr_out_t(out);
+        std::cout << "----------------" << std::endl;
+    }
+}
+
+void test_accumulate(csr_out_t test_case1, csr_out_t test_case2){
+    csr_out_t out = accumulate(test_case1, test_case2);
+    print_csr_out_t(out);
 }
 
 int main() {
@@ -104,16 +121,18 @@ int main() {
         .data = {1, 5, 2, 6, 3, 4, 7, 8}
     };
 
-    //stream_t col_stream;
-    //stream_t row_stream;
-    //multiply_outer_test(A, B, col_stream, row_stream);
+    // Test extract_row
+    //test_extract_row(B);
+    // Test extract_col
+    //test_extract_col(A);
+    // Test multiply_row_col
+    //test_mult(B, A);
+    // Test accumulate
+    //test_accumulate(test, test2);
 
-    //accumulator_test(test, test2);
-
-    final_test_multiplication(B, A);
-
-    // csr_t bus_matrix = read_matrix_market_file("/home/zain/Documents/hls/processing_elements/outer_product/src/494_bus.mtx");
-    // calculate_sparsity(bus_matrix);
+    // Test outer_product
+    csr_out_t out = outer_product(A, B);
+    print_csr_out_t(out);
 
     return 0;
 }
