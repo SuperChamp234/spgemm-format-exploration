@@ -1,4 +1,4 @@
-<project xmlns="com.autoesl.autopilot.project" name="outer_product" top="outer_product_opt">
+<project xmlns="com.autoesl.autopilot.project" name="outer_product" top="outer_product">
     <includePaths/>
     <libraryPaths/>
     <Simulation>

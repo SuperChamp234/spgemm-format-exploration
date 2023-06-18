@@ -1,0 +1,199 @@
+<profile>
+
+<section name = "Vivado HLS Report for 'accumulate'" level="0">
+<item name = "Date">Sun Jun 18 00:47:00 2023
+</item>
+<item name = "Version">2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)</item>
+<item name = "Project">outer_product</item>
+<item name = "Solution">solution1</item>
+<item name = "Product family">aartix7</item>
+<item name = "Target device">xa7a12tcsg325-1q</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing (ns)">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00, 8.313, 1.25</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency (clock cycles)">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">, min, max, min, max, Type</keys>
+<column name="">?, ?, ?, ?, dataflow</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="7">Instance, Module, min, max, min, max, Type</keys>
+<column name="accumulate_Block_pr_U0">accumulate_Block_pr, ?, ?, ?, ?, none</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Utilization Estimates" level="0">
+<item name = "Summary"><table name="" hasTotal="1">
+<keys size="5">Name, BRAM_18K, DSP48E, FF, LUT</keys>
+<column name="DSP">-, -, -, -</column>
+<column name="Expression">-, -, -, -</column>
+<column name="FIFO">-, -, -, -</column>
+<column name="Instance">-, -, 759, 1059</column>
+<column name="Memory">-, -, -, -</column>
+<column name="Multiplexer">-, -, -, -</column>
+<column name="Register">-, -, -, -</column>
+<specialColumn name="Available">40, 40, 16000, 8000</specialColumn>
+<specialColumn name="Utilization (%)">0, 0, 4, 13</specialColumn>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="1">
+<keys size="6">Instance, Module, BRAM_18K, DSP48E, FF, LUT</keys>
+<column name="accumulate_Block_pr_U0">accumulate_Block_pr, 0, 0, 759, 1059</column>
+</table>
+</item>
+<item name = "DSP48"><table name="" hasTotal="0">
+<keys size="3">Instance, Module, Expression</keys>
+</table>
+</item>
+<item name = "Memory"><table name="" hasTotal="1">
+<keys size="9">Memory, Module, BRAM_18K, FF, LUT, Words, Bits, Banks, W*Bits*Banks</keys>
+</table>
+</item>
+<item name = "FIFO"><table name="" hasTotal="1">
+<keys size="7">Name, BRAM_18K, FF, LUT, Depth, Bits, Size:D*B</keys>
+</table>
+</item>
+<item name = "Expression"><table name="" hasTotal="1">
+<keys size="7">Variable Name, Operation, DSP48E, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
+</table>
+</item>
+<item name = "Multiplexer"><table name="" hasTotal="1">
+<keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
+</table>
+</item>
+<item name = "Register"><table name="" hasTotal="1">
+<keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
+</table>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Interface" level="0">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">RTL Ports, Dir, Bits, Protocol, Source Object, C Type</keys>
+<column name="agg_result_rowptr_address0">out, 3, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_rowptr_ce0">out, 1, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_rowptr_d0">out, 32, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_rowptr_q0">in, 32, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_rowptr_we0">out, 1, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_rowptr_address1">out, 3, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_rowptr_ce1">out, 1, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_rowptr_d1">out, 32, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_rowptr_q1">in, 32, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_rowptr_we1">out, 1, ap_memory, agg_result_rowptr, array</column>
+<column name="agg_result_colind_address0">out, 5, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_colind_ce0">out, 1, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_colind_d0">out, 32, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_colind_q0">in, 32, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_colind_we0">out, 1, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_colind_address1">out, 5, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_colind_ce1">out, 1, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_colind_d1">out, 32, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_colind_q1">in, 32, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_colind_we1">out, 1, ap_memory, agg_result_colind, array</column>
+<column name="agg_result_data_V_address0">out, 5, ap_memory, agg_result_data_V, array</column>
+<column name="agg_result_data_V_ce0">out, 1, ap_memory, agg_result_data_V, array</column>
+<column name="agg_result_data_V_d0">out, 32, ap_memory, agg_result_data_V, array</column>
+<column name="agg_result_data_V_q0">in, 32, ap_memory, agg_result_data_V, array</column>
+<column name="agg_result_data_V_we0">out, 1, ap_memory, agg_result_data_V, array</column>
+<column name="agg_result_data_V_address1">out, 5, ap_memory, agg_result_data_V, array</column>
+<column name="agg_result_data_V_ce1">out, 1, ap_memory, agg_result_data_V, array</column>
+<column name="agg_result_data_V_d1">out, 32, ap_memory, agg_result_data_V, array</column>
+<column name="agg_result_data_V_q1">in, 32, ap_memory, agg_result_data_V, array</column>
+<column name="agg_result_data_V_we1">out, 1, ap_memory, agg_result_data_V, array</column>
+<column name="csr1_rowptr_address0">out, 3, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_rowptr_ce0">out, 1, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_rowptr_d0">out, 32, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_rowptr_q0">in, 32, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_rowptr_we0">out, 1, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_rowptr_address1">out, 3, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_rowptr_ce1">out, 1, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_rowptr_d1">out, 32, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_rowptr_q1">in, 32, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_rowptr_we1">out, 1, ap_memory, csr1_rowptr, array</column>
+<column name="csr1_colind_address0">out, 5, ap_memory, csr1_colind, array</column>
+<column name="csr1_colind_ce0">out, 1, ap_memory, csr1_colind, array</column>
+<column name="csr1_colind_d0">out, 32, ap_memory, csr1_colind, array</column>
+<column name="csr1_colind_q0">in, 32, ap_memory, csr1_colind, array</column>
+<column name="csr1_colind_we0">out, 1, ap_memory, csr1_colind, array</column>
+<column name="csr1_colind_address1">out, 5, ap_memory, csr1_colind, array</column>
+<column name="csr1_colind_ce1">out, 1, ap_memory, csr1_colind, array</column>
+<column name="csr1_colind_d1">out, 32, ap_memory, csr1_colind, array</column>
+<column name="csr1_colind_q1">in, 32, ap_memory, csr1_colind, array</column>
+<column name="csr1_colind_we1">out, 1, ap_memory, csr1_colind, array</column>
+<column name="csr1_data_V_address0">out, 5, ap_memory, csr1_data_V, array</column>
+<column name="csr1_data_V_ce0">out, 1, ap_memory, csr1_data_V, array</column>
+<column name="csr1_data_V_d0">out, 32, ap_memory, csr1_data_V, array</column>
+<column name="csr1_data_V_q0">in, 32, ap_memory, csr1_data_V, array</column>
+<column name="csr1_data_V_we0">out, 1, ap_memory, csr1_data_V, array</column>
+<column name="csr1_data_V_address1">out, 5, ap_memory, csr1_data_V, array</column>
+<column name="csr1_data_V_ce1">out, 1, ap_memory, csr1_data_V, array</column>
+<column name="csr1_data_V_d1">out, 32, ap_memory, csr1_data_V, array</column>
+<column name="csr1_data_V_q1">in, 32, ap_memory, csr1_data_V, array</column>
+<column name="csr1_data_V_we1">out, 1, ap_memory, csr1_data_V, array</column>
+<column name="csr2_rowptr_address0">out, 3, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_rowptr_ce0">out, 1, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_rowptr_d0">out, 32, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_rowptr_q0">in, 32, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_rowptr_we0">out, 1, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_rowptr_address1">out, 3, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_rowptr_ce1">out, 1, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_rowptr_d1">out, 32, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_rowptr_q1">in, 32, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_rowptr_we1">out, 1, ap_memory, csr2_rowptr, array</column>
+<column name="csr2_colind_address0">out, 5, ap_memory, csr2_colind, array</column>
+<column name="csr2_colind_ce0">out, 1, ap_memory, csr2_colind, array</column>
+<column name="csr2_colind_d0">out, 3, ap_memory, csr2_colind, array</column>
+<column name="csr2_colind_q0">in, 3, ap_memory, csr2_colind, array</column>
+<column name="csr2_colind_we0">out, 1, ap_memory, csr2_colind, array</column>
+<column name="csr2_colind_address1">out, 5, ap_memory, csr2_colind, array</column>
+<column name="csr2_colind_ce1">out, 1, ap_memory, csr2_colind, array</column>
+<column name="csr2_colind_d1">out, 3, ap_memory, csr2_colind, array</column>
+<column name="csr2_colind_q1">in, 3, ap_memory, csr2_colind, array</column>
+<column name="csr2_colind_we1">out, 1, ap_memory, csr2_colind, array</column>
+<column name="csr2_data_V_address0">out, 5, ap_memory, csr2_data_V, array</column>
+<column name="csr2_data_V_ce0">out, 1, ap_memory, csr2_data_V, array</column>
+<column name="csr2_data_V_d0">out, 32, ap_memory, csr2_data_V, array</column>
+<column name="csr2_data_V_q0">in, 32, ap_memory, csr2_data_V, array</column>
+<column name="csr2_data_V_we0">out, 1, ap_memory, csr2_data_V, array</column>
+<column name="csr2_data_V_address1">out, 5, ap_memory, csr2_data_V, array</column>
+<column name="csr2_data_V_ce1">out, 1, ap_memory, csr2_data_V, array</column>
+<column name="csr2_data_V_d1">out, 32, ap_memory, csr2_data_V, array</column>
+<column name="csr2_data_V_q1">in, 32, ap_memory, csr2_data_V, array</column>
+<column name="csr2_data_V_we1">out, 1, ap_memory, csr2_data_V, array</column>
+<column name="ap_clk">in, 1, ap_ctrl_hs, accumulate, return value</column>
+<column name="ap_rst">in, 1, ap_ctrl_hs, accumulate, return value</column>
+<column name="ap_start">in, 1, ap_ctrl_hs, accumulate, return value</column>
+<column name="ap_done">out, 1, ap_ctrl_hs, accumulate, return value</column>
+<column name="ap_ready">out, 1, ap_ctrl_hs, accumulate, return value</column>
+<column name="ap_idle">out, 1, ap_ctrl_hs, accumulate, return value</column>
+<column name="ap_continue">in, 1, ap_ctrl_hs, accumulate, return value</column>
+</table>
+</item>
+</section>
+</profile>

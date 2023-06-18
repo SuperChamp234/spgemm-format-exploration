@@ -2,30 +2,19 @@
 <vivadoHLSLog:LogRoot xmlns:vivadoHLSLog="www.xilinx.com/vivadoHLSLog">
   <errorLogs>
     <logs>
-      <synLog>
-        <logs message="ERROR: [HLS 200-70] Synthesizability check failed.&#xA;command 'ap_source' returned error code&#xA;    while executing&#xA;&quot;source /home/zain/Documents/hls/processing_elements/outer_product/solution1/csynth.tcl&quot;&#xA;    invoked from within&#xA;&quot;hls::main /home/zain/Documents/hls/processing_elements/outer_product/solution1/csynth.tcl&quot;&#xA;    (&quot;uplevel&quot; body line 1)&#xA;    invoked from within&#xA;&quot;uplevel 1 hls::main {*}$args&quot;&#xA;    (procedure &quot;hls_proc&quot; line 5)&#xA;    invoked from within&#xA;&quot;hls_proc $argv&quot;&#xA;" projectName="outer_product" solutionName="solution1" date="2023-06-07T17:58:43.397+0530"/>
-        <logs message="ERROR: [SYNCHK 200-61] outer_product/src/outer_product.cpp:161: unsupported memory access on variable 'z_csr.data.V' which is (or contains) an array with unknown size at compile time." projectName="outer_product" solutionName="solution1" date="2023-06-07T17:58:43.360+0530"/>
-        <logs message="ERROR: [SYNCHK 200-41] outer_product/src/outer_product.cpp:150: unsupported pointer reinterpretation from type 'i8*' to type 'ap_fixed&lt;32, 16, 5, 3, 0>'." projectName="outer_product" solutionName="solution1" date="2023-06-07T17:58:43.356+0530"/>
-        <logs message="ERROR: [SYNCHK 200-71] outer_product/src/outer_product.cpp:150: function 'operator new[](unsigned long)' has no function body." projectName="outer_product" solutionName="solution1" date="2023-06-07T17:58:43.353+0530"/>
-        <logs message="ERROR: [SYNCHK 200-43] outer_product/src/outer_product.cpp:271: use or assignment of a non-static pointer '' (this pointer may refer to different memory locations)." projectName="outer_product" solutionName="solution1" date="2023-06-07T17:58:43.350+0530"/>
-        <logs message="ERROR: [SYNCHK 200-11] outer_product/src/outer_product.cpp:240: Argument 'z_csr.colind' of function 'outer_product_opt' (outer_product/src/outer_product.cpp:238) has an unsynthesizable type (possible cause(s): pointer to pointer or global pointer)." projectName="outer_product" solutionName="solution1" date="2023-06-07T17:58:43.347+0530"/>
-      </synLog>
       <simLog/>
-      <mgLog/>
-      <packageLog/>
-      <csimLog/>
     </logs>
   </errorLogs>
   <warningLogs>
     <logs>
-      <synLog>
-        <logs message="WARNING: [HLS 200-471] Dataflow form checks found 1 issue(s) in file outer_product/src/outer_product.cpp" projectName="outer_product" solutionName="solution1" date="2023-06-07T17:58:42.558+0530" type="Warning"/>
-        <logs message="WARNING: [HLS 214-111] Streams will behave like static variables inside a dataflow region: outer_product/src/outer_product.cpp:251:18" projectName="outer_product" solutionName="solution1" date="2023-06-07T17:58:37.713+0530" type="Warning"/>
-      </synLog>
-      <simLog/>
-      <mgLog/>
-      <packageLog/>
-      <csimLog/>
+      <simLog>
+        <logs message="WARNING: [SIM 212-201] RTL produces unknown value 'X' on port 'agg_result_data_V', possible cause: There are uninitialized variables in the C design.&#xA;1 4 5 12 0 &#xA;12 6 0 18 0 &#xA;23 28 74 0 56 &#xA;0 32 56 0 145 " projectName="outer_product" solutionName="solution1" date="2023-06-18T00:48:17.820+0530" type="Warning"/>
+        <logs message="WARNING: [SIM 212-201] RTL produces unknown value 'X' on port 'agg_result_data_V', possible cause: There are uninitialized variables in the C design." projectName="outer_product" solutionName="solution1" date="2023-06-18T00:48:17.819+0530" type="Warning"/>
+        <logs message="WARNING: [SIM 212-201] RTL produces unknown value 'X' on port 'agg_result_data_V', possible cause: There are uninitialized variables in the C design." projectName="outer_product" solutionName="solution1" date="2023-06-18T00:48:17.817+0530" type="Warning"/>
+        <logs message="WARNING: [SIM 212-201] RTL produces unknown value 'X' on port 'agg_result_data_V', possible cause: There are uninitialized variables in the C design." projectName="outer_product" solutionName="solution1" date="2023-06-18T00:48:17.815+0530" type="Warning"/>
+        <logs message="WARNING: [SIM 212-201] RTL produces unknown value 'X' on port 'agg_result_data_V', possible cause: There are uninitialized variables in the C design." projectName="outer_product" solutionName="solution1" date="2023-06-18T00:48:17.814+0530" type="Warning"/>
+        <logs message="WARNING: [SIM 212-201] RTL produces unknown value 'X' on port 'agg_result_data_V', possible cause: There are uninitialized variables in the C design." projectName="outer_product" solutionName="solution1" date="2023-06-18T00:48:17.813+0530" type="Warning"/>
+      </simLog>
     </logs>
   </warningLogs>
 </vivadoHLSLog:LogRoot>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="outer_product.wdb" id="1">
+         <top_modules>
+            <top_module name="apa_outer_product_top" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0ns"></ZoomStartTime>
+      <ZoomEndTime time="2000ns"></ZoomEndTime>
+      <Cursor1Time time="0ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="257"></NameColumnWidth>
+      <ValueColumnWidth column_width="84"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="2" />
+   <wvobject type="group" fp_name="AESL_inst_outer_product_group">
+      <obj_property name="label">AESL_inst_outer_product</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="group" fp_name="grp_accumulate_fu_3783_group">
+         <obj_property name="label">grp_accumulate_fu_3783</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="protoinst" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/accumulate_Block_pr_U0_activity">
+            <obj_property name="ElementShortName">accumulate_Block_pr_U0_activity</obj_property>
+            <obj_property name="ObjectShortName">accumulate_Block_pr_U0_activity</obj_property>
+         </wvobject>
+         <wvobject type="group" fp_name="accumulate_Block_pr_U0_group">
+            <obj_property name="label">accumulate_Block_pr_U0</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="group" fp_name="accumulate_Block_pr_U0_Input_group">
+               <obj_property name="label">Input Channels</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <wvobject type="group" fp_name="csr1_rowptr_group">
+                  <obj_property name="label">csr1_rowptr(PIPO)</obj_property>
+                  <obj_property name="DisplayName">label</obj_property>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr1_rowptr_address0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr1_rowptr_q0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr1_rowptr_ce0">
+                     <obj_property name="ElementShortName">csr1_rowptr_ce0</obj_property>
+                     <obj_property name="ObjectShortName">csr1_rowptr_ce0</obj_property>
+                  </wvobject>
+               </wvobject>
+               <wvobject type="group" fp_name="csr2_rowptr_group">
+                  <obj_property name="label">csr2_rowptr(PIPO)</obj_property>
+                  <obj_property name="DisplayName">label</obj_property>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr2_rowptr_address0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr2_rowptr_q0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr2_rowptr_ce0">
+                     <obj_property name="ElementShortName">csr2_rowptr_ce0</obj_property>
+                     <obj_property name="ObjectShortName">csr2_rowptr_ce0</obj_property>
+                  </wvobject>
+               </wvobject>
+               <wvobject type="group" fp_name="csr1_data_V_group">
+                  <obj_property name="label">csr1_data_V(PIPO)</obj_property>
+                  <obj_property name="DisplayName">label</obj_property>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr1_data_V_address0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr1_data_V_q0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr1_data_V_ce0">
+                     <obj_property name="ElementShortName">csr1_data_V_ce0</obj_property>
+                     <obj_property name="ObjectShortName">csr1_data_V_ce0</obj_property>
+                  </wvobject>
+               </wvobject>
+               <wvobject type="group" fp_name="csr2_data_V_group">
+                  <obj_property name="label">csr2_data_V(PIPO)</obj_property>
+                  <obj_property name="DisplayName">label</obj_property>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr2_data_V_address0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr2_data_V_q0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr2_data_V_ce0">
+                     <obj_property name="ElementShortName">csr2_data_V_ce0</obj_property>
+                     <obj_property name="ObjectShortName">csr2_data_V_ce0</obj_property>
+                  </wvobject>
+               </wvobject>
+               <wvobject type="group" fp_name="csr1_colind_group">
+                  <obj_property name="label">csr1_colind(PIPO)</obj_property>
+                  <obj_property name="DisplayName">label</obj_property>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr1_colind_address0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr1_colind_q0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr1_colind_ce0">
+                     <obj_property name="ElementShortName">csr1_colind_ce0</obj_property>
+                     <obj_property name="ObjectShortName">csr1_colind_ce0</obj_property>
+                  </wvobject>
+               </wvobject>
+               <wvobject type="group" fp_name="csr2_colind_group">
+                  <obj_property name="label">csr2_colind(PIPO)</obj_property>
+                  <obj_property name="DisplayName">label</obj_property>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr2_colind_address0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr2_colind_q0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/csr2_colind_ce0">
+                     <obj_property name="ElementShortName">csr2_colind_ce0</obj_property>
+                     <obj_property name="ObjectShortName">csr2_colind_ce0</obj_property>
+                  </wvobject>
+               </wvobject>
+            </wvobject>
+            <wvobject type="group" fp_name="accumulate_Block_pr_U0_Handshake_group">
+               <obj_property name="label">Block-level handshake</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/ap_start">
+                  <obj_property name="ElementShortName">ap_start</obj_property>
+                  <obj_property name="ObjectShortName">ap_start</obj_property>
+               </wvobject>
+               <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/ap_ready">
+                  <obj_property name="ElementShortName">ap_ready</obj_property>
+                  <obj_property name="ObjectShortName">ap_ready</obj_property>
+               </wvobject>
+               <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/ap_done">
+                  <obj_property name="ElementShortName">ap_done</obj_property>
+                  <obj_property name="ObjectShortName">ap_done</obj_property>
+               </wvobject>
+               <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/ap_continue">
+                  <obj_property name="ElementShortName">ap_continue</obj_property>
+                  <obj_property name="ObjectShortName">ap_continue</obj_property>
+               </wvobject>
+            </wvobject>
+            <wvobject type="group" fp_name="accumulate_Block_pr_U0_Output_group">
+               <obj_property name="label">Output Channels</obj_property>
+               <obj_property name="DisplayName">label</obj_property>
+               <wvobject type="group" fp_name="agg_result_data_V_group">
+                  <obj_property name="label">agg_result_data_V(PIPO)</obj_property>
+                  <obj_property name="DisplayName">label</obj_property>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/agg_result_data_V_address0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/agg_result_data_V_d0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/agg_result_data_V_ce0">
+                     <obj_property name="ElementShortName">agg_result_data_V_ce0</obj_property>
+                     <obj_property name="ObjectShortName">agg_result_data_V_ce0</obj_property>
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/agg_result_data_V_we0">
+                     <obj_property name="ElementShortName">agg_result_data_V_we0</obj_property>
+                     <obj_property name="ObjectShortName">agg_result_data_V_we0</obj_property>
+                  </wvobject>
+               </wvobject>
+               <wvobject type="group" fp_name="agg_result_colind_group">
+                  <obj_property name="label">agg_result_colind(PIPO)</obj_property>
+                  <obj_property name="DisplayName">label</obj_property>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/agg_result_colind_address0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/agg_result_colind_d0">
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/agg_result_colind_ce0">
+                     <obj_property name="ElementShortName">agg_result_colind_ce0</obj_property>
+                     <obj_property name="ObjectShortName">agg_result_colind_ce0</obj_property>
+                  </wvobject>
+                  <wvobject type="logic" fp_name="/apatb_outer_product_top/AESL_inst_outer_product/grp_accumulate_fu_3783/accumulate_Block_pr_U0/agg_result_colind_we0">
+                     <obj_property name="ElementShortName">agg_result_colind_we0</obj_property>
+                     <obj_property name="ObjectShortName">agg_result_colind_we0</obj_property>
+                  </wvobject>
+               </wvobject>
+            </wvobject>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+</wave_config>

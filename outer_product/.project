@@ -29,47 +29,47 @@
 		<link>
 			<name>source</name>
 			<type>2</type>
-			<location>/home/zain/Documents/hls/processing_elements/outer_product/.apc/.src</location>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/.apc/.src</location>
 		</link>
 		<link>
 			<name>testbench</name>
 			<type>2</type>
-			<location>/home/zain/Documents/hls/processing_elements/outer_product/.apc/.tb</location>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/.apc/.tb</location>
 		</link>
 		<link>
 			<name>solution1/constraints</name>
 			<type>2</type>
-			<location>/home/zain/Documents/hls/processing_elements/outer_product/solution1/.tcls</location>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/solution1/.tcls</location>
 		</link>
 		<link>
 			<name>source/outer_product.cpp</name>
 			<type>1</type>
-			<location>/home/zain/Documents/hls/processing_elements/outer_product/src/outer_product.cpp</location>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/src/outer_product.cpp</location>
 		</link>
 		<link>
 			<name>source/outer_product.h</name>
 			<type>1</type>
-			<location>/home/zain/Documents/hls/processing_elements/outer_product/src/outer_product.h</location>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/src/outer_product.h</location>
 		</link>
 		<link>
 			<name>testbench/outer_product_tb.cpp</name>
 			<type>1</type>
-			<location>/home/zain/Documents/hls/processing_elements/outer_product/src/outer_product_tb.cpp</location>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/src/outer_product_tb.cpp</location>
 		</link>
 		<link>
 			<name>solution1/constraints/.xml.directive</name>
 			<type>1</type>
-			<location>/home/zain/Documents/hls/processing_elements/outer_product/solution1/solution1.directive</location>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/solution1/solution1.directive</location>
 		</link>
 		<link>
 			<name>solution1/constraints/directives.tcl</name>
 			<type>1</type>
-			<location>/home/zain/Documents/hls/processing_elements/outer_product/solution1/directives.tcl</location>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/solution1/directives.tcl</location>
 		</link>
 		<link>
 			<name>solution1/constraints/script.tcl</name>
 			<type>1</type>
-			<location>/home/zain/Documents/hls/processing_elements/outer_product/solution1/script.tcl</location>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/solution1/script.tcl</location>
 		</link>
 	</linkedResources>
 </projectDescription>

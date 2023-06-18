@@ -18,5 +18,4 @@ obj/outer_product_tb.o: ../../../src/outer_product_tb.cpp \
  /tools/Xilinx/Vivado/2018.3/include/ap_int_ref.h \
  /tools/Xilinx/Vivado/2018.3/include/ap_int_special.h \
  /tools/Xilinx/Vivado/2018.3/include/ap_fixed_ref.h \
- /tools/Xilinx/Vivado/2018.3/include/ap_fixed_special.h \
- /tools/Xilinx/Vivado/2018.3/include/hls_stream.h
+ /tools/Xilinx/Vivado/2018.3/include/ap_fixed_special.h
