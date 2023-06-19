@@ -68813,6 +68813,7 @@ data_t* extract_row(csr_t inp_csr, int row)
     int start_idx = inp_csr.rowptr[row];
     int end_idx = inp_csr.rowptr[row+1];
     int j = start_idx;
+#pragma HLS unroll
     for (int i = 0; i < 5; i++)
     {
         if (j < end_idx && inp_csr.colind[j] == i)
@@ -68839,6 +68840,7 @@ data_t* extract_col(csc_t inp_csc, int col)
     int start_idx = inp_csc.colptr[col];
     int end_idx = inp_csc.colptr[col+1];
     int j = start_idx;
+#pragma HLS unroll
     for (int i = 0; i < 4; i++)
     {
         if (j < end_idx && inp_csc.rowind[j] == i)
@@ -68857,20 +68859,28 @@ data_t* extract_col(csc_t inp_csc, int col)
     return out_col;
 }
 
+data_t mult(data_t a, data_t b)
+{
+#pragma HLS INLINE off
+    data_t c = a * b;
+#pragma HLS RESOURCE variable=c core=FMul_nodsp
+    return c;
+}
+
 csr_out_t multiply_row_col(data_t* row, data_t* col)
 {
     csr_out_t out;
     out.rowptr[0] = 0;
     int z_idx = 0;
+#pragma HLS pipeline
     for(int i = 0; i < 4; i++)
     {
         for(int j = 0; j < 5; j++)
         {
-            data_t prod = row[j] * col[i];
-            if (prod != 0)
+            if (row[j] != 0 && col[i] != 0)
             {
                 out.colind[z_idx] = j;
-                out.data[z_idx] = prod;
+                out.data[z_idx] = mult(row[j], col[i]);
                 z_idx++;
             }
         }
@@ -68881,7 +68891,6 @@ csr_out_t multiply_row_col(data_t* row, data_t* col)
 
 csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
 {
-#pragma HLS dataflow
     csr_out_t out;
     out.rowptr[0] = 0;
     int z_idx = 0;
@@ -68894,6 +68903,7 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
         int j = start_idx_1;
         int k = start_idx_2;
         z_idx = out.rowptr[i];
+#pragma HLS LOOP_TRIPCOUNT min=1 max=5
         while (j < end_idx_1 && k < end_idx_2)
         {
             if(csr1.colind[j] == csr2.colind[k])
@@ -68920,6 +68930,7 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
                 z_idx++;
             }
         }
+#pragma HLS LOOP_TRIPCOUNT min=1 max=5
         while (j < end_idx_1)
         {
             out.data[z_idx] = csr1.data[j];
@@ -68927,6 +68938,7 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
             j++;
             z_idx++;
         }
+#pragma HLS LOOP_TRIPCOUNT min=1 max=5
         while (k < end_idx_2)
         {
             out.data[z_idx] = csr2.data[k];

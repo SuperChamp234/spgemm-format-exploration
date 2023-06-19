@@ -183,7 +183,7 @@ set NewPortList {[
  	{ "name": "y_csr_data_V_q1", "direction": "in", "datatype": "sc_lv", "bitwidth":32, "type": "signal", "bundle":{"name": "y_csr_data_V", "role": "q1" }}  ]}
 
 set RtlHierarchyInfo {[
-	{"ID" : "0", "Level" : "0", "Path" : "`AUTOTB_DUT_INST", "Parent" : "", "Child" : ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "23"],
+	{"ID" : "0", "Level" : "0", "Path" : "`AUTOTB_DUT_INST", "Parent" : "", "Child" : ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22"],
 		"CDFG" : "outer_product",
 		"Protocol" : "ap_ctrl_hs",
 		"ControlExist" : "1", "ap_start" : "1", "ap_ready" : "1", "ap_done" : "1", "ap_continue" : "0", "ap_idle" : "1",
@@ -193,12 +193,12 @@ set RtlHierarchyInfo {[
 		"Combinational" : "0",
 		"Datapath" : "0",
 		"ClockEnable" : "0",
-		"HasSubDataflow" : "1",
+		"HasSubDataflow" : "0",
 		"InDataflowNetwork" : "0",
 		"HasNonBlockingOperation" : "0",
 		"WaitState" : [
-			{"State" : "ap_ST_fsm_state44", "FSM" : "ap_CS_fsm", "SubInstance" : "grp_accumulate_fu_3783"},
-			{"State" : "ap_ST_fsm_state31", "FSM" : "ap_CS_fsm", "SubInstance" : "grp_multiply_row_col_fu_3796"}],
+			{"State" : "ap_ST_fsm_state59", "FSM" : "ap_CS_fsm", "SubInstance" : "grp_accumulate_fu_3661"},
+			{"State" : "ap_ST_fsm_state14", "FSM" : "ap_CS_fsm", "SubInstance" : "grp_extract_col_fu_3674"}],
 		"Port" : [
 			{"Name" : "agg_result_rowptr", "Type" : "Memory", "Direction" : "IO"},
 			{"Name" : "agg_result_colind", "Type" : "Memory", "Direction" : "IO"},
@@ -209,107 +209,83 @@ set RtlHierarchyInfo {[
 			{"Name" : "y_csr_rowptr", "Type" : "Memory", "Direction" : "I"},
 			{"Name" : "y_csr_colind", "Type" : "Memory", "Direction" : "I"},
 			{"Name" : "y_csr_data_V", "Type" : "Memory", "Direction" : "I"},
-			{"Name" : "out_col_V", "Type" : "Memory", "Direction" : "IO",
+			{"Name" : "out_col_V_0", "Type" : "OVld", "Direction" : "IO",
 				"SubConnect" : [
-					{"ID" : "23", "SubInstance" : "grp_multiply_row_col_fu_3796", "Port" : "col_V"}]},
+					{"ID" : "22", "SubInstance" : "grp_extract_col_fu_3674", "Port" : "out_col_V_0"}]},
+			{"Name" : "out_col_V_1", "Type" : "OVld", "Direction" : "IO",
+				"SubConnect" : [
+					{"ID" : "22", "SubInstance" : "grp_extract_col_fu_3674", "Port" : "out_col_V_1"}]},
+			{"Name" : "out_col_V_2", "Type" : "OVld", "Direction" : "IO",
+				"SubConnect" : [
+					{"ID" : "22", "SubInstance" : "grp_extract_col_fu_3674", "Port" : "out_col_V_2"}]},
+			{"Name" : "out_col_V_3", "Type" : "OVld", "Direction" : "IO",
+				"SubConnect" : [
+					{"ID" : "22", "SubInstance" : "grp_extract_col_fu_3674", "Port" : "out_col_V_3"}]},
 			{"Name" : "out_row_V", "Type" : "Memory", "Direction" : "IO",
 				"SubConnect" : [
-					{"ID" : "23", "SubInstance" : "grp_multiply_row_col_fu_3796", "Port" : "row_V"}]}]},
-	{"ID" : "1", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.out_col_V_U", "Parent" : "0"},
-	{"ID" : "2", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.out_row_V_U", "Parent" : "0"},
-	{"ID" : "3", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.inp_csr_data_V_assig_U", "Parent" : "0"},
-	{"ID" : "4", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.inp_csr_colind_assig_U", "Parent" : "0"},
-	{"ID" : "5", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.inp_csr_rowptr_assig_U", "Parent" : "0"},
-	{"ID" : "6", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.inp_csc_data_V_assig_U", "Parent" : "0"},
-	{"ID" : "7", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.inp_csc_rowind_assig_U", "Parent" : "0"},
-	{"ID" : "8", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.inp_csc_colptr_assig_U", "Parent" : "0"},
-	{"ID" : "9", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.partial_z_rowptr_U", "Parent" : "0"},
-	{"ID" : "10", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.partial_z_colind_U", "Parent" : "0"},
-	{"ID" : "11", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.partial_z_data_V_U", "Parent" : "0"},
-	{"ID" : "12", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_04_U", "Parent" : "0"},
-	{"ID" : "13", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_15_U", "Parent" : "0"},
-	{"ID" : "14", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_26_U", "Parent" : "0"},
-	{"ID" : "15", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_07_U", "Parent" : "0"},
-	{"ID" : "16", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_18_U", "Parent" : "0"},
-	{"ID" : "17", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_29_U", "Parent" : "0"},
-	{"ID" : "18", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_010_U", "Parent" : "0"},
-	{"ID" : "19", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_111_U", "Parent" : "0"},
-	{"ID" : "20", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_212_U", "Parent" : "0"},
-	{"ID" : "21", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.grp_accumulate_fu_3783", "Parent" : "0", "Child" : ["22"],
-		"CDFG" : "accumulate",
+					{"ID" : "19", "SubInstance" : "grp_multiply_row_col_fu_3649", "Port" : "row_V"}]}]},
+	{"ID" : "1", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.out_row_V_U", "Parent" : "0"},
+	{"ID" : "2", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.inp_csr_data_V_assig_U", "Parent" : "0"},
+	{"ID" : "3", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.inp_csr_colind_assig_U", "Parent" : "0"},
+	{"ID" : "4", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.inp_csr_rowptr_assig_U", "Parent" : "0"},
+	{"ID" : "5", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_0_U", "Parent" : "0"},
+	{"ID" : "6", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_1_U", "Parent" : "0"},
+	{"ID" : "7", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_2_U", "Parent" : "0"},
+	{"ID" : "8", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.partial_z_colind_U", "Parent" : "0"},
+	{"ID" : "9", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.partial_z_data_V_U", "Parent" : "0"},
+	{"ID" : "10", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_04_U", "Parent" : "0"},
+	{"ID" : "11", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_15_U", "Parent" : "0"},
+	{"ID" : "12", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_26_U", "Parent" : "0"},
+	{"ID" : "13", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_07_U", "Parent" : "0"},
+	{"ID" : "14", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_18_U", "Parent" : "0"},
+	{"ID" : "15", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_29_U", "Parent" : "0"},
+	{"ID" : "16", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_010_U", "Parent" : "0"},
+	{"ID" : "17", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_111_U", "Parent" : "0"},
+	{"ID" : "18", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.p_212_U", "Parent" : "0"},
+	{"ID" : "19", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.grp_multiply_row_col_fu_3649", "Parent" : "0", "Child" : ["20"],
+		"CDFG" : "multiply_row_col",
 		"Protocol" : "ap_ctrl_hs",
-		"ControlExist" : "1", "ap_start" : "1", "ap_ready" : "1", "ap_done" : "1", "ap_continue" : "1", "ap_idle" : "1",
-		"Pipeline" : "Dataflow", "UnalignedPipeline" : "0", "RewindPipeline" : "0", "ProcessNetwork" : "1",
-		"II" : "0",
-		"VariableLatency" : "1", "ExactLatency" : "-1", "EstimateLatencyMin" : "-1", "EstimateLatencyMax" : "-1",
-		"Combinational" : "0",
-		"Datapath" : "0",
-		"ClockEnable" : "0",
-		"HasSubDataflow" : "1",
-		"InDataflowNetwork" : "0",
-		"HasNonBlockingOperation" : "0",
-		"InputProcess" : [
-			{"ID" : "22", "Name" : "accumulate_Block_pr_U0"}],
-		"OutputProcess" : [
-			{"ID" : "22", "Name" : "accumulate_Block_pr_U0"}],
-		"Port" : [
-			{"Name" : "agg_result_rowptr", "Type" : "Memory", "Direction" : "IO",
-				"SubConnect" : [
-					{"ID" : "22", "SubInstance" : "accumulate_Block_pr_U0", "Port" : "agg_result_rowptr"}]},
-			{"Name" : "agg_result_colind", "Type" : "Memory", "Direction" : "O",
-				"SubConnect" : [
-					{"ID" : "22", "SubInstance" : "accumulate_Block_pr_U0", "Port" : "agg_result_colind"}]},
-			{"Name" : "agg_result_data_V", "Type" : "Memory", "Direction" : "O",
-				"SubConnect" : [
-					{"ID" : "22", "SubInstance" : "accumulate_Block_pr_U0", "Port" : "agg_result_data_V"}]},
-			{"Name" : "csr1_rowptr", "Type" : "Memory", "Direction" : "I",
-				"SubConnect" : [
-					{"ID" : "22", "SubInstance" : "accumulate_Block_pr_U0", "Port" : "csr1_rowptr"}]},
-			{"Name" : "csr1_colind", "Type" : "Memory", "Direction" : "I",
-				"SubConnect" : [
-					{"ID" : "22", "SubInstance" : "accumulate_Block_pr_U0", "Port" : "csr1_colind"}]},
-			{"Name" : "csr1_data_V", "Type" : "Memory", "Direction" : "I",
-				"SubConnect" : [
-					{"ID" : "22", "SubInstance" : "accumulate_Block_pr_U0", "Port" : "csr1_data_V"}]},
-			{"Name" : "csr2_rowptr", "Type" : "Memory", "Direction" : "I",
-				"SubConnect" : [
-					{"ID" : "22", "SubInstance" : "accumulate_Block_pr_U0", "Port" : "csr2_rowptr"}]},
-			{"Name" : "csr2_colind", "Type" : "Memory", "Direction" : "I",
-				"SubConnect" : [
-					{"ID" : "22", "SubInstance" : "accumulate_Block_pr_U0", "Port" : "csr2_colind"}]},
-			{"Name" : "csr2_data_V", "Type" : "Memory", "Direction" : "I",
-				"SubConnect" : [
-					{"ID" : "22", "SubInstance" : "accumulate_Block_pr_U0", "Port" : "csr2_data_V"}]}]},
-	{"ID" : "22", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.grp_accumulate_fu_3783.accumulate_Block_pr_U0", "Parent" : "21",
-		"CDFG" : "accumulate_Block_pr",
-		"Protocol" : "ap_ctrl_hs",
-		"ControlExist" : "1", "ap_start" : "1", "ap_ready" : "1", "ap_done" : "1", "ap_continue" : "1", "ap_idle" : "1",
-		"Pipeline" : "None", "UnalignedPipeline" : "0", "RewindPipeline" : "0", "ProcessNetwork" : "0",
-		"II" : "0",
-		"VariableLatency" : "1", "ExactLatency" : "-1", "EstimateLatencyMin" : "-1", "EstimateLatencyMax" : "-1",
+		"ControlExist" : "1", "ap_start" : "1", "ap_ready" : "1", "ap_done" : "1", "ap_continue" : "0", "ap_idle" : "1",
+		"Pipeline" : "Aligned", "UnalignedPipeline" : "0", "RewindPipeline" : "0", "ProcessNetwork" : "0",
+		"II" : "20",
+		"VariableLatency" : "0", "ExactLatency" : "22", "EstimateLatencyMin" : "22", "EstimateLatencyMax" : "22",
 		"Combinational" : "0",
 		"Datapath" : "0",
 		"ClockEnable" : "0",
 		"HasSubDataflow" : "0",
-		"InDataflowNetwork" : "1",
+		"InDataflowNetwork" : "0",
 		"HasNonBlockingOperation" : "0",
 		"Port" : [
-			{"Name" : "agg_result_rowptr", "Type" : "Memory", "Direction" : "IO"},
-			{"Name" : "csr1_rowptr", "Type" : "Memory", "Direction" : "I"},
-			{"Name" : "csr2_rowptr", "Type" : "Memory", "Direction" : "I"},
-			{"Name" : "csr1_data_V", "Type" : "Memory", "Direction" : "I"},
-			{"Name" : "csr2_data_V", "Type" : "Memory", "Direction" : "I"},
-			{"Name" : "agg_result_data_V", "Type" : "Memory", "Direction" : "O"},
 			{"Name" : "agg_result_colind", "Type" : "Memory", "Direction" : "O"},
-			{"Name" : "csr1_colind", "Type" : "Memory", "Direction" : "I"},
-			{"Name" : "csr2_colind", "Type" : "Memory", "Direction" : "I"}]},
-	{"ID" : "23", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.grp_multiply_row_col_fu_3796", "Parent" : "0",
-		"CDFG" : "multiply_row_col",
+			{"Name" : "agg_result_data_V", "Type" : "Memory", "Direction" : "O"},
+			{"Name" : "row_V", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "col_0_V_read", "Type" : "None", "Direction" : "I"},
+			{"Name" : "col_1_V_read", "Type" : "None", "Direction" : "I"},
+			{"Name" : "col_2_V_read", "Type" : "None", "Direction" : "I"},
+			{"Name" : "col_3_V_read", "Type" : "None", "Direction" : "I"}]},
+	{"ID" : "20", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.grp_multiply_row_col_fu_3649.grp_mult_fu_692", "Parent" : "19",
+		"CDFG" : "mult",
+		"Protocol" : "ap_ctrl_hs",
+		"ControlExist" : "0", "ap_start" : "0", "ap_ready" : "1", "ap_done" : "0", "ap_continue" : "0", "ap_idle" : "0",
+		"Pipeline" : "None", "UnalignedPipeline" : "0", "RewindPipeline" : "0", "ProcessNetwork" : "0",
+		"II" : "1",
+		"VariableLatency" : "0", "ExactLatency" : "0", "EstimateLatencyMin" : "0", "EstimateLatencyMax" : "0",
+		"Combinational" : "1",
+		"Datapath" : "0",
+		"ClockEnable" : "0",
+		"HasSubDataflow" : "0",
+		"InDataflowNetwork" : "0",
+		"HasNonBlockingOperation" : "0",
+		"Port" : [
+			{"Name" : "a_V", "Type" : "None", "Direction" : "I"},
+			{"Name" : "b_V", "Type" : "None", "Direction" : "I"}]},
+	{"ID" : "21", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.grp_accumulate_fu_3661", "Parent" : "0",
+		"CDFG" : "accumulate",
 		"Protocol" : "ap_ctrl_hs",
 		"ControlExist" : "1", "ap_start" : "1", "ap_ready" : "1", "ap_done" : "1", "ap_continue" : "0", "ap_idle" : "1",
 		"Pipeline" : "None", "UnalignedPipeline" : "0", "RewindPipeline" : "0", "ProcessNetwork" : "0",
 		"II" : "0",
-		"VariableLatency" : "1", "ExactLatency" : "-1", "EstimateLatencyMin" : "93", "EstimateLatencyMax" : "93",
+		"VariableLatency" : "1", "ExactLatency" : "-1", "EstimateLatencyMin" : "-1", "EstimateLatencyMax" : "-1",
 		"Combinational" : "0",
 		"Datapath" : "0",
 		"ClockEnable" : "0",
@@ -317,26 +293,66 @@ set RtlHierarchyInfo {[
 		"InDataflowNetwork" : "0",
 		"HasNonBlockingOperation" : "0",
 		"Port" : [
-			{"Name" : "agg_result_rowptr", "Type" : "Memory", "Direction" : "O"},
+			{"Name" : "agg_result_rowptr", "Type" : "Memory", "Direction" : "IO"},
 			{"Name" : "agg_result_colind", "Type" : "Memory", "Direction" : "O"},
 			{"Name" : "agg_result_data_V", "Type" : "Memory", "Direction" : "O"},
-			{"Name" : "row_V", "Type" : "Memory", "Direction" : "I"},
-			{"Name" : "col_V", "Type" : "Memory", "Direction" : "I"}]}]}
+			{"Name" : "csr1_rowptr", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "csr1_colind", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "csr1_data_V", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "csr2_rowptr", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "csr2_colind", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "csr2_data_V", "Type" : "Memory", "Direction" : "I"}]},
+	{"ID" : "22", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.grp_extract_col_fu_3674", "Parent" : "0",
+		"CDFG" : "extract_col",
+		"Protocol" : "ap_ctrl_hs",
+		"ControlExist" : "1", "ap_start" : "1", "ap_ready" : "1", "ap_done" : "1", "ap_continue" : "0", "ap_idle" : "1",
+		"Pipeline" : "None", "UnalignedPipeline" : "0", "RewindPipeline" : "0", "ProcessNetwork" : "0",
+		"II" : "0",
+		"VariableLatency" : "1", "ExactLatency" : "-1", "EstimateLatencyMin" : "14", "EstimateLatencyMax" : "14",
+		"Combinational" : "0",
+		"Datapath" : "0",
+		"ClockEnable" : "0",
+		"HasSubDataflow" : "0",
+		"InDataflowNetwork" : "0",
+		"HasNonBlockingOperation" : "0",
+		"Port" : [
+			{"Name" : "inp_csc_colptr", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "inp_csc_rowind", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "inp_csc_data_V", "Type" : "Memory", "Direction" : "I"},
+			{"Name" : "col", "Type" : "None", "Direction" : "I"},
+			{"Name" : "out_col_V_0", "Type" : "Vld", "Direction" : "O"},
+			{"Name" : "out_col_V_1", "Type" : "Vld", "Direction" : "O"},
+			{"Name" : "out_col_V_2", "Type" : "Vld", "Direction" : "O"},
+			{"Name" : "out_col_V_3", "Type" : "Vld", "Direction" : "O"}]}]}
 
 
 set ArgLastReadFirstWriteLatency {
 	outer_product {
-		agg_result_rowptr {Type IO LastRead 27 FirstWrite 26}
-		agg_result_colind {Type IO LastRead 34 FirstWrite 26}
-		agg_result_data_V {Type IO LastRead 34 FirstWrite 37}
+		agg_result_rowptr {Type IO LastRead 45 FirstWrite 42}
+		agg_result_colind {Type IO LastRead 52 FirstWrite 44}
+		agg_result_data_V {Type IO LastRead 52 FirstWrite 55}
 		x_csc_colptr {Type I LastRead 4 FirstWrite -1}
 		x_csc_rowind {Type I LastRead 11 FirstWrite -1}
 		x_csc_data_V {Type I LastRead 11 FirstWrite -1}
-		y_csr_rowptr {Type I LastRead 15 FirstWrite -1}
-		y_csr_colind {Type I LastRead 22 FirstWrite -1}
-		y_csr_data_V {Type I LastRead 22 FirstWrite -1}
-		out_col_V {Type IO LastRead -1 FirstWrite -1}
+		y_csr_rowptr {Type I LastRead 4 FirstWrite -1}
+		y_csr_colind {Type I LastRead 11 FirstWrite -1}
+		y_csr_data_V {Type I LastRead 11 FirstWrite -1}
+		out_col_V_0 {Type IO LastRead -1 FirstWrite -1}
+		out_col_V_1 {Type IO LastRead -1 FirstWrite -1}
+		out_col_V_2 {Type IO LastRead -1 FirstWrite -1}
+		out_col_V_3 {Type IO LastRead -1 FirstWrite -1}
 		out_row_V {Type IO LastRead -1 FirstWrite -1}}
+	multiply_row_col {
+		agg_result_colind {Type O LastRead -1 FirstWrite 1}
+		agg_result_data_V {Type O LastRead -1 FirstWrite 3}
+		row_V {Type I LastRead 3 FirstWrite -1}
+		col_0_V_read {Type I LastRead 1 FirstWrite -1}
+		col_1_V_read {Type I LastRead 6 FirstWrite -1}
+		col_2_V_read {Type I LastRead 11 FirstWrite -1}
+		col_3_V_read {Type I LastRead 16 FirstWrite -1}}
+	mult {
+		a_V {Type I LastRead 0 FirstWrite -1}
+		b_V {Type I LastRead 0 FirstWrite -1}}
 	accumulate {
 		agg_result_rowptr {Type IO LastRead 1 FirstWrite 0}
 		agg_result_colind {Type O LastRead -1 FirstWrite 4}
@@ -347,22 +363,15 @@ set ArgLastReadFirstWriteLatency {
 		csr2_rowptr {Type I LastRead 2 FirstWrite -1}
 		csr2_colind {Type I LastRead 5 FirstWrite -1}
 		csr2_data_V {Type I LastRead 6 FirstWrite -1}}
-	accumulate_Block_pr {
-		agg_result_rowptr {Type IO LastRead 1 FirstWrite 0}
-		csr1_rowptr {Type I LastRead 2 FirstWrite -1}
-		csr2_rowptr {Type I LastRead 2 FirstWrite -1}
-		csr1_data_V {Type I LastRead 5 FirstWrite -1}
-		csr2_data_V {Type I LastRead 6 FirstWrite -1}
-		agg_result_data_V {Type O LastRead -1 FirstWrite 5}
-		agg_result_colind {Type O LastRead -1 FirstWrite 4}
-		csr1_colind {Type I LastRead 4 FirstWrite -1}
-		csr2_colind {Type I LastRead 5 FirstWrite -1}}
-	multiply_row_col {
-		agg_result_rowptr {Type O LastRead -1 FirstWrite 0}
-		agg_result_colind {Type O LastRead -1 FirstWrite 6}
-		agg_result_data_V {Type O LastRead -1 FirstWrite 6}
-		row_V {Type I LastRead 3 FirstWrite -1}
-		col_V {Type I LastRead 1 FirstWrite -1}}}
+	extract_col {
+		inp_csc_colptr {Type I LastRead 1 FirstWrite -1}
+		inp_csc_rowind {Type I LastRead 2 FirstWrite -1}
+		inp_csc_data_V {Type I LastRead 3 FirstWrite -1}
+		col {Type I LastRead 0 FirstWrite -1}
+		out_col_V_0 {Type O LastRead -1 FirstWrite 3}
+		out_col_V_1 {Type O LastRead -1 FirstWrite 3}
+		out_col_V_2 {Type O LastRead -1 FirstWrite 3}
+		out_col_V_3 {Type O LastRead -1 FirstWrite 3}}}
 
 set hasDtUnsupportedChannel 0
 

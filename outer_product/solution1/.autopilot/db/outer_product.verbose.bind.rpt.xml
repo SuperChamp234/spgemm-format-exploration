@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vivado HLS Report for 'outer_product'" level="0">
-<item name = "Date">Sun Jun 18 00:46:59 2023
+<item name = "Date">Mon Jun 19 21:27:48 2023
 </item>
 <item name = "Version">2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)</item>
 <item name = "Project">outer_product</item>
@@ -31,17 +31,17 @@
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="7">Instance, Module, min, max, min, max, Type</keys>
-<column name="grp_accumulate_fu_3783">accumulate, ?, ?, ?, ?, dataflow</column>
-<column name="grp_multiply_row_col_fu_3796">multiply_row_col, 93, 93, 93, 93, none</column>
+<column name="grp_multiply_row_col_fu_3649">multiply_row_col, 22, 22, 20, 20, function</column>
+<column name="grp_accumulate_fu_3661">accumulate, ?, ?, ?, ?, none</column>
+<column name="grp_extract_col_fu_3674">extract_col, 14, 14, 14, 14, none</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
 <column name="- Loop 1">?, ?, ?, -, -, 5, no</column>
-<column name=" + Loop 1.1">12, 16, 3 ~ 4, -, -, 4, no</column>
-<column name=" + Loop 1.2">15, 20, 3 ~ 4, -, -, 5, no</column>
+<column name=" + Loop 1.1">15, 20, 3 ~ 4, -, -, 5, no</column>
+<column name=" + Loop 1.2">40, 40, 2, -, -, 20, no</column>
 <column name=" + Loop 1.3">40, 40, 2, -, -, 20, no</column>
-<column name=" + Loop 1.4">40, 40, 2, -, -, 20, no</column>
 </table>
 </item>
 </section>

@@ -1,14 +1,14 @@
-outer_product_out_col_V
 outer_product_out_row_V
 outer_product_inp_csr_data_V_assig
 outer_product_inp_csr_rowptr_assig
-outer_product_partial_z_rowptr
 outer_product_partial_z_colind
 outer_product_partial_z_data_V
+outer_product_p_04
 outer_product_p_26
 outer_product_p_07
 outer_product_p_111
+extract_col
+mult
 multiply_row_col
-accumulate_Block_pr
 accumulate
 outer_product

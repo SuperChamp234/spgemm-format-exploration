@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vivado HLS Report for 'multiply_row_col'" level="0">
-<item name = "Date">Sun Jun 18 00:46:56 2023
+<item name = "Date">Mon Jun 19 21:27:46 2023
 </item>
 <item name = "Version">2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)</item>
 <item name = "Project">outer_product</item>
@@ -24,19 +24,18 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="6">, min, max, min, max, Type</keys>
-<column name="">93, 93, 93, 93, none</column>
+<column name="">22, 22, 20, 20, function</column>
 </table>
 </item>
 <item name = "Detail">
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="7">Instance, Module, min, max, min, max, Type</keys>
+<column name="grp_mult_fu_692">mult, 0, 0, 1, 1, function</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- Loop 1">92, 92, 23, -, -, 4, no</column>
-<column name=" + Loop 1.1">20, 20, 4, -, -, 5, no</column>
 </table>
 </item>
 </section>

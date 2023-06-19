@@ -1,5 +1,5 @@
 // ==============================================================
-// File generated on Sun Jun 18 00:47:02 IST 2023
+// File generated on Mon Jun 19 21:18:38 IST 2023
 // Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2018.3 (64-bit)
 // SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
 // IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
@@ -8,7 +8,7 @@
 `timescale 1 ns / 1 ps
 module outer_product_p_111_ram (addr0, ce0, d0, we0, q0, addr1, ce1, d1, we1,  clk);
 
-parameter DWIDTH = 3;
+parameter DWIDTH = 5;
 parameter AWIDTH = 5;
 parameter MEM_SIZE = 20;
 
@@ -69,7 +69,7 @@ module outer_product_p_111(
     we1,
     d1);
 
-parameter DataWidth = 32'd3;
+parameter DataWidth = 32'd5;
 parameter AddressRange = 32'd20;
 parameter AddressWidth = 32'd5;
 input reset;
