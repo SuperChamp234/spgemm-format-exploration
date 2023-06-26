@@ -1,5 +1,9 @@
 #include "outer_product.h"
 
+void test_mmio_to_csr(const char* filename){
+    csr_t test_case = mmio_to_csr(filename);
+}
+
 void test_extract_row(csr_t test_case){
     for (int i = 0; i < N; i++) {
         std::cout << "row " << i << std::endl;
@@ -131,8 +135,11 @@ int main() {
     //test_accumulate(test, test2);
 
     // Test outer_product
-    csr_out_t out = outer_product(A, B);
-    print_csr_out_t(out);
+    //csr_out_t out = outer_product(A, B);
+    //print_csr_out_t(out);
+
+    //test mmio_to_csr
+    test_mmio_to_csr("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
 
     return 0;
 }

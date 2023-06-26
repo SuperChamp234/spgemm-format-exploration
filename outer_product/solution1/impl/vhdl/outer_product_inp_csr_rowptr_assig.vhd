@@ -1,5 +1,5 @@
 -- ==============================================================
--- File generated on Mon Jun 19 21:27:52 IST 2023
+-- File generated on Mon Jun 19 21:57:11 IST 2023
 -- Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2018.3 (64-bit)
 -- SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
 -- IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
@@ -14,8 +14,8 @@ entity outer_product_inp_csr_rowptr_assig_ram is
     generic(
             MEM_TYPE    : string := "block"; 
             DWIDTH     : integer := 32; 
-            AWIDTH     : integer := 3; 
-            MEM_SIZE    : integer := 6
+            AWIDTH     : integer := 9; 
+            MEM_SIZE    : integer := 495
     ); 
     port (
           addr0     : in std_logic_vector(AWIDTH-1 downto 0); 
@@ -25,8 +25,6 @@ entity outer_product_inp_csr_rowptr_assig_ram is
           q0        : out std_logic_vector(DWIDTH-1 downto 0);
           addr1     : in std_logic_vector(AWIDTH-1 downto 0); 
           ce1       : in std_logic; 
-          d1        : in std_logic_vector(DWIDTH-1 downto 0); 
-          we1       : in std_logic; 
           q1        : out std_logic_vector(DWIDTH-1 downto 0);
           clk        : in std_logic 
     ); 
@@ -88,9 +86,6 @@ p_memory_access_1: process (clk)
 begin 
     if (clk'event and clk = '1') then
         if (ce1 = '1') then 
-            if (we1 = '1') then 
-                ram(CONV_INTEGER(addr1_tmp)) := d1; 
-            end if;
             q1 <= ram(CONV_INTEGER(addr1_tmp)); 
         end if;
     end if;
@@ -105,8 +100,8 @@ use IEEE.std_logic_1164.all;
 entity outer_product_inp_csr_rowptr_assig is
     generic (
         DataWidth : INTEGER := 32;
-        AddressRange : INTEGER := 6;
-        AddressWidth : INTEGER := 3);
+        AddressRange : INTEGER := 495;
+        AddressWidth : INTEGER := 9);
     port (
         reset : IN STD_LOGIC;
         clk : IN STD_LOGIC;
@@ -117,8 +112,6 @@ entity outer_product_inp_csr_rowptr_assig is
         q0 : OUT STD_LOGIC_VECTOR(DataWidth - 1 DOWNTO 0);
         address1 : IN STD_LOGIC_VECTOR(AddressWidth - 1 DOWNTO 0);
         ce1 : IN STD_LOGIC;
-        we1 : IN STD_LOGIC;
-        d1 : IN STD_LOGIC_VECTOR(DataWidth - 1 DOWNTO 0);
         q1 : OUT STD_LOGIC_VECTOR(DataWidth - 1 DOWNTO 0));
 end entity;
 
@@ -133,8 +126,6 @@ architecture arch of outer_product_inp_csr_rowptr_assig is
             q0 : OUT STD_LOGIC_VECTOR;
             addr1 : IN STD_LOGIC_VECTOR;
             ce1 : IN STD_LOGIC;
-            we1 : IN STD_LOGIC;
-            d1 : IN STD_LOGIC_VECTOR;
             q1 : OUT STD_LOGIC_VECTOR);
     end component;
 
@@ -151,8 +142,6 @@ begin
         q0 => q0,
         addr1 => address1,
         ce1 => ce1,
-        we1 => we1,
-        d1 => d1,
         q1 => q1);
 
 end architecture;

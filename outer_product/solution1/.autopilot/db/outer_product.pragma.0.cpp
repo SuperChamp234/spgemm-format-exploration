@@ -25342,20 +25342,20 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 typedef ap_fixed<32, 16> data_t;
 struct csc_t {
-    int colptr[5 +1];
-    int rowind[4*5];
-    data_t data[4*5];
+    int colptr[494 +1];
+    int rowind[494*494];
+    data_t data[494*494];
 };
 struct csr_t {
-    int rowptr[5 +1];
-    int colind[4*5];
-    data_t data[4*5];
+    int rowptr[494 +1];
+    int colind[494*494];
+    data_t data[494*494];
 };
 
 struct csr_out_t {
-    int rowptr[4 +1];
-    int colind[4*5];
-    data_t data[4*5];
+    int rowptr[494 +1];
+    int colind[494*494];
+    data_t data[494*494];
 };
 
 data_t* extract_row(csr_t inp_csr, int row);
@@ -25368,12 +25368,12 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2);
 
 data_t* extract_row(csr_t inp_csr, int row)
 {
-    static data_t out_row[5];
+    static data_t out_row[494];
     int start_idx = inp_csr.rowptr[row];
     int end_idx = inp_csr.rowptr[row+1];
     int j = start_idx;
 #pragma HLS unroll
- for (int i = 0; i < 5; i++)
+ for (int i = 0; i < 494; i++)
     {
         if (j < end_idx && inp_csr.colind[j] == i)
 
@@ -25395,12 +25395,12 @@ data_t* extract_row(csr_t inp_csr, int row)
 
 data_t* extract_col(csc_t inp_csc, int col)
 {
-    static data_t out_col[4];
+    static data_t out_col[494];
     int start_idx = inp_csc.colptr[col];
     int end_idx = inp_csc.colptr[col+1];
     int j = start_idx;
 #pragma HLS unroll
- for (int i = 0; i < 4; i++)
+ for (int i = 0; i < 494; i++)
     {
         if (j < end_idx && inp_csc.rowind[j] == i)
         {
@@ -25431,10 +25431,12 @@ csr_out_t multiply_row_col(data_t* row, data_t* col)
     csr_out_t out;
     out.rowptr[0] = 0;
     int z_idx = 0;
-#pragma HLS pipeline
- for(int i = 0; i < 4; i++)
+
+    for(int i = 0; i < 494; i++)
     {
-        for(int j = 0; j < 5; j++)
+#pragma HLS unroll
+
+ for(int j = 0; j < 494; j++)
         {
             if (row[j] != 0 && col[i] != 0)
             {
@@ -25453,7 +25455,7 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
     csr_out_t out;
     out.rowptr[0] = 0;
     int z_idx = 0;
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < 494; i++)
     {
         int start_idx_1 = csr1.rowptr[i];
         int end_idx_1 = csr1.rowptr[i+1];
@@ -25462,8 +25464,7 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
         int j = start_idx_1;
         int k = start_idx_2;
         z_idx = out.rowptr[i];
-#pragma HLS LOOP_TRIPCOUNT min=1 max=5
- while (j < end_idx_1 && k < end_idx_2)
+        while (j < end_idx_1 && k < end_idx_2)
         {
             if(csr1.colind[j] == csr2.colind[k])
             {
@@ -25489,16 +25490,14 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
                 z_idx++;
             }
         }
-#pragma HLS LOOP_TRIPCOUNT min=1 max=5
- while (j < end_idx_1)
+        while (j < end_idx_1)
         {
             out.data[z_idx] = csr1.data[j];
             out.colind[z_idx] = csr1.colind[j];
             j++;
             z_idx++;
         }
-#pragma HLS LOOP_TRIPCOUNT min=1 max=5
- while (k < end_idx_2)
+        while (k < end_idx_2)
         {
             out.data[z_idx] = csr2.data[k];
             out.colind[z_idx] = csr2.colind[k];
@@ -25519,7 +25518,7 @@ csr_out_t outer_product(csc_t x_csc, csr_t y_csr)
     data_t* row;
     data_t* col;
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 494; i++)
     {
 
         col = extract_col(x_csc, i);

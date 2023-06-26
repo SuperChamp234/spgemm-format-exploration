@@ -11,14 +11,33 @@ if {${::AESL::PGuard_autoexp_gen}} {
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::xil_bram_gen] == "::AESL_LIB_XILADAPTER::xil_bram_gen"} {
 eval "::AESL_LIB_XILADAPTER::xil_bram_gen { \
-    id 11 \
+    id 3 \
+    name agg_result_rowptr \
+    reset_level 1 \
+    sync_rst true \
+    dir O \
+    corename agg_result_rowptr \
+    op interface \
+    ports { agg_result_rowptr_address0 { O 9 vector } agg_result_rowptr_ce0 { O 1 bit } agg_result_rowptr_we0 { O 1 bit } agg_result_rowptr_d0 { O 32 vector } } \
+} "
+} else {
+puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'agg_result_rowptr'"
+}
+}
+
+
+# XIL_BRAM:
+if {${::AESL::PGuard_autoexp_gen}} {
+if {[info proc ::AESL_LIB_XILADAPTER::xil_bram_gen] == "::AESL_LIB_XILADAPTER::xil_bram_gen"} {
+eval "::AESL_LIB_XILADAPTER::xil_bram_gen { \
+    id 4 \
     name agg_result_colind \
     reset_level 1 \
     sync_rst true \
     dir O \
     corename agg_result_colind \
     op interface \
-    ports { agg_result_colind_address0 { O 5 vector } agg_result_colind_ce0 { O 1 bit } agg_result_colind_we0 { O 1 bit } agg_result_colind_d0 { O 5 vector } } \
+    ports { agg_result_colind_address0 { O 18 vector } agg_result_colind_ce0 { O 1 bit } agg_result_colind_we0 { O 1 bit } agg_result_colind_d0 { O 9 vector } } \
 } "
 } else {
 puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'agg_result_colind'"
@@ -30,14 +49,14 @@ puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored ge
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::xil_bram_gen] == "::AESL_LIB_XILADAPTER::xil_bram_gen"} {
 eval "::AESL_LIB_XILADAPTER::xil_bram_gen { \
-    id 12 \
+    id 5 \
     name agg_result_data_V \
     reset_level 1 \
     sync_rst true \
     dir O \
     corename agg_result_data_V \
     op interface \
-    ports { agg_result_data_V_address0 { O 5 vector } agg_result_data_V_ce0 { O 1 bit } agg_result_data_V_we0 { O 1 bit } agg_result_data_V_d0 { O 32 vector } } \
+    ports { agg_result_data_V_address0 { O 18 vector } agg_result_data_V_ce0 { O 1 bit } agg_result_data_V_we0 { O 1 bit } agg_result_data_V_d0 { O 32 vector } } \
 } "
 } else {
 puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'agg_result_data_V'"
@@ -49,14 +68,14 @@ puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored ge
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::xil_bram_gen] == "::AESL_LIB_XILADAPTER::xil_bram_gen"} {
 eval "::AESL_LIB_XILADAPTER::xil_bram_gen { \
-    id 13 \
+    id 6 \
     name row_V \
     reset_level 1 \
     sync_rst true \
     dir I \
     corename row_V \
     op interface \
-    ports { row_V_address0 { O 3 vector } row_V_ce0 { O 1 bit } row_V_q0 { I 32 vector } row_V_address1 { O 3 vector } row_V_ce1 { O 1 bit } row_V_q1 { I 32 vector } } \
+    ports { row_V_address0 { O 9 vector } row_V_ce0 { O 1 bit } row_V_q0 { I 32 vector } } \
 } "
 } else {
 puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'row_V'"
@@ -64,65 +83,24 @@ puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored ge
 }
 
 
-# Direct connection:
+# XIL_BRAM:
 if {${::AESL::PGuard_autoexp_gen}} {
-eval "cg_default_interface_gen_dc { \
-    id 14 \
-    name col_0_V_read \
-    type other \
-    dir I \
+if {[info proc ::AESL_LIB_XILADAPTER::xil_bram_gen] == "::AESL_LIB_XILADAPTER::xil_bram_gen"} {
+eval "::AESL_LIB_XILADAPTER::xil_bram_gen { \
+    id 7 \
+    name col_V \
     reset_level 1 \
     sync_rst true \
-    corename dc_col_0_V_read \
+    dir I \
+    corename col_V \
     op interface \
-    ports { col_0_V_read { I 32 vector } } \
+    ports { col_V_address0 { O 9 vector } col_V_ce0 { O 1 bit } col_V_q0 { I 32 vector } } \
 } "
+} else {
+puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'col_V'"
+}
 }
 
-# Direct connection:
-if {${::AESL::PGuard_autoexp_gen}} {
-eval "cg_default_interface_gen_dc { \
-    id 15 \
-    name col_1_V_read \
-    type other \
-    dir I \
-    reset_level 1 \
-    sync_rst true \
-    corename dc_col_1_V_read \
-    op interface \
-    ports { col_1_V_read { I 32 vector } } \
-} "
-}
-
-# Direct connection:
-if {${::AESL::PGuard_autoexp_gen}} {
-eval "cg_default_interface_gen_dc { \
-    id 16 \
-    name col_2_V_read \
-    type other \
-    dir I \
-    reset_level 1 \
-    sync_rst true \
-    corename dc_col_2_V_read \
-    op interface \
-    ports { col_2_V_read { I 32 vector } } \
-} "
-}
-
-# Direct connection:
-if {${::AESL::PGuard_autoexp_gen}} {
-eval "cg_default_interface_gen_dc { \
-    id 17 \
-    name col_3_V_read \
-    type other \
-    dir I \
-    reset_level 1 \
-    sync_rst true \
-    corename dc_col_3_V_read \
-    op interface \
-    ports { col_3_V_read { I 32 vector } } \
-} "
-}
 
 # Direct connection:
 if {${::AESL::PGuard_autoexp_gen}} {
@@ -138,20 +116,6 @@ eval "cg_default_interface_gen_dc { \
 } "
 }
 
-# Direct connection:
-if {${::AESL::PGuard_autoexp_gen}} {
-eval "cg_default_interface_gen_dc { \
-    id -2 \
-    name ap_return \
-    type ap_return \
-    reset_level 1 \
-    sync_rst true \
-    corename ap_return \
-    op interface \
-    ports { ap_return { O 1 vector } } \
-} "
-}
-
 
 # Adapter definition:
 set PortName ap_clk
@@ -159,7 +123,7 @@ set DataWd 1
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc cg_default_interface_gen_clock] == "cg_default_interface_gen_clock"} {
 eval "cg_default_interface_gen_clock { \
-    id -3 \
+    id -2 \
     name ${PortName} \
     reset_level 1 \
     sync_rst true \
@@ -179,7 +143,7 @@ set DataWd 1
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc cg_default_interface_gen_reset] == "cg_default_interface_gen_reset"} {
 eval "cg_default_interface_gen_reset { \
-    id -4 \
+    id -3 \
     name ${PortName} \
     reset_level 1 \
     sync_rst true \

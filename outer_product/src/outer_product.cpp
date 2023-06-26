@@ -1,5 +1,56 @@
 #include "outer_product.h"
 
+csr_t mmio_to_csr(const char* filename)
+{
+    csr_t csr;
+    int ret_code;
+    MM_typecode matcode;
+    FILE *f = fopen(filename, "r");
+    int M, N, nz;
+    int i;
+
+
+    if (mm_read_banner(f, &matcode) != 0)
+    {
+        printf("Could not process Matrix Market banner.\n");
+        return csr;
+    }
+    printf("Matrix Market matcode: %s\n", mm_typecode_to_str(matcode));
+    if ((ret_code = mm_read_mtx_crd_size(f, &M, &N, &nz)) !=0)
+        return csr;
+
+    int I[nz];
+    int J[nz];
+    data_t val[nz];
+
+    for (i=0; i<nz; i++)
+    {
+        fscanf(f, "%d %d %lg\n", &I[i], &J[i], &val[i]);
+        I[i]--;  /* adjust from 1-based to 0-based */
+        J[i]--;
+    }
+    if (f !=stdin) fclose(f);
+    //print nnz
+    printf("nnz: %d\n", nz);
+    //convert to csr
+    // csr.rowptr[0] = 0;
+    // int row = 0;
+    // int idx = 0;
+    // for (int i = 0; i < nz; i++)
+    // {
+    //     if (I[i] != row)
+    //     {
+    //         row = I[i];
+    //         csr.rowptr[row+1] = idx;
+    //     }
+    //     csr.colind[idx] = J[i];
+    //     csr.data[idx] = val[i];
+    //     idx++;
+    // }
+    // csr.rowptr[M] = idx;
+    // return csr;
+}
+
 //extract row from csr and store it in an array
 data_t* extract_row(csr_t inp_csr, int row)
 {
@@ -66,9 +117,11 @@ csr_out_t multiply_row_col(data_t* row, data_t* col)
     csr_out_t out;
     out.rowptr[0] = 0;
     int z_idx = 0;
-    #pragma HLS pipeline
+    
     for(int i = 0; i < M; i++)
     {
+        #pragma HLS unroll
+        //#pragma HLS unroll factor=0
         for(int j = 0; j < N; j++)
         {
             if (row[j] != 0 && col[i] != 0)
@@ -97,7 +150,6 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
         int j = start_idx_1;
         int k = start_idx_2;
         z_idx = out.rowptr[i];
-        #pragma HLS LOOP_TRIPCOUNT min=1 max=5
         while (j < end_idx_1 && k < end_idx_2)
         {
             if(csr1.colind[j] == csr2.colind[k])
@@ -124,7 +176,6 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
                 z_idx++;
             }
         }
-        #pragma HLS LOOP_TRIPCOUNT min=1 max=5
         while (j < end_idx_1)
         {
             out.data[z_idx] = csr1.data[j];
@@ -132,7 +183,6 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
             j++;
             z_idx++;
         }
-        #pragma HLS LOOP_TRIPCOUNT min=1 max=5
         while (k < end_idx_2)
         {
             out.data[z_idx] = csr2.data[k];

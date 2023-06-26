@@ -6,25 +6,35 @@
       <simLog/>
       <mgLog/>
       <packageLog/>
-      <csimLog/>
+      <csimLog>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T23:31:57.870+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T23:27:31.145+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T23:24:05.269+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T23:09:16.285+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T23:00:40.068+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:58:20.421+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:57:12.261+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:55:27.112+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:54:13.466+0530"/>
+        <logs message="ERROR: [APCC 202-1] APCC failed.&#xA;make: *** [csim.mk:91: obj/mmio.o] Error 1" projectName="outer_product" solutionName="solution1" date="2023-06-23T22:54:13.458+0530"/>
+        <logs message="ERROR: [APCC 202-1] ProcessSources failed" projectName="outer_product" solutionName="solution1" date="2023-06-23T22:54:13.448+0530"/>
+        <logs message="ERROR: [APCC 202-10] clang compile failed: child process exited abnormally" projectName="outer_product" solutionName="solution1" date="2023-06-23T22:54:13.435+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:40:23.776+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:39:51.364+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:39:18.375+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:38:01.060+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:36:54.586+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:35:12.788+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:34:21.496+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T22:32:54.059+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T21:59:54.457+0530"/>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="outer_product" solutionName="solution1" date="2023-06-23T21:58:34.565+0530"/>
+      </csimLog>
     </logs>
   </errorLogs>
   <warningLogs>
     <logs>
-      <synLog>
-        <logs message="WARNING: [RTGEN 206-101] Register 'out_col_V_3' is power-on initialization." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:50.460+0530" type="Warning"/>
-        <logs message="WARNING: [RTGEN 206-101] Register 'out_col_V_2' is power-on initialization." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:50.247+0530" type="Warning"/>
-        <logs message="WARNING: [RTGEN 206-101] Register 'out_col_V_1' is power-on initialization." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:50.245+0530" type="Warning"/>
-        <logs message="WARNING: [RTGEN 206-101] Register 'out_col_V_0' is power-on initialization." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:50.240+0530" type="Warning"/>
-        <logs message="WARNING: [SCHED 204-68] The II Violation in module 'multiply_row_col': Unable to enforce a carried dependence constraint (II = 19, distance = 1, offset = 1)&#xA;   between 'store' operation (outer_product/src/outer_product.cpp:76) of constant 4 on array 'agg_result_colind' and 'store' operation (outer_product/src/outer_product.cpp:76) of constant 0 on array 'agg_result_colind'." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:45.930+0530" type="Warning"/>
-        <logs message="WARNING: [SCHED 204-68] The II Violation in module 'multiply_row_col': Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1)&#xA;   between 'store' operation (outer_product/src/outer_product.cpp:76) of constant 4 on array 'agg_result_colind' and 'store' operation (outer_product/src/outer_product.cpp:76) of constant 0 on array 'agg_result_colind'." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:45.878+0530" type="Warning"/>
-        <logs message="WARNING: [SCHED 204-68] The II Violation in module 'multiply_row_col': Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1)&#xA;   between 'store' operation (outer_product/src/outer_product.cpp:76) of constant 3 on array 'agg_result_colind' and 'store' operation (outer_product/src/outer_product.cpp:76) of constant 0 on array 'agg_result_colind'." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:45.831+0530" type="Warning"/>
-        <logs message="WARNING: [SCHED 204-68] The II Violation in module 'multiply_row_col': Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1)&#xA;   between 'store' operation (outer_product/src/outer_product.cpp:76) of constant 2 on array 'agg_result_colind' and 'store' operation (outer_product/src/outer_product.cpp:76) of constant 0 on array 'agg_result_colind'." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:45.829+0530" type="Warning"/>
-        <logs message="WARNING: [SCHED 204-68] The II Violation in module 'multiply_row_col': Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1)&#xA;   between 'store' operation (outer_product/src/outer_product.cpp:76) of constant 1 on array 'agg_result_colind' and 'store' operation (outer_product/src/outer_product.cpp:76) of constant 0 on array 'agg_result_colind'." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:45.825+0530" type="Warning"/>
-        <logs message="WARNING: [XFORM 203-561] Updating loop lower bound from 1 to 4 for loop 'Loop-0' (outer_product/src/outer_product.cpp:135:1) in function 'accumulate'." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:44.362+0530" type="Warning"/>
-        <logs message="WARNING: [XFORM 203-561] Updating loop upper bound from 5 to 4 for loop 'Loop-0' (outer_product/src/outer_product.cpp:135:1) in function 'accumulate'." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:44.345+0530" type="Warning"/>
-        <logs message="WARNING: [XFORM 203-561] Ignored multiple trip count directives for loop 'Loop-0' in function 'accumulate'." projectName="outer_product" solutionName="solution1" date="2023-06-19T21:27:44.341+0530" type="Warning"/>
-      </synLog>
+      <synLog/>
       <simLog/>
       <mgLog/>
       <packageLog/>
