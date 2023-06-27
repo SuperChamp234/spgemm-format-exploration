@@ -1,4 +1,4 @@
-#include "outer_product.h"
+#include "outer_product.hpp"
 
 void test_mmio_to_csr(const char* filename){
     csr_t test_case = mmio_to_csr(filename);

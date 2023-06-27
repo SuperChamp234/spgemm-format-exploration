@@ -1,4 +1,4 @@
-#include "outer_product.h"
+#include "outer_product.hpp"
 
 csr_t mmio_to_csr(const char* filename)
 {

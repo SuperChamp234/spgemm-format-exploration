@@ -11,9 +11,9 @@
 #include <iostream>
 #endif
 
-const int M = 4;
-const int P = 5;
-const int N = 5;
+const int M =  4;
+const int P =  5;
+const int N =  5;
 //X is of size MxP, Y is of size PxN, Z is of size MxN
 //X is CSC, Y is CSR, Z is CSR
 
