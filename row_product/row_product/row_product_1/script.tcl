@@ -4,6 +4,7 @@
 ## Copyright (C) 1986-2018 Xilinx, Inc. All Rights Reserved.
 ############################################################
 open_project row_product
+set_top row_product
 add_files row_product/src/mmio.cpp
 add_files row_product/src/mmio.h
 add_files row_product/src/row_product.cpp
