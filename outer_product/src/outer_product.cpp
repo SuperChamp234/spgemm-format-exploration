@@ -1,4 +1,4 @@
-#include "outer_product.h"
+#include "outer_product.hpp"
 
 //extract row from csr and store it in an array
 data_t* extract_row(csr_t inp_csr, int row)
