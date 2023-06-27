@@ -42,6 +42,16 @@
 			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/solution1/.tcls</location>
 		</link>
 		<link>
+			<name>source/mmio.cpp</name>
+			<type>1</type>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/src/mmio.cpp</location>
+		</link>
+		<link>
+			<name>source/mmio.h</name>
+			<type>1</type>
+			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/src/mmio.h</location>
+		</link>
+		<link>
 			<name>source/outer_product.cpp</name>
 			<type>1</type>
 			<location>/home/leoh/Documents/spgemm-format-exploration/outer_product/src/outer_product.cpp</location>

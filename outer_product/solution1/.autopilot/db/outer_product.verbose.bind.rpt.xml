@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vivado HLS Report for 'outer_product'" level="0">
-<item name = "Date">Mon Jun 19 21:27:48 2023
+<item name = "Date">Mon Jun 19 21:56:08 2023
 </item>
 <item name = "Version">2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)</item>
 <item name = "Project">outer_product</item>
@@ -15,7 +15,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="4">Clock, Target, Estimated, Uncertainty</keys>
-<column name="ap_clk">10.00, 8.470, 1.25</column>
+<column name="ap_clk">10.00, 8.750, 1.25</column>
 </table>
 </item>
 </section>
@@ -31,17 +31,39 @@
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="7">Instance, Module, min, max, min, max, Type</keys>
-<column name="grp_multiply_row_col_fu_3649">multiply_row_col, 22, 22, 20, 20, function</column>
-<column name="grp_accumulate_fu_3661">accumulate, ?, ?, ?, ?, none</column>
-<column name="grp_extract_col_fu_3674">extract_col, 14, 14, 14, 14, none</column>
+<column name="grp_multiply_row_col_fu_1155">multiply_row_col, 732602, 1220674, 732602, 1220674, none</column>
+<column name="grp_accumulate_fu_1166">accumulate, ?, ?, ?, ?, none</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- Loop 1">?, ?, ?, -, -, 5, no</column>
-<column name=" + Loop 1.1">15, 20, 3 ~ 4, -, -, 5, no</column>
-<column name=" + Loop 1.2">40, 40, 2, -, -, 20, no</column>
-<column name=" + Loop 1.3">40, 40, 2, -, -, 20, no</column>
+<column name="- Loop 1">?, ?, ?, -, -, 494, no</column>
+<column name=" + Loop 1.1">989, 989, 2, -, -, 495, no</column>
+<column name=" + Loop 1.2">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.3">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.4">989, 989, 2, -, -, 495, no</column>
+<column name=" + Loop 1.5">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.6">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.7">1482, 1976, 3 ~ 4, -, -, 494, no</column>
+<column name=" + Loop 1.8">989, 989, 2, -, -, 495, no</column>
+<column name=" + Loop 1.9">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.10">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.11">989, 989, 2, -, -, 495, no</column>
+<column name=" + Loop 1.12">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.13">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.14">1482, 1976, 3 ~ 4, -, -, 494, no</column>
+<column name=" + memcpy_">989, 989, 2, -, -, 495, no</column>
+<column name=" + memcpy_">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.17">488072, 488072, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.18">989, 989, 2, -, -, 495, no</column>
+<column name=" + Loop 1.19">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.20">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.21">989, 989, 2, -, -, 495, no</column>
+<column name=" + Loop 1.22">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.23">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + memcpy_">989, 989, 2, -, -, 495, no</column>
+<column name=" + memcpy_">488071, 488071, 2, -, -, 244036, no</column>
+<column name=" + Loop 1.26">488072, 488072, 2, -, -, 244036, no</column>
 </table>
 </item>
 </section>

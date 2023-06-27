@@ -72,3 +72,6 @@ xvlog.*
 ## checkpoint files
 *.dcp
 .vscode/
+
+*.log
+*.o

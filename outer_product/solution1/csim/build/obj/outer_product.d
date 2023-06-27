@@ -18,4 +18,5 @@ obj/outer_product.o: ../../../src/outer_product.cpp \
  /tools/Xilinx/Vivado/2018.3/include/ap_int_ref.h \
  /tools/Xilinx/Vivado/2018.3/include/ap_int_special.h \
  /tools/Xilinx/Vivado/2018.3/include/ap_fixed_ref.h \
- /tools/Xilinx/Vivado/2018.3/include/ap_fixed_special.h
+ /tools/Xilinx/Vivado/2018.3/include/ap_fixed_special.h \
+ ../../../src/mmio.h

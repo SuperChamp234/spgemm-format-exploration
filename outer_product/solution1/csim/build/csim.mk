@@ -1,5 +1,5 @@
 # ==============================================================
-# File generated on Mon Jun 19 18:03:04 IST 2023
+# File generated on Fri Jun 23 23:37:14 IST 2023
 # Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
@@ -23,7 +23,7 @@ __SIM_DDS__ = 1
 
 ObjDir = obj
 
-HLS_SOURCES = ../../../src/outer_product_tb.cpp ../../../src/outer_product.cpp
+HLS_SOURCES = ../../../src/outer_product_tb.cpp ../../../src/mmio.cpp ../../../src/outer_product.cpp
 
 TARGET := csim.exe
 
@@ -82,6 +82,12 @@ $(ObjDir)/outer_product_tb.o: ../../../src/outer_product_tb.cpp $(ObjDir)/.dir
 	$(Verb)  $(CC) ${CCFLAG} -c -MMD -Wno-unknown-pragmas  $(IFLAG) $(DFLAG) $< -o $@ ; \
 
 -include $(ObjDir)/outer_product_tb.d
+
+$(ObjDir)/mmio.o: ../../../src/mmio.cpp $(ObjDir)/.dir
+	$(Echo) "   Compiling ../../../src/mmio.cpp in $(BuildMode) mode" $(AVE_DIR_DLOG)
+	$(Verb)  $(CC) ${CCFLAG} -c -MMD  $(IFLAG) $(DFLAG) $< -o $@ ; \
+
+-include $(ObjDir)/mmio.d
 
 $(ObjDir)/outer_product.o: ../../../src/outer_product.cpp $(ObjDir)/.dir
 	$(Echo) "   Compiling ../../../src/outer_product.cpp in $(BuildMode) mode" $(AVE_DIR_DLOG)

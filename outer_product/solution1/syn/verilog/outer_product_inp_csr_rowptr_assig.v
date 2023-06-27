@@ -1,16 +1,16 @@
 // ==============================================================
-// File generated on Mon Jun 19 21:27:52 IST 2023
+// File generated on Mon Jun 19 21:57:11 IST 2023
 // Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2018.3 (64-bit)
 // SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
 // IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // ==============================================================
 `timescale 1 ns / 1 ps
-module outer_product_inp_csr_rowptr_assig_ram (addr0, ce0, d0, we0, q0, addr1, ce1, d1, we1, q1,  clk);
+module outer_product_inp_csr_rowptr_assig_ram (addr0, ce0, d0, we0, q0, addr1, ce1, q1,  clk);
 
 parameter DWIDTH = 32;
-parameter AWIDTH = 3;
-parameter MEM_SIZE = 6;
+parameter AWIDTH = 9;
+parameter MEM_SIZE = 495;
 
 input[AWIDTH-1:0] addr0;
 input ce0;
@@ -19,8 +19,6 @@ input we0;
 output reg[DWIDTH-1:0] q0;
 input[AWIDTH-1:0] addr1;
 input ce1;
-input[DWIDTH-1:0] d1;
-input we1;
 output reg[DWIDTH-1:0] q1;
 input clk;
 
@@ -46,10 +44,6 @@ always @(posedge clk)
 begin 
     if (ce1) 
     begin
-        if (we1) 
-        begin 
-            ram[addr1] <= d1; 
-        end 
         q1 <= ram[addr1];
     end
 end
@@ -68,13 +62,11 @@ module outer_product_inp_csr_rowptr_assig(
     q0,
     address1,
     ce1,
-    we1,
-    d1,
     q1);
 
 parameter DataWidth = 32'd32;
-parameter AddressRange = 32'd6;
-parameter AddressWidth = 32'd3;
+parameter AddressRange = 32'd495;
+parameter AddressWidth = 32'd9;
 input reset;
 input clk;
 input[AddressWidth - 1:0] address0;
@@ -84,8 +76,6 @@ input[DataWidth - 1:0] d0;
 output[DataWidth - 1:0] q0;
 input[AddressWidth - 1:0] address1;
 input ce1;
-input we1;
-input[DataWidth - 1:0] d1;
 output[DataWidth - 1:0] q1;
 
 
@@ -99,8 +89,6 @@ outer_product_inp_csr_rowptr_assig_ram outer_product_inp_csr_rowptr_assig_ram_U(
     .q0( q0 ),
     .addr1( address1 ),
     .ce1( ce1 ),
-    .we1( we1 ),
-    .d1( d1 ),
     .q1( q1 ));
 
 endmodule
