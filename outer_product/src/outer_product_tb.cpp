@@ -1,4 +1,4 @@
-#include "outer_product.h"
+#include "outer_product.hpp"
 
 void test_extract_row(csr_t test_case){
     for (int i = 0; i < N; i++) {
