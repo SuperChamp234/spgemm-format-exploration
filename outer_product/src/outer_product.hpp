@@ -3,12 +3,13 @@
 
 #include <ap_fixed.h>
 
-#include "mmio.h"
+
 #define NO_SYNTH
 //#define DEBUG
 
 #ifdef NO_SYNTH
 #include <iostream>
+#include "mmio.h"
 #endif
 
 const int M =  4;

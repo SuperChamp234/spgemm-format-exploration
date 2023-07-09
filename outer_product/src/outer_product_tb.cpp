@@ -135,11 +135,11 @@ int main() {
     //test_accumulate(test, test2);
 
     // Test outer_product
-    //csr_out_t out = outer_product(A, B);
-    //print_csr_out_t(out);
+    csr_out_t out = outer_product(A, B);
+    print_csr_out_t(out);
 
     //test mmio_to_csr
-    test_mmio_to_csr("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
+    //test_mmio_to_csr("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
 
     return 0;
 }
