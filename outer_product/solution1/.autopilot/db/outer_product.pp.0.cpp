@@ -145,7 +145,7 @@ extern "C" {
 # 8 "<command line>" 2
 # 1 "<built-in>" 2
 # 1 "outer_product/src/outer_product.cpp" 2
-# 1 "outer_product/src/outer_product.h" 1
+# 1 "outer_product/src/outer_product.hpp" 1
 
 
 
@@ -6452,7 +6452,9 @@ inline bool operator!=(
 
 }
 # 381 "/tools/Xilinx/Vivado/2018.3/common/technology/autopilot/ap_fixed.h" 2
-# 5 "outer_product/src/outer_product.h" 2
+# 5 "outer_product/src/outer_product.hpp" 2
+
+
 
 
 
@@ -25331,49 +25333,147 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
 }
-# 10 "outer_product/src/outer_product.h" 2
+# 12 "outer_product/src/outer_product.hpp" 2
+# 1 "outer_product/src/mmio.h" 1
+# 16 "outer_product/src/mmio.h"
+typedef char MM_typecode[4];
+
+char *mm_typecode_to_str(MM_typecode matcode);
+
+int mm_read_banner(FILE *f, MM_typecode *matcode);
+int mm_read_mtx_crd_size(FILE *f, int *M, int *N, int *nz);
+int mm_read_mtx_array_size(FILE *f, int *M, int *N);
+
+int mm_write_banner(FILE *f, MM_typecode matcode);
+int mm_write_mtx_crd_size(FILE *f, int M, int N, int nz);
+int mm_write_mtx_array_size(FILE *f, int M, int N);
+# 48 "outer_product/src/mmio.h"
+int mm_is_valid(MM_typecode matcode);
+# 121 "outer_product/src/mmio.h"
+int mm_write_mtx_crd(char fname[], int M, int N, int nz, int I[], int J[],
+   double val[], MM_typecode matcode);
+int mm_read_mtx_crd_data(FILE *f, int M, int N, int nz, int I[], int J[],
+  double val[], MM_typecode matcode);
+int mm_read_mtx_crd_entry(FILE *f, int *I, int *J, double *real, double *img,
+   MM_typecode matcode);
+
+int mm_read_unsymmetric_sparse(const char *fname, int *M_, int *N_, int *nz_,
+                double **val_, int **I_, int **J_);
+# 13 "outer_product/src/outer_product.hpp" 2
 
 
-
-
-
+const int M = 4;
+const int P = 5;
+const int N = 5;
 
 
 
 typedef ap_fixed<32, 16> data_t;
 struct csc_t {
-    int colptr[494 +1];
-    int rowind[494*494];
-    data_t data[494*494];
+    int colptr[P+1];
+    int rowind[M*P];
+    data_t data[M*P];
 };
 struct csr_t {
-    int rowptr[494 +1];
-    int colind[494*494];
-    data_t data[494*494];
+    int rowptr[P+1];
+    int colind[M*P];
+    data_t data[M*P];
 };
 
 struct csr_out_t {
-    int rowptr[494 +1];
-    int colind[494*494];
-    data_t data[494*494];
+    int rowptr[M+1];
+    int colind[M*N];
+    data_t data[M*N];
 };
 
+
+
+
+
+
 data_t* extract_row(csr_t inp_csr, int row);
-data_t* extract_col(csc_t inp_csc, int col);csr_out_t outer_product(csc_t x_csc, csr_t y_csr);
+
+
+
+
+
+
+data_t* extract_col(csc_t inp_csc, int col);
+
+
+
+
+
+
+csr_out_t outer_product(csc_t x_csc, csr_t y_csr);
+
+
+
+
+
 
 csr_out_t multiply_row_col(data_t* row, data_t* col);
+
+
+
+
+
+
 csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2);
+
+
+
+
+
+
+
+csr_t mmio_to_csr(const char* filename);
 # 2 "outer_product/src/outer_product.cpp" 2
+
+csr_t mmio_to_csr(const char* filename)
+{
+    csr_t csr;
+    int ret_code;
+    MM_typecode matcode;
+    FILE *f = fopen(filename, "r");
+    int M, N, nz;
+    int i;
+
+
+    if (mm_read_banner(f, &matcode) != 0)
+    {
+        printf("Could not process Matrix Market banner.\n");
+        return csr;
+    }
+    printf("Matrix Market matcode: %s\n", mm_typecode_to_str(matcode));
+    if ((ret_code = mm_read_mtx_crd_size(f, &M, &N, &nz)) !=0)
+        return csr;
+
+    int I[nz];
+    int J[nz];
+    data_t val[nz];
+
+    for (i=0; i<nz; i++)
+    {
+        fscanf(f, "%d %d %lg\n", &I[i], &J[i], &val[i]);
+        I[i]--;
+        J[i]--;
+    }
+    if (f !=stdin) fclose(f);
+
+    printf("nnz: %d\n", nz);
+# 52 "outer_product/src/outer_product.cpp"
+}
 
 
 data_t* extract_row(csr_t inp_csr, int row)
 {
-    static data_t out_row[494];
+    static data_t out_row[P];
     int start_idx = inp_csr.rowptr[row];
     int end_idx = inp_csr.rowptr[row+1];
     int j = start_idx;
 #pragma HLS unroll
- for (int i = 0; i < 494; i++)
+ for (int i = 0; i < N; i++)
     {
         if (j < end_idx && inp_csr.colind[j] == i)
 
@@ -25395,12 +25495,12 @@ data_t* extract_row(csr_t inp_csr, int row)
 
 data_t* extract_col(csc_t inp_csc, int col)
 {
-    static data_t out_col[494];
+    static data_t out_col[M];
     int start_idx = inp_csc.colptr[col];
     int end_idx = inp_csc.colptr[col+1];
     int j = start_idx;
 #pragma HLS unroll
- for (int i = 0; i < 494; i++)
+ for (int i = 0; i < M; i++)
     {
         if (j < end_idx && inp_csc.rowind[j] == i)
         {
@@ -25422,7 +25522,7 @@ data_t mult(data_t a, data_t b)
 {
 #pragma HLS INLINE off
  data_t c = a * b;
-#pragma HLS RESOURCE variable=&c core=FMul_nodsp
+#pragma HLS RESOURCE variable=c core=FMul_nodsp
  return c;
 }
 
@@ -25432,11 +25532,11 @@ csr_out_t multiply_row_col(data_t* row, data_t* col)
     out.rowptr[0] = 0;
     int z_idx = 0;
 
-    for(int i = 0; i < 494; i++)
+    for(int i = 0; i < M; i++)
     {
 #pragma HLS unroll
 
- for(int j = 0; j < 494; j++)
+ for(int j = 0; j < N; j++)
         {
             if (row[j] != 0 && col[i] != 0)
             {
@@ -25455,7 +25555,7 @@ csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2)
     csr_out_t out;
     out.rowptr[0] = 0;
     int z_idx = 0;
-    for(int i = 0; i < 494; i++)
+    for(int i = 0; i < M; i++)
     {
         int start_idx_1 = csr1.rowptr[i];
         int end_idx_1 = csr1.rowptr[i+1];
@@ -25518,7 +25618,7 @@ csr_out_t outer_product(csc_t x_csc, csr_t y_csr)
     data_t* row;
     data_t* col;
 
-    for (int i = 0; i < 494; i++)
+    for (int i = 0; i < P; i++)
     {
 
         col = extract_col(x_csc, i);

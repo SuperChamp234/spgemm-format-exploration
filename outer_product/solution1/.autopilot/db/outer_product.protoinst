@@ -1,9 +1,0 @@
-{
-	"version": "1.0",
-	"modules": {
-		"outer_product": {
-			"proto_instances": {
-			}
-		}
-	}
-}
