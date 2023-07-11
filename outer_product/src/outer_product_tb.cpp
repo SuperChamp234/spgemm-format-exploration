@@ -25,7 +25,6 @@ COO assemble_COO_matrix(std::string filePath)
     // Ignore headers and comments:
     while (fin.peek() == '%')
         fin.ignore(2048, '\n');
-    // Read defining parameters:
     fin >> M >> N >> L;
 
     for (int l = 0; l < L; l++)
@@ -35,7 +34,6 @@ COO assemble_COO_matrix(std::string filePath)
         fin >> row >> col >> data;
         matrix.units.push_back({row - 1, col - 1, data});
     }
-    // sort the matrix
     sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
          { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
     fin.close();
@@ -49,10 +47,8 @@ COO assemble_simetric_COO_matrix(std::string filePath)
     vector<double> data;
     COO matrix;
     std::ifstream fin(filePath);
-    // Ignore headers and comments:
     while (fin.peek() == '%')
         fin.ignore(2048, '\n');
-    // Read defining parameters:
     fin >> M >> N >> L;
     for (int l = 0; l < L; l++)
     {
@@ -60,17 +56,13 @@ COO assemble_simetric_COO_matrix(std::string filePath)
         int i, j;
         double Aij;
         fin >> i >> j >> Aij;
-        // fill COO matrix
         matrix.units.push_back({i-1, j-1, Aij});
     }
-    // since the matrix is simetric, we need to have the same elements in the lower triangle
     for (int l = 0; l < L; l++)
     {
-        // fill COO matrix
         if (matrix.units[l].row != matrix.units[l].col)
             matrix.units.push_back({matrix.units[l].col, matrix.units[l].row, matrix.units[l].data});
     }
-    // sort the matrix
     sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
          { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
     fin.close();
@@ -185,7 +177,6 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
             break;
         }
     }
-    //print if rowptr is equal
     cout << "rowptr is equal: " << equal << endl;
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
@@ -195,11 +186,9 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
             break;
         }
     }
-    //print if colind is equal
     cout << "colind is equal: " << equal << endl;
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
-        //check data till 2 fixed point precision
         int check = std::abs(z_csr.data[i] - z_csr2.data[i]) > 0.01;
         if (check)
         {
@@ -207,7 +196,6 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
             break;
         }
     }
-    //print if data is equal
     cout << "data is equal: " << equal << endl;
     return equal;
 }

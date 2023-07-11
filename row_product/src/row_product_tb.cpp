@@ -21,10 +21,8 @@ COO assemble_COO_matrix(std::string filePath)
     int M, N, L;
     COO matrix;
     std::ifstream fin(filePath);
-    // Ignore headers and comments:
     while (fin.peek() == '%')
         fin.ignore(2048, '\n');
-    // Read defining parameters:
     fin >> M >> N >> L;
 
     for (int l = 0; l < L; l++)
@@ -34,7 +32,6 @@ COO assemble_COO_matrix(std::string filePath)
         fin >> row >> col >> data;
         matrix.units.push_back({row - 1, col - 1, data});
     }
-    // sort the matrix
     sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
          { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
     fin.close();
@@ -48,10 +45,8 @@ COO assemble_simetric_COO_matrix(std::string filePath)
     vector<double> data;
     COO matrix;
     std::ifstream fin(filePath);
-    // Ignore headers and comments:
     while (fin.peek() == '%')
         fin.ignore(2048, '\n');
-    // Read defining parameters:
     fin >> M >> N >> L;
     for (int l = 0; l < L; l++)
     {
@@ -59,17 +54,13 @@ COO assemble_simetric_COO_matrix(std::string filePath)
         int i, j;
         double Aij;
         fin >> i >> j >> Aij;
-        // fill COO matrix
         matrix.units.push_back({i-1, j-1, Aij});
     }
-    // since the matrix is simetric, we need to have the same elements in the lower triangle
     for (int l = 0; l < L; l++)
     {
-        // fill COO matrix
         if (matrix.units[l].row != matrix.units[l].col)
             matrix.units.push_back({matrix.units[l].col, matrix.units[l].row, matrix.units[l].data});
     }
-    // sort the matrix
     sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
          { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
     fin.close();
@@ -180,7 +171,6 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
             break;
         }
     }
-    //print if rowptr is equal
     cout << "rowptr is equal: " << equal << endl;
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
@@ -190,7 +180,6 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
             break;
         }
     }
-    //print if colind is equal
     cout << "colind is equal: " << equal << endl;
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
@@ -201,7 +190,6 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
             break;
         }
     }
-    //print if data is equal
     cout << "data is equal: " << equal << endl;
     return equal;
 }
@@ -287,13 +275,11 @@ void test_append_row()
     // init empty csr_out_t
     csr_out_t out_csr;
     out_csr.rowptr[0] = 0;
-    // write 1,1,1,1,1 to each row of out_csr using append_row
     hls::vector<data_t, N> row = (data_t)1;
     for (int i = 0; i < M; i++)
     {
         append_row(&out_csr, row, i);
     }
-    // print out_csr
     std::cout << "out_csr = " << std::endl;
     print_csr_out_t(out_csr);
 }
@@ -355,7 +341,7 @@ void basic_test()
     print_csr_out_t(z_csr);
 }
 
-void real_matrix_test()
+void synth_test()
 {
 
     /*
@@ -384,7 +370,6 @@ C:
     COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
     COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
 
-    // print COO matrix
     cout << "COO A" << endl;
     print_COO(coo_A, M, P);
     cout << "-------------------" << endl;
@@ -405,12 +390,10 @@ C:
 
     //C = A*B
     csr_out_t csr_out = row_product(csr_A, csr_B);
-    //print both
     cout << "CSR out" << endl;
     print_csr_out_t(csr_out);
     cout << "-------------------" << endl;
 
-    //compare with C and print OK or FAIL
     cout << "CSR out == CSR C ?" << endl;
     if (compare_csr_out_t(csr_out, csr_C))
     {
@@ -425,7 +408,7 @@ C:
 
 int main()
 {
-    // synth_test();
-    real_matrix_test();
+    // basic_test();
+    synth_test();
     return 0;
 }
