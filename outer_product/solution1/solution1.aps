@@ -5,14 +5,12 @@
     <downStreamTool>
         <DownStreamTool name=""/>
     </downStreamTool>
-    <config>
-        <config_compile blackbox=""/>
-        <schedule model="outer_product"/>
-    </config>
+    <config/>
     <UIConfigurations>
         <UIAutosynConf hideTrivialOp="true" isBasedOnBoard="false" isSolutionDirty="true" isStopAskAgain="true" showDetailDesignViewer="false">
             <Platform>xilinx/aartix7/aartix7</Platform>
             <Platform>xilinx/aartix7/aartix7_fpv6</Platform>
+            <Platform>xilinx/artix7/artix7</Platform>
             <customLibs/>
         </UIAutosynConf>
         <UIIPPackagerConf AskAgain="true" DescriptionButton="false" LibraryButton="false" RTLLanguage="verilog" UseNetList="none" VendorButton="false" VersionButton="false" evaluateRTL="false" setup="false">
@@ -47,9 +45,10 @@
         <Format formatName="sysgen_ise"/>
         <Format formatName="syn_dcp"/>
         <Format formatName="pcore" use_netlist="none"/>
+        <Format formatName="xo"/>
     </ExportDesign>
     <Simulation>
-        <SimFlow askAgain="true" clangSanitizer="false" compile="false" compileChoice="gcc" disableDeadlockDetect="false" dumpTrace="none" name="cosim" optimizeCompile="false" reduce_diskspace="false" setup="false" toolName="Auto" waveDebug="false">
+        <SimFlow askAgain="true" clangSanitizer="false" compile="false" compileChoice="gcc" disableDeadlockDetect="false" dumpTrace="none" enableDataflowProfiling="false" enableFifoSizing="false" name="cosim" optimizeCompile="false" random_stall="false" reduce_diskspace="false" setup="false" toolName="Auto" waveDebug="false">
             <Rtl active="false" name="systemc"/>
             <Rtl active="true" name="verilog"/>
             <Rtl active="false" name="vhdl"/>
@@ -61,12 +60,15 @@
     <project>
         <value string="outer_product"/>
     </project>
+    <flowTarget value="vivado"/>
     <targetInfo>
-        <TargetInfo value="xa7a12t:csg325:-1q"/>
+        <TargetInfo value="xa7a12t:-csg325:-1Q"/>
     </targetInfo>
     <libraryList>
         <library name="DefaultPlatform" value="xilinx/aartix7/aartix7"/>
         <library name="DefaultPlatform" value="xilinx/aartix7/aartix7_fpv6"/>
+        <library name="DefaultPlatform" value="xilinx/artix7/artix7"/>
+        <library value="xilinx/artix7/artix7" name="DefaultPlatform"/>
     </libraryList>
     <clockList>
         <clock name="default" default="false" period="10"/>

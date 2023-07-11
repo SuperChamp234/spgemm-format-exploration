@@ -2,7 +2,7 @@
 #
 # Makefile rules for autopilot SystemC simulation flow
 #
-#-  (c) Copyright 2011-2018 Xilinx, Inc. All rights reserved.
+#-  (c) Copyright 2011-2020 Xilinx, Inc. All rights reserved.
 #-
 #-  This file contains confidential and proprietary information
 #-  of Xilinx, Inc. and is protected under U.S. and
@@ -72,6 +72,8 @@ MKDIR = mkdir -p
 Make = make
 MV = mv
 RM = rm
+CP = cp
+CD = cd
 
 ### Directory for object files.
 ifndef ObjDir
@@ -116,18 +118,6 @@ ifndef HLS_FPO_LIB_PATH
    HLS_FPO_LIB_PATH = $(AUTOPILOT_TOOL)/fpo_v7_0
 endif
 
-ifndef HLS_OPENCV_LIB_PATH
-  ifneq ($(AUTOPILOT_MACH),win64)
-    #ifdef __USE_CLANG__
-    #  HLS_OPENCV_LIB_PATH = $(AUTOPILOT_TOOL)/opencv/opencv_clang
-    #else
-      HLS_OPENCV_LIB_PATH = $(AUTOPILOT_TOOL)/opencv/opencv_gcc
-    #endif
-  else
-    HLS_OPENCV_LIB_PATH = $(AUTOPILOT_TOOL)/opencv
-  endif
-endif
-
 ifndef HLS_FFT_LIB_PATH
   HLS_FFT_LIB_PATH = $(AUTOPILOT_TOOL)/fft_v9_1
 endif
@@ -149,17 +139,21 @@ ifdef __USE_CLANG__
 ifdef AP_CLANG_PATH
 CC      = $(AP_CLANG_PATH)/clang
 CXX     = $(AP_CLANG_PATH)/clang++
+LLC     = $(AUTOPILOT_TOOL)/clang-3.9-csynth/bin/llc
 else
 CC      = clang
 CXX     = clang++
+LLC     = $(AUTOPILOT_TOOL)/clang-3.9-csynth/bin/llc
 endif
 else
 ifdef AP_GCC_PATH
 CC      = $(AP_GCC_PATH)/gcc
 CXX     = $(AP_GCC_PATH)/g++
+LLC     = $(AUTOPILOT_TOOL)/clang-3.9-csynth/bin/llc
 else
 CC	= gcc
 CXX	= g++
+LLC     = $(AUTOPILOT_TOOL)/clang-3.9-csynth/bin/llc
 endif
 endif
 
@@ -176,7 +170,6 @@ SYSC = $(HLS_SYSTEMC_HOME)
 SYSCINC = $(SYSC)/include
 SYSCLIB = $(HLS_SYSTEMC_LIB_PATH)
 FPOLIB = $(HLS_FPO_LIB_PATH)
-OPENCVLIB = $(HLS_OPENCV_LIB_PATH)
 FFTLIB = $(HLS_FFT_LIB_PATH)
 FIRLIB = $(HLS_FIR_LIB_PATH)
 DDSLIB = $(HLS_DDS_LIB_PATH)
@@ -190,6 +183,12 @@ IFLAG += -I "$(AUTOPILOT_ROOT)/include"
 IFLAG += -I "$(AUTOPILOT_TECH)/generic/SystemC/AESL_comp"
 LFLAG += -Wl,--as-needed
 LFLAG += -Wl,-rpath,"$(SYSCLIB)" -L "$(SYSCLIB)" -lsystemc -lpthread
+
+ifeq ($(AUTOPILOT_MACH),win64)
+  LLCTARGET += -mtriple=x86_64-pc-mingw32
+else
+  LLCTARGET += -mtriple=x86_64-linux
+endif
 
 ifdef __SIM_MATHHLS__
 
@@ -230,15 +229,6 @@ ifdef __SIM_FPO__
    LFLAG += -Wl,-rpath,"$(FPOLIB)" -L "$(FPOLIB)" -lgmp -lmpfr -lIp_floating_point_v7_0_bitacc_cmodel
 endif
 
-ifdef __SIM_OPENCV__
-  ifeq ($(shell uname -s), Linux)
-    LFLAG += -Wl,-rpath,"$(OPENCVLIB)" -L "$(OPENCVLIB)" -lopencv_calib3d -lopencv_contrib -lopencv_core -lopencv_features2d -lopencv_flann -lopencv_gpu -lopencv_highgui -lopencv_imgproc -lopencv_legacy -lopencv_ml -lopencv_objdetect -lopencv_photo -lopencv_stitching -lopencv_superres -lopencv_ts -lopencv_video -lopencv_videostab
-  else
-    CV_VER = 245
-    #delete lopencv_superres245 for win64
-    LFLAG += -Wl,-rpath,"$(OPENCVLIB)" -L "$(OPENCVLIB)" -lopencv_calib3d$(CV_VER) -lopencv_contrib$(CV_VER) -lopencv_core$(CV_VER) -lopencv_features2d$(CV_VER) -lopencv_flann$(CV_VER) -lopencv_gpu$(CV_VER) -lopencv_highgui$(CV_VER) -lopencv_imgproc$(CV_VER) -lopencv_legacy$(CV_VER) -lopencv_ml$(CV_VER) -lopencv_objdetect$(CV_VER) -lopencv_photo$(CV_VER) -lopencv_stitching$(CV_VER) -lopencv_video$(CV_VER) -lopencv_videostab$(CV_VER)
-  endif
-endif
 
 ifdef __SIM_FFT__
   LFLAG += -Wl,-rpath,"$(FFTLIB)" -L "$(FFTLIB)" -lIp_xfft_v9_1_bitacc_cmodel
@@ -281,6 +271,7 @@ ifndef HLS_SOURCES
   SUFFIX_C++  = c++
   SUFFIX_c    = c
   SUFFIX_C    = C
+  SUFFIX_ll   = ll 
   SOURCES_CPP = $(wildcard *.$(SUFFIX_CPP))
   SOURCES_CP = $(wildcard *.$(SUFFIX_CP))
   SOURCES_CXX = $(wildcard *.$(SUFFIX_CXX))
@@ -288,6 +279,7 @@ ifndef HLS_SOURCES
   SOURCES_C++ = $(wildcard *.$(SUFFIX_C++))
   SOURCES_c = $(wildcard *.$(SUFFIX_c))
   SOURCES_C = $(wildcard *.$(SUFFIX_C))
+  SOURCES_ll = $(wildcard *.$(SUFFIX_ll))
 
 ifdef HLS_RtlSCDir
   SOURCES_CPP += $(wildcard $(HLS_RtlSCDir)/*.cpp)
@@ -299,7 +291,7 @@ endif
   FILE_SOURCES_CC = $(notdir $(SOURCES_CC))
   FILE_SOURCES_C = $(notdir $(SOURCES_C))
 
-  override HLS_SOURCES = $(SOURCES_CPP) $(SOURCES_CP) $(SOURCES_CXX) $(SOURCES_CC) $(SOURCES_C++) $(SOURCES_c) $(SOURCES_C)
+  override HLS_SOURCES = $(SOURCES_CPP) $(SOURCES_CP) $(SOURCES_CXX) $(SOURCES_CC) $(SOURCES_C++) $(SOURCES_c) $(SOURCES_C) $(SOURCES_ll)
 endif
 
 OBJECTS := $(basename $(notdir $(HLS_SOURCES)))
@@ -387,6 +379,7 @@ endif
 #-------------- C/C++ to binary ----------------------------------------
 Compile.C     = $(CC) $(CPP.Flags) $(CompileCommonOpts) -c $(C.Flags)
 Compile.CXX   = $(CXX) $(CPP.Flags) $(CompileCommonOpts) $(CXX.Flags) -c
+Compile.LLC   = $(LLC)
 
 CXXPATH = $(shell which ${CXX})
 
@@ -421,6 +414,9 @@ $(ObjDir)/%.o: %.c $(ObjDir)/.dir
 	then $(MV) -f "$(ObjDir)/$*.Cd" "$(ObjDir)/$*.d"; \
 	else $(RM) -f "$(ObjDir)/$*.Cd"; exit 1; fi
 
+$(ObjDir)/%.o: %.ll $(ObjDir)/.dir
+	$(Echo) "   Compiling $*.ll" $(AVE_DIR_DLOG)
+	$(Verb)  $(Compile.LLC) $(LLCTARGET) -filetype=obj $< -o $@
 
 # This rules ensures that header files that are removed still have a rule for
 # which they can be "generated."  This allows make to ignore them and

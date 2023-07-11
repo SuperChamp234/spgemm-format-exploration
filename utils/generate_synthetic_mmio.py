@@ -14,8 +14,8 @@ class MMFileFixedFormat(MMFile):
 
 def main():
     #generate random matrix
-    A = sps.rand(5,5,0.5)
-    B = sps.rand(5,5,0.5)
+    A = sps.rand(10,10,0.5)
+    B = sps.rand(10,10,0.5)
     #make them symmetric
     A = A + A.T
     B = B + B.T

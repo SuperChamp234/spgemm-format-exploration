@@ -5,8 +5,8 @@
 ############################################################
 open_project row_product
 set_top row_product
-add_files row_product/src/row_product.cpp
 add_files row_product/src/row_product.hpp
+add_files row_product/src/row_product.cpp
 add_files -tb row_product/src/row_product_tb.cpp -cflags "-Wno-unknown-pragmas" -csimflags "-Wno-unknown-pragmas"
 open_solution "row_product_test" -flow_target vivado
 set_part {xc7z020-clg484-1}

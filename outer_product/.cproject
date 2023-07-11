@@ -49,23 +49,23 @@
                                 								
                                 <option id="gnu.cpp.compiler.exe.debug.option.debugging.level.1249734031" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
                                 								
-                                <option id="gnu.cpp.compiler.option.include.paths.622735610" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.622735610" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/auto_cc/include"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/zain/Documents/hls/processing_elements"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/ap_sysc"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/ap_sysc"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/auto_cc/include"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/etc"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/etc"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/include"/>
                                     								
                                 </option>
                                 								
-                                <option id="gnu.cpp.compiler.option.preprocessor.def.1863056078" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1863056078" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
                                     									
                                     <listOptionValue builtIn="false" value="AESL_TB"/>
                                     									
@@ -85,23 +85,23 @@
                                 								
                                 <option id="gnu.c.compiler.exe.debug.option.debugging.level.889838778" name="Debug Level" superClass="gnu.c.compiler.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
                                 								
-                                <option id="gnu.c.compiler.option.include.paths.849478025" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.849478025" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/auto_cc/include"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/zain/Documents/hls/processing_elements"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/ap_sysc"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/ap_sysc"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/auto_cc/include"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/etc"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/etc"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/include"/>
                                     								
                                 </option>
                                 								
-                                <option id="gnu.c.compiler.option.preprocessor.def.symbols.435630126" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.435630126" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                                     									
                                     <listOptionValue builtIn="false" value="AESL_TB"/>
                                     									
@@ -117,9 +117,9 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.137852141" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug">
                                 								
-                                <option id="gnu.c.link.option.paths.858961129" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.link.option.paths.858961129" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/lib"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/lib"/>
                                     								
                                 </option>
                                 								
@@ -131,9 +131,9 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.623793454" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug">
                                 								
-                                <option id="gnu.cpp.link.option.paths.1233392584" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.paths.1233392584" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/lib"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/lib"/>
                                     								
                                 </option>
                                 								
@@ -167,19 +167,19 @@
                             							
                             <option id="gnu.cpp.compiler.option.preprocessor.def.23780359" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
                             							
-                            <option id="gnu.cpp.compiler.option.include.paths.571070838" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                            <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.571070838" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
                                 								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/include"/>
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include"/>
                                 								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/auto_cc/include"/>
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/ap_sysc"/>
                                 								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include"/>
-                                								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/ap_sysc"/>
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/auto_cc/include"/>
                                 								
                                 <listOptionValue builtIn="false" value="/home/leoh/Documents/spgemm-format-exploration"/>
                                 								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/etc"/>
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/include"/>
                                 							
                             </option>
                             							
@@ -193,7 +193,7 @@
                     					
                     <sourceEntries>
                         						
-                        <entry excluding="solution1|*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding=".apc|.settings|solution1|*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                         					
                     </sourceEntries>
                     				
@@ -251,19 +251,19 @@
                                 								
                                 <option id="gnu.cpp.compiler.exe.release.option.debugging.level.1737771213" name="Debug Level" superClass="gnu.cpp.compiler.exe.release.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
                                 								
-                                <option id="gnu.cpp.compiler.option.include.paths.947874111" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.947874111" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/auto_cc/include"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/zain/Documents/hls/processing_elements"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/ap_sysc"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/ap_sysc"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/auto_cc/include"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/etc"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/etc"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/include"/>
                                     								
                                 </option>
                                 								
@@ -277,19 +277,19 @@
                                 								
                                 <option id="gnu.c.compiler.exe.release.option.debugging.level.1995553420" name="Debug Level" superClass="gnu.c.compiler.exe.release.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.none" valueType="enumerated"/>
                                 								
-                                <option id="gnu.c.compiler.option.include.paths.1671604579" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.1671604579" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/auto_cc/include"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/zain/Documents/hls/processing_elements"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/ap_sysc"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/ap_sysc"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/auto_cc/include"/>
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/etc"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/etc"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/include"/>
                                     								
                                 </option>
                                 								
@@ -299,9 +299,9 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.31462591" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release">
                                 								
-                                <option id="gnu.c.link.option.paths.1627032611" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.link.option.paths.1627032611" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/lib"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/lib"/>
                                     								
                                 </option>
                                 								
@@ -313,9 +313,9 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.14362384" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.release">
                                 								
-                                <option id="gnu.cpp.link.option.paths.1131291096" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.paths.1131291096" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
                                     									
-                                    <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/lib"/>
+                                    <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/lib"/>
                                     								
                                 </option>
                                 								
@@ -349,19 +349,19 @@
                             							
                             <option id="gnu.cpp.compiler.option.preprocessor.def.2105236964" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
                             							
-                            <option id="gnu.cpp.compiler.option.include.paths.1220218839" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                            <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1220218839" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
                                 								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/systemc/include"/>
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include"/>
                                 								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/lnx64/tools/auto_cc/include"/>
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/ap_sysc"/>
                                 								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include"/>
-                                								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/ap_sysc"/>
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/auto_cc/include"/>
                                 								
                                 <listOptionValue builtIn="false" value="/home/leoh/Documents/spgemm-format-exploration"/>
                                 								
-                                <listOptionValue builtIn="false" value="/tools/Xilinx/Vivado/2018.3/include/etc"/>
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/systemc/include"/>
                                 							
                             </option>
                             							
@@ -375,7 +375,7 @@
                     					
                     <sourceEntries>
                         						
-                        <entry excluding="solution1|*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding=".apc|.settings|solution1|*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                         					
                     </sourceEntries>
                     				

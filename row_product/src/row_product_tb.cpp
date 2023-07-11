@@ -298,7 +298,7 @@ void test_append_row()
     print_csr_out_t(out_csr);
 }
 
-void synth_test()
+void basic_test()
 {
 
     // csr_t_1 csr: A 4x5

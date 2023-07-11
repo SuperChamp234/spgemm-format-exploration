@@ -1,7 +1,215 @@
 #include "outer_product.hpp"
+#include <vector>
+#include <fstream>
+#include <algorithm>
+#include <cmath>
 
-void test_mmio_to_csr(const char* filename){
-    csr_t test_case = mmio_to_csr(filename);
+using namespace std;
+
+struct COO_unit
+{
+    int row;
+    int col;
+    data_t data;
+};
+struct COO
+{
+    vector<COO_unit> units;
+};
+
+COO assemble_COO_matrix(std::string filePath)
+{
+    int M, N, L;
+    COO matrix;
+    std::ifstream fin(filePath);
+    // Ignore headers and comments:
+    while (fin.peek() == '%')
+        fin.ignore(2048, '\n');
+    // Read defining parameters:
+    fin >> M >> N >> L;
+
+    for (int l = 0; l < L; l++)
+    {
+        int row, col;
+        double data;
+        fin >> row >> col >> data;
+        matrix.units.push_back({row - 1, col - 1, data});
+    }
+    // sort the matrix
+    sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
+         { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
+    fin.close();
+    return matrix;
+}
+
+COO assemble_simetric_COO_matrix(std::string filePath)
+{
+    int M, N, L;
+    vector<int> rows, cols;
+    vector<double> data;
+    COO matrix;
+    std::ifstream fin(filePath);
+    // Ignore headers and comments:
+    while (fin.peek() == '%')
+        fin.ignore(2048, '\n');
+    // Read defining parameters:
+    fin >> M >> N >> L;
+    for (int l = 0; l < L; l++)
+    {
+        // Read (i,j,A[i,j]) triplets:
+        int i, j;
+        double Aij;
+        fin >> i >> j >> Aij;
+        // fill COO matrix
+        matrix.units.push_back({i-1, j-1, Aij});
+    }
+    // since the matrix is simetric, we need to have the same elements in the lower triangle
+    for (int l = 0; l < L; l++)
+    {
+        // fill COO matrix
+        if (matrix.units[l].row != matrix.units[l].col)
+            matrix.units.push_back({matrix.units[l].col, matrix.units[l].row, matrix.units[l].data});
+    }
+    // sort the matrix
+    sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
+         { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
+    fin.close();
+    return matrix;
+}
+
+void print_COO(const COO& coo, int numRows, int numCols) {
+    std::vector<std::vector<double>> denseMatrix(numRows, std::vector<double>(numCols, 0.0));
+
+    for (const auto& unit : coo.units) {
+        denseMatrix[unit.row][unit.col] = unit.data;
+    }
+
+    for (const auto& row : denseMatrix) {
+        for (const auto& element : row) {
+            std::cout << element << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+// convert COO matrix to CSR matrix
+csr_t COO_to_CSR(COO matrix)
+{
+    csr_t csr;
+    int row = 0;
+    int rowptr = 0;
+    csr.rowptr[row] = rowptr;
+    for (int i = 0; i <= matrix.units.size(); i++)
+    {
+        if (matrix.units[i].row == row)
+        {
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+        else
+        {
+            row++;
+            csr.rowptr[row] = rowptr;
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+    }
+    return csr;
+}
+
+csc_t COO_to_CSC(COO matrix)
+{
+    csc_t csc;
+    sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
+                                { return (a.col == b.col) ? (a.row < b.row) : (a.col < b.col); });
+    int col = 0;
+    int colptr = 0;
+    csc.colptr[col] = colptr;
+    for (int i = 0; i <= matrix.units.size(); i++)
+    {
+        if (matrix.units[i].col == col)
+        {
+            csc.rowind[colptr] = matrix.units[i].row;
+            csc.data[colptr] = matrix.units[i].data;
+            colptr++;
+        }
+        else
+        {
+            col++;
+            csc.colptr[col] = colptr;
+            csc.rowind[colptr] = matrix.units[i].row;
+            csc.data[colptr] = matrix.units[i].data;
+            colptr++;
+        }
+    }
+    return csc;
+}
+
+csr_out_t COO_to_CSR_OUT(COO matrix)
+{
+    csr_out_t csr;
+    int row = 0;
+    int rowptr = 0;
+    csr.rowptr[row] = rowptr;
+    for (int i = 0; i <= matrix.units.size(); i++)
+    {
+        if (matrix.units[i].row == row)
+        {
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+        else
+        {
+            row++;
+            csr.rowptr[row] = rowptr;
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+    }
+    return csr;
+}
+
+//compare if two csr_out_t are equal
+bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
+{
+    bool equal = true;
+    for (int i = 0; i < M; i++)
+    {
+        if (z_csr.rowptr[i] != z_csr2.rowptr[i])
+        {
+            equal = false;
+            break;
+        }
+    }
+    //print if rowptr is equal
+    cout << "rowptr is equal: " << equal << endl;
+    for (int i = 0; i < z_csr.rowptr[M]; i++)
+    {
+        if (z_csr.colind[i] != z_csr2.colind[i])
+        {
+            equal = false;
+            break;
+        }
+    }
+    //print if colind is equal
+    cout << "colind is equal: " << equal << endl;
+    for (int i = 0; i < z_csr.rowptr[M]; i++)
+    {
+        //check data till 2 fixed point precision
+        int check = std::abs(z_csr.data[i] - z_csr2.data[i]) > 0.01;
+        if (check)
+        {
+            equal = false;
+            break;
+        }
+    }
+    //print if data is equal
+    cout << "data is equal: " << equal << endl;
+    return equal;
 }
 
 void test_extract_row(csr_t test_case){
@@ -78,7 +286,7 @@ void test_accumulate(csr_out_t test_case1, csr_out_t test_case2){
     print_csr_out_t(out);
 }
 
-int main() {
+void basic_test() {
 
 
 
@@ -137,9 +345,32 @@ int main() {
     // Test outer_product
     csr_out_t out = outer_product(A, B);
     print_csr_out_t(out);
+}
 
-    //test mmio_to_csr
-    //test_mmio_to_csr("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
+void synth_test(){
+    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
+    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
+    COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
 
+    csr_t csr_A = COO_to_CSR(coo_A);
+    csc_t csc_B = COO_to_CSC(coo_B);
+    csr_out_t csr_C = COO_to_CSR_OUT(coo_C);
+    print_COO(coo_C, M, N);
+    std::cout << "----------------" << std::endl;
+
+    csr_out_t out = outer_product(csc_B, csr_A);
+    print_csr_out_t(out);
+    std::cout << "----------------" << std::endl;
+    cout << "CSR_OUT == CSR_OUT: ? " << endl;
+    if(compare_csr_out_t(out, csr_C)){
+        cout << "TRUE" << endl;
+    } else {
+        cout << "FALSE" << endl;
+    }
+}
+
+int main() {
+    //basic_test();
+    synth_test();
     return 0;
 }

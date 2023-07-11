@@ -1,24 +1,20 @@
 #ifndef OUTER_PRODUCT_CSR_H
 #define OUTER_PRODUCT_CSR_H
 
-#include <ap_fixed.h>
-
-
 #define NO_SYNTH
 //#define DEBUG
 
 #ifdef NO_SYNTH
 #include <iostream>
-#include "mmio.h"
 #endif
 
-const int M =  4;
-const int P =  5;
-const int N =  5;
+const int M =  10;
+const int P =  10;
+const int N =  10;
 //X is of size MxP, Y is of size PxN, Z is of size MxN
 //X is CSC, Y is CSR, Z is CSR
 
-typedef ap_fixed<32, 16> data_t;
+typedef double data_t;
 struct csc_t {
     int colptr[P+1];
     int rowind[M*P];
@@ -70,13 +66,5 @@ csr_out_t multiply_row_col(data_t* row, data_t* col);
     * @return csr_out_t: the sum of the two matrices in CSR format
 */
 csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2);
-
-/*
-    * Convert a matrix in Matrix Market format to CSR format
-    * @param filename: path to the matrix file
-    * @return csr_t: the matrix in CSR format
-*/
-
-csr_t mmio_to_csr(const char* filename);
 
 #endif // OUTER_PRODUCT_CSR_H

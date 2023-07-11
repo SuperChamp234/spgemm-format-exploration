@@ -1,16 +1,12 @@
 # ==============================================================
-# File generated on Fri Jun 23 23:37:14 IST 2023
-# Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC v2018.3 (64-bit)
-# SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
-# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+# Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2020.2 (64-bit)
+# Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 # ==============================================================
-set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/tools/Xilinx/Vivado/2018.3/lnx64/tools/fpo_v6_1
-set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/tools/Xilinx/Vivado/2018.3/lnx64/tools/opencv
-set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/tools/Xilinx/Vivado/2018.3/lnx64/tools/fft_v9_1
-set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/tools/Xilinx/Vivado/2018.3/lnx64/tools/fir_v7_0
-set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/tools/Xilinx/Vivado/2018.3/lnx64/tools/dds_v6_0
-set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/tools/Xilinx/Vivado/2018.3/lnx64/csim
+set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/fpo_v6_1
+set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/fft_v9_1
+set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/fir_v7_0
+set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/home/leoh/tools/Vitis_HLS/2020.2/lnx64/tools/dds_v6_0
+set ::env(LD_LIBRARY_PATH) $::env(LD_LIBRARY_PATH):/home/leoh/tools/Vitis_HLS/2020.2/lnx64/csim
 ### C sim ###
 if {![file exists csim.exe]} {
   puts "@E C-simulation is not set up properly. Please re-run csim."

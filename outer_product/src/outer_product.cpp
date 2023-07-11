@@ -1,56 +1,5 @@
 #include "outer_product.hpp"
 
-csr_t mmio_to_csr(const char* filename)
-{
-    csr_t csr;
-    int ret_code;
-    MM_typecode matcode;
-    FILE *f = fopen(filename, "r");
-    int M, N, nz;
-    int i;
-
-
-    if (mm_read_banner(f, &matcode) != 0)
-    {
-        printf("Could not process Matrix Market banner.\n");
-        return csr;
-    }
-    printf("Matrix Market matcode: %s\n", mm_typecode_to_str(matcode));
-    if ((ret_code = mm_read_mtx_crd_size(f, &M, &N, &nz)) !=0)
-        return csr;
-
-    int I[nz];
-    int J[nz];
-    data_t val[nz];
-
-    for (i=0; i<nz; i++)
-    {
-        fscanf(f, "%d %d %lg\n", &I[i], &J[i], &val[i]);
-        I[i]--;  /* adjust from 1-based to 0-based */
-        J[i]--;
-    }
-    if (f !=stdin) fclose(f);
-    //print nnz
-    printf("nnz: %d\n", nz);
-    //convert to csr
-    // csr.rowptr[0] = 0;
-    // int row = 0;
-    // int idx = 0;
-    // for (int i = 0; i < nz; i++)
-    // {
-    //     if (I[i] != row)
-    //     {
-    //         row = I[i];
-    //         csr.rowptr[row+1] = idx;
-    //     }
-    //     csr.colind[idx] = J[i];
-    //     csr.data[idx] = val[i];
-    //     idx++;
-    // }
-    // csr.rowptr[M] = idx;
-    // return csr;
-}
-
 //extract row from csr and store it in an array
 data_t* extract_row(csr_t inp_csr, int row)
 {
