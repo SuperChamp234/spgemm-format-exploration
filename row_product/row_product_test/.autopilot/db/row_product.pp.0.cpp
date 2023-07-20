@@ -33430,6 +33430,7 @@ __attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, in
 #pragma HLS TOP name=row_product
 # 83 "row_product/src/row_product.cpp"
 
+#pragma HLS INTERFACE s_axilite port=return bundle=control
 #pragma HLS INTERFACE m_axi port=x_rowptr bundle=csr_x depth=1024
 #pragma HLS INTERFACE m_axi port=x_colind bundle=csr_x depth=1024
 #pragma HLS INTERFACE m_axi port=x_data bundle=csr_x depth=1024
@@ -33439,7 +33440,9 @@ __attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, in
 #pragma HLS INTERFACE m_axi port=z_rowptr bundle=csr_z depth=1024
 #pragma HLS INTERFACE m_axi port=z_colind bundle=csr_z depth=1024
 #pragma HLS INTERFACE m_axi port=z_data bundle=csr_z depth=1024
-# 106 "row_product/src/row_product.cpp"
+
+
+
  csr_t_1 x;
     x.rowptr = x_rowptr;
     x.colind = x_colind;
@@ -33462,9 +33465,9 @@ __attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, in
     data_t extracted_scalar = data_t(0);
 
 
-    VITIS_LOOP_128_1: for (int i = 0; i < M; i++)
+    VITIS_LOOP_119_1: for (int i = 0; i < M; i++)
     {
-        VITIS_LOOP_130_2: for (int k = 0; k < N; k++)
+        VITIS_LOOP_121_2: for (int k = 0; k < N; k++)
         {
             extracted_scalar = extract_element(x, i, k);
             if (extracted_scalar != 0)

@@ -81,6 +81,7 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
 
 void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
 {
+#pragma HLS INTERFACE s_axilite port=return bundle=control
 #pragma HLS INTERFACE m_axi port=x_rowptr bundle=csr_x depth=1024
 #pragma HLS INTERFACE m_axi port=x_colind bundle=csr_x depth=1024
 #pragma HLS INTERFACE m_axi port=x_data bundle=csr_x   depth=1024
@@ -90,16 +91,6 @@ void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, in
 #pragma HLS INTERFACE m_axi port=z_rowptr bundle=csr_z depth=1024
 #pragma HLS INTERFACE m_axi port=z_colind bundle=csr_z depth=1024
 #pragma HLS INTERFACE m_axi port=z_data bundle=csr_z  depth=1024
-
-// #pragma HLS INTERFACE s_axilite port=x_rowptr bundle=csr_x
-// #pragma HLS INTERFACE s_axilite port=x_colind bundle=csr_x
-// #pragma HLS INTERFACE s_axilite port=x_data bundle=csr_x
-// #pragma HLS INTERFACE s_axilite port=y_rowptr bundle=csr_y
-// #pragma HLS INTERFACE s_axilite port=y_colind bundle=csr_y
-// #pragma HLS INTERFACE s_axilite port=y_data bundle=csr_y
-// #pragma HLS INTERFACE s_axilite port=z_rowptr bundle=csr_z
-// #pragma HLS INTERFACE s_axilite port=z_colind bundle=csr_z
-// #pragma HLS INTERFACE s_axilite port=z_data bundle=csr_z
 
 
     //init csr_t_1

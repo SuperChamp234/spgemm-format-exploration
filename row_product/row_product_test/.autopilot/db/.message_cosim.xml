@@ -16,5 +16,5 @@
 	<Message severity="ERROR" prefix="[COSIM 212-320]" key="COSIM_TCL_320_1192" tag="" content="C TB testing failed, stop generating test vectors. Please check C TB or re-run cosim." resolution=""/>
 	<Message severity="ERROR" prefix="[COSIM 212-5]" key="COSIM_TCL_5_1075" tag="" content="*** C/RTL co-simulation file generation failed. ***" resolution=""/>
 	<Message severity="ERROR" prefix="[COSIM 212-4]" key="COSIM_TCL_4_1074" tag="" content="*** C/RTL co-simulation finished: FAIL ***" resolution=""/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="RUNTIME" content="Finished Command cosim_design CPU user time: 16.17 seconds. CPU system time: 1.32 seconds. Elapsed time: 16.28 seconds; current allocated memory: 87.903 MB." resolution=""/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="RUNTIME" content="Finished Command cosim_design CPU user time: 13.85 seconds. CPU system time: 1.38 seconds. Elapsed time: 14.01 seconds; current allocated memory: 87.887 MB." resolution=""/>
 </Messages>

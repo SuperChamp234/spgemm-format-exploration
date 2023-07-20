@@ -28,6 +28,7 @@ module row_product_control_s_axi
     output wire [1:0]                    RRESP,
     output wire                          RVALID,
     input  wire                          RREADY,
+    output wire                          interrupt,
     output wire [63:0]                   x_rowptr,
     output wire [63:0]                   x_colind,
     output wire [63:0]                   x_data,
@@ -36,13 +37,31 @@ module row_product_control_s_axi
     output wire [63:0]                   y_data,
     output wire [63:0]                   z_rowptr,
     output wire [63:0]                   z_colind,
-    output wire [63:0]                   z_data
+    output wire [63:0]                   z_data,
+    output wire                          ap_start,
+    input  wire                          ap_done,
+    input  wire                          ap_ready,
+    input  wire                          ap_idle
 );
 //------------------------Address Info-------------------
-// 0x00 : reserved
-// 0x04 : reserved
-// 0x08 : reserved
-// 0x0c : reserved
+// 0x00 : Control signals
+//        bit 0  - ap_start (Read/Write/COH)
+//        bit 1  - ap_done (Read/COR)
+//        bit 2  - ap_idle (Read)
+//        bit 3  - ap_ready (Read)
+//        bit 7  - auto_restart (Read/Write)
+//        others - reserved
+// 0x04 : Global Interrupt Enable Register
+//        bit 0  - Global Interrupt Enable (Read/Write)
+//        others - reserved
+// 0x08 : IP Interrupt Enable Register (Read/Write)
+//        bit 0  - enable ap_done interrupt (Read/Write)
+//        bit 1  - enable ap_ready interrupt (Read/Write)
+//        others - reserved
+// 0x0c : IP Interrupt Status Register (Read/TOW)
+//        bit 0  - ap_done (COR/TOW)
+//        bit 1  - ap_ready (COR/TOW)
+//        others - reserved
 // 0x10 : Data signal of x_rowptr
 //        bit 31~0 - x_rowptr[31:0] (Read/Write)
 // 0x14 : Data signal of x_rowptr
@@ -92,6 +111,10 @@ module row_product_control_s_axi
 
 //------------------------Parameter----------------------
 localparam
+    ADDR_AP_CTRL         = 7'h00,
+    ADDR_GIE             = 7'h04,
+    ADDR_IER             = 7'h08,
+    ADDR_ISR             = 7'h0c,
     ADDR_X_ROWPTR_DATA_0 = 7'h10,
     ADDR_X_ROWPTR_DATA_1 = 7'h14,
     ADDR_X_ROWPTR_CTRL   = 7'h18,
@@ -141,6 +164,14 @@ localparam
     wire                          ar_hs;
     wire [ADDR_BITS-1:0]          raddr;
     // internal registers
+    reg                           int_ap_idle;
+    reg                           int_ap_ready;
+    reg                           int_ap_done = 1'b0;
+    reg                           int_ap_start = 1'b0;
+    reg                           int_auto_restart = 1'b0;
+    reg                           int_gie = 1'b0;
+    reg  [1:0]                    int_ier = 2'b0;
+    reg  [1:0]                    int_isr = 2'b0;
     reg  [63:0]                   int_x_rowptr = 'b0;
     reg  [63:0]                   int_x_colind = 'b0;
     reg  [63:0]                   int_x_data = 'b0;
@@ -242,6 +273,22 @@ always @(posedge ACLK) begin
         if (ar_hs) begin
             rdata <= 'b0;
             case (raddr)
+                ADDR_AP_CTRL: begin
+                    rdata[0] <= int_ap_start;
+                    rdata[1] <= int_ap_done;
+                    rdata[2] <= int_ap_idle;
+                    rdata[3] <= int_ap_ready;
+                    rdata[7] <= int_auto_restart;
+                end
+                ADDR_GIE: begin
+                    rdata <= int_gie;
+                end
+                ADDR_IER: begin
+                    rdata <= int_ier;
+                end
+                ADDR_ISR: begin
+                    rdata <= int_isr;
+                end
                 ADDR_X_ROWPTR_DATA_0: begin
                     rdata <= int_x_rowptr[31:0];
                 end
@@ -303,15 +350,113 @@ end
 
 
 //------------------------Register logic-----------------
-assign x_rowptr = int_x_rowptr;
-assign x_colind = int_x_colind;
-assign x_data   = int_x_data;
-assign y_rowptr = int_y_rowptr;
-assign y_colind = int_y_colind;
-assign y_data   = int_y_data;
-assign z_rowptr = int_z_rowptr;
-assign z_colind = int_z_colind;
-assign z_data   = int_z_data;
+assign interrupt = int_gie & (|int_isr);
+assign ap_start  = int_ap_start;
+assign x_rowptr  = int_x_rowptr;
+assign x_colind  = int_x_colind;
+assign x_data    = int_x_data;
+assign y_rowptr  = int_y_rowptr;
+assign y_colind  = int_y_colind;
+assign y_data    = int_y_data;
+assign z_rowptr  = int_z_rowptr;
+assign z_colind  = int_z_colind;
+assign z_data    = int_z_data;
+// int_ap_start
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_ap_start <= 1'b0;
+    else if (ACLK_EN) begin
+        if (w_hs && waddr == ADDR_AP_CTRL && WSTRB[0] && WDATA[0])
+            int_ap_start <= 1'b1;
+        else if (ap_ready)
+            int_ap_start <= int_auto_restart; // clear on handshake/auto restart
+    end
+end
+
+// int_ap_done
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_ap_done <= 1'b0;
+    else if (ACLK_EN) begin
+        if (ap_done)
+            int_ap_done <= 1'b1;
+        else if (ar_hs && raddr == ADDR_AP_CTRL)
+            int_ap_done <= 1'b0; // clear on read
+    end
+end
+
+// int_ap_idle
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_ap_idle <= 1'b0;
+    else if (ACLK_EN) begin
+            int_ap_idle <= ap_idle;
+    end
+end
+
+// int_ap_ready
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_ap_ready <= 1'b0;
+    else if (ACLK_EN) begin
+            int_ap_ready <= ap_ready;
+    end
+end
+
+// int_auto_restart
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_auto_restart <= 1'b0;
+    else if (ACLK_EN) begin
+        if (w_hs && waddr == ADDR_AP_CTRL && WSTRB[0])
+            int_auto_restart <=  WDATA[7];
+    end
+end
+
+// int_gie
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_gie <= 1'b0;
+    else if (ACLK_EN) begin
+        if (w_hs && waddr == ADDR_GIE && WSTRB[0])
+            int_gie <= WDATA[0];
+    end
+end
+
+// int_ier
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_ier <= 1'b0;
+    else if (ACLK_EN) begin
+        if (w_hs && waddr == ADDR_IER && WSTRB[0])
+            int_ier <= WDATA[1:0];
+    end
+end
+
+// int_isr[0]
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_isr[0] <= 1'b0;
+    else if (ACLK_EN) begin
+        if (int_ier[0] & ap_done)
+            int_isr[0] <= 1'b1;
+        else if (w_hs && waddr == ADDR_ISR && WSTRB[0])
+            int_isr[0] <= int_isr[0] ^ WDATA[0]; // toggle on write
+    end
+end
+
+// int_isr[1]
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_isr[1] <= 1'b0;
+    else if (ACLK_EN) begin
+        if (int_ier[1] & ap_ready)
+            int_isr[1] <= 1'b1;
+        else if (w_hs && waddr == ADDR_ISR && WSTRB[0])
+            int_isr[1] <= int_isr[1] ^ WDATA[1]; // toggle on write
+    end
+end
+
 // int_x_rowptr[31:0]
 always @(posedge ACLK) begin
     if (ARESET)

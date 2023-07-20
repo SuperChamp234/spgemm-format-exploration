@@ -60432,6 +60432,7 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
 
 void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
 {
+#pragma HLS INTERFACE s_axilite port=return bundle=control
 #pragma HLS INTERFACE m_axi port=x_rowptr bundle=csr_x depth=1024
 #pragma HLS INTERFACE m_axi port=x_colind bundle=csr_x depth=1024
 #pragma HLS INTERFACE m_axi port=x_data bundle=csr_x depth=1024
@@ -60441,7 +60442,9 @@ void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, in
 #pragma HLS INTERFACE m_axi port=z_rowptr bundle=csr_z depth=1024
 #pragma HLS INTERFACE m_axi port=z_colind bundle=csr_z depth=1024
 #pragma HLS INTERFACE m_axi port=z_data bundle=csr_z depth=1024
-# 106 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
+
+
+
     csr_t_1 x;
     x.rowptr = x_rowptr;
     x.colind = x_colind;
@@ -60500,5 +60503,5 @@ apatb_row_product_ir(x_rowptr, x_colind, x_data, y_rowptr, y_colind, y_data, z_r
 return ;
 }
 #endif
-# 143 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
+# 134 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
 

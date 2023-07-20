@@ -34,15 +34,15 @@
 <PipelineII>1</PipelineII>
 <PipelineDepth>2</PipelineDepth>
 </Loop1>
-<VITIS_LOOP_128_1>
-<Name>VITIS_LOOP_128_1</Name>
+<VITIS_LOOP_119_1>
+<Name>VITIS_LOOP_119_1</Name>
 <TripCount>5</TripCount>
 <Latency>undef</Latency>
 <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
 <IterationLatency>undef</IterationLatency>
 <PipelineDepth>undef</PipelineDepth>
-<VITIS_LOOP_130_2>
-<Name>VITIS_LOOP_130_2</Name>
+<VITIS_LOOP_121_2>
+<Name>VITIS_LOOP_121_2</Name>
 <TripCount>5</TripCount>
 <Latency>undef</Latency>
 <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
@@ -64,15 +64,15 @@
 <PipelineII>10</PipelineII>
 <PipelineDepth>20</PipelineDepth>
 </VITIS_LOOP_11_1>
-<VITIS_LOOP_130_2.3>
-<Name>VITIS_LOOP_130_2.3</Name>
+<VITIS_LOOP_121_2.3>
+<Name>VITIS_LOOP_121_2.3</Name>
 <TripCount>5</TripCount>
 <Latency>5</Latency>
 <AbsoluteTimeLatency>50.000 ns</AbsoluteTimeLatency>
 <PipelineII>1</PipelineII>
 <PipelineDepth>2</PipelineDepth>
-</VITIS_LOOP_130_2.3>
-</VITIS_LOOP_130_2>
+</VITIS_LOOP_121_2.3>
+</VITIS_LOOP_121_2>
 <VITIS_LOOP_70_1>
 <Name>VITIS_LOOP_70_1</Name>
 <TripCount>5</TripCount>
@@ -81,15 +81,15 @@
 <PipelineII>2</PipelineII>
 <PipelineDepth>12</PipelineDepth>
 </VITIS_LOOP_70_1>
-<VITIS_LOOP_128_1.3>
-<Name>VITIS_LOOP_128_1.3</Name>
+<VITIS_LOOP_119_1.3>
+<Name>VITIS_LOOP_119_1.3</Name>
 <TripCount>5</TripCount>
 <Latency>5</Latency>
 <AbsoluteTimeLatency>50.000 ns</AbsoluteTimeLatency>
 <PipelineII>1</PipelineII>
 <PipelineDepth>2</PipelineDepth>
-</VITIS_LOOP_128_1.3>
-</VITIS_LOOP_128_1>
+</VITIS_LOOP_119_1.3>
+</VITIS_LOOP_119_1>
 </SummaryOfLoopLatency>
 </PerformanceEstimates>
 <AreaEstimates>
@@ -100,7 +100,7 @@
 <DSP>70</DSP>
 <AVAIL_DSP>220</AVAIL_DSP>
 <UTIL_DSP>31</UTIL_DSP>
-<FF>14237</FF>
+<FF>14243</FF>
 <AVAIL_FF>106400</AVAIL_FF>
 <UTIL_FF>13</UTIL_FF>
 <LUT>43647</LUT>
@@ -123,7 +123,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_AWREADY</name>
@@ -136,7 +136,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_AWADDR</name>
@@ -149,7 +149,7 @@
 <Bits>7</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_WVALID</name>
@@ -162,7 +162,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_WREADY</name>
@@ -175,7 +175,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_WDATA</name>
@@ -188,7 +188,7 @@
 <Bits>32</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_WSTRB</name>
@@ -201,7 +201,7 @@
 <Bits>4</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_ARVALID</name>
@@ -214,7 +214,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_ARREADY</name>
@@ -227,7 +227,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_ARADDR</name>
@@ -240,7 +240,7 @@
 <Bits>7</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_RVALID</name>
@@ -253,7 +253,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_RREADY</name>
@@ -266,7 +266,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_RDATA</name>
@@ -279,7 +279,7 @@
 <Bits>32</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_RRESP</name>
@@ -292,7 +292,7 @@
 <Bits>2</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_BVALID</name>
@@ -305,7 +305,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_BREADY</name>
@@ -318,7 +318,7 @@
 <Bits>1</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>s_axi_control_BRESP</name>
@@ -331,7 +331,7 @@
 <Bits>2</Bits>
 <Attribute>unknown</Attribute>
 <CType>int</CType>
-<HasCtrl>0</HasCtrl>
+<HasCtrl>1</HasCtrl>
 </RtlPorts>
 <RtlPorts>
 <name>ap_clk</name>
@@ -356,18 +356,7 @@
 <Attribute>control</Attribute>
 </RtlPorts>
 <RtlPorts>
-<name>ap_start</name>
-<Object>row_product</Object>
-<Type>return value</Type>
-<Scope></Scope>
-<IOProtocol>ap_ctrl_hs</IOProtocol>
-<IOConfig></IOConfig>
-<Dir>in</Dir>
-<Bits>1</Bits>
-<Attribute>control</Attribute>
-</RtlPorts>
-<RtlPorts>
-<name>ap_done</name>
+<name>interrupt</name>
 <Object>row_product</Object>
 <Type>return value</Type>
 <Scope></Scope>
@@ -375,29 +364,7 @@
 <IOConfig></IOConfig>
 <Dir>out</Dir>
 <Bits>1</Bits>
-<Attribute>control</Attribute>
-</RtlPorts>
-<RtlPorts>
-<name>ap_idle</name>
-<Object>row_product</Object>
-<Type>return value</Type>
-<Scope></Scope>
-<IOProtocol>ap_ctrl_hs</IOProtocol>
-<IOConfig></IOConfig>
-<Dir>out</Dir>
-<Bits>1</Bits>
-<Attribute>control</Attribute>
-</RtlPorts>
-<RtlPorts>
-<name>ap_ready</name>
-<Object>row_product</Object>
-<Type>return value</Type>
-<Scope></Scope>
-<IOProtocol>ap_ctrl_hs</IOProtocol>
-<IOConfig></IOConfig>
-<Dir>out</Dir>
-<Bits>1</Bits>
-<Attribute>control</Attribute>
+<Attribute>unknown</Attribute>
 </RtlPorts>
 <RtlPorts>
 <name>m_axi_csr_x_AWVALID</name>
