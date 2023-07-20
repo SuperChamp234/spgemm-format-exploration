@@ -2,84 +2,57 @@
   <kernel src_name="row_product" language="c" hwCtrl="ap_ctrl_hs" mem_layout="fpga64-xilinx-none">
     <args>
       <arg id="0" access_type="r" src_name="x_rowptr" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="csr_x" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="16"/>
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="x_rowptr" hw_bitwidth="32" hw_size_or_depth="0">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="off" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
       </arg>
       <arg id="1" access_type="r" src_name="x_colind" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="csr_x" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="28"/>
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="x_colind" hw_bitwidth="32" hw_size_or_depth="0">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="off" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
       </arg>
       <arg id="2" access_type="r" src_name="x_data" src_type="double*" src_isptr="1" src_bitwidth="64" src_size_or_depth="1024">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="csr_x" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="x_data" hw_bitwidth="64" hw_size_or_depth="0">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="off" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
           <constraint constraint_type="bitwidth" orig_bitwidth="64" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="40"/>
         </hw>
       </arg>
       <arg id="3" access_type="r" src_name="y_rowptr" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="csr_y" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="52"/>
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="y_rowptr" hw_bitwidth="32" hw_size_or_depth="0">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="off" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
       </arg>
       <arg id="4" access_type="r" src_name="y_colind" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="csr_y" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="64"/>
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="y_colind" hw_bitwidth="32" hw_size_or_depth="0">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="off" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
       </arg>
       <arg id="5" access_type="r" src_name="y_data" src_type="double*" src_isptr="1" src_bitwidth="64" src_size_or_depth="1024">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="csr_y" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="y_data" hw_bitwidth="64" hw_size_or_depth="0">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="off" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
           <constraint constraint_type="bitwidth" orig_bitwidth="64" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="76"/>
         </hw>
       </arg>
       <arg id="6" access_type="rw" src_name="z_rowptr" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="csr_z" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="88"/>
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="z_rowptr" hw_bitwidth="32" hw_size_or_depth="0">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="off" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
       </arg>
-      <arg id="7" access_type="rw" src_name="z_colind" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="csr_z" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
-          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="100"/>
+      <arg id="7" access_type="w" src_name="z_colind" src_type="int*" src_isptr="1" src_bitwidth="32" src_size_or_depth="1024">
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="z_colind" hw_bitwidth="32" hw_size_or_depth="0">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="off" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
+          <constraint constraint_type="bitwidth" orig_bitwidth="32" final_bitwidth="32"/>
         </hw>
       </arg>
-      <arg id="8" access_type="rw" src_name="z_data" src_type="double*" src_isptr="1" src_bitwidth="64" src_size_or_depth="1024">
-        <hw hw_usage="data" hw_interface="MAXI" hw_name="csr_z" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="slave" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
+      <arg id="8" access_type="w" src_name="z_data" src_type="double*" src_isptr="1" src_bitwidth="64" src_size_or_depth="1024">
+        <hw hw_usage="data" hw_interface="MAXI" hw_name="z_data" hw_bitwidth="64" hw_size_or_depth="0">
+          <constraint constraint_type="pragma interface" mode="m_axi" register_option="0" offset="off" latency="0" num_read_outstanding="16" num_write_outstanding="16" max_read_burst_length="16" max_write_burst_length="16" max_widen_bitwidth="0"/>
           <constraint constraint_type="bitwidth" orig_bitwidth="64" final_bitwidth="64"/>
-        </hw>
-        <hw hw_usage="address" hw_interface="S_AXILite" hw_name="control" hw_bitwidth="64" hw_size_or_depth="0">
-          <constraint constraint_type="pragma interface" mode="s_axilite" register_option="0" offset="112"/>
         </hw>
       </arg>
     </args>

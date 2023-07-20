@@ -288,78 +288,10 @@ if {${::AESL::PGuard_autoexp_gen}} {
 
 set axilite_register_dict [dict create]
 set port_control {
-x_rowptr { 
-	dir I
-	width 64
-	depth 1
-	mode ap_none
-	offset 16
-	offset_end 27
-}
-x_colind { 
-	dir I
-	width 64
-	depth 1
-	mode ap_none
-	offset 28
-	offset_end 39
-}
-x_data { 
-	dir I
-	width 64
-	depth 1
-	mode ap_none
-	offset 40
-	offset_end 51
-}
-y_rowptr { 
-	dir I
-	width 64
-	depth 1
-	mode ap_none
-	offset 52
-	offset_end 63
-}
-y_colind { 
-	dir I
-	width 64
-	depth 1
-	mode ap_none
-	offset 64
-	offset_end 75
-}
-y_data { 
-	dir I
-	width 64
-	depth 1
-	mode ap_none
-	offset 76
-	offset_end 87
-}
-z_rowptr { 
-	dir I
-	width 64
-	depth 1
-	mode ap_none
-	offset 88
-	offset_end 99
-}
-z_colind { 
-	dir I
-	width 64
-	depth 1
-	mode ap_none
-	offset 100
-	offset_end 111
-}
-z_data { 
-	dir I
-	width 64
-	depth 1
-	mode ap_none
-	offset 112
-	offset_end 123
-}
+ap_start { }
+ap_done { }
+ap_ready { }
+ap_idle { }
 }
 dict set axilite_register_dict control $port_control
 
@@ -395,15 +327,15 @@ eval "::AESL_LIB_XILADAPTER::m_axi_gen { \
     max_latency -1 \ 
     delay_budget 7.3 \ 
     is_flushable 0 \ 
-    name {row_product_csr_x_m_axi} \
+    name {row_product_x_rowptr_m_axi} \
 } "
 } else {
-puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'csr_x'"
+puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'x_rowptr'"
 }
 }
 
 if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler row_product_csr_x_m_axi
+	::AP::rtl_comp_handler row_product_x_rowptr_m_axi
 }
 
 # Native M_AXI:
@@ -416,15 +348,15 @@ eval "::AESL_LIB_XILADAPTER::m_axi_gen { \
     max_latency -1 \ 
     delay_budget 7.3 \ 
     is_flushable 0 \ 
-    name {row_product_csr_y_m_axi} \
+    name {row_product_x_colind_m_axi} \
 } "
 } else {
-puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'csr_y'"
+puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'x_colind'"
 }
 }
 
 if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler row_product_csr_y_m_axi
+	::AP::rtl_comp_handler row_product_x_colind_m_axi
 }
 
 # Native M_AXI:
@@ -437,29 +369,141 @@ eval "::AESL_LIB_XILADAPTER::m_axi_gen { \
     max_latency -1 \ 
     delay_budget 7.3 \ 
     is_flushable 0 \ 
-    name {row_product_csr_z_m_axi} \
+    name {row_product_x_data_m_axi} \
 } "
 } else {
-puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'csr_z'"
+puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'x_data'"
 }
 }
 
 if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler row_product_csr_z_m_axi
+	::AP::rtl_comp_handler row_product_x_data_m_axi
 }
 
-# Direct connection:
-if {${::AESL::PGuard_autoexp_gen}} {
-eval "cg_default_interface_gen_dc { \
-    id -1 \
-    name ap_ctrl \
-    type ap_ctrl \
-    reset_level 0 \
-    sync_rst true \
-    corename ap_ctrl \
+# Native M_AXI:
+if {${::AESL::PGuard_simmodel_gen}} {
+if {[info proc ::AESL_LIB_XILADAPTER::m_axi_gen] == "::AESL_LIB_XILADAPTER::m_axi_gen"} {
+eval "::AESL_LIB_XILADAPTER::m_axi_gen { \
+    id 19 \
+    corename {m_axi} \
     op interface \
-    ports { ap_start { I 1 bit } ap_ready { O 1 bit } ap_done { O 1 bit } ap_idle { O 1 bit } } \
+    max_latency -1 \ 
+    delay_budget 7.3 \ 
+    is_flushable 0 \ 
+    name {row_product_y_rowptr_m_axi} \
 } "
+} else {
+puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'y_rowptr'"
+}
+}
+
+if {${::AESL::PGuard_rtl_comp_handler}} {
+	::AP::rtl_comp_handler row_product_y_rowptr_m_axi
+}
+
+# Native M_AXI:
+if {${::AESL::PGuard_simmodel_gen}} {
+if {[info proc ::AESL_LIB_XILADAPTER::m_axi_gen] == "::AESL_LIB_XILADAPTER::m_axi_gen"} {
+eval "::AESL_LIB_XILADAPTER::m_axi_gen { \
+    id 20 \
+    corename {m_axi} \
+    op interface \
+    max_latency -1 \ 
+    delay_budget 7.3 \ 
+    is_flushable 0 \ 
+    name {row_product_y_colind_m_axi} \
+} "
+} else {
+puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'y_colind'"
+}
+}
+
+if {${::AESL::PGuard_rtl_comp_handler}} {
+	::AP::rtl_comp_handler row_product_y_colind_m_axi
+}
+
+# Native M_AXI:
+if {${::AESL::PGuard_simmodel_gen}} {
+if {[info proc ::AESL_LIB_XILADAPTER::m_axi_gen] == "::AESL_LIB_XILADAPTER::m_axi_gen"} {
+eval "::AESL_LIB_XILADAPTER::m_axi_gen { \
+    id 21 \
+    corename {m_axi} \
+    op interface \
+    max_latency -1 \ 
+    delay_budget 7.3 \ 
+    is_flushable 0 \ 
+    name {row_product_y_data_m_axi} \
+} "
+} else {
+puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'y_data'"
+}
+}
+
+if {${::AESL::PGuard_rtl_comp_handler}} {
+	::AP::rtl_comp_handler row_product_y_data_m_axi
+}
+
+# Native M_AXI:
+if {${::AESL::PGuard_simmodel_gen}} {
+if {[info proc ::AESL_LIB_XILADAPTER::m_axi_gen] == "::AESL_LIB_XILADAPTER::m_axi_gen"} {
+eval "::AESL_LIB_XILADAPTER::m_axi_gen { \
+    id 22 \
+    corename {m_axi} \
+    op interface \
+    max_latency -1 \ 
+    delay_budget 7.3 \ 
+    is_flushable 0 \ 
+    name {row_product_z_rowptr_m_axi} \
+} "
+} else {
+puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'z_rowptr'"
+}
+}
+
+if {${::AESL::PGuard_rtl_comp_handler}} {
+	::AP::rtl_comp_handler row_product_z_rowptr_m_axi
+}
+
+# Native M_AXI:
+if {${::AESL::PGuard_simmodel_gen}} {
+if {[info proc ::AESL_LIB_XILADAPTER::m_axi_gen] == "::AESL_LIB_XILADAPTER::m_axi_gen"} {
+eval "::AESL_LIB_XILADAPTER::m_axi_gen { \
+    id 23 \
+    corename {m_axi} \
+    op interface \
+    max_latency -1 \ 
+    delay_budget 7.3 \ 
+    is_flushable 0 \ 
+    name {row_product_z_colind_m_axi} \
+} "
+} else {
+puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'z_colind'"
+}
+}
+
+if {${::AESL::PGuard_rtl_comp_handler}} {
+	::AP::rtl_comp_handler row_product_z_colind_m_axi
+}
+
+# Native M_AXI:
+if {${::AESL::PGuard_simmodel_gen}} {
+if {[info proc ::AESL_LIB_XILADAPTER::m_axi_gen] == "::AESL_LIB_XILADAPTER::m_axi_gen"} {
+eval "::AESL_LIB_XILADAPTER::m_axi_gen { \
+    id 24 \
+    corename {m_axi} \
+    op interface \
+    max_latency -1 \ 
+    delay_budget 7.3 \ 
+    is_flushable 0 \ 
+    name {row_product_z_data_m_axi} \
+} "
+} else {
+puts "@W \[IMPL-110\] Cannot find AXI interface model in the library. Ignored generation of AXI interface for 'z_data'"
+}
+}
+
+if {${::AESL::PGuard_rtl_comp_handler}} {
+	::AP::rtl_comp_handler row_product_z_data_m_axi
 }
 
 
@@ -469,7 +513,7 @@ set DataWd 1
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc cg_default_interface_gen_clock] == "cg_default_interface_gen_clock"} {
 eval "cg_default_interface_gen_clock { \
-    id -2 \
+    id -1 \
     name ${PortName} \
     reset_level 0 \
     sync_rst true \
@@ -489,7 +533,7 @@ set DataWd 1
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc cg_default_interface_gen_reset] == "cg_default_interface_gen_reset"} {
 eval "cg_default_interface_gen_reset { \
-    id -3 \
+    id -2 \
     name ${PortName} \
     reset_level 0 \
     sync_rst true \

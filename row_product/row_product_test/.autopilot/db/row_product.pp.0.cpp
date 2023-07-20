@@ -25428,15 +25428,16 @@ __attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, in
 #pragma HLS TOP name=row_product
 # 100 "row_product/src/row_product.cpp"
 
-#pragma HLS INTERFACE m_axi port=x_rowptr bundle=csr_x depth=1024
-#pragma HLS INTERFACE m_axi port=x_colind bundle=csr_x depth=1024
-#pragma HLS INTERFACE m_axi port=x_data bundle=csr_x depth=1024
-#pragma HLS INTERFACE m_axi port=y_rowptr bundle=csr_y depth=1024
-#pragma HLS INTERFACE m_axi port=y_colind bundle=csr_y depth=1024
-#pragma HLS INTERFACE m_axi port=y_data bundle=csr_y depth=1024
-#pragma HLS INTERFACE m_axi port=z_rowptr bundle=csr_z depth=1024
-#pragma HLS INTERFACE m_axi port=z_colind bundle=csr_z depth=1024
-#pragma HLS INTERFACE m_axi port=z_data bundle=csr_z depth=1024
+#pragma HLS INTERFACE s_axilite port=return
+#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=x_colind
+#pragma HLS INTERFACE m_axi depth=1024 port=x_data
+#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=y_colind
+#pragma HLS INTERFACE m_axi depth=1024 port=y_data
+#pragma HLS INTERFACE m_axi depth=1024 port=z_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=z_colind
+#pragma HLS INTERFACE m_axi depth=1024 port=z_data
 
 
 
@@ -25462,9 +25463,9 @@ __attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, in
     data_t extracted_scalar = data_t(0);
 
 
-    VITIS_LOOP_135_1: for (int i = 0; i < M; i++)
+    VITIS_LOOP_136_1: for (int i = 0; i < M; i++)
     {
-        VITIS_LOOP_137_2: for (int k = 0; k < N; k++)
+        VITIS_LOOP_138_2: for (int k = 0; k < N; k++)
         {
             extracted_scalar = extract_element(x, i, k);
             if (extracted_scalar != 0)

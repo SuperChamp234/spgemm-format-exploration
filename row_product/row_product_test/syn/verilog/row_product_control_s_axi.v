@@ -5,7 +5,7 @@
 `timescale 1ns/1ps
 module row_product_control_s_axi
 #(parameter
-    C_S_AXI_ADDR_WIDTH = 7,
+    C_S_AXI_ADDR_WIDTH = 4,
     C_S_AXI_DATA_WIDTH = 32
 )(
     input  wire                          ACLK,
@@ -28,105 +28,47 @@ module row_product_control_s_axi
     output wire [1:0]                    RRESP,
     output wire                          RVALID,
     input  wire                          RREADY,
-    output wire [63:0]                   x_rowptr,
-    output wire [63:0]                   x_colind,
-    output wire [63:0]                   x_data,
-    output wire [63:0]                   y_rowptr,
-    output wire [63:0]                   y_colind,
-    output wire [63:0]                   y_data,
-    output wire [63:0]                   z_rowptr,
-    output wire [63:0]                   z_colind,
-    output wire [63:0]                   z_data
+    output wire                          interrupt,
+    output wire                          ap_start,
+    input  wire                          ap_done,
+    input  wire                          ap_ready,
+    input  wire                          ap_idle
 );
 //------------------------Address Info-------------------
-// 0x00 : reserved
-// 0x04 : reserved
-// 0x08 : reserved
-// 0x0c : reserved
-// 0x10 : Data signal of x_rowptr
-//        bit 31~0 - x_rowptr[31:0] (Read/Write)
-// 0x14 : Data signal of x_rowptr
-//        bit 31~0 - x_rowptr[63:32] (Read/Write)
-// 0x18 : reserved
-// 0x1c : Data signal of x_colind
-//        bit 31~0 - x_colind[31:0] (Read/Write)
-// 0x20 : Data signal of x_colind
-//        bit 31~0 - x_colind[63:32] (Read/Write)
-// 0x24 : reserved
-// 0x28 : Data signal of x_data
-//        bit 31~0 - x_data[31:0] (Read/Write)
-// 0x2c : Data signal of x_data
-//        bit 31~0 - x_data[63:32] (Read/Write)
-// 0x30 : reserved
-// 0x34 : Data signal of y_rowptr
-//        bit 31~0 - y_rowptr[31:0] (Read/Write)
-// 0x38 : Data signal of y_rowptr
-//        bit 31~0 - y_rowptr[63:32] (Read/Write)
-// 0x3c : reserved
-// 0x40 : Data signal of y_colind
-//        bit 31~0 - y_colind[31:0] (Read/Write)
-// 0x44 : Data signal of y_colind
-//        bit 31~0 - y_colind[63:32] (Read/Write)
-// 0x48 : reserved
-// 0x4c : Data signal of y_data
-//        bit 31~0 - y_data[31:0] (Read/Write)
-// 0x50 : Data signal of y_data
-//        bit 31~0 - y_data[63:32] (Read/Write)
-// 0x54 : reserved
-// 0x58 : Data signal of z_rowptr
-//        bit 31~0 - z_rowptr[31:0] (Read/Write)
-// 0x5c : Data signal of z_rowptr
-//        bit 31~0 - z_rowptr[63:32] (Read/Write)
-// 0x60 : reserved
-// 0x64 : Data signal of z_colind
-//        bit 31~0 - z_colind[31:0] (Read/Write)
-// 0x68 : Data signal of z_colind
-//        bit 31~0 - z_colind[63:32] (Read/Write)
-// 0x6c : reserved
-// 0x70 : Data signal of z_data
-//        bit 31~0 - z_data[31:0] (Read/Write)
-// 0x74 : Data signal of z_data
-//        bit 31~0 - z_data[63:32] (Read/Write)
-// 0x78 : reserved
+// 0x0 : Control signals
+//       bit 0  - ap_start (Read/Write/COH)
+//       bit 1  - ap_done (Read/COR)
+//       bit 2  - ap_idle (Read)
+//       bit 3  - ap_ready (Read)
+//       bit 7  - auto_restart (Read/Write)
+//       others - reserved
+// 0x4 : Global Interrupt Enable Register
+//       bit 0  - Global Interrupt Enable (Read/Write)
+//       others - reserved
+// 0x8 : IP Interrupt Enable Register (Read/Write)
+//       bit 0  - enable ap_done interrupt (Read/Write)
+//       bit 1  - enable ap_ready interrupt (Read/Write)
+//       others - reserved
+// 0xc : IP Interrupt Status Register (Read/TOW)
+//       bit 0  - ap_done (COR/TOW)
+//       bit 1  - ap_ready (COR/TOW)
+//       others - reserved
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 //------------------------Parameter----------------------
 localparam
-    ADDR_X_ROWPTR_DATA_0 = 7'h10,
-    ADDR_X_ROWPTR_DATA_1 = 7'h14,
-    ADDR_X_ROWPTR_CTRL   = 7'h18,
-    ADDR_X_COLIND_DATA_0 = 7'h1c,
-    ADDR_X_COLIND_DATA_1 = 7'h20,
-    ADDR_X_COLIND_CTRL   = 7'h24,
-    ADDR_X_DATA_DATA_0   = 7'h28,
-    ADDR_X_DATA_DATA_1   = 7'h2c,
-    ADDR_X_DATA_CTRL     = 7'h30,
-    ADDR_Y_ROWPTR_DATA_0 = 7'h34,
-    ADDR_Y_ROWPTR_DATA_1 = 7'h38,
-    ADDR_Y_ROWPTR_CTRL   = 7'h3c,
-    ADDR_Y_COLIND_DATA_0 = 7'h40,
-    ADDR_Y_COLIND_DATA_1 = 7'h44,
-    ADDR_Y_COLIND_CTRL   = 7'h48,
-    ADDR_Y_DATA_DATA_0   = 7'h4c,
-    ADDR_Y_DATA_DATA_1   = 7'h50,
-    ADDR_Y_DATA_CTRL     = 7'h54,
-    ADDR_Z_ROWPTR_DATA_0 = 7'h58,
-    ADDR_Z_ROWPTR_DATA_1 = 7'h5c,
-    ADDR_Z_ROWPTR_CTRL   = 7'h60,
-    ADDR_Z_COLIND_DATA_0 = 7'h64,
-    ADDR_Z_COLIND_DATA_1 = 7'h68,
-    ADDR_Z_COLIND_CTRL   = 7'h6c,
-    ADDR_Z_DATA_DATA_0   = 7'h70,
-    ADDR_Z_DATA_DATA_1   = 7'h74,
-    ADDR_Z_DATA_CTRL     = 7'h78,
-    WRIDLE               = 2'd0,
-    WRDATA               = 2'd1,
-    WRRESP               = 2'd2,
-    WRRESET              = 2'd3,
-    RDIDLE               = 2'd0,
-    RDDATA               = 2'd1,
-    RDRESET              = 2'd2,
-    ADDR_BITS                = 7;
+    ADDR_AP_CTRL = 4'h0,
+    ADDR_GIE     = 4'h4,
+    ADDR_IER     = 4'h8,
+    ADDR_ISR     = 4'hc,
+    WRIDLE       = 2'd0,
+    WRDATA       = 2'd1,
+    WRRESP       = 2'd2,
+    WRRESET      = 2'd3,
+    RDIDLE       = 2'd0,
+    RDDATA       = 2'd1,
+    RDRESET      = 2'd2,
+    ADDR_BITS                = 4;
 
 //------------------------Local signal-------------------
     reg  [1:0]                    wstate = WRRESET;
@@ -141,15 +83,14 @@ localparam
     wire                          ar_hs;
     wire [ADDR_BITS-1:0]          raddr;
     // internal registers
-    reg  [63:0]                   int_x_rowptr = 'b0;
-    reg  [63:0]                   int_x_colind = 'b0;
-    reg  [63:0]                   int_x_data = 'b0;
-    reg  [63:0]                   int_y_rowptr = 'b0;
-    reg  [63:0]                   int_y_colind = 'b0;
-    reg  [63:0]                   int_y_data = 'b0;
-    reg  [63:0]                   int_z_rowptr = 'b0;
-    reg  [63:0]                   int_z_colind = 'b0;
-    reg  [63:0]                   int_z_data = 'b0;
+    reg                           int_ap_idle;
+    reg                           int_ap_ready;
+    reg                           int_ap_done = 1'b0;
+    reg                           int_ap_start = 1'b0;
+    reg                           int_auto_restart = 1'b0;
+    reg                           int_gie = 1'b0;
+    reg  [1:0]                    int_ier = 2'b0;
+    reg  [1:0]                    int_isr = 2'b0;
 
 //------------------------Instantiation------------------
 
@@ -242,59 +183,21 @@ always @(posedge ACLK) begin
         if (ar_hs) begin
             rdata <= 'b0;
             case (raddr)
-                ADDR_X_ROWPTR_DATA_0: begin
-                    rdata <= int_x_rowptr[31:0];
+                ADDR_AP_CTRL: begin
+                    rdata[0] <= int_ap_start;
+                    rdata[1] <= int_ap_done;
+                    rdata[2] <= int_ap_idle;
+                    rdata[3] <= int_ap_ready;
+                    rdata[7] <= int_auto_restart;
                 end
-                ADDR_X_ROWPTR_DATA_1: begin
-                    rdata <= int_x_rowptr[63:32];
+                ADDR_GIE: begin
+                    rdata <= int_gie;
                 end
-                ADDR_X_COLIND_DATA_0: begin
-                    rdata <= int_x_colind[31:0];
+                ADDR_IER: begin
+                    rdata <= int_ier;
                 end
-                ADDR_X_COLIND_DATA_1: begin
-                    rdata <= int_x_colind[63:32];
-                end
-                ADDR_X_DATA_DATA_0: begin
-                    rdata <= int_x_data[31:0];
-                end
-                ADDR_X_DATA_DATA_1: begin
-                    rdata <= int_x_data[63:32];
-                end
-                ADDR_Y_ROWPTR_DATA_0: begin
-                    rdata <= int_y_rowptr[31:0];
-                end
-                ADDR_Y_ROWPTR_DATA_1: begin
-                    rdata <= int_y_rowptr[63:32];
-                end
-                ADDR_Y_COLIND_DATA_0: begin
-                    rdata <= int_y_colind[31:0];
-                end
-                ADDR_Y_COLIND_DATA_1: begin
-                    rdata <= int_y_colind[63:32];
-                end
-                ADDR_Y_DATA_DATA_0: begin
-                    rdata <= int_y_data[31:0];
-                end
-                ADDR_Y_DATA_DATA_1: begin
-                    rdata <= int_y_data[63:32];
-                end
-                ADDR_Z_ROWPTR_DATA_0: begin
-                    rdata <= int_z_rowptr[31:0];
-                end
-                ADDR_Z_ROWPTR_DATA_1: begin
-                    rdata <= int_z_rowptr[63:32];
-                end
-                ADDR_Z_COLIND_DATA_0: begin
-                    rdata <= int_z_colind[31:0];
-                end
-                ADDR_Z_COLIND_DATA_1: begin
-                    rdata <= int_z_colind[63:32];
-                end
-                ADDR_Z_DATA_DATA_0: begin
-                    rdata <= int_z_data[31:0];
-                end
-                ADDR_Z_DATA_DATA_1: begin
-                    rdata <= int_z_data[63:32];
+                ADDR_ISR: begin
+                    rdata <= int_isr;
                 end
             endcase
         end
@@ -303,192 +206,101 @@ end
 
 
 //------------------------Register logic-----------------
-assign x_rowptr = int_x_rowptr;
-assign x_colind = int_x_colind;
-assign x_data   = int_x_data;
-assign y_rowptr = int_y_rowptr;
-assign y_colind = int_y_colind;
-assign y_data   = int_y_data;
-assign z_rowptr = int_z_rowptr;
-assign z_colind = int_z_colind;
-assign z_data   = int_z_data;
-// int_x_rowptr[31:0]
+assign interrupt = int_gie & (|int_isr);
+assign ap_start  = int_ap_start;
+// int_ap_start
 always @(posedge ACLK) begin
     if (ARESET)
-        int_x_rowptr[31:0] <= 0;
+        int_ap_start <= 1'b0;
     else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_X_ROWPTR_DATA_0)
-            int_x_rowptr[31:0] <= (WDATA[31:0] & wmask) | (int_x_rowptr[31:0] & ~wmask);
+        if (w_hs && waddr == ADDR_AP_CTRL && WSTRB[0] && WDATA[0])
+            int_ap_start <= 1'b1;
+        else if (ap_ready)
+            int_ap_start <= int_auto_restart; // clear on handshake/auto restart
     end
 end
 
-// int_x_rowptr[63:32]
+// int_ap_done
 always @(posedge ACLK) begin
     if (ARESET)
-        int_x_rowptr[63:32] <= 0;
+        int_ap_done <= 1'b0;
     else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_X_ROWPTR_DATA_1)
-            int_x_rowptr[63:32] <= (WDATA[31:0] & wmask) | (int_x_rowptr[63:32] & ~wmask);
+        if (ap_done)
+            int_ap_done <= 1'b1;
+        else if (ar_hs && raddr == ADDR_AP_CTRL)
+            int_ap_done <= 1'b0; // clear on read
     end
 end
 
-// int_x_colind[31:0]
+// int_ap_idle
 always @(posedge ACLK) begin
     if (ARESET)
-        int_x_colind[31:0] <= 0;
+        int_ap_idle <= 1'b0;
     else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_X_COLIND_DATA_0)
-            int_x_colind[31:0] <= (WDATA[31:0] & wmask) | (int_x_colind[31:0] & ~wmask);
+            int_ap_idle <= ap_idle;
     end
 end
 
-// int_x_colind[63:32]
+// int_ap_ready
 always @(posedge ACLK) begin
     if (ARESET)
-        int_x_colind[63:32] <= 0;
+        int_ap_ready <= 1'b0;
     else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_X_COLIND_DATA_1)
-            int_x_colind[63:32] <= (WDATA[31:0] & wmask) | (int_x_colind[63:32] & ~wmask);
+            int_ap_ready <= ap_ready;
     end
 end
 
-// int_x_data[31:0]
+// int_auto_restart
 always @(posedge ACLK) begin
     if (ARESET)
-        int_x_data[31:0] <= 0;
+        int_auto_restart <= 1'b0;
     else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_X_DATA_DATA_0)
-            int_x_data[31:0] <= (WDATA[31:0] & wmask) | (int_x_data[31:0] & ~wmask);
+        if (w_hs && waddr == ADDR_AP_CTRL && WSTRB[0])
+            int_auto_restart <=  WDATA[7];
     end
 end
 
-// int_x_data[63:32]
+// int_gie
 always @(posedge ACLK) begin
     if (ARESET)
-        int_x_data[63:32] <= 0;
+        int_gie <= 1'b0;
     else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_X_DATA_DATA_1)
-            int_x_data[63:32] <= (WDATA[31:0] & wmask) | (int_x_data[63:32] & ~wmask);
+        if (w_hs && waddr == ADDR_GIE && WSTRB[0])
+            int_gie <= WDATA[0];
     end
 end
 
-// int_y_rowptr[31:0]
+// int_ier
 always @(posedge ACLK) begin
     if (ARESET)
-        int_y_rowptr[31:0] <= 0;
+        int_ier <= 1'b0;
     else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Y_ROWPTR_DATA_0)
-            int_y_rowptr[31:0] <= (WDATA[31:0] & wmask) | (int_y_rowptr[31:0] & ~wmask);
+        if (w_hs && waddr == ADDR_IER && WSTRB[0])
+            int_ier <= WDATA[1:0];
     end
 end
 
-// int_y_rowptr[63:32]
+// int_isr[0]
 always @(posedge ACLK) begin
     if (ARESET)
-        int_y_rowptr[63:32] <= 0;
+        int_isr[0] <= 1'b0;
     else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Y_ROWPTR_DATA_1)
-            int_y_rowptr[63:32] <= (WDATA[31:0] & wmask) | (int_y_rowptr[63:32] & ~wmask);
+        if (int_ier[0] & ap_done)
+            int_isr[0] <= 1'b1;
+        else if (w_hs && waddr == ADDR_ISR && WSTRB[0])
+            int_isr[0] <= int_isr[0] ^ WDATA[0]; // toggle on write
     end
 end
 
-// int_y_colind[31:0]
+// int_isr[1]
 always @(posedge ACLK) begin
     if (ARESET)
-        int_y_colind[31:0] <= 0;
+        int_isr[1] <= 1'b0;
     else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Y_COLIND_DATA_0)
-            int_y_colind[31:0] <= (WDATA[31:0] & wmask) | (int_y_colind[31:0] & ~wmask);
-    end
-end
-
-// int_y_colind[63:32]
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_y_colind[63:32] <= 0;
-    else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Y_COLIND_DATA_1)
-            int_y_colind[63:32] <= (WDATA[31:0] & wmask) | (int_y_colind[63:32] & ~wmask);
-    end
-end
-
-// int_y_data[31:0]
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_y_data[31:0] <= 0;
-    else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Y_DATA_DATA_0)
-            int_y_data[31:0] <= (WDATA[31:0] & wmask) | (int_y_data[31:0] & ~wmask);
-    end
-end
-
-// int_y_data[63:32]
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_y_data[63:32] <= 0;
-    else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Y_DATA_DATA_1)
-            int_y_data[63:32] <= (WDATA[31:0] & wmask) | (int_y_data[63:32] & ~wmask);
-    end
-end
-
-// int_z_rowptr[31:0]
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_z_rowptr[31:0] <= 0;
-    else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Z_ROWPTR_DATA_0)
-            int_z_rowptr[31:0] <= (WDATA[31:0] & wmask) | (int_z_rowptr[31:0] & ~wmask);
-    end
-end
-
-// int_z_rowptr[63:32]
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_z_rowptr[63:32] <= 0;
-    else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Z_ROWPTR_DATA_1)
-            int_z_rowptr[63:32] <= (WDATA[31:0] & wmask) | (int_z_rowptr[63:32] & ~wmask);
-    end
-end
-
-// int_z_colind[31:0]
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_z_colind[31:0] <= 0;
-    else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Z_COLIND_DATA_0)
-            int_z_colind[31:0] <= (WDATA[31:0] & wmask) | (int_z_colind[31:0] & ~wmask);
-    end
-end
-
-// int_z_colind[63:32]
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_z_colind[63:32] <= 0;
-    else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Z_COLIND_DATA_1)
-            int_z_colind[63:32] <= (WDATA[31:0] & wmask) | (int_z_colind[63:32] & ~wmask);
-    end
-end
-
-// int_z_data[31:0]
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_z_data[31:0] <= 0;
-    else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Z_DATA_DATA_0)
-            int_z_data[31:0] <= (WDATA[31:0] & wmask) | (int_z_data[31:0] & ~wmask);
-    end
-end
-
-// int_z_data[63:32]
-always @(posedge ACLK) begin
-    if (ARESET)
-        int_z_data[63:32] <= 0;
-    else if (ACLK_EN) begin
-        if (w_hs && waddr == ADDR_Z_DATA_DATA_1)
-            int_z_data[63:32] <= (WDATA[31:0] & wmask) | (int_z_data[63:32] & ~wmask);
+        if (int_ier[1] & ap_ready)
+            int_isr[1] <= 1'b1;
+        else if (w_hs && waddr == ADDR_ISR && WSTRB[0])
+            int_isr[1] <= int_isr[1] ^ WDATA[1]; // toggle on write
     end
 end
 

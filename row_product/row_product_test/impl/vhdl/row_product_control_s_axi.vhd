@@ -8,7 +8,7 @@ use IEEE.NUMERIC_STD.all;
 
 entity row_product_control_s_axi is
 generic (
-    C_S_AXI_ADDR_WIDTH    : INTEGER := 7;
+    C_S_AXI_ADDR_WIDTH    : INTEGER := 4;
     C_S_AXI_DATA_WIDTH    : INTEGER := 32);
 port (
     ACLK                  :in   STD_LOGIC;
@@ -31,68 +31,33 @@ port (
     RRESP                 :out  STD_LOGIC_VECTOR(1 downto 0);
     RVALID                :out  STD_LOGIC;
     RREADY                :in   STD_LOGIC;
-    x_rowptr              :out  STD_LOGIC_VECTOR(63 downto 0);
-    x_colind              :out  STD_LOGIC_VECTOR(63 downto 0);
-    x_data                :out  STD_LOGIC_VECTOR(63 downto 0);
-    y_rowptr              :out  STD_LOGIC_VECTOR(63 downto 0);
-    y_colind              :out  STD_LOGIC_VECTOR(63 downto 0);
-    y_data                :out  STD_LOGIC_VECTOR(63 downto 0);
-    z_rowptr              :out  STD_LOGIC_VECTOR(63 downto 0);
-    z_colind              :out  STD_LOGIC_VECTOR(63 downto 0);
-    z_data                :out  STD_LOGIC_VECTOR(63 downto 0)
+    interrupt             :out  STD_LOGIC;
+    ap_start              :out  STD_LOGIC;
+    ap_done               :in   STD_LOGIC;
+    ap_ready              :in   STD_LOGIC;
+    ap_idle               :in   STD_LOGIC
 );
 end entity row_product_control_s_axi;
 
 -- ------------------------Address Info-------------------
--- 0x00 : reserved
--- 0x04 : reserved
--- 0x08 : reserved
--- 0x0c : reserved
--- 0x10 : Data signal of x_rowptr
---        bit 31~0 - x_rowptr[31:0] (Read/Write)
--- 0x14 : Data signal of x_rowptr
---        bit 31~0 - x_rowptr[63:32] (Read/Write)
--- 0x18 : reserved
--- 0x1c : Data signal of x_colind
---        bit 31~0 - x_colind[31:0] (Read/Write)
--- 0x20 : Data signal of x_colind
---        bit 31~0 - x_colind[63:32] (Read/Write)
--- 0x24 : reserved
--- 0x28 : Data signal of x_data
---        bit 31~0 - x_data[31:0] (Read/Write)
--- 0x2c : Data signal of x_data
---        bit 31~0 - x_data[63:32] (Read/Write)
--- 0x30 : reserved
--- 0x34 : Data signal of y_rowptr
---        bit 31~0 - y_rowptr[31:0] (Read/Write)
--- 0x38 : Data signal of y_rowptr
---        bit 31~0 - y_rowptr[63:32] (Read/Write)
--- 0x3c : reserved
--- 0x40 : Data signal of y_colind
---        bit 31~0 - y_colind[31:0] (Read/Write)
--- 0x44 : Data signal of y_colind
---        bit 31~0 - y_colind[63:32] (Read/Write)
--- 0x48 : reserved
--- 0x4c : Data signal of y_data
---        bit 31~0 - y_data[31:0] (Read/Write)
--- 0x50 : Data signal of y_data
---        bit 31~0 - y_data[63:32] (Read/Write)
--- 0x54 : reserved
--- 0x58 : Data signal of z_rowptr
---        bit 31~0 - z_rowptr[31:0] (Read/Write)
--- 0x5c : Data signal of z_rowptr
---        bit 31~0 - z_rowptr[63:32] (Read/Write)
--- 0x60 : reserved
--- 0x64 : Data signal of z_colind
---        bit 31~0 - z_colind[31:0] (Read/Write)
--- 0x68 : Data signal of z_colind
---        bit 31~0 - z_colind[63:32] (Read/Write)
--- 0x6c : reserved
--- 0x70 : Data signal of z_data
---        bit 31~0 - z_data[31:0] (Read/Write)
--- 0x74 : Data signal of z_data
---        bit 31~0 - z_data[63:32] (Read/Write)
--- 0x78 : reserved
+-- 0x0 : Control signals
+--       bit 0  - ap_start (Read/Write/COH)
+--       bit 1  - ap_done (Read/COR)
+--       bit 2  - ap_idle (Read)
+--       bit 3  - ap_ready (Read)
+--       bit 7  - auto_restart (Read/Write)
+--       others - reserved
+-- 0x4 : Global Interrupt Enable Register
+--       bit 0  - Global Interrupt Enable (Read/Write)
+--       others - reserved
+-- 0x8 : IP Interrupt Enable Register (Read/Write)
+--       bit 0  - enable ap_done interrupt (Read/Write)
+--       bit 1  - enable ap_ready interrupt (Read/Write)
+--       others - reserved
+-- 0xc : IP Interrupt Status Register (Read/TOW)
+--       bit 0  - ap_done (COR/TOW)
+--       bit 1  - ap_ready (COR/TOW)
+--       others - reserved
 -- (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 architecture behave of row_product_control_s_axi is
@@ -100,34 +65,11 @@ architecture behave of row_product_control_s_axi is
     signal wstate  : states := wrreset;
     signal rstate  : states := rdreset;
     signal wnext, rnext: states;
-    constant ADDR_X_ROWPTR_DATA_0 : INTEGER := 16#10#;
-    constant ADDR_X_ROWPTR_DATA_1 : INTEGER := 16#14#;
-    constant ADDR_X_ROWPTR_CTRL   : INTEGER := 16#18#;
-    constant ADDR_X_COLIND_DATA_0 : INTEGER := 16#1c#;
-    constant ADDR_X_COLIND_DATA_1 : INTEGER := 16#20#;
-    constant ADDR_X_COLIND_CTRL   : INTEGER := 16#24#;
-    constant ADDR_X_DATA_DATA_0   : INTEGER := 16#28#;
-    constant ADDR_X_DATA_DATA_1   : INTEGER := 16#2c#;
-    constant ADDR_X_DATA_CTRL     : INTEGER := 16#30#;
-    constant ADDR_Y_ROWPTR_DATA_0 : INTEGER := 16#34#;
-    constant ADDR_Y_ROWPTR_DATA_1 : INTEGER := 16#38#;
-    constant ADDR_Y_ROWPTR_CTRL   : INTEGER := 16#3c#;
-    constant ADDR_Y_COLIND_DATA_0 : INTEGER := 16#40#;
-    constant ADDR_Y_COLIND_DATA_1 : INTEGER := 16#44#;
-    constant ADDR_Y_COLIND_CTRL   : INTEGER := 16#48#;
-    constant ADDR_Y_DATA_DATA_0   : INTEGER := 16#4c#;
-    constant ADDR_Y_DATA_DATA_1   : INTEGER := 16#50#;
-    constant ADDR_Y_DATA_CTRL     : INTEGER := 16#54#;
-    constant ADDR_Z_ROWPTR_DATA_0 : INTEGER := 16#58#;
-    constant ADDR_Z_ROWPTR_DATA_1 : INTEGER := 16#5c#;
-    constant ADDR_Z_ROWPTR_CTRL   : INTEGER := 16#60#;
-    constant ADDR_Z_COLIND_DATA_0 : INTEGER := 16#64#;
-    constant ADDR_Z_COLIND_DATA_1 : INTEGER := 16#68#;
-    constant ADDR_Z_COLIND_CTRL   : INTEGER := 16#6c#;
-    constant ADDR_Z_DATA_DATA_0   : INTEGER := 16#70#;
-    constant ADDR_Z_DATA_DATA_1   : INTEGER := 16#74#;
-    constant ADDR_Z_DATA_CTRL     : INTEGER := 16#78#;
-    constant ADDR_BITS         : INTEGER := 7;
+    constant ADDR_AP_CTRL : INTEGER := 16#0#;
+    constant ADDR_GIE     : INTEGER := 16#4#;
+    constant ADDR_IER     : INTEGER := 16#8#;
+    constant ADDR_ISR     : INTEGER := 16#c#;
+    constant ADDR_BITS         : INTEGER := 4;
 
     signal waddr               : UNSIGNED(ADDR_BITS-1 downto 0);
     signal wmask               : UNSIGNED(C_S_AXI_DATA_WIDTH-1 downto 0);
@@ -141,15 +83,14 @@ architecture behave of row_product_control_s_axi is
     signal ARREADY_t           : STD_LOGIC;
     signal RVALID_t            : STD_LOGIC;
     -- internal registers
-    signal int_x_rowptr        : UNSIGNED(63 downto 0) := (others => '0');
-    signal int_x_colind        : UNSIGNED(63 downto 0) := (others => '0');
-    signal int_x_data          : UNSIGNED(63 downto 0) := (others => '0');
-    signal int_y_rowptr        : UNSIGNED(63 downto 0) := (others => '0');
-    signal int_y_colind        : UNSIGNED(63 downto 0) := (others => '0');
-    signal int_y_data          : UNSIGNED(63 downto 0) := (others => '0');
-    signal int_z_rowptr        : UNSIGNED(63 downto 0) := (others => '0');
-    signal int_z_colind        : UNSIGNED(63 downto 0) := (others => '0');
-    signal int_z_data          : UNSIGNED(63 downto 0) := (others => '0');
+    signal int_ap_idle         : STD_LOGIC;
+    signal int_ap_ready        : STD_LOGIC;
+    signal int_ap_done         : STD_LOGIC := '0';
+    signal int_ap_start        : STD_LOGIC := '0';
+    signal int_auto_restart    : STD_LOGIC := '0';
+    signal int_gie             : STD_LOGIC := '0';
+    signal int_ier             : UNSIGNED(1 downto 0) := (others => '0');
+    signal int_isr             : UNSIGNED(1 downto 0) := (others => '0');
 
 
 begin
@@ -265,42 +206,18 @@ begin
                 if (ar_hs = '1') then
                     rdata_data <= (others => '0');
                     case (TO_INTEGER(raddr)) is
-                    when ADDR_X_ROWPTR_DATA_0 =>
-                        rdata_data <= RESIZE(int_x_rowptr(31 downto 0), 32);
-                    when ADDR_X_ROWPTR_DATA_1 =>
-                        rdata_data <= RESIZE(int_x_rowptr(63 downto 32), 32);
-                    when ADDR_X_COLIND_DATA_0 =>
-                        rdata_data <= RESIZE(int_x_colind(31 downto 0), 32);
-                    when ADDR_X_COLIND_DATA_1 =>
-                        rdata_data <= RESIZE(int_x_colind(63 downto 32), 32);
-                    when ADDR_X_DATA_DATA_0 =>
-                        rdata_data <= RESIZE(int_x_data(31 downto 0), 32);
-                    when ADDR_X_DATA_DATA_1 =>
-                        rdata_data <= RESIZE(int_x_data(63 downto 32), 32);
-                    when ADDR_Y_ROWPTR_DATA_0 =>
-                        rdata_data <= RESIZE(int_y_rowptr(31 downto 0), 32);
-                    when ADDR_Y_ROWPTR_DATA_1 =>
-                        rdata_data <= RESIZE(int_y_rowptr(63 downto 32), 32);
-                    when ADDR_Y_COLIND_DATA_0 =>
-                        rdata_data <= RESIZE(int_y_colind(31 downto 0), 32);
-                    when ADDR_Y_COLIND_DATA_1 =>
-                        rdata_data <= RESIZE(int_y_colind(63 downto 32), 32);
-                    when ADDR_Y_DATA_DATA_0 =>
-                        rdata_data <= RESIZE(int_y_data(31 downto 0), 32);
-                    when ADDR_Y_DATA_DATA_1 =>
-                        rdata_data <= RESIZE(int_y_data(63 downto 32), 32);
-                    when ADDR_Z_ROWPTR_DATA_0 =>
-                        rdata_data <= RESIZE(int_z_rowptr(31 downto 0), 32);
-                    when ADDR_Z_ROWPTR_DATA_1 =>
-                        rdata_data <= RESIZE(int_z_rowptr(63 downto 32), 32);
-                    when ADDR_Z_COLIND_DATA_0 =>
-                        rdata_data <= RESIZE(int_z_colind(31 downto 0), 32);
-                    when ADDR_Z_COLIND_DATA_1 =>
-                        rdata_data <= RESIZE(int_z_colind(63 downto 32), 32);
-                    when ADDR_Z_DATA_DATA_0 =>
-                        rdata_data <= RESIZE(int_z_data(31 downto 0), 32);
-                    when ADDR_Z_DATA_DATA_1 =>
-                        rdata_data <= RESIZE(int_z_data(63 downto 32), 32);
+                    when ADDR_AP_CTRL =>
+                        rdata_data(7) <= int_auto_restart;
+                        rdata_data(3) <= int_ap_ready;
+                        rdata_data(2) <= int_ap_idle;
+                        rdata_data(1) <= int_ap_done;
+                        rdata_data(0) <= int_ap_start;
+                    when ADDR_GIE =>
+                        rdata_data(0) <= int_gie;
+                    when ADDR_IER =>
+                        rdata_data(1 downto 0) <= int_ier;
+                    when ADDR_ISR =>
+                        rdata_data(1 downto 0) <= int_isr;
                     when others =>
                         NULL;
                     end case;
@@ -310,22 +227,19 @@ begin
     end process;
 
 -- ----------------------- Register logic ----------------
-    x_rowptr             <= STD_LOGIC_VECTOR(int_x_rowptr);
-    x_colind             <= STD_LOGIC_VECTOR(int_x_colind);
-    x_data               <= STD_LOGIC_VECTOR(int_x_data);
-    y_rowptr             <= STD_LOGIC_VECTOR(int_y_rowptr);
-    y_colind             <= STD_LOGIC_VECTOR(int_y_colind);
-    y_data               <= STD_LOGIC_VECTOR(int_y_data);
-    z_rowptr             <= STD_LOGIC_VECTOR(int_z_rowptr);
-    z_colind             <= STD_LOGIC_VECTOR(int_z_colind);
-    z_data               <= STD_LOGIC_VECTOR(int_z_data);
+    interrupt            <= int_gie and (int_isr(0) or int_isr(1));
+    ap_start             <= int_ap_start;
 
     process (ACLK)
     begin
         if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_X_ROWPTR_DATA_0) then
-                    int_x_rowptr(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_x_rowptr(31 downto 0));
+            if (ARESET = '1') then
+                int_ap_start <= '0';
+            elsif (ACLK_EN = '1') then
+                if (w_hs = '1' and waddr = ADDR_AP_CTRL and WSTRB(0) = '1' and WDATA(0) = '1') then
+                    int_ap_start <= '1';
+                elsif (ap_ready = '1') then
+                    int_ap_start <= int_auto_restart; -- clear on handshake/auto restart
                 end if;
             end if;
         end if;
@@ -334,9 +248,13 @@ begin
     process (ACLK)
     begin
         if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_X_ROWPTR_DATA_1) then
-                    int_x_rowptr(63 downto 32) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_x_rowptr(63 downto 32));
+            if (ARESET = '1') then
+                int_ap_done <= '0';
+            elsif (ACLK_EN = '1') then
+                if (ap_done = '1') then
+                    int_ap_done <= '1';
+                elsif (ar_hs = '1' and raddr = ADDR_AP_CTRL) then
+                    int_ap_done <= '0'; -- clear on read
                 end if;
             end if;
         end if;
@@ -345,9 +263,11 @@ begin
     process (ACLK)
     begin
         if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_X_COLIND_DATA_0) then
-                    int_x_colind(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_x_colind(31 downto 0));
+            if (ARESET = '1') then
+                int_ap_idle <= '0';
+            elsif (ACLK_EN = '1') then
+                if (true) then
+                    int_ap_idle <= ap_idle;
                 end if;
             end if;
         end if;
@@ -356,9 +276,11 @@ begin
     process (ACLK)
     begin
         if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_X_COLIND_DATA_1) then
-                    int_x_colind(63 downto 32) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_x_colind(63 downto 32));
+            if (ARESET = '1') then
+                int_ap_ready <= '0';
+            elsif (ACLK_EN = '1') then
+                if (true) then
+                    int_ap_ready <= ap_ready;
                 end if;
             end if;
         end if;
@@ -367,9 +289,11 @@ begin
     process (ACLK)
     begin
         if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_X_DATA_DATA_0) then
-                    int_x_data(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_x_data(31 downto 0));
+            if (ARESET = '1') then
+                int_auto_restart <= '0';
+            elsif (ACLK_EN = '1') then
+                if (w_hs = '1' and waddr = ADDR_AP_CTRL and WSTRB(0) = '1') then
+                    int_auto_restart <= WDATA(7);
                 end if;
             end if;
         end if;
@@ -378,9 +302,11 @@ begin
     process (ACLK)
     begin
         if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_X_DATA_DATA_1) then
-                    int_x_data(63 downto 32) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_x_data(63 downto 32));
+            if (ARESET = '1') then
+                int_gie <= '0';
+            elsif (ACLK_EN = '1') then
+                if (w_hs = '1' and waddr = ADDR_GIE and WSTRB(0) = '1') then
+                    int_gie <= WDATA(0);
                 end if;
             end if;
         end if;
@@ -389,9 +315,11 @@ begin
     process (ACLK)
     begin
         if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Y_ROWPTR_DATA_0) then
-                    int_y_rowptr(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_y_rowptr(31 downto 0));
+            if (ARESET = '1') then
+                int_ier <= "00";
+            elsif (ACLK_EN = '1') then
+                if (w_hs = '1' and waddr = ADDR_IER and WSTRB(0) = '1') then
+                    int_ier <= UNSIGNED(WDATA(1 downto 0));
                 end if;
             end if;
         end if;
@@ -400,9 +328,13 @@ begin
     process (ACLK)
     begin
         if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Y_ROWPTR_DATA_1) then
-                    int_y_rowptr(63 downto 32) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_y_rowptr(63 downto 32));
+            if (ARESET = '1') then
+                int_isr(0) <= '0';
+            elsif (ACLK_EN = '1') then
+                if (int_ier(0) = '1' and ap_done = '1') then
+                    int_isr(0) <= '1';
+                elsif (w_hs = '1' and waddr = ADDR_ISR and WSTRB(0) = '1') then
+                    int_isr(0) <= int_isr(0) xor WDATA(0); -- toggle on write
                 end if;
             end if;
         end if;
@@ -411,108 +343,13 @@ begin
     process (ACLK)
     begin
         if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Y_COLIND_DATA_0) then
-                    int_y_colind(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_y_colind(31 downto 0));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Y_COLIND_DATA_1) then
-                    int_y_colind(63 downto 32) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_y_colind(63 downto 32));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Y_DATA_DATA_0) then
-                    int_y_data(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_y_data(31 downto 0));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Y_DATA_DATA_1) then
-                    int_y_data(63 downto 32) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_y_data(63 downto 32));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Z_ROWPTR_DATA_0) then
-                    int_z_rowptr(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_z_rowptr(31 downto 0));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Z_ROWPTR_DATA_1) then
-                    int_z_rowptr(63 downto 32) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_z_rowptr(63 downto 32));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Z_COLIND_DATA_0) then
-                    int_z_colind(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_z_colind(31 downto 0));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Z_COLIND_DATA_1) then
-                    int_z_colind(63 downto 32) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_z_colind(63 downto 32));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Z_DATA_DATA_0) then
-                    int_z_data(31 downto 0) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_z_data(31 downto 0));
-                end if;
-            end if;
-        end if;
-    end process;
-
-    process (ACLK)
-    begin
-        if (ACLK'event and ACLK = '1') then
-            if (ACLK_EN = '1') then
-                if (w_hs = '1' and waddr = ADDR_Z_DATA_DATA_1) then
-                    int_z_data(63 downto 32) <= (UNSIGNED(WDATA(31 downto 0)) and wmask(31 downto 0)) or ((not wmask(31 downto 0)) and int_z_data(63 downto 32));
+            if (ARESET = '1') then
+                int_isr(1) <= '0';
+            elsif (ACLK_EN = '1') then
+                if (int_ier(1) = '1' and ap_ready = '1') then
+                    int_isr(1) <= '1';
+                elsif (w_hs = '1' and waddr = ADDR_ISR and WSTRB(0) = '1') then
+                    int_isr(1) <= int_isr(1) xor WDATA(1); -- toggle on write
                 end if;
             end if;
         end if;

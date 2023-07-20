@@ -5,7 +5,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module row_product_csr_z_m_axi
+module row_product_z_data_m_axi
 #(parameter
     CONSERVATIVE            = 0,
     NUM_READ_OUTSTANDING    = 2,
@@ -154,8 +154,8 @@ assign I_RLAST = 1'b0;
 assign I_RUSER = C_USER_VALUE;
 //------------------------Instantiation------------------
 
-// row_product_csr_z_m_axi_write
-row_product_csr_z_m_axi_write #(
+// row_product_z_data_m_axi_write
+row_product_z_data_m_axi_write #(
     .NUM_WRITE_OUTSTANDING   ( NUM_WRITE_OUTSTANDING ),
     .MAX_WRITE_BURST_LENGTH  ( MAX_WRITE_BURST_LENGTH ),
     .C_M_AXI_ID_WIDTH        ( C_M_AXI_ID_WIDTH ),
@@ -219,8 +219,8 @@ row_product_csr_z_m_axi_write #(
     .out_HLS_BRESP             ( I_BRESP )
 );
 
-// row_product_csr_z_m_axi_read
-row_product_csr_z_m_axi_read #(
+// row_product_z_data_m_axi_read
+row_product_z_data_m_axi_read #(
     .NUM_READ_OUTSTANDING     ( NUM_READ_OUTSTANDING ),
     .MAX_READ_BURST_LENGTH    ( MAX_READ_BURST_LENGTH ),
     .C_M_AXI_ID_WIDTH         ( C_M_AXI_ID_WIDTH ),
@@ -275,7 +275,7 @@ row_product_csr_z_m_axi_read #(
 );
 
 // Write Address channel throttling unit
-row_product_csr_z_m_axi_throttle #(
+row_product_z_data_m_axi_throttle #(
     .USED_FIX(0),
     .ADDR_WIDTH(C_M_AXI_ADDR_WIDTH),
     .DATA_WIDTH(C_M_AXI_DATA_WIDTH),
@@ -311,7 +311,7 @@ row_product_csr_z_m_axi_throttle #(
 endmodule
 `default_nettype wire
 
-module row_product_csr_z_m_axi_reg_slice
+module row_product_z_data_m_axi_reg_slice
 #(parameter
     N = 8   // data width
 ) (
@@ -415,7 +415,7 @@ end
 
 endmodule
 
-module row_product_csr_z_m_axi_fifo
+module row_product_z_data_m_axi_fifo
 #(parameter
     DATA_BITS  = 8,
     DEPTH      = 16,
@@ -526,7 +526,7 @@ begin
 end
 endmodule
 
-module row_product_csr_z_m_axi_buffer
+module row_product_z_data_m_axi_buffer
 #(parameter
     MEM_STYLE  = "block",
     DATA_WIDTH = 32,
@@ -691,7 +691,7 @@ end
 endmodule
 `timescale 1ns/1ps
 
-module row_product_csr_z_m_axi_decoder
+module row_product_z_data_m_axi_decoder
 #(parameter
     DIN_WIDTH       = 3
 )(
@@ -707,7 +707,7 @@ module row_product_csr_z_m_axi_decoder
 endmodule
 
 
-module row_product_csr_z_m_axi_throttle
+module row_product_z_data_m_axi_throttle
 #(parameter
     USED_FIX       = 0,
     FIX_VALUE      = 4,
@@ -812,7 +812,7 @@ wire                        rs_req_valid;
 wire [ADDR_WIDTH + 7 : 0]   rs_req_in;
 wire [ADDR_WIDTH + 7 : 0]   rs_req_out;
 
-row_product_csr_z_m_axi_reg_slice #(
+row_product_z_data_m_axi_reg_slice #(
     .N(ADDR_WIDTH + 8)
 ) rs_req (
     .sclk(clk),
@@ -868,7 +868,7 @@ begin
     end
 end
 
-row_product_csr_z_m_axi_fifo #(
+row_product_z_data_m_axi_fifo #(
     .DATA_BITS(ADDR_WIDTH + 8),
     .DEPTH(USER_MAXREQS),
     .DEPTH_BITS(log2(USER_MAXREQS))
@@ -907,7 +907,7 @@ begin
     end
 end
 
-row_product_csr_z_m_axi_fifo #(
+row_product_z_data_m_axi_fifo #(
     .DATA_BITS(DATA_WIDTH + DATA_WIDTH/8 + 1),
     .DEPTH(DEPTH),
     .DEPTH_BITS(log2(DEPTH))
@@ -929,7 +929,7 @@ endmodule
 
 `timescale 1ns/1ps
 
-module row_product_csr_z_m_axi_read
+module row_product_z_data_m_axi_read
 #(parameter
     NUM_READ_OUTSTANDING      = 2,
     MAX_READ_BURST_LENGTH     = 16,
@@ -1095,7 +1095,7 @@ endfunction
 
 //------------------------AR channel begin---------------
 //------------------------Instantiation------------------
-    row_product_csr_z_m_axi_reg_slice #(
+    row_product_z_data_m_axi_reg_slice #(
         .N(USER_AW + 32)
     ) rs_rreq (
         .sclk(ACLK),
@@ -1107,7 +1107,7 @@ endfunction
         .m_valid(rs2f_rreq_valid),
         .m_ready(rs2f_rreq_ack));
 
-    row_product_csr_z_m_axi_fifo #(
+    row_product_z_data_m_axi_fifo #(
         .DATA_BITS(USER_AW + 32),
         .DEPTH(USER_MAXREQS),
         .DEPTH_BITS(log2(USER_MAXREQS))
@@ -1426,7 +1426,7 @@ endfunction
 
 //------------------------R channel begin----------------
 //------------------------Instantiation------------------
-    row_product_csr_z_m_axi_buffer #(
+    row_product_z_data_m_axi_buffer #(
         .DATA_WIDTH(BUS_DATA_WIDTH + 3),
         .DEPTH(NUM_READ_OUTSTANDING * MAX_READ_BURST_LENGTH),
         .ADDR_WIDTH(log2(NUM_READ_OUTSTANDING * MAX_READ_BURST_LENGTH))
@@ -1443,7 +1443,7 @@ endfunction
         .if_read(next_beat),
         .if_dout(data_pack));
 
-    row_product_csr_z_m_axi_reg_slice #(
+    row_product_z_data_m_axi_reg_slice #(
         .N(USER_DW + 2)
     ) rs_rdata (
         .sclk(ACLK),
@@ -1455,7 +1455,7 @@ endfunction
         .m_valid(out_HLS_RVALID),
         .m_ready(in_HLS_RREADY));
 
-    row_product_csr_z_m_axi_fifo #(
+    row_product_z_data_m_axi_fifo #(
         .DATA_BITS(2),
         .DEPTH(NUM_READ_OUTSTANDING-1),
         .DEPTH_BITS(log2(NUM_READ_OUTSTANDING-1))
@@ -1540,7 +1540,7 @@ endfunction
         wire                            last_split;
         wire                            ready_for_data;
 
-        row_product_csr_z_m_axi_fifo #(
+        row_product_z_data_m_axi_fifo #(
             .DATA_BITS(2*SPLIT_ALIGN + 8),
             .DEPTH(USER_MAXREQS),
             .DEPTH_BITS(log2(USER_MAXREQS))
@@ -1726,7 +1726,7 @@ endfunction
 //------------------------R channel end------------------
 endmodule
 
-module row_product_csr_z_m_axi_write
+module row_product_z_data_m_axi_write
 #(parameter
     NUM_WRITE_OUTSTANDING     = 2,
     MAX_WRITE_BURST_LENGTH    = 16,
@@ -1907,7 +1907,7 @@ endfunction
 
 //------------------------AW channel begin---------------
 //------------------------Instantiation------------------
-    row_product_csr_z_m_axi_reg_slice #(
+    row_product_z_data_m_axi_reg_slice #(
         .N(USER_AW + 32)
     ) rs_wreq (
         .sclk(ACLK),
@@ -1919,7 +1919,7 @@ endfunction
         .m_valid(rs2f_wreq_valid),
         .m_ready(rs2f_wreq_ack));
 
-    row_product_csr_z_m_axi_fifo #(
+    row_product_z_data_m_axi_fifo #(
         .DATA_BITS(USER_AW + 32),
         .DEPTH(USER_MAXREQS),
         .DEPTH_BITS(log2(USER_MAXREQS))
@@ -2254,7 +2254,7 @@ endfunction
 
 //------------------------W channel begin----------------
 //------------------------Instantiation------------------
-    row_product_csr_z_m_axi_buffer #(
+    row_product_z_data_m_axi_buffer #(
         .DATA_WIDTH(USER_DW + USER_DW/8),
         .DEPTH(NUM_WRITE_OUTSTANDING * MAX_WRITE_BURST_LENGTH),
         .ADDR_WIDTH(log2(NUM_WRITE_OUTSTANDING * MAX_WRITE_BURST_LENGTH))
@@ -2287,7 +2287,7 @@ endfunction
         wire [7:0]                          tmp_burst_info;
         wire                                ready_for_data;
 
-        row_product_csr_z_m_axi_fifo #(
+        row_product_z_data_m_axi_fifo #(
             .DATA_BITS(8),
             .DEPTH(USER_MAXREQS),
             .DEPTH_BITS(log2(USER_MAXREQS))
@@ -2382,7 +2382,7 @@ endfunction
         wire                                        last_split;
         wire                                        ready_for_data;
 
-        row_product_csr_z_m_axi_fifo #(
+        row_product_z_data_m_axi_fifo #(
             .DATA_BITS(8),
             .DEPTH(USER_MAXREQS),
             .DEPTH_BITS(log2(USER_MAXREQS))
@@ -2509,7 +2509,7 @@ endfunction
         wire                                        last_beat;
         wire                                        next_beat;
 
-        row_product_csr_z_m_axi_fifo #(
+        row_product_z_data_m_axi_fifo #(
             .DATA_BITS(8 + 2*PAD_ALIGN),
             .DEPTH(USER_MAXREQS),
             .DEPTH_BITS(log2(USER_MAXREQS))
@@ -2532,13 +2532,13 @@ endfunction
         assign awlen_tmp_t = awlen_tmp;
         assign tmp_burst_info = {awaddr_tmp[BUS_ADDR_ALIGN - 1:USER_ADDR_ALIGN], burst_end[BUS_ADDR_ALIGN - 1:USER_ADDR_ALIGN], awlen_tmp_t};
 
-        row_product_csr_z_m_axi_decoder #(
+        row_product_z_data_m_axi_decoder #(
             .DIN_WIDTH(PAD_ALIGN)
         ) head_pad_decoder (
             .din(head_pads),
             .dout(head_pad_sel));
 
-        row_product_csr_z_m_axi_decoder #(
+        row_product_z_data_m_axi_decoder #(
             .DIN_WIDTH(PAD_ALIGN)
         ) tail_pad_decoder (
             .din(tail_pads),
@@ -2657,7 +2657,7 @@ endfunction
 
 //------------------------B channel begin----------------
 //------------------------Instantiation------------------
-    row_product_csr_z_m_axi_fifo #(
+    row_product_z_data_m_axi_fifo #(
         .DATA_BITS(2),
         .DEPTH(NUM_WRITE_OUTSTANDING-1),
         .DEPTH_BITS(log2(NUM_WRITE_OUTSTANDING-1))
@@ -2672,7 +2672,7 @@ endfunction
         .q(aw2b_bdata),
         .data(aw2b_awdata));
 
-    row_product_csr_z_m_axi_fifo #(
+    row_product_z_data_m_axi_fifo #(
         .DATA_BITS(2),
         .DEPTH(USER_MAXREQS),
         .DEPTH_BITS(log2(USER_MAXREQS))
