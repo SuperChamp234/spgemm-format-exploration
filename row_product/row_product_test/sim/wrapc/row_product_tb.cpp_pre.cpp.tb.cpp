@@ -60305,7 +60305,7 @@ public:
 
 }
 # 6 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
-# 16 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 15 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 const int M = 5;
 const int P = 5;
 const int N = 5;
@@ -60331,15 +60331,15 @@ struct csr_out_t {
     int* colind;
     data_t* data;
 };
-# 49 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 48 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
-# 58 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 57 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row);
-# 67 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 66 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scalar);
-# 76 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 75 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
-# 85 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 84 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
 
 

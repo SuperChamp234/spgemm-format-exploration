@@ -4,16 +4,21 @@
 hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
 {
     hls::vector<data_t, N> out_row;
-    int start_idx  = inp_csr.rowptr[row];
-    int end_idx = inp_csr.rowptr[row+1];
+    int start_idx;
+    int end_idx;
+    int col_idx;
+    data_t data;
+    memcpy(&start_idx, &inp_csr.rowptr[row], sizeof(int));
+    memcpy(&end_idx, &inp_csr.rowptr[row+1], sizeof(int));
     int j = start_idx;
     #pragma HLS unroll
     for (int i = 0; i < N; i++)
     {
-        if (j < end_idx && inp_csr.colind[j] == i)
-
+        memcpy(&col_idx, &inp_csr.colind[j], sizeof(int));
+        if (j < end_idx && col_idx == i)
         {
-            out_row[i] = inp_csr.data[j];
+            memcpy(&data, &inp_csr.data[j], sizeof(data_t));
+            out_row[i] = data;
             // #if  defined(NO_SYNTH) && defined(DEBUG)
             // std::cout << "out_row[" << i << "] = " << out_row[i] << std::endl;
             // #endif
@@ -29,14 +34,20 @@ hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
 
 data_t extract_element(csr_t_1 inp_csr, int row, int col)
 {
-    int start_idx = inp_csr.rowptr[row];
-    int end_idx = inp_csr.rowptr[row + 1];
+    int start_idx;
+    int end_idx;
+    int col_idx;
+    data_t data;
+    memcpy(&start_idx, &inp_csr.rowptr[row], sizeof(int));
+    memcpy(&end_idx, &inp_csr.rowptr[row+1], sizeof(int));
 
     for (int j = start_idx; j < end_idx; j++)
     {
-        if (inp_csr.colind[j] == col)
+        memcpy(&col_idx, &inp_csr.colind[j], sizeof(int));
+        if (col_idx == col)
         {
-            return inp_csr.data[j];
+            memcpy(&data, &inp_csr.data[j], sizeof(data_t));
+            return data;
         }
     }
     
@@ -64,24 +75,29 @@ void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2)
 void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
 {
     #pragma HLS array_partition variable=row complete
-    int start_idx = out_csr->rowptr[row_idx];
-    int end_idx = out_csr->rowptr[row_idx+1];
+    int start_idx;
+    int end_idx;
+    memcpy(&start_idx, &(out_csr->rowptr[row_idx]), sizeof(int));
+    memcpy(&end_idx, &(out_csr->rowptr[row_idx+1]), sizeof(int));
+    
     int j = start_idx;
     for (int i = 0; i < N; i++)
     {
         if (row[i] != 0)
         {
-            out_csr->colind[j] = i;
-            out_csr->data[j] = row[i];
+            int col_idx = i;
+            data_t data = row[i];
+            memcpy(&(out_csr->colind[j]), &col_idx, sizeof(int));
+            memcpy(&(out_csr->data[j]), &data, sizeof(data_t));
             j++;
         }
     }
-    out_csr->rowptr[row_idx+1] = j;
+    
+    memcpy(&(out_csr->rowptr[row_idx+1]), &j, sizeof(int));
 }
 
 void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
 {
-#pragma HLS INTERFACE s_axilite port=return bundle=control
 #pragma HLS INTERFACE m_axi port=x_rowptr bundle=csr_x depth=1024
 #pragma HLS INTERFACE m_axi port=x_colind bundle=csr_x depth=1024
 #pragma HLS INTERFACE m_axi port=x_data bundle=csr_x   depth=1024

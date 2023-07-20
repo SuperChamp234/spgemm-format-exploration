@@ -74,10 +74,6 @@ z_data {
 	offset 112
 	offset_end 123
 }
-ap_start { }
-ap_done { }
-ap_ready { }
-ap_idle { }
 }
 dict set axilite_register_dict control $port_control
 

@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'row_product'" level="0">
-<item name = "Date">Thu Jul 20 17:12:45 2023
+<item name = "Date">Thu Jul 20 17:44:14 2023
 </item>
 <item name = "Version">2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)</item>
 <item name = "Project">row_product</item>
@@ -36,13 +36,13 @@
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
 <column name="- Loop 1">5, 5, 2, 1, 1, 5, yes</column>
-<column name="- VITIS_LOOP_119_1">?, ?, ?, -, -, 5, no</column>
-<column name=" + VITIS_LOOP_121_2">?, ?, ?, -, -, 5, no</column>
-<column name="  ++ VITIS_LOOP_35_1">?, ?, 10, 10, 1, ?, yes</column>
-<column name="  ++ VITIS_LOOP_11_1">59, 59, 20, 10, 1, 5, yes</column>
-<column name="  ++ VITIS_LOOP_121_2.3">5, 5, 2, 1, 1, 5, yes</column>
-<column name=" + VITIS_LOOP_70_1">19, 19, 12, 2, 1, 5, yes</column>
-<column name=" + VITIS_LOOP_119_1.3">5, 5, 2, 1, 1, 5, yes</column>
+<column name="- VITIS_LOOP_135_1">?, ?, ?, -, -, 5, no</column>
+<column name=" + VITIS_LOOP_137_2">?, ?, ?, -, -, 5, no</column>
+<column name="  ++ VITIS_LOOP_44_1">?, ?, 10, 10, 1, ?, yes</column>
+<column name="  ++ VITIS_LOOP_15_1">59, 59, 20, 10, 1, 5, yes</column>
+<column name="  ++ VITIS_LOOP_137_2.3">5, 5, 2, 1, 1, 5, yes</column>
+<column name=" + VITIS_LOOP_84_1">19, 19, 12, 2, 1, 5, yes</column>
+<column name=" + VITIS_LOOP_135_1.3">5, 5, 2, 1, 1, 5, yes</column>
 </table>
 </item>
 </section>

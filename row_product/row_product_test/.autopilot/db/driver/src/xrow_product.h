@@ -80,12 +80,6 @@ int XRow_product_Initialize(XRow_product *InstancePtr, const char* InstanceName)
 int XRow_product_Release(XRow_product *InstancePtr);
 #endif
 
-void XRow_product_Start(XRow_product *InstancePtr);
-u32 XRow_product_IsDone(XRow_product *InstancePtr);
-u32 XRow_product_IsIdle(XRow_product *InstancePtr);
-u32 XRow_product_IsReady(XRow_product *InstancePtr);
-void XRow_product_EnableAutoRestart(XRow_product *InstancePtr);
-void XRow_product_DisableAutoRestart(XRow_product *InstancePtr);
 
 void XRow_product_Set_x_rowptr(XRow_product *InstancePtr, u64 Data);
 u64 XRow_product_Get_x_rowptr(XRow_product *InstancePtr);
@@ -105,14 +99,6 @@ void XRow_product_Set_z_colind(XRow_product *InstancePtr, u64 Data);
 u64 XRow_product_Get_z_colind(XRow_product *InstancePtr);
 void XRow_product_Set_z_data(XRow_product *InstancePtr, u64 Data);
 u64 XRow_product_Get_z_data(XRow_product *InstancePtr);
-
-void XRow_product_InterruptGlobalEnable(XRow_product *InstancePtr);
-void XRow_product_InterruptGlobalDisable(XRow_product *InstancePtr);
-void XRow_product_InterruptEnable(XRow_product *InstancePtr, u32 Mask);
-void XRow_product_InterruptDisable(XRow_product *InstancePtr, u32 Mask);
-void XRow_product_InterruptClear(XRow_product *InstancePtr, u32 Mask);
-u32 XRow_product_InterruptGetEnabled(XRow_product *InstancePtr);
-u32 XRow_product_InterruptGetStatus(XRow_product *InstancePtr);
 
 #ifdef __cplusplus
 }

@@ -3,9 +3,8 @@
 
 #include <ap_fixed.h>
 #include <hls_vector.h>
+#include "string.h"
 
-
-#define NO_SYNTH
 #define DEBUG
 
 #ifdef NO_SYNTH
