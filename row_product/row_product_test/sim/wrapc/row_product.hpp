@@ -13,7 +13,7 @@
 //#include "mmio.h"
 #endif
 
-const int M = 4;
+const int M = 5;
 const int P = 5;
 const int N = 5;
 //X is of size MxP, Y is of size PxN, Z is of size MxN
@@ -22,21 +22,21 @@ const int N = 5;
 typedef double data_t;
 
 struct csr_t_1 {
-    int rowptr[P+1];
-    int colind[M*P];
-    data_t data[M*P];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 
 struct csr_t_2 {
-    int rowptr[N+1];
-    int colind[P*N];
-    data_t data[P*N];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 
 struct csr_out_t {
-    int rowptr[M+1];
-    int colind[M*N];
-    data_t data[M*N];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 
 /*
@@ -46,7 +46,7 @@ struct csr_out_t {
 * Input: CSR matrix X, CSR matrix Y
 * Output: CSR output matrix Z
 */
-csr_out_t row_product(csr_t_1 X, csr_t_2 Y);
+void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 
 /*
 * Function extract_row

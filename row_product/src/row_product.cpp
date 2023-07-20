@@ -47,7 +47,6 @@ data_t extract_element(csr_t_1 inp_csr, int row, int col)
 //multiply row with a scalar
 hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scalar)
 {
-    #pragma HLS inline
     #pragma HLS array_partition variable=row complete
     row *= scalar;
     return row;
@@ -56,7 +55,6 @@ hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scala
 //add two rows
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2)
 {
-    #pragma HLS inline
     #pragma HLS array_partition variable=row1 complete
     #pragma HLS array_partition variable=row2 complete
     row1 += row2;
@@ -81,18 +79,45 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
     out_csr->rowptr[row_idx+1] = j;
 }
 
-csr_out_t row_product(csr_t_1 x, csr_t_2 y){
-#pragma HLS BIND_STORAGE variable=x.rowptr type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=x.colind type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=x.data type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=y.rowptr type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=y.colind type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=y.data type=ram_2p impl=bram
+void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
+{
+#pragma HLS INTERFACE m_axi port=x_rowptr bundle=csr_x depth=1024
+#pragma HLS INTERFACE m_axi port=x_colind bundle=csr_x depth=1024
+#pragma HLS INTERFACE m_axi port=x_data bundle=csr_x   depth=1024
+#pragma HLS INTERFACE m_axi port=y_rowptr bundle=csr_y depth=1024
+#pragma HLS INTERFACE m_axi port=y_colind bundle=csr_y depth=1024
+#pragma HLS INTERFACE m_axi port=y_data bundle=csr_y depth=1024
+#pragma HLS INTERFACE m_axi port=z_rowptr bundle=csr_z depth=1024
+#pragma HLS INTERFACE m_axi port=z_colind bundle=csr_z depth=1024
+#pragma HLS INTERFACE m_axi port=z_data bundle=csr_z  depth=1024
+
+// #pragma HLS INTERFACE s_axilite port=x_rowptr bundle=csr_x
+// #pragma HLS INTERFACE s_axilite port=x_colind bundle=csr_x
+// #pragma HLS INTERFACE s_axilite port=x_data bundle=csr_x
+// #pragma HLS INTERFACE s_axilite port=y_rowptr bundle=csr_y
+// #pragma HLS INTERFACE s_axilite port=y_colind bundle=csr_y
+// #pragma HLS INTERFACE s_axilite port=y_data bundle=csr_y
+// #pragma HLS INTERFACE s_axilite port=z_rowptr bundle=csr_z
+// #pragma HLS INTERFACE s_axilite port=z_colind bundle=csr_z
+// #pragma HLS INTERFACE s_axilite port=z_data bundle=csr_z
+
+
+    //init csr_t_1
+    csr_t_1 x;
+    x.rowptr = x_rowptr;
+    x.colind = x_colind;
+    x.data = x_data;
+    csr_t_2 y;
+    y.rowptr = y_rowptr;
+    y.colind = y_colind;
+    y.data = y_data;
+
     //init empty csr_out_t
     csr_out_t csr;
-    #pragma HLS BIND_STORAGE variable=csr.rowptr type=ram_2p impl=bram
-    #pragma HLS BIND_STORAGE variable=csr.colind type=ram_2p impl=bram
-    #pragma HLS BIND_STORAGE variable=csr.data type=ram_2p impl=bram
+    csr.rowptr = z_rowptr;
+    csr.colind = z_colind;
+    csr.data = z_data;
+
     csr.rowptr[0] = 0;
     hls::vector<data_t, N> extracted_row = data_t(0);
     hls::vector<data_t, N> buffer_row = data_t(0);
@@ -115,5 +140,4 @@ csr_out_t row_product(csr_t_1 x, csr_t_2 y){
         append_row(&csr, buffer_row, i);
         buffer_row = data_t(0);
     }
-    return csr;
 }

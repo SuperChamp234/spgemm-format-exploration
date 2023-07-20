@@ -4,40 +4,112 @@ set moduleIsExternC "1"
 set rawDecl ""
 set globalVariable ""
 set PortList ""
-set PortName "x"
-set BitWidth "2112"
+set PortName "x_rowptr"
+set BitWidth "64"
 set ArrayOpt ""
 set Const "0"
-set Volatile "0"
-set Pointer "0"
+set Volatile "1"
+set Pointer "1"
 set Reference "0"
 set Dims [list 0]
 set Interface "wire"
-set DataType "__cosim_s108__"
+set DataType "void"
 set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
 lappend PortList $Port
-set PortName "y"
-set BitWidth "2624"
+set PortName "x_colind"
+set BitWidth "64"
 set ArrayOpt ""
 set Const "0"
-set Volatile "0"
-set Pointer "0"
+set Volatile "1"
+set Pointer "1"
 set Reference "0"
 set Dims [list 0]
 set Interface "wire"
-set DataType "__cosim_s148__"
+set DataType "void"
 set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
 lappend PortList $Port
-set PortName "return"
-set BitWidth "2112"
+set PortName "x_data"
+set BitWidth "64"
 set ArrayOpt ""
 set Const "0"
-set Volatile "0"
-set Pointer "0"
+set Volatile "1"
+set Pointer "1"
 set Reference "0"
 set Dims [list 0]
 set Interface "wire"
-set DataType "__cosim_s108__"
+set DataType "void"
+set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
+lappend PortList $Port
+set PortName "y_rowptr"
+set BitWidth "64"
+set ArrayOpt ""
+set Const "0"
+set Volatile "1"
+set Pointer "1"
+set Reference "0"
+set Dims [list 0]
+set Interface "wire"
+set DataType "void"
+set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
+lappend PortList $Port
+set PortName "y_colind"
+set BitWidth "64"
+set ArrayOpt ""
+set Const "0"
+set Volatile "1"
+set Pointer "1"
+set Reference "0"
+set Dims [list 0]
+set Interface "wire"
+set DataType "void"
+set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
+lappend PortList $Port
+set PortName "y_data"
+set BitWidth "64"
+set ArrayOpt ""
+set Const "0"
+set Volatile "1"
+set Pointer "1"
+set Reference "0"
+set Dims [list 0]
+set Interface "wire"
+set DataType "void"
+set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
+lappend PortList $Port
+set PortName "z_rowptr"
+set BitWidth "64"
+set ArrayOpt ""
+set Const "0"
+set Volatile "1"
+set Pointer "1"
+set Reference "0"
+set Dims [list 0]
+set Interface "wire"
+set DataType "void"
+set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
+lappend PortList $Port
+set PortName "z_colind"
+set BitWidth "64"
+set ArrayOpt ""
+set Const "0"
+set Volatile "1"
+set Pointer "1"
+set Reference "0"
+set Dims [list 0]
+set Interface "wire"
+set DataType "void"
+set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
+lappend PortList $Port
+set PortName "z_data"
+set BitWidth "64"
+set ArrayOpt ""
+set Const "0"
+set Volatile "1"
+set Pointer "1"
+set Reference "0"
+set Dims [list 0]
+set Interface "wire"
+set DataType "void"
 set Port [list $PortName $Interface $DataType $Pointer $Dims $Const    $Volatile $ArrayOpt]
 lappend PortList $Port
 set globalAPint "" 

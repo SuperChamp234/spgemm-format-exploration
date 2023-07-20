@@ -75,3 +75,5 @@ xvlog.*
 
 *.log
 *.o
+
+testing/

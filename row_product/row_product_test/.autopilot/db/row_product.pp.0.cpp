@@ -33301,7 +33301,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
 
-const int M = 4;
+const int M = 5;
 const int P = 5;
 const int N = 5;
 
@@ -33310,24 +33310,24 @@ const int N = 5;
 typedef double data_t;
 
 struct csr_t_1 {
-    int rowptr[P+1];
-    int colind[M*P];
-    data_t data[M*P];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 
 struct csr_t_2 {
-    int rowptr[N+1];
-    int colind[P*N];
-    data_t data[P*N];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 
 struct csr_out_t {
-    int rowptr[M+1];
-    int colind[M*N];
-    data_t data[M*N];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 # 49 "row_product/src/row_product.hpp"
-__attribute__((sdx_kernel("row_product", 0))) csr_out_t row_product(csr_t_1 X, csr_t_2 Y);
+__attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 58 "row_product/src/row_product.hpp"
 hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row);
 # 67 "row_product/src/row_product.hpp"
@@ -33393,7 +33393,6 @@ data_t extract_element(csr_t_1 inp_csr, int row, int col)
 
 hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scalar)
 {
-#pragma HLS inline
 #pragma HLS array_partition variable=row complete
  row *= scalar;
     return row;
@@ -33402,7 +33401,6 @@ hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scala
 
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2)
 {
-#pragma HLS inline
 #pragma HLS array_partition variable=row1 complete
 #pragma HLS array_partition variable=row2 complete
  row1 += row2;
@@ -33415,7 +33413,7 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
  int start_idx = out_csr->rowptr[row_idx];
     int end_idx = out_csr->rowptr[row_idx+1];
     int j = start_idx;
-    VITIS_LOOP_72_1: for (int i = 0; i < N; i++)
+    VITIS_LOOP_70_1: for (int i = 0; i < N; i++)
     {
         if (row[i] != 0)
         {
@@ -33427,31 +33425,46 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
     out_csr->rowptr[row_idx+1] = j;
 }
 
-__attribute__((sdx_kernel("row_product", 0))) csr_out_t row_product(csr_t_1 x, csr_t_2 y){
+__attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
+{
 #pragma HLS TOP name=row_product
-# 84 "row_product/src/row_product.cpp"
+# 83 "row_product/src/row_product.cpp"
 
-#pragma HLS BIND_STORAGE variable=x.rowptr type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=x.colind type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=x.data type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=y.rowptr type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=y.colind type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=y.data type=ram_2p impl=bram
+#pragma HLS INTERFACE m_axi port=x_rowptr bundle=csr_x depth=1024
+#pragma HLS INTERFACE m_axi port=x_colind bundle=csr_x depth=1024
+#pragma HLS INTERFACE m_axi port=x_data bundle=csr_x depth=1024
+#pragma HLS INTERFACE m_axi port=y_rowptr bundle=csr_y depth=1024
+#pragma HLS INTERFACE m_axi port=y_colind bundle=csr_y depth=1024
+#pragma HLS INTERFACE m_axi port=y_data bundle=csr_y depth=1024
+#pragma HLS INTERFACE m_axi port=z_rowptr bundle=csr_z depth=1024
+#pragma HLS INTERFACE m_axi port=z_colind bundle=csr_z depth=1024
+#pragma HLS INTERFACE m_axi port=z_data bundle=csr_z depth=1024
+# 106 "row_product/src/row_product.cpp"
+ csr_t_1 x;
+    x.rowptr = x_rowptr;
+    x.colind = x_colind;
+    x.data = x_data;
+    csr_t_2 y;
+    y.rowptr = y_rowptr;
+    y.colind = y_colind;
+    y.data = y_data;
 
- csr_out_t csr;
-#pragma HLS BIND_STORAGE variable=csr.rowptr type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=csr.colind type=ram_2p impl=bram
-#pragma HLS BIND_STORAGE variable=csr.data type=ram_2p impl=bram
- csr.rowptr[0] = 0;
+
+    csr_out_t csr;
+    csr.rowptr = z_rowptr;
+    csr.colind = z_colind;
+    csr.data = z_data;
+
+    csr.rowptr[0] = 0;
     hls::vector<data_t, N> extracted_row = data_t(0);
     hls::vector<data_t, N> buffer_row = data_t(0);
     hls::vector<data_t, N> mult_row = data_t(0);
     data_t extracted_scalar = data_t(0);
 
 
-    VITIS_LOOP_103_1: for (int i = 0; i < M; i++)
+    VITIS_LOOP_128_1: for (int i = 0; i < M; i++)
     {
-        VITIS_LOOP_105_2: for (int k = 0; k < N; k++)
+        VITIS_LOOP_130_2: for (int k = 0; k < N; k++)
         {
             extracted_scalar = extract_element(x, i, k);
             if (extracted_scalar != 0)
@@ -33464,5 +33477,4 @@ __attribute__((sdx_kernel("row_product", 0))) csr_out_t row_product(csr_t_1 x, c
         append_row(&csr, buffer_row, i);
         buffer_row = data_t(0);
     }
-    return csr;
 }

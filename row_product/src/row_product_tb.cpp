@@ -86,6 +86,9 @@ void print_COO(const COO& coo, int numRows, int numCols) {
 csr_t_1 COO_to_CSR1(COO matrix)
 {
     csr_t_1 csr;
+    csr.rowptr = new int[M + 1];
+    csr.colind = new int[M * P];
+    csr.data = new data_t[M * P];
     int row = 0;
     int rowptr = 0;
     csr.rowptr[row] = rowptr;
@@ -110,7 +113,11 @@ csr_t_1 COO_to_CSR1(COO matrix)
 }
 csr_t_2 COO_to_CSR2(COO matrix)
 {
-    csr_t_2 csr;
+    csr_t_2 csr;    
+    csr.rowptr = new int[P + 1];
+    csr.colind = new int[P * N];
+    csr.data = new data_t[P * N];
+
     int row = 0;
     int rowptr = 0;
     csr.rowptr[row] = rowptr;
@@ -136,6 +143,9 @@ csr_t_2 COO_to_CSR2(COO matrix)
 csr_out_t COO_to_CSR3(COO matrix)
 {
     csr_out_t csr;
+    csr.rowptr = new int[M + 1];
+    csr.colind = new int[M * N];
+    csr.data = new data_t[M * N];
     int row = 0;
     int rowptr = 0;
     csr.rowptr[row] = rowptr;
@@ -155,6 +165,21 @@ csr_out_t COO_to_CSR3(COO matrix)
             csr.data[rowptr] = matrix.units[i].data;
             rowptr++;
         }
+    }
+    return csr;
+}
+
+csr_out_t new_csr_out_t()
+{
+    csr_out_t csr;
+    csr.rowptr = new int[M + 1];
+    csr.colind = new int[M * N];
+    csr.data = new data_t[M * N];
+    //check if allocation was successful
+    if (!csr.rowptr || !csr.colind || !csr.data)
+    {
+        cout << "Memory allocation failed" << endl;
+        exit(1);
     }
     return csr;
 }
@@ -309,15 +334,24 @@ void basic_test()
     // 23 28 74	  0  56
     // 0  32 56   0	145
 
-    csr_t_1 A = {
-        .rowptr = {0, 2, 4, 7, 9},
-        .colind = {0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+    // csr_t_1 A = {
+    //     .rowptr = new int[M + 1],
+    //     .colind = new int[M*P],
+    //     .data = new data_t[M*P]};
+    // csr_t_2 B = {
+    //     .rowptr = new int[P + 1],
+    //     .colind = new int[P*N],
+    //     .data = new data_t[P*N]};
 
-    csr_t_2 B = {
-        .rowptr = {0, 2, 4, 5, 8, 9},
-        .colind = {0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = {1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+    // A = {
+    //     .rowptr =  {0, 2, 4, 7, 9},
+    //     .colind = {0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+    //     .data = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+
+    // B = {
+    //     .rowptr = {0, 2, 4, 5, 8, 9},
+    //     .colind = {0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+    //     .data = {1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
 
     // csr_out_t test = {
     //     .rowptr = {0, 4, 7, 11, 14},
@@ -337,7 +371,9 @@ void basic_test()
     // test_row_scalar_mult();
     // test_row_add();
     // run row_product
-    csr_out_t z_csr = row_product(A, B);
+    csr_out_t z_csr;
+    z_csr.rowptr[0] = 0;
+    //row_product(A.rowptr, A.colind, A.data, B.rowptr, B.colind, B.data, z_csr.rowptr, z_csr.colind, z_csr.data);
     print_csr_out_t(z_csr);
 }
 
@@ -366,6 +402,7 @@ C:
     */
 
     // read COO matrix from file
+    csr_out_t csr_out = new_csr_out_t();
     COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
     COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
     COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
@@ -385,11 +422,19 @@ C:
     csr_t_2 csr_B = COO_to_CSR2(coo_B);
     csr_out_t csr_C = COO_to_CSR3(coo_C);
     cout << "CSR C" << endl;
-    // print_csr_out_t(csr_C);
+    print_csr_out_t(csr_C);
     // cout << "-------------------" << endl;
 
+    //delete COO matrices
+    // delete[] coo_A.units.data();
+    // delete[] coo_B.units.data();
+    // delete[] coo_C.units.data();
+
     //C = A*B
-    csr_out_t csr_out = row_product(csr_A, csr_B);
+    //init empty csr_out_t
+    //run row_product
+    row_product(&csr_A.rowptr[0], &csr_A.colind[0], &csr_A.data[0], &csr_B.rowptr[0], &csr_B.colind[0], &csr_B.data[0], &csr_out.rowptr[0], &csr_out.colind[0], &csr_out.data[0]);
+    
     cout << "CSR out" << endl;
     print_csr_out_t(csr_out);
     cout << "-------------------" << endl;

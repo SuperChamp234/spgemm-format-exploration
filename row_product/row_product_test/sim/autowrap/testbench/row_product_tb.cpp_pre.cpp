@@ -60302,7 +60302,7 @@ public:
 }
 # 6 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
 # 16 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-const int M = 4;
+const int M = 5;
 const int P = 5;
 const int N = 5;
 
@@ -60311,24 +60311,24 @@ const int N = 5;
 typedef double data_t;
 
 struct csr_t_1 {
-    int rowptr[P+1];
-    int colind[M*P];
-    data_t data[M*P];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 
 struct csr_t_2 {
-    int rowptr[N+1];
-    int colind[P*N];
-    data_t data[P*N];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 
 struct csr_out_t {
-    int rowptr[M+1];
-    int colind[M*N];
-    data_t data[M*N];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 # 49 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-csr_out_t row_product(csr_t_1 X, csr_t_2 Y);
+void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 58 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row);
 # 67 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
@@ -65794,81 +65794,5668 @@ namespace std __attribute__ ((__visibility__ ("default")))
 }
 # 1082 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 2 3
 # 4 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 2
+# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/algorithm" 1 3
+# 58 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/algorithm" 3
+       
+# 59 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/algorithm" 3
 
 
-# 5 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+
+# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 1 3
+# 59 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cstdlib" 1 3
+# 39 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cstdlib" 3
+       
+# 40 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cstdlib" 3
+# 60 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 2 3
+# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/algorithmfwd.h" 1 3
+# 33 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/algorithmfwd.h" 3
+       
+# 34 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/algorithmfwd.h" 3
+# 42 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/algorithmfwd.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+# 194 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/algorithmfwd.h" 3
+  template<typename _IIter, typename _Predicate>
+    bool
+    all_of(_IIter, _IIter, _Predicate);
+
+  template<typename _IIter, typename _Predicate>
+    bool
+    any_of(_IIter, _IIter, _Predicate);
+
+
+  template<typename _FIter, typename _Tp>
+    bool
+    binary_search(_FIter, _FIter, const _Tp&);
+
+  template<typename _FIter, typename _Tp, typename _Compare>
+    bool
+    binary_search(_FIter, _FIter, const _Tp&, _Compare);
+
+  template<typename _IIter, typename _OIter>
+    _OIter
+    copy(_IIter, _IIter, _OIter);
+
+  template<typename _BIter1, typename _BIter2>
+    _BIter2
+    copy_backward(_BIter1, _BIter1, _BIter2);
+
+
+  template<typename _IIter, typename _OIter, typename _Predicate>
+    _OIter
+    copy_if(_IIter, _IIter, _OIter, _Predicate);
+
+  template<typename _IIter, typename _Size, typename _OIter>
+    _OIter
+    copy_n(_IIter, _Size, _OIter);
+
+
+
+
+
+  template<typename _FIter, typename _Tp>
+    pair<_FIter, _FIter>
+    equal_range(_FIter, _FIter, const _Tp&);
+
+  template<typename _FIter, typename _Tp, typename _Compare>
+    pair<_FIter, _FIter>
+    equal_range(_FIter, _FIter, const _Tp&, _Compare);
+
+  template<typename _FIter, typename _Tp>
+    void
+    fill(_FIter, _FIter, const _Tp&);
+
+  template<typename _OIter, typename _Size, typename _Tp>
+    _OIter
+    fill_n(_OIter, _Size, const _Tp&);
+
+
+
+  template<typename _FIter1, typename _FIter2>
+    _FIter1
+    find_end(_FIter1, _FIter1, _FIter2, _FIter2);
+
+  template<typename _FIter1, typename _FIter2, typename _BinaryPredicate>
+    _FIter1
+    find_end(_FIter1, _FIter1, _FIter2, _FIter2, _BinaryPredicate);
+
+
+
+
+
+  template<typename _IIter, typename _Predicate>
+    _IIter
+    find_if_not(_IIter, _IIter, _Predicate);
+
+
+
+
+
+
+  template<typename _IIter1, typename _IIter2>
+    bool
+    includes(_IIter1, _IIter1, _IIter2, _IIter2);
+
+  template<typename _IIter1, typename _IIter2, typename _Compare>
+    bool
+    includes(_IIter1, _IIter1, _IIter2, _IIter2, _Compare);
+
+  template<typename _BIter>
+    void
+    inplace_merge(_BIter, _BIter, _BIter);
+
+  template<typename _BIter, typename _Compare>
+    void
+    inplace_merge(_BIter, _BIter, _BIter, _Compare);
+
+
+  template<typename _RAIter>
+    bool
+    is_heap(_RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    bool
+    is_heap(_RAIter, _RAIter, _Compare);
+
+  template<typename _RAIter>
+    _RAIter
+    is_heap_until(_RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    _RAIter
+    is_heap_until(_RAIter, _RAIter, _Compare);
+
+  template<typename _IIter, typename _Predicate>
+    bool
+    is_partitioned(_IIter, _IIter, _Predicate);
+
+  template<typename _FIter1, typename _FIter2>
+    bool
+    is_permutation(_FIter1, _FIter1, _FIter2);
+
+  template<typename _FIter1, typename _FIter2,
+    typename _BinaryPredicate>
+    bool
+    is_permutation(_FIter1, _FIter1, _FIter2, _BinaryPredicate);
+
+  template<typename _FIter>
+    bool
+    is_sorted(_FIter, _FIter);
+
+  template<typename _FIter, typename _Compare>
+    bool
+    is_sorted(_FIter, _FIter, _Compare);
+
+  template<typename _FIter>
+    _FIter
+    is_sorted_until(_FIter, _FIter);
+
+  template<typename _FIter, typename _Compare>
+    _FIter
+    is_sorted_until(_FIter, _FIter, _Compare);
+
+
+  template<typename _FIter1, typename _FIter2>
+    void
+    iter_swap(_FIter1, _FIter2);
+
+  template<typename _FIter, typename _Tp>
+    _FIter
+    lower_bound(_FIter, _FIter, const _Tp&);
+
+  template<typename _FIter, typename _Tp, typename _Compare>
+    _FIter
+    lower_bound(_FIter, _FIter, const _Tp&, _Compare);
+
+  template<typename _RAIter>
+    void
+    make_heap(_RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    void
+    make_heap(_RAIter, _RAIter, _Compare);
+
+  template<typename _Tp>
+    constexpr
+    const _Tp&
+    max(const _Tp&, const _Tp&);
+
+  template<typename _Tp, typename _Compare>
+    constexpr
+    const _Tp&
+    max(const _Tp&, const _Tp&, _Compare);
+
+
+
+
+  template<typename _Tp>
+    constexpr
+    const _Tp&
+    min(const _Tp&, const _Tp&);
+
+  template<typename _Tp, typename _Compare>
+    constexpr
+    const _Tp&
+    min(const _Tp&, const _Tp&, _Compare);
+
+
+
+
+  template<typename _Tp>
+    constexpr
+    pair<const _Tp&, const _Tp&>
+    minmax(const _Tp&, const _Tp&);
+
+  template<typename _Tp, typename _Compare>
+    constexpr
+    pair<const _Tp&, const _Tp&>
+    minmax(const _Tp&, const _Tp&, _Compare);
+
+  template<typename _FIter>
+    constexpr
+    pair<_FIter, _FIter>
+    minmax_element(_FIter, _FIter);
+
+  template<typename _FIter, typename _Compare>
+    constexpr
+    pair<_FIter, _FIter>
+    minmax_element(_FIter, _FIter, _Compare);
+
+  template<typename _Tp>
+    constexpr
+    _Tp
+    min(initializer_list<_Tp>);
+
+  template<typename _Tp, typename _Compare>
+    constexpr
+    _Tp
+    min(initializer_list<_Tp>, _Compare);
+
+  template<typename _Tp>
+    constexpr
+    _Tp
+    max(initializer_list<_Tp>);
+
+  template<typename _Tp, typename _Compare>
+    constexpr
+    _Tp
+    max(initializer_list<_Tp>, _Compare);
+
+  template<typename _Tp>
+    constexpr
+    pair<_Tp, _Tp>
+    minmax(initializer_list<_Tp>);
+
+  template<typename _Tp, typename _Compare>
+    constexpr
+    pair<_Tp, _Tp>
+    minmax(initializer_list<_Tp>, _Compare);
+
+
+
+
+  template<typename _BIter>
+    bool
+    next_permutation(_BIter, _BIter);
+
+  template<typename _BIter, typename _Compare>
+    bool
+    next_permutation(_BIter, _BIter, _Compare);
+
+
+  template<typename _IIter, typename _Predicate>
+    bool
+    none_of(_IIter, _IIter, _Predicate);
+
+
+
+
+
+  template<typename _IIter, typename _RAIter>
+    _RAIter
+    partial_sort_copy(_IIter, _IIter, _RAIter, _RAIter);
+
+  template<typename _IIter, typename _RAIter, typename _Compare>
+    _RAIter
+    partial_sort_copy(_IIter, _IIter, _RAIter, _RAIter, _Compare);
+
+
+
+
+  template<typename _IIter, typename _OIter1,
+    typename _OIter2, typename _Predicate>
+    pair<_OIter1, _OIter2>
+    partition_copy(_IIter, _IIter, _OIter1, _OIter2, _Predicate);
+
+  template<typename _FIter, typename _Predicate>
+    _FIter
+    partition_point(_FIter, _FIter, _Predicate);
+
+
+  template<typename _RAIter>
+    void
+    pop_heap(_RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    void
+    pop_heap(_RAIter, _RAIter, _Compare);
+
+  template<typename _BIter>
+    bool
+    prev_permutation(_BIter, _BIter);
+
+  template<typename _BIter, typename _Compare>
+    bool
+    prev_permutation(_BIter, _BIter, _Compare);
+
+  template<typename _RAIter>
+    void
+    push_heap(_RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    void
+    push_heap(_RAIter, _RAIter, _Compare);
+
+
+
+  template<typename _FIter, typename _Tp>
+    _FIter
+    remove(_FIter, _FIter, const _Tp&);
+
+  template<typename _FIter, typename _Predicate>
+    _FIter
+    remove_if(_FIter, _FIter, _Predicate);
+
+  template<typename _IIter, typename _OIter, typename _Tp>
+    _OIter
+    remove_copy(_IIter, _IIter, _OIter, const _Tp&);
+
+  template<typename _IIter, typename _OIter, typename _Predicate>
+    _OIter
+    remove_copy_if(_IIter, _IIter, _OIter, _Predicate);
+
+
+
+  template<typename _IIter, typename _OIter, typename _Tp>
+    _OIter
+    replace_copy(_IIter, _IIter, _OIter, const _Tp&, const _Tp&);
+
+  template<typename _Iter, typename _OIter, typename _Predicate, typename _Tp>
+    _OIter
+    replace_copy_if(_Iter, _Iter, _OIter, _Predicate, const _Tp&);
+
+
+
+  template<typename _BIter>
+    void
+    reverse(_BIter, _BIter);
+
+  template<typename _BIter, typename _OIter>
+    _OIter
+    reverse_copy(_BIter, _BIter, _OIter);
+
+  inline namespace _V2
+  {
+    template<typename _FIter>
+      _FIter
+      rotate(_FIter, _FIter, _FIter);
+  }
+
+  template<typename _FIter, typename _OIter>
+    _OIter
+    rotate_copy(_FIter, _FIter, _FIter, _OIter);
+# 552 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/algorithmfwd.h" 3
+  template<typename _RAIter, typename _UGenerator>
+    void
+    shuffle(_RAIter, _RAIter, _UGenerator&&);
+
+
+  template<typename _RAIter>
+    void
+    sort_heap(_RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    void
+    sort_heap(_RAIter, _RAIter, _Compare);
+
+  template<typename _BIter, typename _Predicate>
+    _BIter
+    stable_partition(_BIter, _BIter, _Predicate);
+# 581 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/algorithmfwd.h" 3
+  template<typename _FIter1, typename _FIter2>
+    _FIter2
+    swap_ranges(_FIter1, _FIter1, _FIter2);
+
+
+
+  template<typename _FIter>
+    _FIter
+    unique(_FIter, _FIter);
+
+  template<typename _FIter, typename _BinaryPredicate>
+    _FIter
+    unique(_FIter, _FIter, _BinaryPredicate);
+
+
+
+  template<typename _FIter, typename _Tp>
+    _FIter
+    upper_bound(_FIter, _FIter, const _Tp&);
+
+  template<typename _FIter, typename _Tp, typename _Compare>
+    _FIter
+    upper_bound(_FIter, _FIter, const _Tp&, _Compare);
+
+
+
+
+
+  template<typename _FIter>
+    _FIter
+    adjacent_find(_FIter, _FIter);
+
+  template<typename _FIter, typename _BinaryPredicate>
+    _FIter
+    adjacent_find(_FIter, _FIter, _BinaryPredicate);
+
+  template<typename _IIter, typename _Tp>
+    typename iterator_traits<_IIter>::difference_type
+    count(_IIter, _IIter, const _Tp&);
+
+  template<typename _IIter, typename _Predicate>
+    typename iterator_traits<_IIter>::difference_type
+    count_if(_IIter, _IIter, _Predicate);
+
+  template<typename _IIter1, typename _IIter2>
+    bool
+    equal(_IIter1, _IIter1, _IIter2);
+
+  template<typename _IIter1, typename _IIter2, typename _BinaryPredicate>
+    bool
+    equal(_IIter1, _IIter1, _IIter2, _BinaryPredicate);
+
+  template<typename _IIter, typename _Tp>
+    _IIter
+    find(_IIter, _IIter, const _Tp&);
+
+  template<typename _FIter1, typename _FIter2>
+    _FIter1
+    find_first_of(_FIter1, _FIter1, _FIter2, _FIter2);
+
+  template<typename _FIter1, typename _FIter2, typename _BinaryPredicate>
+    _FIter1
+    find_first_of(_FIter1, _FIter1, _FIter2, _FIter2, _BinaryPredicate);
+
+  template<typename _IIter, typename _Predicate>
+    _IIter
+    find_if(_IIter, _IIter, _Predicate);
+
+  template<typename _IIter, typename _Funct>
+    _Funct
+    for_each(_IIter, _IIter, _Funct);
+
+  template<typename _FIter, typename _Generator>
+    void
+    generate(_FIter, _FIter, _Generator);
+
+  template<typename _OIter, typename _Size, typename _Generator>
+    _OIter
+    generate_n(_OIter, _Size, _Generator);
+
+  template<typename _IIter1, typename _IIter2>
+    bool
+    lexicographical_compare(_IIter1, _IIter1, _IIter2, _IIter2);
+
+  template<typename _IIter1, typename _IIter2, typename _Compare>
+    bool
+    lexicographical_compare(_IIter1, _IIter1, _IIter2, _IIter2, _Compare);
+
+  template<typename _FIter>
+    constexpr
+    _FIter
+    max_element(_FIter, _FIter);
+
+  template<typename _FIter, typename _Compare>
+    constexpr
+    _FIter
+    max_element(_FIter, _FIter, _Compare);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter>
+    _OIter
+    merge(_IIter1, _IIter1, _IIter2, _IIter2, _OIter);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter,
+    typename _Compare>
+    _OIter
+    merge(_IIter1, _IIter1, _IIter2, _IIter2, _OIter, _Compare);
+
+  template<typename _FIter>
+    constexpr
+    _FIter
+    min_element(_FIter, _FIter);
+
+  template<typename _FIter, typename _Compare>
+    constexpr
+    _FIter
+    min_element(_FIter, _FIter, _Compare);
+
+  template<typename _IIter1, typename _IIter2>
+    pair<_IIter1, _IIter2>
+    mismatch(_IIter1, _IIter1, _IIter2);
+
+  template<typename _IIter1, typename _IIter2, typename _BinaryPredicate>
+    pair<_IIter1, _IIter2>
+    mismatch(_IIter1, _IIter1, _IIter2, _BinaryPredicate);
+
+  template<typename _RAIter>
+    void
+    nth_element(_RAIter, _RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    void
+    nth_element(_RAIter, _RAIter, _RAIter, _Compare);
+
+  template<typename _RAIter>
+    void
+    partial_sort(_RAIter, _RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    void
+    partial_sort(_RAIter, _RAIter, _RAIter, _Compare);
+
+  template<typename _BIter, typename _Predicate>
+    _BIter
+    partition(_BIter, _BIter, _Predicate);
+
+  template<typename _RAIter>
+    void
+    random_shuffle(_RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Generator>
+    void
+    random_shuffle(_RAIter, _RAIter,
+
+     _Generator&&);
+
+
+
+
+  template<typename _FIter, typename _Tp>
+    void
+    replace(_FIter, _FIter, const _Tp&, const _Tp&);
+
+  template<typename _FIter, typename _Predicate, typename _Tp>
+    void
+    replace_if(_FIter, _FIter, _Predicate, const _Tp&);
+
+  template<typename _FIter1, typename _FIter2>
+    _FIter1
+    search(_FIter1, _FIter1, _FIter2, _FIter2);
+
+  template<typename _FIter1, typename _FIter2, typename _BinaryPredicate>
+    _FIter1
+    search(_FIter1, _FIter1, _FIter2, _FIter2, _BinaryPredicate);
+
+  template<typename _FIter, typename _Size, typename _Tp>
+    _FIter
+    search_n(_FIter, _FIter, _Size, const _Tp&);
+
+  template<typename _FIter, typename _Size, typename _Tp,
+    typename _BinaryPredicate>
+    _FIter
+    search_n(_FIter, _FIter, _Size, const _Tp&, _BinaryPredicate);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter>
+    _OIter
+    set_difference(_IIter1, _IIter1, _IIter2, _IIter2, _OIter);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter,
+    typename _Compare>
+    _OIter
+    set_difference(_IIter1, _IIter1, _IIter2, _IIter2, _OIter, _Compare);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter>
+    _OIter
+    set_intersection(_IIter1, _IIter1, _IIter2, _IIter2, _OIter);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter,
+    typename _Compare>
+    _OIter
+    set_intersection(_IIter1, _IIter1, _IIter2, _IIter2, _OIter, _Compare);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter>
+    _OIter
+    set_symmetric_difference(_IIter1, _IIter1, _IIter2, _IIter2, _OIter);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter,
+    typename _Compare>
+    _OIter
+    set_symmetric_difference(_IIter1, _IIter1, _IIter2, _IIter2,
+        _OIter, _Compare);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter>
+    _OIter
+    set_union(_IIter1, _IIter1, _IIter2, _IIter2, _OIter);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter,
+    typename _Compare>
+    _OIter
+    set_union(_IIter1, _IIter1, _IIter2, _IIter2, _OIter, _Compare);
+
+  template<typename _RAIter>
+    void
+    sort(_RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    void
+    sort(_RAIter, _RAIter, _Compare);
+
+  template<typename _RAIter>
+    void
+    stable_sort(_RAIter, _RAIter);
+
+  template<typename _RAIter, typename _Compare>
+    void
+    stable_sort(_RAIter, _RAIter, _Compare);
+
+  template<typename _IIter, typename _OIter, typename _UnaryOperation>
+    _OIter
+    transform(_IIter, _IIter, _OIter, _UnaryOperation);
+
+  template<typename _IIter1, typename _IIter2, typename _OIter,
+    typename _BinaryOperation>
+    _OIter
+    transform(_IIter1, _IIter1, _IIter2, _OIter, _BinaryOperation);
+
+  template<typename _IIter, typename _OIter>
+    _OIter
+    unique_copy(_IIter, _IIter, _OIter);
+
+  template<typename _IIter, typename _OIter, typename _BinaryPredicate>
+    _OIter
+    unique_copy(_IIter, _IIter, _OIter, _BinaryPredicate);
+
+
+}
+# 61 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 2 3
+# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 1 3
+# 62 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+
+
+
+
+  template<typename _RandomAccessIterator, typename _Distance,
+    typename _Compare>
+    _Distance
+    __is_heap_until(_RandomAccessIterator __first, _Distance __n,
+      _Compare __comp)
+    {
+      _Distance __parent = 0;
+      for (_Distance __child = 1; __child < __n; ++__child)
+ {
+   if (__comp(__first + __parent, __first + __child))
+     return __child;
+   if ((__child & 1) == 0)
+     ++__parent;
+ }
+      return __n;
+    }
+
+
+
+  template<typename _RandomAccessIterator, typename _Distance>
+    inline bool
+    __is_heap(_RandomAccessIterator __first, _Distance __n)
+    {
+      return std::__is_heap_until(__first, __n,
+   __gnu_cxx::__ops::__iter_less_iter()) == __n;
+    }
+
+  template<typename _RandomAccessIterator, typename _Compare,
+    typename _Distance>
+    inline bool
+    __is_heap(_RandomAccessIterator __first, _Compare __comp, _Distance __n)
+    {
+      return std::__is_heap_until(__first, __n,
+ __gnu_cxx::__ops::__iter_comp_iter(__comp)) == __n;
+    }
+
+  template<typename _RandomAccessIterator>
+    inline bool
+    __is_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    { return std::__is_heap(__first, std::distance(__first, __last)); }
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline bool
+    __is_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+       _Compare __comp)
+    { return std::__is_heap(__first, __comp, std::distance(__first, __last)); }
+
+
+
+
+  template<typename _RandomAccessIterator, typename _Distance, typename _Tp,
+    typename _Compare>
+    void
+    __push_heap(_RandomAccessIterator __first,
+  _Distance __holeIndex, _Distance __topIndex, _Tp __value,
+  _Compare __comp)
+    {
+      _Distance __parent = (__holeIndex - 1) / 2;
+      while (__holeIndex > __topIndex && __comp(__first + __parent, __value))
+ {
+   *(__first + __holeIndex) = std::move(*(__first + __parent));
+   __holeIndex = __parent;
+   __parent = (__holeIndex - 1) / 2;
+ }
+      *(__first + __holeIndex) = std::move(__value);
+    }
+# 148 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator>
+    inline void
+    push_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    {
+      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+   _ValueType;
+      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+   _DistanceType;
+
+
+     
+
+     
+      ;
+      ;
+      ;
+
+      _ValueType __value = std::move(*(__last - 1));
+      std::__push_heap(__first, _DistanceType((__last - __first) - 1),
+         _DistanceType(0), std::move(__value),
+         __gnu_cxx::__ops::__iter_less_val());
+    }
+# 183 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    push_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+       _Compare __comp)
+    {
+      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+   _ValueType;
+      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+   _DistanceType;
+
+
+     
+
+      ;
+      ;
+      ;
+
+      _ValueType __value = std::move(*(__last - 1));
+      std::__push_heap(__first, _DistanceType((__last - __first) - 1),
+         _DistanceType(0), std::move(__value),
+         __gnu_cxx::__ops::__iter_comp_val(__comp));
+    }
+
+  template<typename _RandomAccessIterator, typename _Distance,
+    typename _Tp, typename _Compare>
+    void
+    __adjust_heap(_RandomAccessIterator __first, _Distance __holeIndex,
+    _Distance __len, _Tp __value, _Compare __comp)
+    {
+      const _Distance __topIndex = __holeIndex;
+      _Distance __secondChild = __holeIndex;
+      while (__secondChild < (__len - 1) / 2)
+ {
+   __secondChild = 2 * (__secondChild + 1);
+   if (__comp(__first + __secondChild,
+       __first + (__secondChild - 1)))
+     __secondChild--;
+   *(__first + __holeIndex) = std::move(*(__first + __secondChild));
+   __holeIndex = __secondChild;
+ }
+      if ((__len & 1) == 0 && __secondChild == (__len - 2) / 2)
+ {
+   __secondChild = 2 * (__secondChild + 1);
+   *(__first + __holeIndex) = std::move(*(__first + (__secondChild - 1)))
+                                  ;
+   __holeIndex = __secondChild - 1;
+ }
+      std::__push_heap(__first, __holeIndex, __topIndex,
+         std::move(__value),
+         __gnu_cxx::__ops::__iter_comp_val(__comp));
+    }
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    __pop_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        _RandomAccessIterator __result, _Compare __comp)
+    {
+      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+ _ValueType;
+      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+ _DistanceType;
+
+      _ValueType __value = std::move(*__result);
+      *__result = std::move(*__first);
+      std::__adjust_heap(__first, _DistanceType(0),
+    _DistanceType(__last - __first),
+    std::move(__value), __comp);
+    }
+# 263 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator>
+    inline void
+    pop_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+      ;
+      ;
+
+      if (__last - __first > 1)
+ {
+   --__last;
+   std::__pop_heap(__first, __last, __last,
+     __gnu_cxx::__ops::__iter_less_iter());
+ }
+    }
+# 296 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    pop_heap(_RandomAccessIterator __first,
+      _RandomAccessIterator __last, _Compare __comp)
+    {
+
+     
+
+      ;
+      ;
+      ;
+      ;
+
+      if (__last - __first > 1)
+ {
+   --__last;
+   std::__pop_heap(__first, __last, __last,
+     __gnu_cxx::__ops::__iter_comp_iter(__comp));
+ }
+    }
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    void
+    __make_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+  _Compare __comp)
+    {
+      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+   _ValueType;
+      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+   _DistanceType;
+
+      if (__last - __first < 2)
+ return;
+
+      const _DistanceType __len = __last - __first;
+      _DistanceType __parent = (__len - 2) / 2;
+      while (true)
+ {
+   _ValueType __value = std::move(*(__first + __parent));
+   std::__adjust_heap(__first, __parent, __len, std::move(__value),
+        __comp);
+   if (__parent == 0)
+     return;
+   __parent--;
+ }
+    }
+# 351 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator>
+    inline void
+    make_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+
+      std::__make_heap(__first, __last,
+         __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 377 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    make_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+       _Compare __comp)
+    {
+
+     
+
+      ;
+      ;
+
+      std::__make_heap(__first, __last,
+         __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    void
+    __sort_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+  _Compare __comp)
+    {
+      while (__last - __first > 1)
+ {
+   --__last;
+   std::__pop_heap(__first, __last, __last, __comp);
+ }
+    }
+# 412 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator>
+    inline void
+    sort_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+      ;
+
+      std::__sort_heap(__first, __last,
+         __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 439 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    sort_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+       _Compare __comp)
+    {
+
+     
+
+      ;
+      ;
+      ;
+
+      std::__sort_heap(__first, __last,
+         __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+# 466 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator>
+    inline _RandomAccessIterator
+    is_heap_until(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+
+      return __first +
+ std::__is_heap_until(__first, std::distance(__first, __last),
+        __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 494 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline _RandomAccessIterator
+    is_heap_until(_RandomAccessIterator __first, _RandomAccessIterator __last,
+    _Compare __comp)
+    {
+
+     
+
+      ;
+      ;
+
+      return __first
+ + std::__is_heap_until(__first, std::distance(__first, __last),
+          __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+# 517 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator>
+    inline bool
+    is_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    { return std::is_heap_until(__first, __last) == __last; }
+# 530 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_heap.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline bool
+    is_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
+     _Compare __comp)
+    { return std::is_heap_until(__first, __last, __comp) == __last; }
+
+
+
+}
+# 62 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 2 3
+# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_tempbuf.h" 1 3
+# 62 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_tempbuf.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+# 83 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_tempbuf.h" 3
+  template<typename _Tp>
+    pair<_Tp*, ptrdiff_t>
+    get_temporary_buffer(ptrdiff_t __len) noexcept
+    {
+      const ptrdiff_t __max =
+ __gnu_cxx::__numeric_traits<ptrdiff_t>::__max / sizeof(_Tp);
+      if (__len > __max)
+ __len = __max;
+
+      while (__len > 0)
+ {
+   _Tp* __tmp = static_cast<_Tp*>(::operator new(__len * sizeof(_Tp),
+       std::nothrow));
+   if (__tmp != 0)
+     return std::pair<_Tp*, ptrdiff_t>(__tmp, __len);
+   __len /= 2;
+ }
+      return std::pair<_Tp*, ptrdiff_t>(static_cast<_Tp*>(0), 0);
+    }
+# 110 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_tempbuf.h" 3
+  template<typename _Tp>
+    inline void
+    return_temporary_buffer(_Tp* __p)
+    { ::operator delete(__p, std::nothrow); }
+
+
+
+
+
+
+
+  template<typename _ForwardIterator, typename _Tp>
+    class _Temporary_buffer
+    {
+
+     
+
+    public:
+      typedef _Tp value_type;
+      typedef value_type* pointer;
+      typedef pointer iterator;
+      typedef ptrdiff_t size_type;
+
+    protected:
+      size_type _M_original_len;
+      size_type _M_len;
+      pointer _M_buffer;
+
+    public:
+
+      size_type
+      size() const
+      { return _M_len; }
+
+
+      size_type
+      requested_size() const
+      { return _M_original_len; }
+
+
+      iterator
+      begin()
+      { return _M_buffer; }
+
+
+      iterator
+      end()
+      { return _M_buffer + _M_len; }
+
+
+
+
+
+      _Temporary_buffer(_ForwardIterator __first, _ForwardIterator __last);
+
+      ~_Temporary_buffer()
+      {
+ std::_Destroy(_M_buffer, _M_buffer + _M_len);
+ std::return_temporary_buffer(_M_buffer);
+      }
+
+    private:
+
+      _Temporary_buffer(const _Temporary_buffer&);
+
+      void
+      operator=(const _Temporary_buffer&);
+    };
+
+
+  template<bool>
+    struct __uninitialized_construct_buf_dispatch
+    {
+      template<typename _Pointer, typename _ForwardIterator>
+        static void
+        __ucr(_Pointer __first, _Pointer __last,
+       _ForwardIterator __seed)
+        {
+   if(__first == __last)
+     return;
+
+   _Pointer __cur = __first;
+   try
+     {
+       std::_Construct(std::__addressof(*__first),
+         std::move(*__seed));
+       _Pointer __prev = __cur;
+       ++__cur;
+       for(; __cur != __last; ++__cur, ++__prev)
+  std::_Construct(std::__addressof(*__cur),
+    std::move(*__prev));
+       *__seed = std::move(*__prev);
+     }
+   catch(...)
+     {
+       std::_Destroy(__first, __cur);
+       throw;
+     }
+ }
+    };
+
+  template<>
+    struct __uninitialized_construct_buf_dispatch<true>
+    {
+      template<typename _Pointer, typename _ForwardIterator>
+        static void
+        __ucr(_Pointer, _Pointer, _ForwardIterator) { }
+    };
+# 229 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_tempbuf.h" 3
+  template<typename _Pointer, typename _ForwardIterator>
+    inline void
+    __uninitialized_construct_buf(_Pointer __first, _Pointer __last,
+      _ForwardIterator __seed)
+    {
+      typedef typename std::iterator_traits<_Pointer>::value_type
+ _ValueType;
+
+      std::__uninitialized_construct_buf_dispatch<
+        __has_trivial_constructor(_ValueType)>::
+   __ucr(__first, __last, __seed);
+    }
+
+  template<typename _ForwardIterator, typename _Tp>
+    _Temporary_buffer<_ForwardIterator, _Tp>::
+    _Temporary_buffer(_ForwardIterator __first, _ForwardIterator __last)
+    : _M_original_len(std::distance(__first, __last)),
+      _M_len(0), _M_buffer(0)
+    {
+      try
+ {
+   std::pair<pointer, size_type> __p(std::get_temporary_buffer<
+         value_type>(_M_original_len));
+   _M_buffer = __p.first;
+   _M_len = __p.second;
+   if (_M_buffer)
+     std::__uninitialized_construct_buf(_M_buffer, _M_buffer + _M_len,
+            __first);
+ }
+      catch(...)
+ {
+   std::return_temporary_buffer(_M_buffer);
+   _M_buffer = 0;
+   _M_len = 0;
+   throw;
+ }
+    }
+
+
+}
+# 63 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 2 3
+
+
+
+# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/uniform_int_dist.h" 1 3
+# 37 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/uniform_int_dist.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+  namespace __detail
+  {
+
+    template<typename _Tp>
+      inline bool
+      _Power_of_2(_Tp __x)
+      {
+ return ((__x - 1) & __x) == 0;
+      };
+  }
+
+
+
+
+
+
+  template<typename _IntType = int>
+    class uniform_int_distribution
+    {
+      static_assert(std::is_integral<_IntType>::value,
+      "template argument not an integral type");
+
+    public:
+
+      typedef _IntType result_type;
+
+      struct param_type
+      {
+ typedef uniform_int_distribution<_IntType> distribution_type;
+
+ explicit
+ param_type(_IntType __a = 0,
+     _IntType __b = std::numeric_limits<_IntType>::max())
+ : _M_a(__a), _M_b(__b)
+ {
+   ;
+ }
+
+ result_type
+ a() const
+ { return _M_a; }
+
+ result_type
+ b() const
+ { return _M_b; }
+
+ friend bool
+ operator==(const param_type& __p1, const param_type& __p2)
+ { return __p1._M_a == __p2._M_a && __p1._M_b == __p2._M_b; }
+
+      private:
+ _IntType _M_a;
+ _IntType _M_b;
+      };
+
+    public:
+
+
+
+      explicit
+      uniform_int_distribution(_IntType __a = 0,
+      _IntType __b = std::numeric_limits<_IntType>::max())
+      : _M_param(__a, __b)
+      { }
+
+      explicit
+      uniform_int_distribution(const param_type& __p)
+      : _M_param(__p)
+      { }
+
+
+
+
+
+
+      void
+      reset() { }
+
+      result_type
+      a() const
+      { return _M_param.a(); }
+
+      result_type
+      b() const
+      { return _M_param.b(); }
+
+
+
+
+      param_type
+      param() const
+      { return _M_param; }
+
+
+
+
+
+      void
+      param(const param_type& __param)
+      { _M_param = __param; }
+
+
+
+
+      result_type
+      min() const
+      { return this->a(); }
+
+
+
+
+      result_type
+      max() const
+      { return this->b(); }
+
+
+
+
+      template<typename _UniformRandomNumberGenerator>
+ result_type
+ operator()(_UniformRandomNumberGenerator& __urng)
+        { return this->operator()(__urng, _M_param); }
+
+      template<typename _UniformRandomNumberGenerator>
+ result_type
+ operator()(_UniformRandomNumberGenerator& __urng,
+     const param_type& __p);
+
+      template<typename _ForwardIterator,
+        typename _UniformRandomNumberGenerator>
+ void
+ __generate(_ForwardIterator __f, _ForwardIterator __t,
+     _UniformRandomNumberGenerator& __urng)
+ { this->__generate(__f, __t, __urng, _M_param); }
+
+      template<typename _ForwardIterator,
+        typename _UniformRandomNumberGenerator>
+ void
+ __generate(_ForwardIterator __f, _ForwardIterator __t,
+     _UniformRandomNumberGenerator& __urng,
+     const param_type& __p)
+ { this->__generate_impl(__f, __t, __urng, __p); }
+
+      template<typename _UniformRandomNumberGenerator>
+ void
+ __generate(result_type* __f, result_type* __t,
+     _UniformRandomNumberGenerator& __urng,
+     const param_type& __p)
+ { this->__generate_impl(__f, __t, __urng, __p); }
+
+
+
+
+
+      friend bool
+      operator==(const uniform_int_distribution& __d1,
+   const uniform_int_distribution& __d2)
+      { return __d1._M_param == __d2._M_param; }
+
+    private:
+      template<typename _ForwardIterator,
+        typename _UniformRandomNumberGenerator>
+ void
+ __generate_impl(_ForwardIterator __f, _ForwardIterator __t,
+   _UniformRandomNumberGenerator& __urng,
+   const param_type& __p);
+
+      param_type _M_param;
+    };
+
+  template<typename _IntType>
+    template<typename _UniformRandomNumberGenerator>
+      typename uniform_int_distribution<_IntType>::result_type
+      uniform_int_distribution<_IntType>::
+      operator()(_UniformRandomNumberGenerator& __urng,
+   const param_type& __param)
+      {
+ typedef typename _UniformRandomNumberGenerator::result_type
+   _Gresult_type;
+ typedef typename std::make_unsigned<result_type>::type __utype;
+ typedef typename std::common_type<_Gresult_type, __utype>::type
+   __uctype;
+
+ const __uctype __urngmin = __urng.min();
+ const __uctype __urngmax = __urng.max();
+ const __uctype __urngrange = __urngmax - __urngmin;
+ const __uctype __urange
+   = __uctype(__param.b()) - __uctype(__param.a());
+
+ __uctype __ret;
+
+ if (__urngrange > __urange)
+   {
+
+     const __uctype __uerange = __urange + 1;
+     const __uctype __scaling = __urngrange / __uerange;
+     const __uctype __past = __uerange * __scaling;
+     do
+       __ret = __uctype(__urng()) - __urngmin;
+     while (__ret >= __past);
+     __ret /= __scaling;
+   }
+ else if (__urngrange < __urange)
+   {
+# 260 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/uniform_int_dist.h" 3
+     __uctype __tmp;
+     do
+       {
+  const __uctype __uerngrange = __urngrange + 1;
+  __tmp = (__uerngrange * operator()
+    (__urng, param_type(0, __urange / __uerngrange)));
+  __ret = __tmp + (__uctype(__urng()) - __urngmin);
+       }
+     while (__ret > __urange || __ret < __tmp);
+   }
+ else
+   __ret = __uctype(__urng()) - __urngmin;
+
+ return __ret + __param.a();
+      }
+
+
+  template<typename _IntType>
+    template<typename _ForwardIterator,
+      typename _UniformRandomNumberGenerator>
+      void
+      uniform_int_distribution<_IntType>::
+      __generate_impl(_ForwardIterator __f, _ForwardIterator __t,
+        _UniformRandomNumberGenerator& __urng,
+        const param_type& __param)
+      {
+
+ typedef typename _UniformRandomNumberGenerator::result_type
+   _Gresult_type;
+ typedef typename std::make_unsigned<result_type>::type __utype;
+ typedef typename std::common_type<_Gresult_type, __utype>::type
+   __uctype;
+
+ const __uctype __urngmin = __urng.min();
+ const __uctype __urngmax = __urng.max();
+ const __uctype __urngrange = __urngmax - __urngmin;
+ const __uctype __urange
+   = __uctype(__param.b()) - __uctype(__param.a());
+
+ __uctype __ret;
+
+ if (__urngrange > __urange)
+   {
+     if (__detail::_Power_of_2(__urngrange + 1)
+  && __detail::_Power_of_2(__urange + 1))
+       {
+  while (__f != __t)
+    {
+      __ret = __uctype(__urng()) - __urngmin;
+      *__f++ = (__ret & __urange) + __param.a();
+    }
+       }
+     else
+       {
+
+  const __uctype __uerange = __urange + 1;
+  const __uctype __scaling = __urngrange / __uerange;
+  const __uctype __past = __uerange * __scaling;
+  while (__f != __t)
+    {
+      do
+        __ret = __uctype(__urng()) - __urngmin;
+      while (__ret >= __past);
+      *__f++ = __ret / __scaling + __param.a();
+    }
+       }
+   }
+ else if (__urngrange < __urange)
+   {
+# 344 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/uniform_int_dist.h" 3
+     __uctype __tmp;
+     while (__f != __t)
+       {
+  do
+    {
+      const __uctype __uerngrange = __urngrange + 1;
+      __tmp = (__uerngrange * operator()
+        (__urng, param_type(0, __urange / __uerngrange)));
+      __ret = __tmp + (__uctype(__urng()) - __urngmin);
+    }
+  while (__ret > __urange || __ret < __tmp);
+  *__f++ = __ret;
+       }
+   }
+ else
+   while (__f != __t)
+     *__f++ = __uctype(__urng()) - __urngmin + __param.a();
+      }
+
+
+}
+# 67 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 2 3
+
+
+
+
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+  template<typename _Iterator, typename _Compare>
+    void
+    __move_median_to_first(_Iterator __result,_Iterator __a, _Iterator __b,
+      _Iterator __c, _Compare __comp)
+    {
+      if (__comp(__a, __b))
+ {
+   if (__comp(__b, __c))
+     std::iter_swap(__result, __b);
+   else if (__comp(__a, __c))
+     std::iter_swap(__result, __c);
+   else
+     std::iter_swap(__result, __a);
+ }
+      else if (__comp(__a, __c))
+ std::iter_swap(__result, __a);
+      else if (__comp(__b, __c))
+ std::iter_swap(__result, __c);
+      else
+ std::iter_swap(__result, __b);
+    }
+
+
+  template<typename _InputIterator, typename _Predicate>
+    inline _InputIterator
+    __find_if(_InputIterator __first, _InputIterator __last,
+       _Predicate __pred, input_iterator_tag)
+    {
+      while (__first != __last && !__pred(__first))
+ ++__first;
+      return __first;
+    }
+
+
+  template<typename _RandomAccessIterator, typename _Predicate>
+    _RandomAccessIterator
+    __find_if(_RandomAccessIterator __first, _RandomAccessIterator __last,
+       _Predicate __pred, random_access_iterator_tag)
+    {
+      typename iterator_traits<_RandomAccessIterator>::difference_type
+ __trip_count = (__last - __first) >> 2;
+
+      for (; __trip_count > 0; --__trip_count)
+ {
+   if (__pred(__first))
+     return __first;
+   ++__first;
+
+   if (__pred(__first))
+     return __first;
+   ++__first;
+
+   if (__pred(__first))
+     return __first;
+   ++__first;
+
+   if (__pred(__first))
+     return __first;
+   ++__first;
+ }
+
+      switch (__last - __first)
+ {
+ case 3:
+   if (__pred(__first))
+     return __first;
+   ++__first;
+ case 2:
+   if (__pred(__first))
+     return __first;
+   ++__first;
+ case 1:
+   if (__pred(__first))
+     return __first;
+   ++__first;
+ case 0:
+ default:
+   return __last;
+ }
+    }
+
+  template<typename _Iterator, typename _Predicate>
+    inline _Iterator
+    __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
+    {
+      return __find_if(__first, __last, __pred,
+         std::__iterator_category(__first));
+    }
+
+
+  template<typename _InputIterator, typename _Predicate>
+    inline _InputIterator
+    __find_if_not(_InputIterator __first, _InputIterator __last,
+    _Predicate __pred)
+    {
+      return std::__find_if(__first, __last,
+       __gnu_cxx::__ops::__negate(__pred),
+       std::__iterator_category(__first));
+    }
+
+
+
+
+  template<typename _InputIterator, typename _Predicate, typename _Distance>
+    _InputIterator
+    __find_if_not_n(_InputIterator __first, _Distance& __len, _Predicate __pred)
+    {
+      for (; __len; --__len, ++__first)
+ if (!__pred(__first))
+   break;
+      return __first;
+    }
+# 202 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator1, typename _ForwardIterator2,
+    typename _BinaryPredicate>
+    _ForwardIterator1
+    __search(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+      _ForwardIterator2 __first2, _ForwardIterator2 __last2,
+      _BinaryPredicate __predicate)
+    {
+
+      if (__first1 == __last1 || __first2 == __last2)
+ return __first1;
+
+
+      _ForwardIterator2 __p1(__first2);
+      if (++__p1 == __last2)
+ return std::__find_if(__first1, __last1,
+  __gnu_cxx::__ops::__iter_comp_iter(__predicate, __first2));
+
+
+      _ForwardIterator2 __p;
+      _ForwardIterator1 __current = __first1;
+
+      for (;;)
+ {
+   __first1 =
+     std::__find_if(__first1, __last1,
+  __gnu_cxx::__ops::__iter_comp_iter(__predicate, __first2));
+
+   if (__first1 == __last1)
+     return __last1;
+
+   __p = __p1;
+   __current = __first1;
+   if (++__current == __last1)
+     return __last1;
+
+   while (__predicate(__current, __p))
+     {
+       if (++__p == __last2)
+  return __first1;
+       if (++__current == __last1)
+  return __last1;
+     }
+   ++__first1;
+ }
+      return __first1;
+    }
+
+
+
+
+
+
+  template<typename _ForwardIterator, typename _Integer,
+    typename _UnaryPredicate>
+    _ForwardIterator
+    __search_n_aux(_ForwardIterator __first, _ForwardIterator __last,
+     _Integer __count, _UnaryPredicate __unary_pred,
+     std::forward_iterator_tag)
+    {
+      __first = std::__find_if(__first, __last, __unary_pred);
+      while (__first != __last)
+ {
+   typename iterator_traits<_ForwardIterator>::difference_type
+     __n = __count;
+   _ForwardIterator __i = __first;
+   ++__i;
+   while (__i != __last && __n != 1 && __unary_pred(__i))
+     {
+       ++__i;
+       --__n;
+     }
+   if (__n == 1)
+     return __first;
+   if (__i == __last)
+     return __last;
+   __first = std::__find_if(++__i, __last, __unary_pred);
+ }
+      return __last;
+    }
+
+
+
+
+
+  template<typename _RandomAccessIter, typename _Integer,
+    typename _UnaryPredicate>
+    _RandomAccessIter
+    __search_n_aux(_RandomAccessIter __first, _RandomAccessIter __last,
+     _Integer __count, _UnaryPredicate __unary_pred,
+     std::random_access_iterator_tag)
+    {
+      typedef typename std::iterator_traits<_RandomAccessIter>::difference_type
+ _DistanceType;
+
+      _DistanceType __tailSize = __last - __first;
+      _DistanceType __remainder = __count;
+
+      while (__remainder <= __tailSize)
+ {
+   __first += __remainder;
+   __tailSize -= __remainder;
+
+
+   _RandomAccessIter __backTrack = __first;
+   while (__unary_pred(--__backTrack))
+     {
+       if (--__remainder == 0)
+  return (__first - __count);
+     }
+   __remainder = __count + 1 - (__first - __backTrack);
+ }
+      return __last;
+    }
+
+  template<typename _ForwardIterator, typename _Integer,
+    typename _UnaryPredicate>
+    _ForwardIterator
+    __search_n(_ForwardIterator __first, _ForwardIterator __last,
+        _Integer __count,
+        _UnaryPredicate __unary_pred)
+    {
+      if (__count <= 0)
+ return __first;
+
+      if (__count == 1)
+ return std::__find_if(__first, __last, __unary_pred);
+
+      return std::__search_n_aux(__first, __last, __count, __unary_pred,
+     std::__iterator_category(__first));
+    }
+
+
+  template<typename _ForwardIterator1, typename _ForwardIterator2,
+    typename _BinaryPredicate>
+    _ForwardIterator1
+    __find_end(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+        _ForwardIterator2 __first2, _ForwardIterator2 __last2,
+        forward_iterator_tag, forward_iterator_tag,
+        _BinaryPredicate __comp)
+    {
+      if (__first2 == __last2)
+ return __last1;
+
+      _ForwardIterator1 __result = __last1;
+      while (1)
+ {
+   _ForwardIterator1 __new_result
+     = std::__search(__first1, __last1, __first2, __last2, __comp);
+   if (__new_result == __last1)
+     return __result;
+   else
+     {
+       __result = __new_result;
+       __first1 = __new_result;
+       ++__first1;
+     }
+ }
+    }
+
+
+  template<typename _BidirectionalIterator1, typename _BidirectionalIterator2,
+    typename _BinaryPredicate>
+    _BidirectionalIterator1
+    __find_end(_BidirectionalIterator1 __first1,
+        _BidirectionalIterator1 __last1,
+        _BidirectionalIterator2 __first2,
+        _BidirectionalIterator2 __last2,
+        bidirectional_iterator_tag, bidirectional_iterator_tag,
+        _BinaryPredicate __comp)
+    {
+
+     
+
+     
+
+
+      typedef reverse_iterator<_BidirectionalIterator1> _RevIterator1;
+      typedef reverse_iterator<_BidirectionalIterator2> _RevIterator2;
+
+      _RevIterator1 __rlast1(__first1);
+      _RevIterator2 __rlast2(__first2);
+      _RevIterator1 __rresult = std::__search(_RevIterator1(__last1), __rlast1,
+           _RevIterator2(__last2), __rlast2,
+           __comp);
+
+      if (__rresult == __rlast1)
+ return __last1;
+      else
+ {
+   _BidirectionalIterator1 __result = __rresult.base();
+   std::advance(__result, -std::distance(__first2, __last2));
+   return __result;
+ }
+    }
+# 423 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator1, typename _ForwardIterator2>
+    inline _ForwardIterator1
+    find_end(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+      _ForwardIterator2 __first2, _ForwardIterator2 __last2)
+    {
+
+     
+     
+     
+
+
+      ;
+      ;
+
+      return std::__find_end(__first1, __last1, __first2, __last2,
+        std::__iterator_category(__first1),
+        std::__iterator_category(__first2),
+        __gnu_cxx::__ops::__iter_equal_to_iter());
+    }
+# 471 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator1, typename _ForwardIterator2,
+    typename _BinaryPredicate>
+    inline _ForwardIterator1
+    find_end(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+      _ForwardIterator2 __first2, _ForwardIterator2 __last2,
+      _BinaryPredicate __comp)
+    {
+
+     
+     
+     
+
+
+      ;
+      ;
+
+      return std::__find_end(__first1, __last1, __first2, __last2,
+        std::__iterator_category(__first1),
+        std::__iterator_category(__first2),
+        __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+# 506 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Predicate>
+    inline bool
+    all_of(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+    { return __last == std::find_if_not(__first, __last, __pred); }
+# 523 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Predicate>
+    inline bool
+    none_of(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+    { return __last == std::find_if(__first, __last, __pred); }
+# 541 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Predicate>
+    inline bool
+    any_of(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+    { return !std::none_of(__first, __last, __pred); }
+# 556 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Predicate>
+    inline _InputIterator
+    find_if_not(_InputIterator __first, _InputIterator __last,
+  _Predicate __pred)
+    {
+
+     
+     
+
+      ;
+      return std::__find_if_not(__first, __last,
+    __gnu_cxx::__ops::__pred_iter(__pred));
+    }
+# 580 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Predicate>
+    inline bool
+    is_partitioned(_InputIterator __first, _InputIterator __last,
+     _Predicate __pred)
+    {
+      __first = std::find_if_not(__first, __last, __pred);
+      return std::none_of(__first, __last, __pred);
+    }
+# 598 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Predicate>
+    _ForwardIterator
+    partition_point(_ForwardIterator __first, _ForwardIterator __last,
+      _Predicate __pred)
+    {
+
+     
+     
+
+
+
+      ;
+
+      typedef typename iterator_traits<_ForwardIterator>::difference_type
+ _DistanceType;
+
+      _DistanceType __len = std::distance(__first, __last);
+      _DistanceType __half;
+      _ForwardIterator __middle;
+
+      while (__len > 0)
+ {
+   __half = __len >> 1;
+   __middle = __first;
+   std::advance(__middle, __half);
+   if (__pred(*__middle))
+     {
+       __first = __middle;
+       ++__first;
+       __len = __len - __half - 1;
+     }
+   else
+     __len = __half;
+ }
+      return __first;
+    }
+
+
+  template<typename _InputIterator, typename _OutputIterator,
+    typename _Predicate>
+    _OutputIterator
+    __remove_copy_if(_InputIterator __first, _InputIterator __last,
+       _OutputIterator __result, _Predicate __pred)
+    {
+      for (; __first != __last; ++__first)
+ if (!__pred(__first))
+   {
+     *__result = *__first;
+     ++__result;
+   }
+      return __result;
+    }
+# 665 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _OutputIterator, typename _Tp>
+    inline _OutputIterator
+    remove_copy(_InputIterator __first, _InputIterator __last,
+  _OutputIterator __result, const _Tp& __value)
+    {
+
+     
+     
+
+     
+
+      ;
+
+      return std::__remove_copy_if(__first, __last, __result,
+ __gnu_cxx::__ops::__iter_equals_val(__value));
+    }
+# 697 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _OutputIterator,
+    typename _Predicate>
+    inline _OutputIterator
+    remove_copy_if(_InputIterator __first, _InputIterator __last,
+     _OutputIterator __result, _Predicate __pred)
+    {
+
+     
+     
+
+     
+
+      ;
+
+      return std::__remove_copy_if(__first, __last, __result,
+       __gnu_cxx::__ops::__pred_iter(__pred));
+    }
+# 731 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _OutputIterator,
+    typename _Predicate>
+    _OutputIterator
+    copy_if(_InputIterator __first, _InputIterator __last,
+     _OutputIterator __result, _Predicate __pred)
+    {
+
+     
+     
+
+     
+
+      ;
+
+      for (; __first != __last; ++__first)
+ if (__pred(*__first))
+   {
+     *__result = *__first;
+     ++__result;
+   }
+      return __result;
+    }
+
+  template<typename _InputIterator, typename _Size, typename _OutputIterator>
+    _OutputIterator
+    __copy_n(_InputIterator __first, _Size __n,
+      _OutputIterator __result, input_iterator_tag)
+    {
+      if (__n > 0)
+ {
+   while (true)
+     {
+       *__result = *__first;
+       ++__result;
+       if (--__n > 0)
+  ++__first;
+       else
+  break;
+     }
+ }
+      return __result;
+    }
+
+  template<typename _RandomAccessIterator, typename _Size,
+    typename _OutputIterator>
+    inline _OutputIterator
+    __copy_n(_RandomAccessIterator __first, _Size __n,
+      _OutputIterator __result, random_access_iterator_tag)
+    { return std::copy(__first, __first + __n, __result); }
+# 794 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Size, typename _OutputIterator>
+    inline _OutputIterator
+    copy_n(_InputIterator __first, _Size __n, _OutputIterator __result)
+    {
+
+     
+     
+
+
+      return std::__copy_n(__first, __n, __result,
+      std::__iterator_category(__first));
+    }
+# 822 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _OutputIterator1,
+    typename _OutputIterator2, typename _Predicate>
+    pair<_OutputIterator1, _OutputIterator2>
+    partition_copy(_InputIterator __first, _InputIterator __last,
+     _OutputIterator1 __out_true, _OutputIterator2 __out_false,
+     _Predicate __pred)
+    {
+
+     
+     
+
+     
+
+     
+
+      ;
+
+      for (; __first != __last; ++__first)
+ if (__pred(*__first))
+   {
+     *__out_true = *__first;
+     ++__out_true;
+   }
+ else
+   {
+     *__out_false = *__first;
+     ++__out_false;
+   }
+
+      return pair<_OutputIterator1, _OutputIterator2>(__out_true, __out_false);
+    }
+
+
+  template<typename _ForwardIterator, typename _Predicate>
+    _ForwardIterator
+    __remove_if(_ForwardIterator __first, _ForwardIterator __last,
+  _Predicate __pred)
+    {
+      __first = std::__find_if(__first, __last, __pred);
+      if (__first == __last)
+ return __first;
+      _ForwardIterator __result = __first;
+      ++__first;
+      for (; __first != __last; ++__first)
+ if (!__pred(__first))
+   {
+     *__result = std::move(*__first);
+     ++__result;
+   }
+      return __result;
+    }
+# 891 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Tp>
+    inline _ForwardIterator
+    remove(_ForwardIterator __first, _ForwardIterator __last,
+    const _Tp& __value)
+    {
+
+     
+
+     
+
+      ;
+
+      return std::__remove_if(__first, __last,
+  __gnu_cxx::__ops::__iter_equals_val(__value));
+    }
+# 924 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Predicate>
+    inline _ForwardIterator
+    remove_if(_ForwardIterator __first, _ForwardIterator __last,
+       _Predicate __pred)
+    {
+
+     
+
+     
+
+      ;
+
+      return std::__remove_if(__first, __last,
+         __gnu_cxx::__ops::__pred_iter(__pred));
+    }
+
+  template<typename _ForwardIterator, typename _BinaryPredicate>
+    _ForwardIterator
+    __adjacent_find(_ForwardIterator __first, _ForwardIterator __last,
+      _BinaryPredicate __binary_pred)
+    {
+      if (__first == __last)
+ return __last;
+      _ForwardIterator __next = __first;
+      while (++__next != __last)
+ {
+   if (__binary_pred(__first, __next))
+     return __first;
+   __first = __next;
+ }
+      return __last;
+    }
+
+  template<typename _ForwardIterator, typename _BinaryPredicate>
+    _ForwardIterator
+    __unique(_ForwardIterator __first, _ForwardIterator __last,
+      _BinaryPredicate __binary_pred)
+    {
+
+      __first = std::__adjacent_find(__first, __last, __binary_pred);
+      if (__first == __last)
+ return __last;
+
+
+      _ForwardIterator __dest = __first;
+      ++__first;
+      while (++__first != __last)
+ if (!__binary_pred(__dest, __first))
+   *++__dest = std::move(*__first);
+      return ++__dest;
+    }
+# 990 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator>
+    inline _ForwardIterator
+    unique(_ForwardIterator __first, _ForwardIterator __last)
+    {
+
+     
+
+     
+
+      ;
+
+      return std::__unique(__first, __last,
+      __gnu_cxx::__ops::__iter_equal_to_iter());
+    }
+# 1020 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _BinaryPredicate>
+    inline _ForwardIterator
+    unique(_ForwardIterator __first, _ForwardIterator __last,
+    _BinaryPredicate __binary_pred)
+    {
+
+     
+
+     
+
+
+      ;
+
+      return std::__unique(__first, __last,
+      __gnu_cxx::__ops::__iter_comp_iter(__binary_pred));
+    }
+
+
+
+
+
+
+
+  template<typename _ForwardIterator, typename _OutputIterator,
+    typename _BinaryPredicate>
+    _OutputIterator
+    __unique_copy(_ForwardIterator __first, _ForwardIterator __last,
+    _OutputIterator __result, _BinaryPredicate __binary_pred,
+    forward_iterator_tag, output_iterator_tag)
+    {
+
+     
+
+
+
+      _ForwardIterator __next = __first;
+      *__result = *__first;
+      while (++__next != __last)
+ if (!__binary_pred(__first, __next))
+   {
+     __first = __next;
+     *++__result = *__first;
+   }
+      return ++__result;
+    }
+
+
+
+
+
+
+
+  template<typename _InputIterator, typename _OutputIterator,
+    typename _BinaryPredicate>
+    _OutputIterator
+    __unique_copy(_InputIterator __first, _InputIterator __last,
+    _OutputIterator __result, _BinaryPredicate __binary_pred,
+    input_iterator_tag, output_iterator_tag)
+    {
+
+     
+
+
+
+      typename iterator_traits<_InputIterator>::value_type __value = *__first;
+      __decltype(__gnu_cxx::__ops::__iter_comp_val(__binary_pred))
+ __rebound_pred
+ = __gnu_cxx::__ops::__iter_comp_val(__binary_pred);
+      *__result = __value;
+      while (++__first != __last)
+ if (!__rebound_pred(__first, __value))
+   {
+     __value = *__first;
+     *++__result = __value;
+   }
+      return ++__result;
+    }
+
+
+
+
+
+
+
+  template<typename _InputIterator, typename _ForwardIterator,
+    typename _BinaryPredicate>
+    _ForwardIterator
+    __unique_copy(_InputIterator __first, _InputIterator __last,
+    _ForwardIterator __result, _BinaryPredicate __binary_pred,
+    input_iterator_tag, forward_iterator_tag)
+    {
+
+     
+
+
+      *__result = *__first;
+      while (++__first != __last)
+ if (!__binary_pred(__result, __first))
+   *++__result = *__first;
+      return ++__result;
+    }
+
+
+
+
+
+
+  template<typename _BidirectionalIterator>
+    void
+    __reverse(_BidirectionalIterator __first, _BidirectionalIterator __last,
+       bidirectional_iterator_tag)
+    {
+      while (true)
+ if (__first == __last || __first == --__last)
+   return;
+ else
+   {
+     std::iter_swap(__first, __last);
+     ++__first;
+   }
+    }
+
+
+
+
+
+
+  template<typename _RandomAccessIterator>
+    void
+    __reverse(_RandomAccessIterator __first, _RandomAccessIterator __last,
+       random_access_iterator_tag)
+    {
+      if (__first == __last)
+ return;
+      --__last;
+      while (__first < __last)
+ {
+   std::iter_swap(__first, __last);
+   ++__first;
+   --__last;
+ }
+    }
+# 1175 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _BidirectionalIterator>
+    inline void
+    reverse(_BidirectionalIterator __first, _BidirectionalIterator __last)
+    {
+
+     
+
+      ;
+      std::__reverse(__first, __last, std::__iterator_category(__first));
+    }
+# 1202 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _BidirectionalIterator, typename _OutputIterator>
+    _OutputIterator
+    reverse_copy(_BidirectionalIterator __first, _BidirectionalIterator __last,
+   _OutputIterator __result)
+    {
+
+     
+
+     
+
+      ;
+
+      while (__first != __last)
+ {
+   --__last;
+   *__result = *__last;
+   ++__result;
+ }
+      return __result;
+    }
+
+
+
+
+
+  template<typename _EuclideanRingElement>
+    _EuclideanRingElement
+    __gcd(_EuclideanRingElement __m, _EuclideanRingElement __n)
+    {
+      while (__n != 0)
+ {
+   _EuclideanRingElement __t = __m % __n;
+   __m = __n;
+   __n = __t;
+ }
+      return __m;
+    }
+
+  inline namespace _V2
+  {
+
+
+  template<typename _ForwardIterator>
+    _ForwardIterator
+    __rotate(_ForwardIterator __first,
+      _ForwardIterator __middle,
+      _ForwardIterator __last,
+      forward_iterator_tag)
+    {
+      if (__first == __middle)
+ return __last;
+      else if (__last == __middle)
+ return __first;
+
+      _ForwardIterator __first2 = __middle;
+      do
+ {
+   std::iter_swap(__first, __first2);
+   ++__first;
+   ++__first2;
+   if (__first == __middle)
+     __middle = __first2;
+ }
+      while (__first2 != __last);
+
+      _ForwardIterator __ret = __first;
+
+      __first2 = __middle;
+
+      while (__first2 != __last)
+ {
+   std::iter_swap(__first, __first2);
+   ++__first;
+   ++__first2;
+   if (__first == __middle)
+     __middle = __first2;
+   else if (__first2 == __last)
+     __first2 = __middle;
+ }
+      return __ret;
+    }
+
+
+  template<typename _BidirectionalIterator>
+    _BidirectionalIterator
+    __rotate(_BidirectionalIterator __first,
+      _BidirectionalIterator __middle,
+      _BidirectionalIterator __last,
+       bidirectional_iterator_tag)
+    {
+
+     
+
+
+      if (__first == __middle)
+ return __last;
+      else if (__last == __middle)
+ return __first;
+
+      std::__reverse(__first, __middle, bidirectional_iterator_tag());
+      std::__reverse(__middle, __last, bidirectional_iterator_tag());
+
+      while (__first != __middle && __middle != __last)
+ {
+   std::iter_swap(__first, --__last);
+   ++__first;
+ }
+
+      if (__first == __middle)
+ {
+   std::__reverse(__middle, __last, bidirectional_iterator_tag());
+   return __last;
+ }
+      else
+ {
+   std::__reverse(__first, __middle, bidirectional_iterator_tag());
+   return __first;
+ }
+    }
+
+
+  template<typename _RandomAccessIterator>
+    _RandomAccessIterator
+    __rotate(_RandomAccessIterator __first,
+      _RandomAccessIterator __middle,
+      _RandomAccessIterator __last,
+      random_access_iterator_tag)
+    {
+
+     
+
+
+      if (__first == __middle)
+ return __last;
+      else if (__last == __middle)
+ return __first;
+
+      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+ _Distance;
+      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+ _ValueType;
+
+      _Distance __n = __last - __first;
+      _Distance __k = __middle - __first;
+
+      if (__k == __n - __k)
+ {
+   std::swap_ranges(__first, __middle, __middle);
+   return __middle;
+ }
+
+      _RandomAccessIterator __p = __first;
+      _RandomAccessIterator __ret = __first + (__last - __middle);
+
+      for (;;)
+ {
+   if (__k < __n - __k)
+     {
+       if (__is_pod(_ValueType) && __k == 1)
+  {
+    _ValueType __t = std::move(*__p);
+    std::move(__p + 1, __p + __n, __p);
+    *(__p + __n - 1) = std::move(__t);
+    return __ret;
+  }
+       _RandomAccessIterator __q = __p + __k;
+       for (_Distance __i = 0; __i < __n - __k; ++ __i)
+  {
+    std::iter_swap(__p, __q);
+    ++__p;
+    ++__q;
+  }
+       __n %= __k;
+       if (__n == 0)
+  return __ret;
+       std::swap(__n, __k);
+       __k = __n - __k;
+     }
+   else
+     {
+       __k = __n - __k;
+       if (__is_pod(_ValueType) && __k == 1)
+  {
+    _ValueType __t = std::move(*(__p + __n - 1));
+    std::move_backward(__p, __p + __n - 1, __p + __n);
+    *__p = std::move(__t);
+    return __ret;
+  }
+       _RandomAccessIterator __q = __p + __n;
+       __p = __q - __k;
+       for (_Distance __i = 0; __i < __n - __k; ++ __i)
+  {
+    --__p;
+    --__q;
+    std::iter_swap(__p, __q);
+  }
+       __n %= __k;
+       if (__n == 0)
+  return __ret;
+       std::swap(__n, __k);
+     }
+ }
+    }
+# 1429 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator>
+    inline _ForwardIterator
+    rotate(_ForwardIterator __first, _ForwardIterator __middle,
+    _ForwardIterator __last)
+    {
+
+     
+
+      ;
+      ;
+
+      return std::__rotate(__first, __middle, __last,
+      std::__iterator_category(__first));
+    }
+
+  }
+# 1466 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _OutputIterator>
+    inline _OutputIterator
+    rotate_copy(_ForwardIterator __first, _ForwardIterator __middle,
+  _ForwardIterator __last, _OutputIterator __result)
+    {
+
+     
+     
+
+      ;
+      ;
+
+      return std::copy(__first, __middle,
+         std::copy(__middle, __last, __result));
+    }
+
+
+  template<typename _ForwardIterator, typename _Predicate>
+    _ForwardIterator
+    __partition(_ForwardIterator __first, _ForwardIterator __last,
+  _Predicate __pred, forward_iterator_tag)
+    {
+      if (__first == __last)
+ return __first;
+
+      while (__pred(*__first))
+ if (++__first == __last)
+   return __first;
+
+      _ForwardIterator __next = __first;
+
+      while (++__next != __last)
+ if (__pred(*__next))
+   {
+     std::iter_swap(__first, __next);
+     ++__first;
+   }
+
+      return __first;
+    }
+
+
+  template<typename _BidirectionalIterator, typename _Predicate>
+    _BidirectionalIterator
+    __partition(_BidirectionalIterator __first, _BidirectionalIterator __last,
+  _Predicate __pred, bidirectional_iterator_tag)
+    {
+      while (true)
+ {
+   while (true)
+     if (__first == __last)
+       return __first;
+     else if (__pred(*__first))
+       ++__first;
+     else
+       break;
+   --__last;
+   while (true)
+     if (__first == __last)
+       return __first;
+     else if (!bool(__pred(*__last)))
+       --__last;
+     else
+       break;
+   std::iter_swap(__first, __last);
+   ++__first;
+ }
+    }
+# 1543 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Pointer, typename _Predicate,
+    typename _Distance>
+    _ForwardIterator
+    __stable_partition_adaptive(_ForwardIterator __first,
+    _ForwardIterator __last,
+    _Predicate __pred, _Distance __len,
+    _Pointer __buffer,
+    _Distance __buffer_size)
+    {
+      if (__len == 1)
+ return __first;
+
+      if (__len <= __buffer_size)
+ {
+   _ForwardIterator __result1 = __first;
+   _Pointer __result2 = __buffer;
+
+
+
+
+   *__result2 = std::move(*__first);
+   ++__result2;
+   ++__first;
+   for (; __first != __last; ++__first)
+     if (__pred(__first))
+       {
+  *__result1 = std::move(*__first);
+  ++__result1;
+       }
+     else
+       {
+  *__result2 = std::move(*__first);
+  ++__result2;
+       }
+
+   std::move(__buffer, __result2, __result1);
+   return __result1;
+ }
+
+      _ForwardIterator __middle = __first;
+      std::advance(__middle, __len / 2);
+      _ForwardIterator __left_split =
+ std::__stable_partition_adaptive(__first, __middle, __pred,
+      __len / 2, __buffer,
+      __buffer_size);
+
+
+
+      _Distance __right_len = __len - __len / 2;
+      _ForwardIterator __right_split =
+ std::__find_if_not_n(__middle, __right_len, __pred);
+
+      if (__right_len)
+ __right_split =
+   std::__stable_partition_adaptive(__right_split, __last, __pred,
+        __right_len,
+        __buffer, __buffer_size);
+
+      std::rotate(__left_split, __middle, __right_split);
+      std::advance(__left_split, std::distance(__middle, __right_split));
+      return __left_split;
+    }
+
+  template<typename _ForwardIterator, typename _Predicate>
+    _ForwardIterator
+    __stable_partition(_ForwardIterator __first, _ForwardIterator __last,
+         _Predicate __pred)
+    {
+      __first = std::__find_if_not(__first, __last, __pred);
+
+      if (__first == __last)
+ return __first;
+
+      typedef typename iterator_traits<_ForwardIterator>::value_type
+ _ValueType;
+      typedef typename iterator_traits<_ForwardIterator>::difference_type
+ _DistanceType;
+
+      _Temporary_buffer<_ForwardIterator, _ValueType> __buf(__first, __last);
+      return
+ std::__stable_partition_adaptive(__first, __last, __pred,
+      _DistanceType(__buf.requested_size()),
+      __buf.begin(),
+      _DistanceType(__buf.size()));
+    }
+# 1646 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Predicate>
+    inline _ForwardIterator
+    stable_partition(_ForwardIterator __first, _ForwardIterator __last,
+       _Predicate __pred)
+    {
+
+     
+
+     
+
+      ;
+
+      return std::__stable_partition(__first, __last,
+         __gnu_cxx::__ops::__pred_iter(__pred));
+    }
+
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    void
+    __heap_select(_RandomAccessIterator __first,
+    _RandomAccessIterator __middle,
+    _RandomAccessIterator __last, _Compare __comp)
+    {
+      std::__make_heap(__first, __middle, __comp);
+      for (_RandomAccessIterator __i = __middle; __i < __last; ++__i)
+ if (__comp(__i, __first))
+   std::__pop_heap(__first, __middle, __i, __comp);
+    }
+
+
+
+  template<typename _InputIterator, typename _RandomAccessIterator,
+    typename _Compare>
+    _RandomAccessIterator
+    __partial_sort_copy(_InputIterator __first, _InputIterator __last,
+   _RandomAccessIterator __result_first,
+   _RandomAccessIterator __result_last,
+   _Compare __comp)
+    {
+      typedef typename iterator_traits<_InputIterator>::value_type
+ _InputValueType;
+      typedef iterator_traits<_RandomAccessIterator> _RItTraits;
+      typedef typename _RItTraits::difference_type _DistanceType;
+
+      if (__result_first == __result_last)
+ return __result_last;
+      _RandomAccessIterator __result_real_last = __result_first;
+      while (__first != __last && __result_real_last != __result_last)
+ {
+   *__result_real_last = *__first;
+   ++__result_real_last;
+   ++__first;
+ }
+
+      std::__make_heap(__result_first, __result_real_last, __comp);
+      while (__first != __last)
+ {
+   if (__comp(__first, __result_first))
+     std::__adjust_heap(__result_first, _DistanceType(0),
+          _DistanceType(__result_real_last
+          - __result_first),
+          _InputValueType(*__first), __comp);
+   ++__first;
+ }
+      std::__sort_heap(__result_first, __result_real_last, __comp);
+      return __result_real_last;
+    }
+# 1732 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _RandomAccessIterator>
+    inline _RandomAccessIterator
+    partial_sort_copy(_InputIterator __first, _InputIterator __last,
+        _RandomAccessIterator __result_first,
+        _RandomAccessIterator __result_last)
+    {
+# 1746 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+     
+     
+
+     
+
+     
+      ;
+      ;
+      ;
+
+      return std::__partial_sort_copy(__first, __last,
+          __result_first, __result_last,
+          __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 1781 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _RandomAccessIterator,
+    typename _Compare>
+    inline _RandomAccessIterator
+    partial_sort_copy(_InputIterator __first, _InputIterator __last,
+        _RandomAccessIterator __result_first,
+        _RandomAccessIterator __result_last,
+        _Compare __comp)
+    {
+# 1797 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+     
+     
+
+     
+
+     
+
+     
+
+      ;
+      ;
+      ;
+
+      return std::__partial_sort_copy(__first, __last,
+          __result_first, __result_last,
+    __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    void
+    __unguarded_linear_insert(_RandomAccessIterator __last,
+         _Compare __comp)
+    {
+      typename iterator_traits<_RandomAccessIterator>::value_type
+ __val = std::move(*__last);
+      _RandomAccessIterator __next = __last;
+      --__next;
+      while (__comp(__val, __next))
+ {
+   *__last = std::move(*__next);
+   __last = __next;
+   --__next;
+ }
+      *__last = std::move(__val);
+    }
+
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    void
+    __insertion_sort(_RandomAccessIterator __first,
+       _RandomAccessIterator __last, _Compare __comp)
+    {
+      if (__first == __last) return;
+
+      for (_RandomAccessIterator __i = __first + 1; __i != __last; ++__i)
+ {
+   if (__comp(__i, __first))
+     {
+       typename iterator_traits<_RandomAccessIterator>::value_type
+  __val = std::move(*__i);
+       std::move_backward(__first, __i, __i + 1);
+       *__first = std::move(__val);
+     }
+   else
+     std::__unguarded_linear_insert(__i,
+    __gnu_cxx::__ops::__val_comp_iter(__comp));
+ }
+    }
+
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    __unguarded_insertion_sort(_RandomAccessIterator __first,
+          _RandomAccessIterator __last, _Compare __comp)
+    {
+      for (_RandomAccessIterator __i = __first; __i != __last; ++__i)
+ std::__unguarded_linear_insert(__i,
+    __gnu_cxx::__ops::__val_comp_iter(__comp));
+    }
+
+
+
+
+
+  enum { _S_threshold = 16 };
+
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    void
+    __final_insertion_sort(_RandomAccessIterator __first,
+      _RandomAccessIterator __last, _Compare __comp)
+    {
+      if (__last - __first > int(_S_threshold))
+ {
+   std::__insertion_sort(__first, __first + int(_S_threshold), __comp);
+   std::__unguarded_insertion_sort(__first + int(_S_threshold), __last,
+       __comp);
+ }
+      else
+ std::__insertion_sort(__first, __last, __comp);
+    }
+
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    _RandomAccessIterator
+    __unguarded_partition(_RandomAccessIterator __first,
+     _RandomAccessIterator __last,
+     _RandomAccessIterator __pivot, _Compare __comp)
+    {
+      while (true)
+ {
+   while (__comp(__first, __pivot))
+     ++__first;
+   --__last;
+   while (__comp(__pivot, __last))
+     --__last;
+   if (!(__first < __last))
+     return __first;
+   std::iter_swap(__first, __last);
+   ++__first;
+ }
+    }
+
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline _RandomAccessIterator
+    __unguarded_partition_pivot(_RandomAccessIterator __first,
+    _RandomAccessIterator __last, _Compare __comp)
+    {
+      _RandomAccessIterator __mid = __first + (__last - __first) / 2;
+      std::__move_median_to_first(__first, __first + 1, __mid, __last - 1,
+      __comp);
+      return std::__unguarded_partition(__first + 1, __last, __first, __comp);
+    }
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    __partial_sort(_RandomAccessIterator __first,
+     _RandomAccessIterator __middle,
+     _RandomAccessIterator __last,
+     _Compare __comp)
+    {
+      std::__heap_select(__first, __middle, __last, __comp);
+      std::__sort_heap(__first, __middle, __comp);
+    }
+
+
+  template<typename _RandomAccessIterator, typename _Size, typename _Compare>
+    void
+    __introsort_loop(_RandomAccessIterator __first,
+       _RandomAccessIterator __last,
+       _Size __depth_limit, _Compare __comp)
+    {
+      while (__last - __first > int(_S_threshold))
+ {
+   if (__depth_limit == 0)
+     {
+       std::__partial_sort(__first, __last, __last, __comp);
+       return;
+     }
+   --__depth_limit;
+   _RandomAccessIterator __cut =
+     std::__unguarded_partition_pivot(__first, __last, __comp);
+   std::__introsort_loop(__cut, __last, __depth_limit, __comp);
+   __last = __cut;
+ }
+    }
+
+
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    __sort(_RandomAccessIterator __first, _RandomAccessIterator __last,
+    _Compare __comp)
+    {
+      if (__first != __last)
+ {
+   std::__introsort_loop(__first, __last,
+    std::__lg(__last - __first) * 2,
+    __comp);
+   std::__final_insertion_sort(__first, __last, __comp);
+ }
+    }
+
+  template<typename _RandomAccessIterator, typename _Size, typename _Compare>
+    void
+    __introselect(_RandomAccessIterator __first, _RandomAccessIterator __nth,
+    _RandomAccessIterator __last, _Size __depth_limit,
+    _Compare __comp)
+    {
+      while (__last - __first > 3)
+ {
+   if (__depth_limit == 0)
+     {
+       std::__heap_select(__first, __nth + 1, __last, __comp);
+
+       std::iter_swap(__first, __nth);
+       return;
+     }
+   --__depth_limit;
+   _RandomAccessIterator __cut =
+     std::__unguarded_partition_pivot(__first, __last, __comp);
+   if (__cut <= __nth)
+     __first = __cut;
+   else
+     __last = __cut;
+ }
+      std::__insertion_sort(__first, __last, __comp);
+    }
+# 2018 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Tp, typename _Compare>
+    inline _ForwardIterator
+    lower_bound(_ForwardIterator __first, _ForwardIterator __last,
+  const _Tp& __val, _Compare __comp)
+    {
+
+     
+     
+
+     
+                    ;
+
+      return std::__lower_bound(__first, __last, __val,
+    __gnu_cxx::__ops::__iter_comp_val(__comp));
+    }
+
+  template<typename _ForwardIterator, typename _Tp, typename _Compare>
+    _ForwardIterator
+    __upper_bound(_ForwardIterator __first, _ForwardIterator __last,
+    const _Tp& __val, _Compare __comp)
+    {
+      typedef typename iterator_traits<_ForwardIterator>::difference_type
+ _DistanceType;
+
+      _DistanceType __len = std::distance(__first, __last);
+
+      while (__len > 0)
+ {
+   _DistanceType __half = __len >> 1;
+   _ForwardIterator __middle = __first;
+   std::advance(__middle, __half);
+   if (__comp(__val, __middle))
+     __len = __half;
+   else
+     {
+       __first = __middle;
+       ++__first;
+       __len = __len - __half - 1;
+     }
+ }
+      return __first;
+    }
+# 2072 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Tp>
+    inline _ForwardIterator
+    upper_bound(_ForwardIterator __first, _ForwardIterator __last,
+  const _Tp& __val)
+    {
+
+     
+     
+
+      ;
+
+      return std::__upper_bound(__first, __last, __val,
+    __gnu_cxx::__ops::__val_less_iter());
+    }
+# 2102 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Tp, typename _Compare>
+    inline _ForwardIterator
+    upper_bound(_ForwardIterator __first, _ForwardIterator __last,
+  const _Tp& __val, _Compare __comp)
+    {
+
+     
+     
+
+     
+                    ;
+
+      return std::__upper_bound(__first, __last, __val,
+    __gnu_cxx::__ops::__val_comp_iter(__comp));
+    }
+
+  template<typename _ForwardIterator, typename _Tp,
+    typename _CompareItTp, typename _CompareTpIt>
+    pair<_ForwardIterator, _ForwardIterator>
+    __equal_range(_ForwardIterator __first, _ForwardIterator __last,
+    const _Tp& __val,
+    _CompareItTp __comp_it_val, _CompareTpIt __comp_val_it)
+    {
+      typedef typename iterator_traits<_ForwardIterator>::difference_type
+ _DistanceType;
+
+      _DistanceType __len = std::distance(__first, __last);
+
+      while (__len > 0)
+ {
+   _DistanceType __half = __len >> 1;
+   _ForwardIterator __middle = __first;
+   std::advance(__middle, __half);
+   if (__comp_it_val(__middle, __val))
+     {
+       __first = __middle;
+       ++__first;
+       __len = __len - __half - 1;
+     }
+   else if (__comp_val_it(__val, __middle))
+     __len = __half;
+   else
+     {
+       _ForwardIterator __left
+  = std::__lower_bound(__first, __middle, __val, __comp_it_val);
+       std::advance(__first, __len);
+       _ForwardIterator __right
+  = std::__upper_bound(++__middle, __first, __val, __comp_val_it);
+       return pair<_ForwardIterator, _ForwardIterator>(__left, __right);
+     }
+ }
+      return pair<_ForwardIterator, _ForwardIterator>(__first, __first);
+    }
+# 2173 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Tp>
+    inline pair<_ForwardIterator, _ForwardIterator>
+    equal_range(_ForwardIterator __first, _ForwardIterator __last,
+  const _Tp& __val)
+    {
+
+     
+     
+
+     
+
+      ;
+      ;
+
+      return std::__equal_range(__first, __last, __val,
+    __gnu_cxx::__ops::__iter_less_val(),
+    __gnu_cxx::__ops::__val_less_iter());
+    }
+# 2209 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Tp, typename _Compare>
+    inline pair<_ForwardIterator, _ForwardIterator>
+    equal_range(_ForwardIterator __first, _ForwardIterator __last,
+  const _Tp& __val, _Compare __comp)
+    {
+
+     
+     
+
+     
+
+     
+                    ;
+     
+                    ;
+
+      return std::__equal_range(__first, __last, __val,
+    __gnu_cxx::__ops::__iter_comp_val(__comp),
+    __gnu_cxx::__ops::__val_comp_iter(__comp));
+    }
+# 2242 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Tp>
+    bool
+    binary_search(_ForwardIterator __first, _ForwardIterator __last,
+    const _Tp& __val)
+    {
+
+     
+     
+
+      ;
+      ;
+
+      _ForwardIterator __i
+ = std::__lower_bound(__first, __last, __val,
+        __gnu_cxx::__ops::__iter_less_val());
+      return __i != __last && !(__val < *__i);
+    }
+# 2275 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Tp, typename _Compare>
+    bool
+    binary_search(_ForwardIterator __first, _ForwardIterator __last,
+    const _Tp& __val, _Compare __comp)
+    {
+
+     
+     
+
+     
+                    ;
+     
+                    ;
+
+      _ForwardIterator __i
+ = std::__lower_bound(__first, __last, __val,
+        __gnu_cxx::__ops::__iter_comp_val(__comp));
+      return __i != __last && !bool(__comp(__val, *__i));
+    }
+
+
+
+
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator, typename _Compare>
+    void
+    __move_merge_adaptive(_InputIterator1 __first1, _InputIterator1 __last1,
+     _InputIterator2 __first2, _InputIterator2 __last2,
+     _OutputIterator __result, _Compare __comp)
+    {
+      while (__first1 != __last1 && __first2 != __last2)
+ {
+   if (__comp(__first2, __first1))
+     {
+       *__result = std::move(*__first2);
+       ++__first2;
+     }
+   else
+     {
+       *__result = std::move(*__first1);
+       ++__first1;
+     }
+   ++__result;
+ }
+      if (__first1 != __last1)
+ std::move(__first1, __last1, __result);
+    }
+
+
+  template<typename _BidirectionalIterator1, typename _BidirectionalIterator2,
+    typename _BidirectionalIterator3, typename _Compare>
+    void
+    __move_merge_adaptive_backward(_BidirectionalIterator1 __first1,
+       _BidirectionalIterator1 __last1,
+       _BidirectionalIterator2 __first2,
+       _BidirectionalIterator2 __last2,
+       _BidirectionalIterator3 __result,
+       _Compare __comp)
+    {
+      if (__first1 == __last1)
+ {
+   std::move_backward(__first2, __last2, __result);
+   return;
+ }
+      else if (__first2 == __last2)
+ return;
+
+      --__last1;
+      --__last2;
+      while (true)
+ {
+   if (__comp(__last2, __last1))
+     {
+       *--__result = std::move(*__last1);
+       if (__first1 == __last1)
+  {
+    std::move_backward(__first2, ++__last2, __result);
+    return;
+  }
+       --__last1;
+     }
+   else
+     {
+       *--__result = std::move(*__last2);
+       if (__first2 == __last2)
+  return;
+       --__last2;
+     }
+ }
+    }
+
+
+  template<typename _BidirectionalIterator1, typename _BidirectionalIterator2,
+    typename _Distance>
+    _BidirectionalIterator1
+    __rotate_adaptive(_BidirectionalIterator1 __first,
+        _BidirectionalIterator1 __middle,
+        _BidirectionalIterator1 __last,
+        _Distance __len1, _Distance __len2,
+        _BidirectionalIterator2 __buffer,
+        _Distance __buffer_size)
+    {
+      _BidirectionalIterator2 __buffer_end;
+      if (__len1 > __len2 && __len2 <= __buffer_size)
+ {
+   if (__len2)
+     {
+       __buffer_end = std::move(__middle, __last, __buffer);
+       std::move_backward(__first, __middle, __last);
+       return std::move(__buffer, __buffer_end, __first);
+     }
+   else
+     return __first;
+ }
+      else if (__len1 <= __buffer_size)
+ {
+   if (__len1)
+     {
+       __buffer_end = std::move(__first, __middle, __buffer);
+       std::move(__middle, __last, __first);
+       return std::move_backward(__buffer, __buffer_end, __last);
+     }
+   else
+     return __last;
+ }
+      else
+ {
+   std::rotate(__first, __middle, __last);
+   std::advance(__first, std::distance(__middle, __last));
+   return __first;
+ }
+    }
+
+
+  template<typename _BidirectionalIterator, typename _Distance,
+    typename _Pointer, typename _Compare>
+    void
+    __merge_adaptive(_BidirectionalIterator __first,
+       _BidirectionalIterator __middle,
+       _BidirectionalIterator __last,
+       _Distance __len1, _Distance __len2,
+       _Pointer __buffer, _Distance __buffer_size,
+       _Compare __comp)
+    {
+      if (__len1 <= __len2 && __len1 <= __buffer_size)
+ {
+   _Pointer __buffer_end = std::move(__first, __middle, __buffer);
+   std::__move_merge_adaptive(__buffer, __buffer_end, __middle, __last,
+         __first, __comp);
+ }
+      else if (__len2 <= __buffer_size)
+ {
+   _Pointer __buffer_end = std::move(__middle, __last, __buffer);
+   std::__move_merge_adaptive_backward(__first, __middle, __buffer,
+           __buffer_end, __last, __comp);
+ }
+      else
+ {
+   _BidirectionalIterator __first_cut = __first;
+   _BidirectionalIterator __second_cut = __middle;
+   _Distance __len11 = 0;
+   _Distance __len22 = 0;
+   if (__len1 > __len2)
+     {
+       __len11 = __len1 / 2;
+       std::advance(__first_cut, __len11);
+       __second_cut
+  = std::__lower_bound(__middle, __last, *__first_cut,
+         __gnu_cxx::__ops::__iter_comp_val(__comp));
+       __len22 = std::distance(__middle, __second_cut);
+     }
+   else
+     {
+       __len22 = __len2 / 2;
+       std::advance(__second_cut, __len22);
+       __first_cut
+  = std::__upper_bound(__first, __middle, *__second_cut,
+         __gnu_cxx::__ops::__val_comp_iter(__comp));
+       __len11 = std::distance(__first, __first_cut);
+     }
+
+   _BidirectionalIterator __new_middle
+     = std::__rotate_adaptive(__first_cut, __middle, __second_cut,
+         __len1 - __len11, __len22, __buffer,
+         __buffer_size);
+   std::__merge_adaptive(__first, __first_cut, __new_middle, __len11,
+    __len22, __buffer, __buffer_size, __comp);
+   std::__merge_adaptive(__new_middle, __second_cut, __last,
+    __len1 - __len11,
+    __len2 - __len22, __buffer,
+    __buffer_size, __comp);
+ }
+    }
+
+
+  template<typename _BidirectionalIterator, typename _Distance,
+    typename _Compare>
+    void
+    __merge_without_buffer(_BidirectionalIterator __first,
+      _BidirectionalIterator __middle,
+      _BidirectionalIterator __last,
+      _Distance __len1, _Distance __len2,
+      _Compare __comp)
+    {
+      if (__len1 == 0 || __len2 == 0)
+ return;
+
+      if (__len1 + __len2 == 2)
+ {
+   if (__comp(__middle, __first))
+     std::iter_swap(__first, __middle);
+   return;
+ }
+
+      _BidirectionalIterator __first_cut = __first;
+      _BidirectionalIterator __second_cut = __middle;
+      _Distance __len11 = 0;
+      _Distance __len22 = 0;
+      if (__len1 > __len2)
+ {
+   __len11 = __len1 / 2;
+   std::advance(__first_cut, __len11);
+   __second_cut
+     = std::__lower_bound(__middle, __last, *__first_cut,
+     __gnu_cxx::__ops::__iter_comp_val(__comp));
+   __len22 = std::distance(__middle, __second_cut);
+ }
+      else
+ {
+   __len22 = __len2 / 2;
+   std::advance(__second_cut, __len22);
+   __first_cut
+     = std::__upper_bound(__first, __middle, *__second_cut,
+     __gnu_cxx::__ops::__val_comp_iter(__comp));
+   __len11 = std::distance(__first, __first_cut);
+ }
+
+      std::rotate(__first_cut, __middle, __second_cut);
+      _BidirectionalIterator __new_middle = __first_cut;
+      std::advance(__new_middle, std::distance(__middle, __second_cut));
+      std::__merge_without_buffer(__first, __first_cut, __new_middle,
+      __len11, __len22, __comp);
+      std::__merge_without_buffer(__new_middle, __second_cut, __last,
+      __len1 - __len11, __len2 - __len22, __comp);
+    }
+
+  template<typename _BidirectionalIterator, typename _Compare>
+    void
+    __inplace_merge(_BidirectionalIterator __first,
+      _BidirectionalIterator __middle,
+      _BidirectionalIterator __last,
+      _Compare __comp)
+    {
+      typedef typename iterator_traits<_BidirectionalIterator>::value_type
+   _ValueType;
+      typedef typename iterator_traits<_BidirectionalIterator>::difference_type
+   _DistanceType;
+
+      if (__first == __middle || __middle == __last)
+ return;
+
+      const _DistanceType __len1 = std::distance(__first, __middle);
+      const _DistanceType __len2 = std::distance(__middle, __last);
+
+      typedef _Temporary_buffer<_BidirectionalIterator, _ValueType> _TmpBuf;
+      _TmpBuf __buf(__first, __last);
+
+      if (__buf.begin() == 0)
+ std::__merge_without_buffer
+   (__first, __middle, __last, __len1, __len2, __comp);
+      else
+ std::__merge_adaptive
+   (__first, __middle, __last, __len1, __len2, __buf.begin(),
+    _DistanceType(__buf.size()), __comp);
+    }
+# 2569 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _BidirectionalIterator>
+    inline void
+    inplace_merge(_BidirectionalIterator __first,
+    _BidirectionalIterator __middle,
+    _BidirectionalIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+      ;
+
+      std::__inplace_merge(__first, __middle, __last,
+      __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 2610 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _BidirectionalIterator, typename _Compare>
+    inline void
+    inplace_merge(_BidirectionalIterator __first,
+    _BidirectionalIterator __middle,
+    _BidirectionalIterator __last,
+    _Compare __comp)
+    {
+
+     
+
+     
+
+
+      ;
+      ;
+      ;
+
+      std::__inplace_merge(__first, __middle, __last,
+      __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+
+
+  template<typename _InputIterator, typename _OutputIterator,
+    typename _Compare>
+    _OutputIterator
+    __move_merge(_InputIterator __first1, _InputIterator __last1,
+   _InputIterator __first2, _InputIterator __last2,
+   _OutputIterator __result, _Compare __comp)
+    {
+      while (__first1 != __last1 && __first2 != __last2)
+ {
+   if (__comp(__first2, __first1))
+     {
+       *__result = std::move(*__first2);
+       ++__first2;
+     }
+   else
+     {
+       *__result = std::move(*__first1);
+       ++__first1;
+     }
+   ++__result;
+ }
+      return std::move(__first2, __last2, std::move(__first1, __last1, __result))
+
+                  ;
+    }
+
+  template<typename _RandomAccessIterator1, typename _RandomAccessIterator2,
+    typename _Distance, typename _Compare>
+    void
+    __merge_sort_loop(_RandomAccessIterator1 __first,
+        _RandomAccessIterator1 __last,
+        _RandomAccessIterator2 __result, _Distance __step_size,
+        _Compare __comp)
+    {
+      const _Distance __two_step = 2 * __step_size;
+
+      while (__last - __first >= __two_step)
+ {
+   __result = std::__move_merge(__first, __first + __step_size,
+           __first + __step_size,
+           __first + __two_step,
+           __result, __comp);
+   __first += __two_step;
+ }
+      __step_size = std::min(_Distance(__last - __first), __step_size);
+
+      std::__move_merge(__first, __first + __step_size,
+   __first + __step_size, __last, __result, __comp);
+    }
+
+  template<typename _RandomAccessIterator, typename _Distance,
+    typename _Compare>
+    void
+    __chunk_insertion_sort(_RandomAccessIterator __first,
+      _RandomAccessIterator __last,
+      _Distance __chunk_size, _Compare __comp)
+    {
+      while (__last - __first >= __chunk_size)
+ {
+   std::__insertion_sort(__first, __first + __chunk_size, __comp);
+   __first += __chunk_size;
+ }
+      std::__insertion_sort(__first, __last, __comp);
+    }
+
+  enum { _S_chunk_size = 7 };
+
+  template<typename _RandomAccessIterator, typename _Pointer, typename _Compare>
+    void
+    __merge_sort_with_buffer(_RandomAccessIterator __first,
+        _RandomAccessIterator __last,
+        _Pointer __buffer, _Compare __comp)
+    {
+      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+ _Distance;
+
+      const _Distance __len = __last - __first;
+      const _Pointer __buffer_last = __buffer + __len;
+
+      _Distance __step_size = _S_chunk_size;
+      std::__chunk_insertion_sort(__first, __last, __step_size, __comp);
+
+      while (__step_size < __len)
+ {
+   std::__merge_sort_loop(__first, __last, __buffer,
+     __step_size, __comp);
+   __step_size *= 2;
+   std::__merge_sort_loop(__buffer, __buffer_last, __first,
+     __step_size, __comp);
+   __step_size *= 2;
+ }
+    }
+
+  template<typename _RandomAccessIterator, typename _Pointer,
+    typename _Distance, typename _Compare>
+    void
+    __stable_sort_adaptive(_RandomAccessIterator __first,
+      _RandomAccessIterator __last,
+      _Pointer __buffer, _Distance __buffer_size,
+      _Compare __comp)
+    {
+      const _Distance __len = (__last - __first + 1) / 2;
+      const _RandomAccessIterator __middle = __first + __len;
+      if (__len > __buffer_size)
+ {
+   std::__stable_sort_adaptive(__first, __middle, __buffer,
+          __buffer_size, __comp);
+   std::__stable_sort_adaptive(__middle, __last, __buffer,
+          __buffer_size, __comp);
+ }
+      else
+ {
+   std::__merge_sort_with_buffer(__first, __middle, __buffer, __comp);
+   std::__merge_sort_with_buffer(__middle, __last, __buffer, __comp);
+ }
+      std::__merge_adaptive(__first, __middle, __last,
+       _Distance(__middle - __first),
+       _Distance(__last - __middle),
+       __buffer, __buffer_size,
+       __comp);
+    }
+
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    void
+    __inplace_stable_sort(_RandomAccessIterator __first,
+     _RandomAccessIterator __last, _Compare __comp)
+    {
+      if (__last - __first < 15)
+ {
+   std::__insertion_sort(__first, __last, __comp);
+   return;
+ }
+      _RandomAccessIterator __middle = __first + (__last - __first) / 2;
+      std::__inplace_stable_sort(__first, __middle, __comp);
+      std::__inplace_stable_sort(__middle, __last, __comp);
+      std::__merge_without_buffer(__first, __middle, __last,
+      __middle - __first,
+      __last - __middle,
+      __comp);
+    }
+# 2782 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _Compare>
+    bool
+    __includes(_InputIterator1 __first1, _InputIterator1 __last1,
+        _InputIterator2 __first2, _InputIterator2 __last2,
+        _Compare __comp)
+    {
+      while (__first1 != __last1 && __first2 != __last2)
+ if (__comp(__first2, __first1))
+   return false;
+ else if (__comp(__first1, __first2))
+   ++__first1;
+ else
+   {
+     ++__first1;
+     ++__first2;
+   }
+
+      return __first2 == __last2;
+    }
+# 2821 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2>
+    inline bool
+    includes(_InputIterator1 __first1, _InputIterator1 __last1,
+      _InputIterator2 __first2, _InputIterator2 __last2)
+    {
+
+     
+     
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__includes(__first1, __last1, __first2, __last2,
+        __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 2865 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _Compare>
+    inline bool
+    includes(_InputIterator1 __first1, _InputIterator1 __last1,
+      _InputIterator2 __first2, _InputIterator2 __last2,
+      _Compare __comp)
+    {
+
+     
+     
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__includes(__first1, __last1, __first2, __last2,
+        __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+# 2900 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _BidirectionalIterator, typename _Compare>
+    bool
+    __next_permutation(_BidirectionalIterator __first,
+         _BidirectionalIterator __last, _Compare __comp)
+    {
+      if (__first == __last)
+ return false;
+      _BidirectionalIterator __i = __first;
+      ++__i;
+      if (__i == __last)
+ return false;
+      __i = __last;
+      --__i;
+
+      for(;;)
+ {
+   _BidirectionalIterator __ii = __i;
+   --__i;
+   if (__comp(__i, __ii))
+     {
+       _BidirectionalIterator __j = __last;
+       while (!__comp(__i, --__j))
+  {}
+       std::iter_swap(__i, __j);
+       std::__reverse(__ii, __last,
+        std::__iterator_category(__first));
+       return true;
+     }
+   if (__i == __first)
+     {
+       std::__reverse(__first, __last,
+        std::__iterator_category(__first));
+       return false;
+     }
+ }
+    }
+# 2949 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _BidirectionalIterator>
+    inline bool
+    next_permutation(_BidirectionalIterator __first,
+       _BidirectionalIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+
+      return std::__next_permutation
+ (__first, __last, __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 2981 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _BidirectionalIterator, typename _Compare>
+    inline bool
+    next_permutation(_BidirectionalIterator __first,
+       _BidirectionalIterator __last, _Compare __comp)
+    {
+
+     
+
+     
+
+
+      ;
+      ;
+
+      return std::__next_permutation
+ (__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _BidirectionalIterator, typename _Compare>
+    bool
+    __prev_permutation(_BidirectionalIterator __first,
+         _BidirectionalIterator __last, _Compare __comp)
+    {
+      if (__first == __last)
+ return false;
+      _BidirectionalIterator __i = __first;
+      ++__i;
+      if (__i == __last)
+ return false;
+      __i = __last;
+      --__i;
+
+      for(;;)
+ {
+   _BidirectionalIterator __ii = __i;
+   --__i;
+   if (__comp(__ii, __i))
+     {
+       _BidirectionalIterator __j = __last;
+       while (!__comp(--__j, __i))
+  {}
+       std::iter_swap(__i, __j);
+       std::__reverse(__ii, __last,
+        std::__iterator_category(__first));
+       return true;
+     }
+   if (__i == __first)
+     {
+       std::__reverse(__first, __last,
+        std::__iterator_category(__first));
+       return false;
+     }
+ }
+    }
+# 3049 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _BidirectionalIterator>
+    inline bool
+    prev_permutation(_BidirectionalIterator __first,
+       _BidirectionalIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+
+      return std::__prev_permutation(__first, __last,
+         __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 3081 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _BidirectionalIterator, typename _Compare>
+    inline bool
+    prev_permutation(_BidirectionalIterator __first,
+       _BidirectionalIterator __last, _Compare __comp)
+    {
+
+     
+
+     
+
+
+      ;
+      ;
+
+      return std::__prev_permutation(__first, __last,
+    __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+
+
+
+  template<typename _InputIterator, typename _OutputIterator,
+    typename _Predicate, typename _Tp>
+    _OutputIterator
+    __replace_copy_if(_InputIterator __first, _InputIterator __last,
+        _OutputIterator __result,
+        _Predicate __pred, const _Tp& __new_value)
+    {
+      for (; __first != __last; ++__first, (void)++__result)
+ if (__pred(__first))
+   *__result = __new_value;
+ else
+   *__result = *__first;
+      return __result;
+    }
+# 3131 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _OutputIterator, typename _Tp>
+    inline _OutputIterator
+    replace_copy(_InputIterator __first, _InputIterator __last,
+   _OutputIterator __result,
+   const _Tp& __old_value, const _Tp& __new_value)
+    {
+
+     
+     
+
+     
+
+      ;
+
+      return std::__replace_copy_if(__first, __last, __result,
+   __gnu_cxx::__ops::__iter_equals_val(__old_value),
+           __new_value);
+    }
+# 3165 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _OutputIterator,
+    typename _Predicate, typename _Tp>
+    inline _OutputIterator
+    replace_copy_if(_InputIterator __first, _InputIterator __last,
+      _OutputIterator __result,
+      _Predicate __pred, const _Tp& __new_value)
+    {
+
+     
+     
+
+     
+
+      ;
+
+      return std::__replace_copy_if(__first, __last, __result,
+    __gnu_cxx::__ops::__pred_iter(__pred),
+           __new_value);
+    }
+
+  template<typename _InputIterator, typename _Predicate>
+    typename iterator_traits<_InputIterator>::difference_type
+    __count_if(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+    {
+      typename iterator_traits<_InputIterator>::difference_type __n = 0;
+      for (; __first != __last; ++__first)
+ if (__pred(__first))
+   ++__n;
+      return __n;
+    }
+# 3204 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator>
+    inline bool
+    is_sorted(_ForwardIterator __first, _ForwardIterator __last)
+    { return std::is_sorted_until(__first, __last) == __last; }
+# 3218 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Compare>
+    inline bool
+    is_sorted(_ForwardIterator __first, _ForwardIterator __last,
+       _Compare __comp)
+    { return std::is_sorted_until(__first, __last, __comp) == __last; }
+
+  template<typename _ForwardIterator, typename _Compare>
+    _ForwardIterator
+    __is_sorted_until(_ForwardIterator __first, _ForwardIterator __last,
+        _Compare __comp)
+    {
+      if (__first == __last)
+ return __last;
+
+      _ForwardIterator __next = __first;
+      for (++__next; __next != __last; __first = __next, (void)++__next)
+ if (__comp(__next, __first))
+   return __next;
+      return __next;
+    }
+# 3247 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator>
+    inline _ForwardIterator
+    is_sorted_until(_ForwardIterator __first, _ForwardIterator __last)
+    {
+
+     
+     
+
+      ;
+      ;
+
+      return std::__is_sorted_until(__first, __last,
+        __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 3271 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Compare>
+    inline _ForwardIterator
+    is_sorted_until(_ForwardIterator __first, _ForwardIterator __last,
+      _Compare __comp)
+    {
+
+     
+     
+
+
+      ;
+      ;
+
+      return std::__is_sorted_until(__first, __last,
+        __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+# 3296 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _Tp>
+    constexpr
+    inline pair<const _Tp&, const _Tp&>
+    minmax(const _Tp& __a, const _Tp& __b)
+    {
+
+     
+
+      return __b < __a ? pair<const _Tp&, const _Tp&>(__b, __a)
+         : pair<const _Tp&, const _Tp&>(__a, __b);
+    }
+# 3317 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _Tp, typename _Compare>
+    constexpr
+    inline pair<const _Tp&, const _Tp&>
+    minmax(const _Tp& __a, const _Tp& __b, _Compare __comp)
+    {
+      return __comp(__b, __a) ? pair<const _Tp&, const _Tp&>(__b, __a)
+         : pair<const _Tp&, const _Tp&>(__a, __b);
+    }
+
+  template<typename _ForwardIterator, typename _Compare>
+    constexpr
+    pair<_ForwardIterator, _ForwardIterator>
+    __minmax_element(_ForwardIterator __first, _ForwardIterator __last,
+       _Compare __comp)
+    {
+      _ForwardIterator __next = __first;
+      if (__first == __last
+   || ++__next == __last)
+ return std::make_pair(__first, __first);
+
+      _ForwardIterator __min{}, __max{};
+      if (__comp(__next, __first))
+ {
+   __min = __next;
+   __max = __first;
+ }
+      else
+ {
+   __min = __first;
+   __max = __next;
+ }
+
+      __first = __next;
+      ++__first;
+
+      while (__first != __last)
+ {
+   __next = __first;
+   if (++__next == __last)
+     {
+       if (__comp(__first, __min))
+  __min = __first;
+       else if (!__comp(__first, __max))
+  __max = __first;
+       break;
+     }
+
+   if (__comp(__next, __first))
+     {
+       if (__comp(__next, __min))
+  __min = __next;
+       if (!__comp(__first, __max))
+  __max = __first;
+     }
+   else
+     {
+       if (__comp(__first, __min))
+  __min = __first;
+       if (!__comp(__next, __max))
+  __max = __next;
+     }
+
+   __first = __next;
+   ++__first;
+ }
+
+      return std::make_pair(__min, __max);
+    }
+# 3397 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator>
+    constexpr
+    inline pair<_ForwardIterator, _ForwardIterator>
+    minmax_element(_ForwardIterator __first, _ForwardIterator __last)
+    {
+
+     
+     
+
+      ;
+      ;
+
+      return std::__minmax_element(__first, __last,
+       __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 3425 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Compare>
+    constexpr
+    inline pair<_ForwardIterator, _ForwardIterator>
+    minmax_element(_ForwardIterator __first, _ForwardIterator __last,
+     _Compare __comp)
+    {
+
+     
+     
+
+
+      ;
+      ;
+
+      return std::__minmax_element(__first, __last,
+       __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+
+  template<typename _Tp>
+    constexpr
+    inline _Tp
+    min(initializer_list<_Tp> __l)
+    { return *std::min_element(__l.begin(), __l.end()); }
+
+  template<typename _Tp, typename _Compare>
+    constexpr
+    inline _Tp
+    min(initializer_list<_Tp> __l, _Compare __comp)
+    { return *std::min_element(__l.begin(), __l.end(), __comp); }
+
+  template<typename _Tp>
+    constexpr
+    inline _Tp
+    max(initializer_list<_Tp> __l)
+    { return *std::max_element(__l.begin(), __l.end()); }
+
+  template<typename _Tp, typename _Compare>
+    constexpr
+    inline _Tp
+    max(initializer_list<_Tp> __l, _Compare __comp)
+    { return *std::max_element(__l.begin(), __l.end(), __comp); }
+
+  template<typename _Tp>
+    constexpr
+    inline pair<_Tp, _Tp>
+    minmax(initializer_list<_Tp> __l)
+    {
+      pair<const _Tp*, const _Tp*> __p =
+ std::minmax_element(__l.begin(), __l.end());
+      return std::make_pair(*__p.first, *__p.second);
+    }
+
+  template<typename _Tp, typename _Compare>
+    constexpr
+    inline pair<_Tp, _Tp>
+    minmax(initializer_list<_Tp> __l, _Compare __comp)
+    {
+      pair<const _Tp*, const _Tp*> __p =
+ std::minmax_element(__l.begin(), __l.end(), __comp);
+      return std::make_pair(*__p.first, *__p.second);
+    }
+
+  template<typename _ForwardIterator1, typename _ForwardIterator2,
+    typename _BinaryPredicate>
+    bool
+    __is_permutation(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+       _ForwardIterator2 __first2, _BinaryPredicate __pred)
+    {
+
+
+      for (; __first1 != __last1; ++__first1, (void)++__first2)
+ if (!__pred(__first1, __first2))
+   break;
+
+      if (__first1 == __last1)
+ return true;
+
+
+
+      _ForwardIterator2 __last2 = __first2;
+      std::advance(__last2, std::distance(__first1, __last1));
+      for (_ForwardIterator1 __scan = __first1; __scan != __last1; ++__scan)
+ {
+   if (__scan != std::__find_if(__first1, __scan,
+     __gnu_cxx::__ops::__iter_comp_iter(__pred, __scan)))
+     continue;
+
+   auto __matches
+     = std::__count_if(__first2, __last2,
+   __gnu_cxx::__ops::__iter_comp_iter(__pred, __scan));
+   if (0 == __matches ||
+       std::__count_if(__scan, __last1,
+   __gnu_cxx::__ops::__iter_comp_iter(__pred, __scan))
+       != __matches)
+     return false;
+ }
+      return true;
+    }
+# 3537 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator1, typename _ForwardIterator2>
+    inline bool
+    is_permutation(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+     _ForwardIterator2 __first2)
+    {
+
+     
+     
+     
+
+
+      ;
+
+      return std::__is_permutation(__first1, __last1, __first2,
+       __gnu_cxx::__ops::__iter_equal_to_iter());
+    }
+# 3568 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator1, typename _ForwardIterator2,
+    typename _BinaryPredicate>
+    inline bool
+    is_permutation(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+     _ForwardIterator2 __first2, _BinaryPredicate __pred)
+    {
+
+     
+     
+     
+
+
+      ;
+
+      return std::__is_permutation(__first1, __last1, __first2,
+       __gnu_cxx::__ops::__iter_comp_iter(__pred));
+    }
+
+
+  template<typename _ForwardIterator1, typename _ForwardIterator2,
+    typename _BinaryPredicate>
+    bool
+    __is_permutation(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+       _ForwardIterator2 __first2, _ForwardIterator2 __last2,
+       _BinaryPredicate __pred)
+    {
+      using _Cat1
+ = typename iterator_traits<_ForwardIterator1>::iterator_category;
+      using _Cat2
+ = typename iterator_traits<_ForwardIterator2>::iterator_category;
+      using _It1_is_RA = is_same<_Cat1, random_access_iterator_tag>;
+      using _It2_is_RA = is_same<_Cat2, random_access_iterator_tag>;
+      constexpr bool __ra_iters = _It1_is_RA() && _It2_is_RA();
+      if (__ra_iters)
+ {
+   auto __d1 = std::distance(__first1, __last1);
+   auto __d2 = std::distance(__first2, __last2);
+   if (__d1 != __d2)
+     return false;
+ }
+
+
+
+      for (; __first1 != __last1 && __first2 != __last2;
+   ++__first1, (void)++__first2)
+ if (!__pred(__first1, __first2))
+   break;
+
+      if (__ra_iters)
+ {
+   if (__first1 == __last1)
+     return true;
+ }
+      else
+ {
+   auto __d1 = std::distance(__first1, __last1);
+   auto __d2 = std::distance(__first2, __last2);
+   if (__d1 == 0 && __d2 == 0)
+     return true;
+   if (__d1 != __d2)
+     return false;
+ }
+
+      for (_ForwardIterator1 __scan = __first1; __scan != __last1; ++__scan)
+ {
+   if (__scan != std::__find_if(__first1, __scan,
+   __gnu_cxx::__ops::__iter_comp_iter(__pred, __scan)))
+     continue;
+
+   auto __matches = std::__count_if(__first2, __last2,
+  __gnu_cxx::__ops::__iter_comp_iter(__pred, __scan));
+   if (0 == __matches
+       || std::__count_if(__scan, __last1,
+   __gnu_cxx::__ops::__iter_comp_iter(__pred, __scan))
+       != __matches)
+     return false;
+ }
+      return true;
+    }
+# 3661 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator1, typename _ForwardIterator2>
+    inline bool
+    is_permutation(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+     _ForwardIterator2 __first2, _ForwardIterator2 __last2)
+    {
+      ;
+      ;
+
+      return
+ std::__is_permutation(__first1, __last1, __first2, __last2,
+         __gnu_cxx::__ops::__iter_equal_to_iter());
+    }
+# 3688 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator1, typename _ForwardIterator2,
+    typename _BinaryPredicate>
+    inline bool
+    is_permutation(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+     _ForwardIterator2 __first2, _ForwardIterator2 __last2,
+     _BinaryPredicate __pred)
+    {
+      ;
+      ;
+
+      return std::__is_permutation(__first1, __last1, __first2, __last2,
+       __gnu_cxx::__ops::__iter_comp_iter(__pred));
+    }
+# 3716 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator,
+    typename _UniformRandomNumberGenerator>
+    void
+    shuffle(_RandomAccessIterator __first, _RandomAccessIterator __last,
+     _UniformRandomNumberGenerator&& __g)
+    {
+
+     
+
+      ;
+
+      if (__first == __last)
+ return;
+
+      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+ _DistanceType;
+
+      typedef typename std::make_unsigned<_DistanceType>::type __ud_type;
+      typedef typename std::uniform_int_distribution<__ud_type> __distr_type;
+      typedef typename __distr_type::param_type __p_type;
+      __distr_type __d;
+
+      for (_RandomAccessIterator __i = __first + 1; __i != __last; ++__i)
+ std::iter_swap(__i, __first + __d(__g, __p_type(0, __i - __first)));
+    }
+
+
+
+
+
+
+
+# 3761 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Function>
+    _Function
+    for_each(_InputIterator __first, _InputIterator __last, _Function __f)
+    {
+
+     
+      ;
+      for (; __first != __last; ++__first)
+ __f(*__first);
+      return std::move(__f);
+    }
+# 3782 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Tp>
+    inline _InputIterator
+    find(_InputIterator __first, _InputIterator __last,
+  const _Tp& __val)
+    {
+
+     
+     
+
+      ;
+      return std::__find_if(__first, __last,
+       __gnu_cxx::__ops::__iter_equals_val(__val));
+    }
+# 3806 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Predicate>
+    inline _InputIterator
+    find_if(_InputIterator __first, _InputIterator __last,
+     _Predicate __pred)
+    {
+
+     
+     
+
+      ;
+
+      return std::__find_if(__first, __last,
+       __gnu_cxx::__ops::__pred_iter(__pred));
+    }
+# 3837 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _ForwardIterator>
+    _InputIterator
+    find_first_of(_InputIterator __first1, _InputIterator __last1,
+    _ForwardIterator __first2, _ForwardIterator __last2)
+    {
+
+     
+     
+     
+
+
+      ;
+      ;
+
+      for (; __first1 != __last1; ++__first1)
+ for (_ForwardIterator __iter = __first2; __iter != __last2; ++__iter)
+   if (*__first1 == *__iter)
+     return __first1;
+      return __last1;
+    }
+# 3877 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _ForwardIterator,
+    typename _BinaryPredicate>
+    _InputIterator
+    find_first_of(_InputIterator __first1, _InputIterator __last1,
+    _ForwardIterator __first2, _ForwardIterator __last2,
+    _BinaryPredicate __comp)
+    {
+
+     
+     
+     
+
+
+      ;
+      ;
+
+      for (; __first1 != __last1; ++__first1)
+ for (_ForwardIterator __iter = __first2; __iter != __last2; ++__iter)
+   if (__comp(*__first1, *__iter))
+     return __first1;
+      return __last1;
+    }
+# 3909 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator>
+    inline _ForwardIterator
+    adjacent_find(_ForwardIterator __first, _ForwardIterator __last)
+    {
+
+     
+     
+
+      ;
+
+      return std::__adjacent_find(__first, __last,
+      __gnu_cxx::__ops::__iter_equal_to_iter());
+    }
+# 3934 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _BinaryPredicate>
+    inline _ForwardIterator
+    adjacent_find(_ForwardIterator __first, _ForwardIterator __last,
+    _BinaryPredicate __binary_pred)
+    {
+
+     
+     
+
+
+      ;
+
+      return std::__adjacent_find(__first, __last,
+   __gnu_cxx::__ops::__iter_comp_iter(__binary_pred));
+    }
+# 3959 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Tp>
+    inline typename iterator_traits<_InputIterator>::difference_type
+    count(_InputIterator __first, _InputIterator __last, const _Tp& __value)
+    {
+
+     
+     
+
+      ;
+
+      return std::__count_if(__first, __last,
+        __gnu_cxx::__ops::__iter_equals_val(__value));
+    }
+# 3982 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _Predicate>
+    inline typename iterator_traits<_InputIterator>::difference_type
+    count_if(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+    {
+
+     
+     
+
+      ;
+
+      return std::__count_if(__first, __last,
+        __gnu_cxx::__ops::__pred_iter(__pred));
+    }
+# 4022 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator1, typename _ForwardIterator2>
+    inline _ForwardIterator1
+    search(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+    _ForwardIterator2 __first2, _ForwardIterator2 __last2)
+    {
+
+     
+     
+     
+
+
+      ;
+      ;
+
+      return std::__search(__first1, __last1, __first2, __last2,
+      __gnu_cxx::__ops::__iter_equal_to_iter());
+    }
+# 4061 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator1, typename _ForwardIterator2,
+    typename _BinaryPredicate>
+    inline _ForwardIterator1
+    search(_ForwardIterator1 __first1, _ForwardIterator1 __last1,
+    _ForwardIterator2 __first2, _ForwardIterator2 __last2,
+    _BinaryPredicate __predicate)
+    {
+
+     
+     
+     
+
+
+      ;
+      ;
+
+      return std::__search(__first1, __last1, __first2, __last2,
+      __gnu_cxx::__ops::__iter_comp_iter(__predicate));
+    }
+# 4096 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Integer, typename _Tp>
+    inline _ForwardIterator
+    search_n(_ForwardIterator __first, _ForwardIterator __last,
+      _Integer __count, const _Tp& __val)
+    {
+
+     
+     
+
+      ;
+
+      return std::__search_n(__first, __last, __count,
+        __gnu_cxx::__ops::__iter_equals_val(__val));
+    }
+# 4129 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Integer, typename _Tp,
+    typename _BinaryPredicate>
+    inline _ForwardIterator
+    search_n(_ForwardIterator __first, _ForwardIterator __last,
+      _Integer __count, const _Tp& __val,
+      _BinaryPredicate __binary_pred)
+    {
+
+     
+     
+
+      ;
+
+      return std::__search_n(__first, __last, __count,
+  __gnu_cxx::__ops::__iter_comp_val(__binary_pred, __val));
+    }
+# 4163 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _OutputIterator,
+    typename _UnaryOperation>
+    _OutputIterator
+    transform(_InputIterator __first, _InputIterator __last,
+       _OutputIterator __result, _UnaryOperation __unary_op)
+    {
+
+     
+     
+
+
+      ;
+
+      for (; __first != __last; ++__first, (void)++__result)
+ *__result = __unary_op(*__first);
+      return __result;
+    }
+# 4200 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator, typename _BinaryOperation>
+    _OutputIterator
+    transform(_InputIterator1 __first1, _InputIterator1 __last1,
+       _InputIterator2 __first2, _OutputIterator __result,
+       _BinaryOperation __binary_op)
+    {
+
+     
+     
+     
+
+
+      ;
+
+      for (; __first1 != __last1; ++__first1, (void)++__first2, ++__result)
+ *__result = __binary_op(*__first1, *__first2);
+      return __result;
+    }
+# 4233 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Tp>
+    void
+    replace(_ForwardIterator __first, _ForwardIterator __last,
+     const _Tp& __old_value, const _Tp& __new_value)
+    {
+
+     
+
+     
+
+     
+
+      ;
+
+      for (; __first != __last; ++__first)
+ if (*__first == __old_value)
+   *__first = __new_value;
+    }
+# 4265 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Predicate, typename _Tp>
+    void
+    replace_if(_ForwardIterator __first, _ForwardIterator __last,
+        _Predicate __pred, const _Tp& __new_value)
+    {
+
+     
+
+     
+
+     
+
+      ;
+
+      for (; __first != __last; ++__first)
+ if (__pred(*__first))
+   *__first = __new_value;
+    }
+# 4297 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Generator>
+    void
+    generate(_ForwardIterator __first, _ForwardIterator __last,
+      _Generator __gen)
+    {
+
+     
+     
+
+      ;
+
+      for (; __first != __last; ++__first)
+ *__first = __gen();
+    }
+# 4328 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _OutputIterator, typename _Size, typename _Generator>
+    _OutputIterator
+    generate_n(_OutputIterator __first, _Size __n, _Generator __gen)
+    {
+
+     
+
+
+
+      for (__decltype(__n + 0) __niter = __n;
+    __niter > 0; --__niter, ++__first)
+ *__first = __gen();
+      return __first;
+    }
+# 4364 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _OutputIterator>
+    inline _OutputIterator
+    unique_copy(_InputIterator __first, _InputIterator __last,
+  _OutputIterator __result)
+    {
+
+     
+     
+
+     
+
+      ;
+
+      if (__first == __last)
+ return __result;
+      return std::__unique_copy(__first, __last, __result,
+    __gnu_cxx::__ops::__iter_equal_to_iter(),
+    std::__iterator_category(__first),
+    std::__iterator_category(__result));
+    }
+# 4404 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator, typename _OutputIterator,
+    typename _BinaryPredicate>
+    inline _OutputIterator
+    unique_copy(_InputIterator __first, _InputIterator __last,
+  _OutputIterator __result,
+  _BinaryPredicate __binary_pred)
+    {
+
+     
+     
+
+      ;
+
+      if (__first == __last)
+ return __result;
+      return std::__unique_copy(__first, __last, __result,
+   __gnu_cxx::__ops::__iter_comp_iter(__binary_pred),
+    std::__iterator_category(__first),
+    std::__iterator_category(__result));
+    }
+# 4437 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator>
+    inline void
+    random_shuffle(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    {
+
+     
+
+      ;
+
+      if (__first != __last)
+ for (_RandomAccessIterator __i = __first + 1; __i != __last; ++__i)
+   {
+
+     _RandomAccessIterator __j = __first
+     + std::rand() % ((__i - __first) + 1);
+     if (__i != __j)
+       std::iter_swap(__i, __j);
+   }
+    }
+# 4472 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator, typename _RandomNumberGenerator>
+    void
+    random_shuffle(_RandomAccessIterator __first, _RandomAccessIterator __last,
+
+     _RandomNumberGenerator&& __rand)
+
+
+
+    {
+
+     
+
+      ;
+
+      if (__first == __last)
+ return;
+      for (_RandomAccessIterator __i = __first + 1; __i != __last; ++__i)
+ {
+   _RandomAccessIterator __j = __first + __rand((__i - __first) + 1);
+   if (__i != __j)
+     std::iter_swap(__i, __j);
+ }
+    }
+# 4512 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Predicate>
+    inline _ForwardIterator
+    partition(_ForwardIterator __first, _ForwardIterator __last,
+       _Predicate __pred)
+    {
+
+     
+
+     
+
+      ;
+
+      return std::__partition(__first, __last, __pred,
+         std::__iterator_category(__first));
+    }
+# 4545 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator>
+    inline void
+    partial_sort(_RandomAccessIterator __first,
+   _RandomAccessIterator __middle,
+   _RandomAccessIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+      ;
+
+      std::__partial_sort(__first, __middle, __last,
+     __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 4583 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    partial_sort(_RandomAccessIterator __first,
+   _RandomAccessIterator __middle,
+   _RandomAccessIterator __last,
+   _Compare __comp)
+    {
+
+     
+
+     
+
+
+      ;
+      ;
+      ;
+
+      std::__partial_sort(__first, __middle, __last,
+     __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+# 4619 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator>
+    inline void
+    nth_element(_RandomAccessIterator __first, _RandomAccessIterator __nth,
+  _RandomAccessIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+      ;
+
+      if (__first == __last || __nth == __last)
+ return;
+
+      std::__introselect(__first, __nth, __last,
+    std::__lg(__last - __first) * 2,
+    __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 4658 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    nth_element(_RandomAccessIterator __first, _RandomAccessIterator __nth,
+  _RandomAccessIterator __last, _Compare __comp)
+    {
+
+     
+
+     
+
+
+      ;
+      ;
+      ;
+
+      if (__first == __last || __nth == __last)
+ return;
+
+      std::__introselect(__first, __nth, __last,
+    std::__lg(__last - __first) * 2,
+    __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+# 4695 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator>
+    inline void
+    sort(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+
+      std::__sort(__first, __last, __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 4725 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    sort(_RandomAccessIterator __first, _RandomAccessIterator __last,
+  _Compare __comp)
+    {
+
+     
+
+     
+
+
+      ;
+      ;
+
+      std::__sort(__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator, typename _Compare>
+    _OutputIterator
+    __merge(_InputIterator1 __first1, _InputIterator1 __last1,
+     _InputIterator2 __first2, _InputIterator2 __last2,
+     _OutputIterator __result, _Compare __comp)
+    {
+      while (__first1 != __last1 && __first2 != __last2)
+ {
+   if (__comp(__first2, __first1))
+     {
+       *__result = *__first2;
+       ++__first2;
+     }
+   else
+     {
+       *__result = *__first1;
+       ++__first1;
+     }
+   ++__result;
+ }
+      return std::copy(__first2, __last2,
+         std::copy(__first1, __last1, __result));
+    }
+# 4786 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator>
+    inline _OutputIterator
+    merge(_InputIterator1 __first1, _InputIterator1 __last1,
+   _InputIterator2 __first2, _InputIterator2 __last2,
+   _OutputIterator __result)
+    {
+
+     
+     
+     
+
+     
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__merge(__first1, __last1,
+         __first2, __last2, __result,
+         __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 4836 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator, typename _Compare>
+    inline _OutputIterator
+    merge(_InputIterator1 __first1, _InputIterator1 __last1,
+   _InputIterator2 __first2, _InputIterator2 __last2,
+   _OutputIterator __result, _Compare __comp)
+    {
+
+     
+     
+     
+
+     
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__merge(__first1, __last1,
+    __first2, __last2, __result,
+    __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    __stable_sort(_RandomAccessIterator __first, _RandomAccessIterator __last,
+    _Compare __comp)
+    {
+      typedef typename iterator_traits<_RandomAccessIterator>::value_type
+ _ValueType;
+      typedef typename iterator_traits<_RandomAccessIterator>::difference_type
+ _DistanceType;
+
+      typedef _Temporary_buffer<_RandomAccessIterator, _ValueType> _TmpBuf;
+      _TmpBuf __buf(__first, __last);
+
+      if (__buf.begin() == 0)
+ std::__inplace_stable_sort(__first, __last, __comp);
+      else
+ std::__stable_sort_adaptive(__first, __last, __buf.begin(),
+        _DistanceType(__buf.size()), __comp);
+    }
+# 4900 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator>
+    inline void
+    stable_sort(_RandomAccessIterator __first, _RandomAccessIterator __last)
+    {
+
+     
+
+     
+
+      ;
+      ;
+
+      std::__stable_sort(__first, __last,
+        __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 4934 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _RandomAccessIterator, typename _Compare>
+    inline void
+    stable_sort(_RandomAccessIterator __first, _RandomAccessIterator __last,
+  _Compare __comp)
+    {
+
+     
+
+     
+
+
+      ;
+      ;
+
+      std::__stable_sort(__first, __last,
+        __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator,
+    typename _Compare>
+    _OutputIterator
+    __set_union(_InputIterator1 __first1, _InputIterator1 __last1,
+  _InputIterator2 __first2, _InputIterator2 __last2,
+  _OutputIterator __result, _Compare __comp)
+    {
+      while (__first1 != __last1 && __first2 != __last2)
+ {
+   if (__comp(__first1, __first2))
+     {
+       *__result = *__first1;
+       ++__first1;
+     }
+   else if (__comp(__first2, __first1))
+     {
+       *__result = *__first2;
+       ++__first2;
+     }
+   else
+     {
+       *__result = *__first1;
+       ++__first1;
+       ++__first2;
+     }
+   ++__result;
+ }
+      return std::copy(__first2, __last2,
+         std::copy(__first1, __last1, __result));
+    }
+# 5002 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator>
+    inline _OutputIterator
+    set_union(_InputIterator1 __first1, _InputIterator1 __last1,
+       _InputIterator2 __first2, _InputIterator2 __last2,
+       _OutputIterator __result)
+    {
+
+     
+     
+     
+
+     
+
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__set_union(__first1, __last1,
+    __first2, __last2, __result,
+    __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 5051 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator, typename _Compare>
+    inline _OutputIterator
+    set_union(_InputIterator1 __first1, _InputIterator1 __last1,
+       _InputIterator2 __first2, _InputIterator2 __last2,
+       _OutputIterator __result, _Compare __comp)
+    {
+
+     
+     
+     
+
+     
+
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__set_union(__first1, __last1,
+    __first2, __last2, __result,
+    __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator,
+    typename _Compare>
+    _OutputIterator
+    __set_intersection(_InputIterator1 __first1, _InputIterator1 __last1,
+         _InputIterator2 __first2, _InputIterator2 __last2,
+         _OutputIterator __result, _Compare __comp)
+    {
+      while (__first1 != __last1 && __first2 != __last2)
+ if (__comp(__first1, __first2))
+   ++__first1;
+ else if (__comp(__first2, __first1))
+   ++__first2;
+ else
+   {
+     *__result = *__first1;
+     ++__first1;
+     ++__first2;
+     ++__result;
+   }
+      return __result;
+    }
+# 5121 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator>
+    inline _OutputIterator
+    set_intersection(_InputIterator1 __first1, _InputIterator1 __last1,
+       _InputIterator2 __first2, _InputIterator2 __last2,
+       _OutputIterator __result)
+    {
+
+     
+     
+     
+
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__set_intersection(__first1, __last1,
+         __first2, __last2, __result,
+         __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 5169 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator, typename _Compare>
+    inline _OutputIterator
+    set_intersection(_InputIterator1 __first1, _InputIterator1 __last1,
+       _InputIterator2 __first2, _InputIterator2 __last2,
+       _OutputIterator __result, _Compare __comp)
+    {
+
+     
+     
+     
+
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__set_intersection(__first1, __last1,
+    __first2, __last2, __result,
+    __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator,
+    typename _Compare>
+    _OutputIterator
+    __set_difference(_InputIterator1 __first1, _InputIterator1 __last1,
+       _InputIterator2 __first2, _InputIterator2 __last2,
+       _OutputIterator __result, _Compare __comp)
+    {
+      while (__first1 != __last1 && __first2 != __last2)
+ if (__comp(__first1, __first2))
+   {
+     *__result = *__first1;
+     ++__first1;
+     ++__result;
+   }
+ else if (__comp(__first2, __first1))
+   ++__first2;
+ else
+   {
+     ++__first1;
+     ++__first2;
+   }
+      return std::copy(__first1, __last1, __result);
+    }
+# 5241 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator>
+    inline _OutputIterator
+    set_difference(_InputIterator1 __first1, _InputIterator1 __last1,
+     _InputIterator2 __first2, _InputIterator2 __last2,
+     _OutputIterator __result)
+    {
+
+     
+     
+     
+
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__set_difference(__first1, __last1,
+       __first2, __last2, __result,
+       __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 5291 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator, typename _Compare>
+    inline _OutputIterator
+    set_difference(_InputIterator1 __first1, _InputIterator1 __last1,
+     _InputIterator2 __first2, _InputIterator2 __last2,
+     _OutputIterator __result, _Compare __comp)
+    {
+
+     
+     
+     
+
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__set_difference(__first1, __last1,
+       __first2, __last2, __result,
+       __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator,
+    typename _Compare>
+    _OutputIterator
+    __set_symmetric_difference(_InputIterator1 __first1,
+          _InputIterator1 __last1,
+          _InputIterator2 __first2,
+          _InputIterator2 __last2,
+          _OutputIterator __result,
+          _Compare __comp)
+    {
+      while (__first1 != __last1 && __first2 != __last2)
+ if (__comp(__first1, __first2))
+   {
+     *__result = *__first1;
+     ++__first1;
+     ++__result;
+   }
+ else if (__comp(__first2, __first1))
+   {
+     *__result = *__first2;
+     ++__first2;
+     ++__result;
+   }
+ else
+   {
+     ++__first1;
+     ++__first2;
+   }
+      return std::copy(__first2, __last2,
+         std::copy(__first1, __last1, __result));
+    }
+# 5369 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator>
+    inline _OutputIterator
+    set_symmetric_difference(_InputIterator1 __first1, _InputIterator1 __last1,
+        _InputIterator2 __first2, _InputIterator2 __last2,
+        _OutputIterator __result)
+    {
+
+     
+     
+     
+
+     
+
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__set_symmetric_difference(__first1, __last1,
+     __first2, __last2, __result,
+     __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 5419 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _InputIterator1, typename _InputIterator2,
+    typename _OutputIterator, typename _Compare>
+    inline _OutputIterator
+    set_symmetric_difference(_InputIterator1 __first1, _InputIterator1 __last1,
+        _InputIterator2 __first2, _InputIterator2 __last2,
+        _OutputIterator __result,
+        _Compare __comp)
+    {
+
+     
+     
+     
+
+     
+
+     
+
+
+     
+
+
+      ;
+      ;
+      ;
+      ;
+
+      return std::__set_symmetric_difference(__first1, __last1,
+    __first2, __last2, __result,
+    __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _ForwardIterator, typename _Compare>
+    constexpr
+    _ForwardIterator
+    __min_element(_ForwardIterator __first, _ForwardIterator __last,
+    _Compare __comp)
+    {
+      if (__first == __last)
+ return __first;
+      _ForwardIterator __result = __first;
+      while (++__first != __last)
+ if (__comp(__first, __result))
+   __result = __first;
+      return __result;
+    }
+# 5472 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator>
+    constexpr
+    _ForwardIterator
+    inline min_element(_ForwardIterator __first, _ForwardIterator __last)
+    {
+
+     
+     
+
+      ;
+      ;
+
+      return std::__min_element(__first, __last,
+    __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 5497 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Compare>
+    constexpr
+    inline _ForwardIterator
+    min_element(_ForwardIterator __first, _ForwardIterator __last,
+  _Compare __comp)
+    {
+
+     
+     
+
+
+      ;
+      ;
+
+      return std::__min_element(__first, __last,
+    __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+  template<typename _ForwardIterator, typename _Compare>
+    constexpr
+    _ForwardIterator
+    __max_element(_ForwardIterator __first, _ForwardIterator __last,
+    _Compare __comp)
+    {
+      if (__first == __last) return __first;
+      _ForwardIterator __result = __first;
+      while (++__first != __last)
+ if (__comp(__result, __first))
+   __result = __first;
+      return __result;
+    }
+# 5536 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator>
+    constexpr
+    inline _ForwardIterator
+    max_element(_ForwardIterator __first, _ForwardIterator __last)
+    {
+
+     
+     
+
+      ;
+      ;
+
+      return std::__max_element(__first, __last,
+    __gnu_cxx::__ops::__iter_less_iter());
+    }
+# 5561 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/stl_algo.h" 3
+  template<typename _ForwardIterator, typename _Compare>
+    constexpr
+    inline _ForwardIterator
+    max_element(_ForwardIterator __first, _ForwardIterator __last,
+  _Compare __comp)
+    {
+
+     
+     
+
+
+      ;
+      ;
+
+      return std::__max_element(__first, __last,
+    __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    }
+
+
+}
+# 63 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/algorithm" 2 3
+# 5 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 2
+
+
+# 6 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 using namespace std;
 
-struct CSR {
- vector<double> val;
- vector<int> col_ind;
- vector<int> row_ptr;
+struct COO_unit
+{
+    int row;
+    int col;
+    data_t data;
+};
+struct COO
+{
+    vector<COO_unit> units;
 };
 
-CSR assemble_csr_matrix(std::string filePath){
- int M, N, L;
- CSR matrix;
- std::ifstream fin(filePath);
+COO assemble_COO_matrix(std::string filePath)
+{
+    int M, N, L;
+    COO matrix;
+    std::ifstream fin(filePath);
+    while (fin.peek() == '%')
+        fin.ignore(2048, '\n');
+    fin >> M >> N >> L;
 
- while (fin.peek() == '%') fin.ignore(2048, '\n');
-
- fin >> M >> N >> L;
-
- int last_row = 1;
- matrix.row_ptr.push_back(1);
- for (int l = 0; l < L; l++){
-  int row, col;
-  double data;
-  fin >> row >> col >> data;
-  matrix.col_ind.push_back(col);
-  matrix.val.push_back(data);
-  if (row > last_row){
-   last_row = row;
-   matrix.row_ptr.push_back(matrix.col_ind.size());
-  }
- }
- matrix.row_ptr.push_back(matrix.col_ind.size() + 1);
- fin.close();
- return matrix;
+    for (int l = 0; l < L; l++)
+    {
+        int row, col;
+        double data;
+        fin >> row >> col >> data;
+        matrix.units.push_back({row - 1, col - 1, data});
+    }
+    sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
+         { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
+    fin.close();
+    return matrix;
 }
 
-CSR assemble_simetric_csr_matrix(std::string filePath){
- int M, N, L;
- vector<int> rows, cols;
- vector<double> data;
- CSR matrix;
- std::ifstream fin(filePath);
+COO assemble_simetric_COO_matrix(std::string filePath)
+{
+    int M, N, L;
+    vector<int> rows, cols;
+    vector<double> data;
+    COO matrix;
+    std::ifstream fin(filePath);
+    while (fin.peek() == '%')
+        fin.ignore(2048, '\n');
+    fin >> M >> N >> L;
+    for (int l = 0; l < L; l++)
+    {
 
- while (fin.peek() == '%') fin.ignore(2048, '\n');
+        int i, j;
+        double Aij;
+        fin >> i >> j >> Aij;
+        matrix.units.push_back({i-1, j-1, Aij});
+    }
+    for (int l = 0; l < L; l++)
+    {
+        if (matrix.units[l].row != matrix.units[l].col)
+            matrix.units.push_back({matrix.units[l].col, matrix.units[l].row, matrix.units[l].data});
+    }
+    sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
+         { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
+    fin.close();
+    return matrix;
+}
 
- fin >> M >> N >> L;
- matrix.row_ptr.push_back(0);
- for (int l = 0; l < L; l++){
-  int row, col;
-  double d;
-  fin >> row >> col >> d;
-  rows.push_back(row);
-  cols.push_back(col);
-  data.push_back(d);
- }
- fin.close();
- for (int l = 1; l <= M; l++){
-  for (int k = 0; k < L; k++){
-   if (cols[k] == l){
-    matrix.col_ind.push_back(rows[k]);
-    matrix.val.push_back(data[k]);
-   }
-   else if (rows[k] == l){
-    matrix.col_ind.push_back(cols[k]);
-    matrix.val.push_back(data[k]);
-   }
-  }
-  matrix.row_ptr.push_back(matrix.col_ind.size());
- }
+void print_COO(const COO& coo, int numRows, int numCols) {
+    std::vector<std::vector<double>> denseMatrix(numRows, std::vector<double>(numCols, 0.0));
 
- matrix.row_ptr.push_back(matrix.col_ind.size() + 1);
+    for (const auto& unit : coo.units) {
+        denseMatrix[unit.row][unit.col] = unit.data;
+    }
 
- return matrix;
+    for (const auto& row : denseMatrix) {
+        for (const auto& element : row) {
+            std::cout << element << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+
+csr_t_1 COO_to_CSR1(COO matrix)
+{
+    csr_t_1 csr;
+    csr.rowptr = new int[M + 1];
+    csr.colind = new int[M * P];
+    csr.data = new data_t[M * P];
+    int row = 0;
+    int rowptr = 0;
+    csr.rowptr[row] = rowptr;
+    for (int i = 0; i <= matrix.units.size(); i++)
+    {
+        if (matrix.units[i].row == row)
+        {
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+        else
+        {
+            row++;
+            csr.rowptr[row] = rowptr;
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+    }
+    return csr;
+}
+csr_t_2 COO_to_CSR2(COO matrix)
+{
+    csr_t_2 csr;
+    csr.rowptr = new int[P + 1];
+    csr.colind = new int[P * N];
+    csr.data = new data_t[P * N];
+
+    int row = 0;
+    int rowptr = 0;
+    csr.rowptr[row] = rowptr;
+    for (int i = 0; i <= matrix.units.size(); i++)
+    {
+        if (matrix.units[i].row == row)
+        {
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+        else
+        {
+            row++;
+            csr.rowptr[row] = rowptr;
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+    }
+    return csr;
+}
+csr_out_t COO_to_CSR3(COO matrix)
+{
+    csr_out_t csr;
+    csr.rowptr = new int[M + 1];
+    csr.colind = new int[M * N];
+    csr.data = new data_t[M * N];
+    int row = 0;
+    int rowptr = 0;
+    csr.rowptr[row] = rowptr;
+    for (int i = 0; i <= matrix.units.size(); i++)
+    {
+        if (matrix.units[i].row == row)
+        {
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+        else
+        {
+            row++;
+            csr.rowptr[row] = rowptr;
+            csr.colind[rowptr] = matrix.units[i].col;
+            csr.data[rowptr] = matrix.units[i].data;
+            rowptr++;
+        }
+    }
+    return csr;
+}
+
+csr_out_t new_csr_out_t()
+{
+    csr_out_t csr;
+    csr.rowptr = new int[M + 1];
+    csr.colind = new int[M * N];
+    csr.data = new data_t[M * N];
+
+    if (!csr.rowptr || !csr.colind || !csr.data)
+    {
+        cout << "Memory allocation failed" << endl;
+        exit(1);
+    }
+    return csr;
+}
+
+
+bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
+{
+    bool equal = true;
+    for (int i = 0; i < M; i++)
+    {
+        if (z_csr.rowptr[i] != z_csr2.rowptr[i])
+        {
+            equal = false;
+            break;
+        }
+    }
+    cout << "rowptr is equal: " << equal << endl;
+    for (int i = 0; i < z_csr.rowptr[M]; i++)
+    {
+        if (z_csr.colind[i] != z_csr2.colind[i])
+        {
+            equal = false;
+            break;
+        }
+    }
+    cout << "colind is equal: " << equal << endl;
+    for (int i = 0; i < z_csr.rowptr[M]; i++)
+    {
+
+        if (abs(z_csr.data[i] - z_csr2.data[i]) > 0.01)
+        {
+            equal = false;
+            break;
+        }
+    }
+    cout << "data is equal: " << equal << endl;
+    return equal;
 }
 
 void print_csr_out_t(csr_out_t z_csr)
@@ -65952,91 +71539,70 @@ void test_append_row()
 
     csr_out_t out_csr;
     out_csr.rowptr[0] = 0;
-
     hls::vector<data_t, N> row = (data_t)1;
     for (int i = 0; i < M; i++)
     {
         append_row(&out_csr, row, i);
     }
-
     std::cout << "out_csr = " << std::endl;
     print_csr_out_t(out_csr);
 }
 
-void synth_test()
+void basic_test()
 {
-# 196 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-    csr_t_1 A = {
-        .rowptr = {0, 2, 4, 7, 9},
-        .colind = {0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+# 374 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+    csr_out_t z_csr;
+    z_csr.rowptr[0] = 0;
 
-    csr_t_2 B = {
-        .rowptr = {0, 2, 4, 5, 8, 9},
-        .colind = {0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = {1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
-# 225 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-    csr_out_t z_csr = row_product(A, B);
     print_csr_out_t(z_csr);
 }
 
-void real_matrix_test(){
-# 253 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-    CSR A = assemble_simetric_csr_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
-    CSR B = assemble_simetric_csr_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
+void synth_test()
+{
+# 405 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+    csr_out_t csr_out = new_csr_out_t();
+    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
+    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
+    COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
 
-    csr_out_t A_csr;
-    csr_out_t B_csr;
-    int i = 0;
-    while (A.row_ptr.empty() == false)
-    {
-        A_csr.rowptr[i] = A.row_ptr.front();
-        A.row_ptr.erase(A.row_ptr.begin());
-    }
-    i = 0;
-    while (A.col_ind.empty() == false)
-    {
-        A_csr.colind[i] = A.col_ind.front();
-        A.col_ind.erase(A.col_ind.begin());
-    }
-    i = 0;
-    while (A.val.empty() == false)
-    {
-
-        A_csr.data[i] = A.val.front();
-        A.val.erase(A.val.begin());
-    }
-    i = 0;
-    while (B.row_ptr.empty() == false)
-    {
-        B_csr.rowptr[i] = B.row_ptr.front();
-        B.row_ptr.erase(B.row_ptr.begin());
-    }
-    i = 0;
-    while (B.col_ind.empty() == false)
-    {
-        B_csr.colind[i] = B.col_ind.front();
-        B.col_ind.erase(B.col_ind.begin());
-    }
-    i = 0;
-    while (B.val.empty() == false)
-    {
-        B_csr.data[i] = B.val.front();
-        B.val.erase(B.val.begin());
-    }
-
-    print_csr_out_t(A_csr);
-    cout << endl;
-    print_csr_out_t(B_csr);
+    cout << "COO A" << endl;
+    print_COO(coo_A, M, P);
+    cout << "-------------------" << endl;
+    cout << "COO B" << endl;
+    print_COO(coo_B , P, N);
+    cout << "-------------------" << endl;
 
 
 
+
+
+    csr_t_1 csr_A = COO_to_CSR1(coo_A);
+    csr_t_2 csr_B = COO_to_CSR2(coo_B);
+    csr_out_t csr_C = COO_to_CSR3(coo_C);
+    cout << "CSR C" << endl;
+    print_csr_out_t(csr_C);
+# 436 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+    row_product(&csr_A.rowptr[0], &csr_A.colind[0], &csr_A.data[0], &csr_B.rowptr[0], &csr_B.colind[0], &csr_B.data[0], &csr_out.rowptr[0], &csr_out.colind[0], &csr_out.data[0]);
+
+    cout << "CSR out" << endl;
+    print_csr_out_t(csr_out);
+    cout << "-------------------" << endl;
+
+    cout << "CSR out == CSR C ?" << endl;
+    if (compare_csr_out_t(csr_out, csr_C))
+    {
+        cout << "OK" << endl;
+    }
+    else
+    {
+        cout << "FAIL" << endl;
+    }
 
 }
 
 int main()
 {
-    synth_test();
 
+    synth_test();
     return 0;
 }
