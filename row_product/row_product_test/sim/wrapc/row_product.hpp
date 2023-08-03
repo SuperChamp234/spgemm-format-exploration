@@ -65,7 +65,6 @@ struct csr_out_t {
     data_t* data;
 };
 
-
 /**
  * @brief Extracts a row from a CSR matrix and stores it in a vector.
  * 

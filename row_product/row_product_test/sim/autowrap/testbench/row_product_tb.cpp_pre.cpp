@@ -60325,9 +60325,9 @@ struct csr_out_t {
     int* colind;
     data_t* data;
 };
-# 76 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 75 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row);
-# 86 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 85 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data);
 
 
@@ -60345,9 +60345,9 @@ void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row);
 
 
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
-# 111 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 110 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
-# 126 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 125 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 2 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 2
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/vector" 1 3
@@ -69746,15 +69746,28 @@ void basic_test()
 void synth_test()
 {
 # 397 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-    csr_out_t csr_out = new_csr_out_t();
     COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
     COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
     COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
-# 413 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+
+     cout << "COO A" << endl;
+
+
+     cout << "COO B" << endl;
+
+
+     cout << "COO C" << endl;
+
+
+
+
     csr_t_1 csr_A = COO_to_CSR1(coo_A);
     csr_t_2 csr_B = COO_to_CSR2(coo_B);
     csr_out_t csr_C = COO_to_CSR3(coo_C);
-# 428 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+    cout << "CSR C" << endl;
+    print_csr_out_t(csr_C);
+# 427 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+    csr_out_t csr_out = new_csr_out_t();
     row_product(csr_A.rowptr, csr_A.colind, csr_A.data, csr_B.rowptr, csr_B.colind, csr_B.data, csr_out.rowptr, csr_out.colind, csr_out.data);
 
 

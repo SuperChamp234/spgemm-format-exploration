@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'row_product'" level="0">
-<item name = "Date">Sat Jul 22 18:38:40 2023
+<item name = "Date">Fri Aug  4 00:56:40 2023
 </item>
 <item name = "Version">2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)</item>
 <item name = "Project">row_product</item>
@@ -31,7 +31,7 @@
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
-<column name="Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc_U0">Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc, ?, ?, ?, ?, ?, ?, none</column>
+<column name="Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0">Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc, ?, ?, ?, ?, ?, ?, none</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
@@ -62,7 +62,7 @@
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="1">
 <keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
-<column name="Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc_U0">Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc, 0, 0, 5221, 16947, 0</column>
+<column name="Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0">Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc, 0, 0, 5221, 16947, 0</column>
 <column name="control_s_axi_U">control_s_axi, 0, 0, 36, 40, 0</column>
 <column name="x_colind_m_axi_U">x_colind_m_axi, 2, 0, 512, 580, 0</column>
 <column name="x_data_m_axi_U">x_data_m_axi, 2, 0, 512, 580, 0</column>

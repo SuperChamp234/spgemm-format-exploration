@@ -7,11 +7,8 @@ target triple = "fpga64-xilinx-none"
 %struct.ap_fixed_base = type { %struct.ssdm_int }
 %struct.ssdm_int = type { i32 }
 
-; Function Attrs: argmemonly nounwind
-declare void @llvm.memcpy.p0i8.p0i8.i64(i8* nocapture writeonly, i8* nocapture readonly, i64, i1) #0
-
 ; Function Attrs: noinline
-define void @apatb_row_product_ir(i32* %x_rowptr, i32* %x_colind, %struct.ap_fixed* %x_data, i32* %y_rowptr, i32* %y_colind, %struct.ap_fixed* %y_data, i32* %z_rowptr, i32* %z_colind, %struct.ap_fixed* %z_data) local_unnamed_addr #1 {
+define void @apatb_row_product_ir(i32* %x_rowptr, i32* %x_colind, %struct.ap_fixed* %x_data, i32* %y_rowptr, i32* %y_colind, %struct.ap_fixed* %y_data, i32* %z_rowptr, i32* %z_colind, %struct.ap_fixed* %z_data) local_unnamed_addr #0 {
 entry:
   %malloccall = tail call i8* @malloc(i64 4096)
   %x_rowptr_copy = bitcast i8* %malloccall to [1024 x i32]*
@@ -67,7 +64,7 @@ entry:
 declare noalias i8* @malloc(i64) local_unnamed_addr
 
 ; Function Attrs: noinline
-define internal fastcc void @copy_in([1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias) unnamed_addr #2 {
+define internal fastcc void @copy_in([1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias) unnamed_addr #1 {
 entry:
   call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %1, [1024 x i32]* %0)
   call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %3, [1024 x i32]* %2)
@@ -82,7 +79,7 @@ entry:
 }
 
 ; Function Attrs: argmemonly noinline
-define internal fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* noalias, [1024 x i32]* noalias readonly) unnamed_addr #3 {
+define internal fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* noalias, [1024 x i32]* noalias readonly) unnamed_addr #2 {
 entry:
   %2 = icmp eq [1024 x i32]* %0, null
   %3 = icmp eq [1024 x i32]* %1, null
@@ -106,6 +103,9 @@ for.loop:                                         ; preds = %for.loop, %copy
 ret:                                              ; preds = %for.loop, %entry
   ret void
 }
+
+; Function Attrs: argmemonly nounwind
+declare void @llvm.memcpy.p0i8.p0i8.i64(i8* nocapture writeonly, i8* nocapture readonly, i64, i1) #3
 
 ; Function Attrs: noinline
 define internal fastcc void @onebyonecpy_hls.p0a1024struct.ap_fixed([1024 x %struct.ap_fixed]* noalias, [1024 x %struct.ap_fixed]* noalias) unnamed_addr #4 {
@@ -308,10 +308,10 @@ declare void @fpga_fifo_pop_4(i8*, i8*)
 
 declare void @fpga_fifo_push_4(i8*, i8*)
 
-attributes #0 = { argmemonly nounwind }
-attributes #1 = { noinline "fpga.wrapper.func"="wrapper" }
-attributes #2 = { noinline "fpga.wrapper.func"="copyin" }
-attributes #3 = { argmemonly noinline "fpga.wrapper.func"="onebyonecpy_hls" }
+attributes #0 = { noinline "fpga.wrapper.func"="wrapper" }
+attributes #1 = { noinline "fpga.wrapper.func"="copyin" }
+attributes #2 = { argmemonly noinline "fpga.wrapper.func"="onebyonecpy_hls" }
+attributes #3 = { argmemonly nounwind }
 attributes #4 = { noinline "fpga.wrapper.func"="onebyonecpy_hls" }
 attributes #5 = { argmemonly noinline "fpga.wrapper.func"="streamcpy_hls" }
 attributes #6 = { noinline "fpga.wrapper.func"="copyout" }

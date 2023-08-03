@@ -394,9 +394,9 @@ C:
     */
 
     // read COO matrix from file
-    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
-    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
-    COO coo_C = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/output.mtx");
+    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
+    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
+    COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
 
      cout << "COO A" << endl;
     // print_COO(coo_A, M, P);

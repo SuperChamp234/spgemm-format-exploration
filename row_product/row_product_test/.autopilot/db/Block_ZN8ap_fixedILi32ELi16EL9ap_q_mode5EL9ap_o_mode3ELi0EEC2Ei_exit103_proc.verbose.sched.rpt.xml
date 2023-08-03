@@ -1,7 +1,7 @@
 <profile>
 
-<section name = "Vitis HLS Report for 'Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc'" level="0">
-<item name = "Date">Sat Jul 22 18:38:37 2023
+<section name = "Vitis HLS Report for 'Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc'" level="0">
+<item name = "Date">Fri Aug  4 00:56:36 2023
 </item>
 <item name = "Version">2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)</item>
 <item name = "Project">row_product</item>
@@ -37,13 +37,13 @@
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
 <column name="- Loop 1">5, 5, 2, 1, 1, 5, yes</column>
 <column name="- Loop 2">5, 5, 2, 1, 1, 5, yes</column>
-<column name="- VITIS_LOOP_132_1">?, ?, ?, -, -, 5, no</column>
-<column name=" + VITIS_LOOP_134_2">?, ?, ?, -, -, 5, no</column>
-<column name="  ++ VITIS_LOOP_41_1">?, ?, 12, 1, 1, ?, yes</column>
-<column name="  ++ VITIS_LOOP_13_1">103, 103, 19, 18, 1, 5, yes</column>
-<column name="  ++ VITIS_LOOP_134_2.3">10, 10, 2, -, -, 5, no</column>
-<column name=" + VITIS_LOOP_80_1">12, 12, 9, 1, 1, 5, yes</column>
-<column name=" + VITIS_LOOP_132_1.3">5, 5, 2, 1, 1, 5, yes</column>
+<column name="- VITIS_LOOP_119_1">?, ?, ?, -, -, 5, no</column>
+<column name=" + VITIS_LOOP_121_2">?, ?, ?, -, -, 5, no</column>
+<column name="  ++ VITIS_LOOP_31_1">?, ?, 12, 1, 1, ?, yes</column>
+<column name="  ++ VITIS_LOOP_9_1">103, 103, 19, 18, 1, 5, yes</column>
+<column name="  ++ VITIS_LOOP_121_2.3">10, 10, 2, -, -, 5, no</column>
+<column name=" + VITIS_LOOP_67_1">12, 12, 9, 1, 1, 5, yes</column>
+<column name=" + VITIS_LOOP_119_1.3">5, 5, 2, 1, 1, 5, yes</column>
 </table>
 </item>
 </section>

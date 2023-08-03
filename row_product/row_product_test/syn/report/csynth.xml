@@ -5167,8 +5167,8 @@
             <ModuleName>row_product</ModuleName>
             <InstancesList>
                 <Instance>
-                    <InstName>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc_U0</InstName>
-                    <ModuleName>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc</ModuleName>
+                    <InstName>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0</InstName>
+                    <ModuleName>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc</ModuleName>
                     <IsCompInst>true</IsCompInst>
                     <ID>66</ID>
                 </Instance>
@@ -5177,7 +5177,7 @@
     </RTLDesignHierarchy>
     <ModuleInformation>
         <Module>
-            <Name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc</Name>
+            <Name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc</Name>
             <PerformanceEstimates>
                 <SummaryOfTimingAnalysis>
                     <TargetClockPeriod>10.00</TargetClockPeriod>
@@ -5211,62 +5211,62 @@
                         <PipelineII>1</PipelineII>
                         <PipelineDepth>2</PipelineDepth>
                     </Loop2>
-                    <VITIS_LOOP_132_1>
-                        <Name>VITIS_LOOP_132_1</Name>
+                    <VITIS_LOOP_119_1>
+                        <Name>VITIS_LOOP_119_1</Name>
                         <TripCount>5</TripCount>
                         <Latency>undef</Latency>
                         <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
                         <IterationLatency>undef</IterationLatency>
                         <PipelineDepth>undef</PipelineDepth>
-                        <VITIS_LOOP_134_2>
-                            <Name>VITIS_LOOP_134_2</Name>
+                        <VITIS_LOOP_121_2>
+                            <Name>VITIS_LOOP_121_2</Name>
                             <TripCount>5</TripCount>
                             <Latency>undef</Latency>
                             <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
                             <IterationLatency>undef</IterationLatency>
                             <PipelineDepth>undef</PipelineDepth>
-                            <VITIS_LOOP_41_1>
-                                <Name>VITIS_LOOP_41_1</Name>
+                            <VITIS_LOOP_31_1>
+                                <Name>VITIS_LOOP_31_1</Name>
                                 <TripCount>undef</TripCount>
                                 <Latency>undef</Latency>
                                 <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
                                 <PipelineII>1</PipelineII>
                                 <PipelineDepth>12</PipelineDepth>
-                            </VITIS_LOOP_41_1>
-                            <VITIS_LOOP_13_1>
-                                <Name>VITIS_LOOP_13_1</Name>
+                            </VITIS_LOOP_31_1>
+                            <VITIS_LOOP_9_1>
+                                <Name>VITIS_LOOP_9_1</Name>
                                 <TripCount>5</TripCount>
                                 <Latency>103</Latency>
                                 <AbsoluteTimeLatency>1.030 us</AbsoluteTimeLatency>
                                 <PipelineII>18</PipelineII>
                                 <PipelineDepth>19</PipelineDepth>
-                            </VITIS_LOOP_13_1>
-                            <VITIS_LOOP_134_2.3>
-                                <Name>VITIS_LOOP_134_2.3</Name>
+                            </VITIS_LOOP_9_1>
+                            <VITIS_LOOP_121_2.3>
+                                <Name>VITIS_LOOP_121_2.3</Name>
                                 <TripCount>5</TripCount>
                                 <Latency>10</Latency>
                                 <AbsoluteTimeLatency>0.100 us</AbsoluteTimeLatency>
                                 <IterationLatency>2</IterationLatency>
                                 <PipelineDepth>2</PipelineDepth>
-                            </VITIS_LOOP_134_2.3>
-                        </VITIS_LOOP_134_2>
-                        <VITIS_LOOP_80_1>
-                            <Name>VITIS_LOOP_80_1</Name>
+                            </VITIS_LOOP_121_2.3>
+                        </VITIS_LOOP_121_2>
+                        <VITIS_LOOP_67_1>
+                            <Name>VITIS_LOOP_67_1</Name>
                             <TripCount>5</TripCount>
                             <Latency>12</Latency>
                             <AbsoluteTimeLatency>0.120 us</AbsoluteTimeLatency>
                             <PipelineII>1</PipelineII>
                             <PipelineDepth>9</PipelineDepth>
-                        </VITIS_LOOP_80_1>
-                        <VITIS_LOOP_132_1.3>
-                            <Name>VITIS_LOOP_132_1.3</Name>
+                        </VITIS_LOOP_67_1>
+                        <VITIS_LOOP_119_1.3>
+                            <Name>VITIS_LOOP_119_1.3</Name>
                             <TripCount>5</TripCount>
                             <Latency>5</Latency>
                             <AbsoluteTimeLatency>50.000 ns</AbsoluteTimeLatency>
                             <PipelineII>1</PipelineII>
                             <PipelineDepth>2</PipelineDepth>
-                        </VITIS_LOOP_132_1.3>
-                    </VITIS_LOOP_132_1>
+                        </VITIS_LOOP_119_1.3>
+                    </VITIS_LOOP_119_1>
                 </SummaryOfLoopLatency>
             </PerformanceEstimates>
             <AreaEstimates>
@@ -5291,7 +5291,7 @@
             <InterfaceSummary>
                 <RtlPorts>
                     <name>ap_clk</name>
-                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc</Object>
+                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc</Object>
                     <Type>return value</Type>
                     <Scope/>
                     <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -5302,7 +5302,7 @@
                 </RtlPorts>
                 <RtlPorts>
                     <name>ap_rst</name>
-                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc</Object>
+                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc</Object>
                     <Type>return value</Type>
                     <Scope/>
                     <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -5313,7 +5313,7 @@
                 </RtlPorts>
                 <RtlPorts>
                     <name>ap_start</name>
-                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc</Object>
+                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc</Object>
                     <Type>return value</Type>
                     <Scope/>
                     <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -5324,7 +5324,7 @@
                 </RtlPorts>
                 <RtlPorts>
                     <name>ap_done</name>
-                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc</Object>
+                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc</Object>
                     <Type>return value</Type>
                     <Scope/>
                     <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -5335,7 +5335,7 @@
                 </RtlPorts>
                 <RtlPorts>
                     <name>ap_continue</name>
-                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc</Object>
+                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc</Object>
                     <Type>return value</Type>
                     <Scope/>
                     <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -5346,7 +5346,7 @@
                 </RtlPorts>
                 <RtlPorts>
                     <name>ap_idle</name>
-                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc</Object>
+                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc</Object>
                     <Type>return value</Type>
                     <Scope/>
                     <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -5357,7 +5357,7 @@
                 </RtlPorts>
                 <RtlPorts>
                     <name>ap_ready</name>
-                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc</Object>
+                    <Object>Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc</Object>
                     <Type>return value</Type>
                     <Scope/>
                     <IOProtocol>ap_ctrl_hs</IOProtocol>
@@ -15764,14 +15764,20 @@
             <item name="Burst Summary">
                 <table>
                     <keys size="3">HW Interface, Message, Location</keys>
-                    <column name="m_axi_x_colind">Multiple burst reads of variable length and bit width 32 in loop 'VITIS_LOOP_41_1', row_product/src/row_product.cpp:41:22</column>
+                    <column name="m_axi_x_colind">Multiple burst reads of variable length and bit width 32 in loop 'VITIS_LOOP_31_1', row_product/src/row_product.cpp:31:22</column>
+                    <column name="m_axi_y_rowptr">Multiple burst reads of length 2 and bit width 32, row_product/src/row_product.cpp:6:21</column>
                 </table>
             </item>
             <item name="Burst Missed">
                 <table>
                     <keys size="5">HW Interface, Variable, Problem, Resolution, Location</keys>
-                    <column name="m_axi_y_rowptr">y_rowptr, Could not widen since Type i32 size is greater than or equal to alignment 0, , bytes</column>
-                    <column name="m_axi_x_colind">x_colind, Could not widen since Type i32 size is greater than or equal to alignment 0(bytes), , row_product/src/row_product.cpp:41:22</column>
+                    <column name="m_axi_x_data">x_data, Access extracted_scalar.V is in the conditional branch, 214-232, row_product/src/row_product.cpp:36:22</column>
+                    <column name="m_axi_y_colind">y_colind, Could not analyze pattern, 214-229, row_product/src/row_product.cpp:11:23</column>
+                    <column name="m_axi_y_data">y_data, Access load is in the conditional branch, 214-232, row_product/src/row_product.cpp:14:27</column>
+                    <column name="m_axi_z_colind">z_colind, Access store is in the conditional branch, 214-232, row_product/src/row_product.cpp:73:32</column>
+                    <column name="m_axi_z_data">z_data, Access store is in the conditional branch, 214-232, row_product/src/row_product.cpp:74:30</column>
+                    <column name="m_axi_y_rowptr">y_rowptr, Could not widen since Type i32 size is greater than or equal to alignment 0(bytes), , row_product/src/row_product.cpp:6:21</column>
+                    <column name="m_axi_x_colind">x_colind, Could not widen since Type i32 size is greater than or equal to alignment 0(bytes), , row_product/src/row_product.cpp:31:22</column>
                 </table>
             </item>
         </section>

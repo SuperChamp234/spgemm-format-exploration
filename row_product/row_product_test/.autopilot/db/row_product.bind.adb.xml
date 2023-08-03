@@ -25,7 +25,7 @@
 
 <Node id="31" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="32" op_3_bw="32" op_4_bw="32" op_5_bw="32" op_6_bw="32" op_7_bw="32" op_8_bw="32" op_9_bw="32">
 <![CDATA[
-_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:21 %call_ln0 = call void @Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc, i32 %z_rowptr, i32 %x_rowptr, i32 %x_colind, i32 %x_data, i32 %y_rowptr, i32 %y_data, i32 %y_colind, i32 %z_colind, i32 %z_data
+_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:21 %call_ln0 = call void @Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc, i32 %z_rowptr, i32 %x_rowptr, i32 %x_colind, i32 %x_data, i32 %y_rowptr, i32 %y_data, i32 %y_colind, i32 %z_colind, i32 %z_data
 
 ]]></Node>
 <StgValue><ssdm name="call_ln0"/></StgValue>
@@ -358,7 +358,7 @@ _ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:20 %specinterfac
 
 <Node id="31" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="32" op_3_bw="32" op_4_bw="32" op_5_bw="32" op_6_bw="32" op_7_bw="32" op_8_bw="32" op_9_bw="32">
 <![CDATA[
-_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:21 %call_ln0 = call void @Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc, i32 %z_rowptr, i32 %x_rowptr, i32 %x_colind, i32 %x_data, i32 %y_rowptr, i32 %y_data, i32 %y_colind, i32 %z_colind, i32 %z_data
+_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:21 %call_ln0 = call void @Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc, i32 %z_rowptr, i32 %x_rowptr, i32 %x_colind, i32 %x_data, i32 %y_rowptr, i32 %y_data, i32 %y_colind, i32 %z_colind, i32 %z_data
 
 ]]></Node>
 <StgValue><ssdm name="call_ln0"/></StgValue>
@@ -373,10 +373,10 @@ _ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:21 %call_ln0 = c
 
 <Node id="32" bw="0">
 <![CDATA[
-_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:22 %ret_ln147 = ret
+_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:22 %ret_ln134 = ret
 
 ]]></Node>
-<StgValue><ssdm name="ret_ln147"/></StgValue>
+<StgValue><ssdm name="ret_ln134"/></StgValue>
 </operation>
 </state>
 </state_list>
@@ -414,7 +414,7 @@ _ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:22 %ret_ln147 = 
 
 
 <dataflows>
-<dataflow id="39" from="Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc" to="call_ln0" fromId="38" toId="3">
+<dataflow id="39" from="Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc" to="call_ln0" fromId="38" toId="3">
 </dataflow>
 <dataflow id="40" from="z_rowptr" to="call_ln0" fromId="35" toId="3">
 </dataflow>
@@ -822,7 +822,7 @@ _ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit:22 %ret_ln147 = 
 </dataflow>
 <dataflow id="265" from="empty_8" to="specinterface_ln0" fromId="55" toId="24">
 </dataflow>
-<dataflow id="266" from="Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc" to="call_ln0" fromId="38" toId="25">
+<dataflow id="266" from="Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc" to="call_ln0" fromId="38" toId="25">
 </dataflow>
 <dataflow id="267" from="z_rowptr" to="call_ln0" fromId="35" toId="25">
 </dataflow>

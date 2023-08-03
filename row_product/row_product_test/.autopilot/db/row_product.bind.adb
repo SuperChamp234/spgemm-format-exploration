@@ -31,7 +31,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>1253013328</coreId>
+						<coreId>0</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -64,7 +64,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>113</coreId>
+						<coreId>129</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -130,7 +130,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>129</coreId>
+						<coreId>132</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -163,7 +163,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>132</coreId>
+						<coreId>177</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -196,7 +196,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>132</coreId>
+						<coreId>1600734514</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -229,7 +229,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>177</coreId>
+						<coreId>132</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -262,7 +262,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>574452846</coreId>
+						<coreId>433</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -295,7 +295,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>0</coreId>
+						<coreId>641</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -364,10 +364,10 @@
 					<Obj>
 						<type>0</type>
 						<id>32</id>
-						<name>_ln147</name>
+						<name>_ln134</name>
 						<fileName>row_product/src/row_product.cpp</fileName>
 						<fileDirectory>/home/leoh/Documents/spgemm-format-exploration</fileDirectory>
-						<lineNumber>147</lineNumber>
+						<lineNumber>134</lineNumber>
 						<contextFuncName>row_product</contextFuncName>
 						<contextNormFuncName>row_product</contextNormFuncName>
 						<inlineStackInfo>
@@ -383,7 +383,7 @@
 											<first>row_product/src/row_product.cpp</first>
 											<second>row_product</second>
 										</first>
-										<second>147</second>
+										<second>134</second>
 									</item>
 								</second>
 							</item>
@@ -420,7 +420,7 @@
 					<Obj>
 						<type>2</type>
 						<id>34</id>
-						<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc</name>
+						<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc</name>
 						<fileName></fileName>
 						<fileDirectory></fileDirectory>
 						<lineNumber>0</lineNumber>
@@ -436,12 +436,12 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>433</coreId>
+						<coreId>1852142194</coreId>
 					</Obj>
 					<bitwidth>0</bitwidth>
 				</Value>
 				<const_type>6</const_type>
-				<content>&lt;constant:Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit111_proc&gt;</content>
+				<content>&lt;constant:Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc&gt;</content>
 			</item>
 		</consts>
 		<blocks class_id="17" tracking_level="0" version="0">
@@ -658,7 +658,7 @@
 					<item_version>0</item_version>
 					<item class_id="28" tracking_level="1" version="0" object_id="_35">
 						<type>0</type>
-						<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc_U0</name>
+						<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0</name>
 						<ssdmobj_id>31</ssdmobj_id>
 						<pins class_id="29" tracking_level="0" version="0">
 							<count>9</count>
@@ -674,7 +674,7 @@
 								</port>
 								<inst class_id="31" tracking_level="1" version="0" object_id="_38">
 									<type>0</type>
-									<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc_U0</name>
+									<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0</name>
 									<ssdmobj_id>31</ssdmobj_id>
 								</inst>
 							</item>
@@ -1036,7 +1036,7 @@
 		<count>1</count>
 		<item_version>0</item_version>
 		<item class_id="57" tracking_level="0" version="0">
-			<first>grp_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc_fu_66</first>
+			<first>grp_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_fu_66</first>
 			<second>
 				<count>2</count>
 				<item_version>0</item_version>

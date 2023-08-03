@@ -167,7 +167,7 @@
   "Files": {
     "CSource": ["..\/src\/row_product.cpp"],
     "Vhdl": [
-      "impl\/vhdl\/row_product_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc.vhd",
+      "impl\/vhdl\/row_product_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc.vhd",
       "impl\/vhdl\/row_product_control_s_axi.vhd",
       "impl\/vhdl\/row_product_mul_32s_32s_48_2_1.vhd",
       "impl\/vhdl\/row_product_x_colind_m_axi.vhd",
@@ -182,7 +182,7 @@
       "impl\/vhdl\/row_product.vhd"
     ],
     "Verilog": [
-      "impl\/verilog\/row_product_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc.v",
+      "impl\/verilog\/row_product_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc.v",
       "impl\/verilog\/row_product_control_s_axi.v",
       "impl\/verilog\/row_product_mul_32s_32s_48_2_1.v",
       "impl\/verilog\/row_product_x_colind_m_axi.v",
@@ -3033,12 +3033,12 @@
     "Hierarchy": {
       "ModuleName": "row_product",
       "Instances": [{
-          "ModuleName": "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc",
-          "InstanceName": "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc_U0"
+          "ModuleName": "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc",
+          "InstanceName": "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0"
         }]
     },
     "Info": {
-      "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc": {
+      "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc": {
         "FunctionProtocol": "ap_ctrl_hs",
         "isTaskLevelControl": "0",
         "isPipelined": "0",
@@ -3054,7 +3054,7 @@
       }
     },
     "Metrics": {
-      "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit111_proc": {
+      "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc": {
         "Latency": {
           "LatencyBest": "",
           "LatencyAvg": "",
@@ -3084,35 +3084,35 @@
             "PipelineDepth": "2"
           },
           {
-            "Name": "VITIS_LOOP_132_1",
+            "Name": "VITIS_LOOP_119_1",
             "TripCount": "5",
             "Latency": "",
             "PipelineII": "",
             "PipelineDepth": "",
             "Loops": [
               {
-                "Name": "VITIS_LOOP_134_2",
+                "Name": "VITIS_LOOP_121_2",
                 "TripCount": "5",
                 "Latency": "",
                 "PipelineII": "",
                 "PipelineDepth": "",
                 "Loops": [
                   {
-                    "Name": "VITIS_LOOP_41_1",
+                    "Name": "VITIS_LOOP_31_1",
                     "TripCount": "",
                     "Latency": "",
                     "PipelineII": "1",
                     "PipelineDepth": "12"
                   },
                   {
-                    "Name": "VITIS_LOOP_13_1",
+                    "Name": "VITIS_LOOP_9_1",
                     "TripCount": "5",
                     "Latency": "103",
                     "PipelineII": "18",
                     "PipelineDepth": "19"
                   },
                   {
-                    "Name": "VITIS_LOOP_134_2.3",
+                    "Name": "VITIS_LOOP_121_2.3",
                     "TripCount": "5",
                     "Latency": "10",
                     "PipelineII": "",
@@ -3121,14 +3121,14 @@
                 ]
               },
               {
-                "Name": "VITIS_LOOP_80_1",
+                "Name": "VITIS_LOOP_67_1",
                 "TripCount": "5",
                 "Latency": "12",
                 "PipelineII": "1",
                 "PipelineDepth": "9"
               },
               {
-                "Name": "VITIS_LOOP_132_1.3",
+                "Name": "VITIS_LOOP_119_1.3",
                 "TripCount": "5",
                 "Latency": "5",
                 "PipelineII": "1",
@@ -3192,7 +3192,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-07-22 18:38:46 IST",
+    "Time": "2023-08-04 00:56:46 IST",
     "ToolName": "vivado_hls",
     "ToolVersion": "2020.2"
   }
