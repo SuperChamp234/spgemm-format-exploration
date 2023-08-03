@@ -17,5 +17,3 @@ The following sparse matrix multiplier, multiplies an input matrix of size MxP i
 
 The `outer_product.h` file contains all of the function prototypes and data structures used in the `outer_product.cpp` file. 
 The function `outer_product_opt()` is the top level function which, taking in the input matrices, performs the multiplication and returns the output matrix in the specified format above.
-
-ap_fixed<32, 16> is used as the data type for the matrix elements. To store the rows and columns of the input matrices while multplying, `hls::stream` is used. 

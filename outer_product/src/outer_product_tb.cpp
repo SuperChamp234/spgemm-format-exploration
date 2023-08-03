@@ -189,8 +189,9 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
     cout << "colind is equal: " << equal << endl;
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
-        int check = std::abs(z_csr.data[i] - z_csr2.data[i]) > 0.01;
-        if (check)
+        //check data till 2 fixed point precision
+        bool almost_equal = z_csr.data[i] - z_csr2.data[i] > 0 ? z_csr.data[i] - z_csr2.data[i] < (data_t)0.01 : z_csr.data[i] - z_csr2.data[i] > (data_t)(-0.01);
+        if (!almost_equal)
         {
             equal = false;
             break;
@@ -200,10 +201,27 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
     return equal;
 }
 
+csr_out_t new_csr_out_t()
+{
+    csr_out_t csr;
+    csr.rowptr = new int[M + 1];
+    csr.colind = new int[M * N];
+    csr.data = new data_t[M * N];
+    //check if allocation was successful
+    if (!csr.rowptr || !csr.colind || !csr.data)
+    {
+        cout << "Memory allocation failed" << endl;
+        exit(1);
+    }
+    return csr;
+}
+
+
 void test_extract_row(csr_t test_case){
     for (int i = 0; i < N; i++) {
         std::cout << "row " << i << std::endl;
-        data_t* out_row = extract_row(test_case, i);
+        data_t out_row[N];
+        extract_row(test_case, out_row, i);
         for (int j = 0; j < P; j++) {
             std::cout << out_row[j] << " ";
         }
@@ -214,7 +232,8 @@ void test_extract_row(csr_t test_case){
 void test_extract_col(csc_t test_case){
     for (int i = 0; i < P; i++) {
         std::cout << "col " << i << std::endl;
-        data_t* out_col = extract_col(test_case, i);
+        data_t out_col[M];
+        extract_col(test_case, out_col, i);
         for (int j = 0; j < M; j++) {
             std::cout << out_col[j] << " ";
         }
@@ -248,11 +267,12 @@ void print_csr_out_t(csr_out_t z_csr)
 }
 
 void test_mult(csr_t test_case1, csc_t test_case2){
-    data_t* row; 
-    data_t* col;
+    data_t row [N];
+    data_t col [M];
+    csr_out_t out = new_csr_out_t();
     for(int i = 0; i < P; i++){
-        row = extract_row(test_case1, i);
-        col = extract_col(test_case2, i);
+        extract_col(test_case2, col, i);
+        extract_row(test_case1, row, i);
         std::cout << "row " << i << std::endl;
         for (int j = 0; j < P; j++) {
             std::cout << row[j] << " ";
@@ -263,14 +283,15 @@ void test_mult(csr_t test_case1, csc_t test_case2){
             std::cout << col[j] << " ";
         }
         std::cout << std::endl;
-        csr_out_t out = multiply_row_col(row, col);
+        multiply_row_col(row, col, out);
         print_csr_out_t(out);
         std::cout << "----------------" << std::endl;
     }
 }
 
 void test_accumulate(csr_out_t test_case1, csr_out_t test_case2){
-    csr_out_t out = accumulate(test_case1, test_case2);
+    csr_out_t out = new_csr_out_t();
+    accumulate(out, test_case1, test_case2);
     print_csr_out_t(out);
 }
 
@@ -301,24 +322,24 @@ void basic_test() {
 // 0  32 56   0	145
 
     csc_t A = {
-        .colptr= {0, 2, 4, 6, 8, 9},
-        .rowind= {0, 2, 0, 1, 1, 2, 2, 3, 3},
-        .data= {1, 5, 2, 3, 4, 6, 7, 8, 9}
+        .colptr= new int[P+1]{0, 2, 4, 6, 8, 9},
+        .rowind= new int[M*P]{0, 2, 0, 1, 1, 2, 2, 3, 3},
+        .data= new data_t[M*P]{1, 5, 2, 3, 4, 6, 7, 8, 9}
     };
     csr_t B = {
-        .rowptr= {0, 2, 4, 5, 8, 9},
-        .colind = {0, 2, 1, 3, 0, 1, 2, 4, 4},
-        .data = {1, 5, 2, 6, 3, 4, 7, 8, 9}
+        .rowptr= new int[P+1]{0, 2, 4, 5, 8, 9},
+        .colind = new int[N*P]{0, 2, 1, 3, 0, 1, 2, 4, 4},
+        .data = new data_t[N*P]{1, 5, 2, 6, 3, 4, 7, 8, 9}
     };
     csr_out_t test = {
-        .rowptr= {0, 4, 7, 11, 14},
-        .colind = {0, 1, 2, 3, 0, 1, 3, 0, 1, 2, 4, 1, 2, 4},
-        .data = {1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 56, 32, 56, 145}
+        .rowptr= new int[M+1]{0, 4, 7, 11, 14},
+        .colind = new int[M*N]{0, 1, 2, 3, 0, 1, 3, 0, 1, 2, 4, 1, 2, 4},
+        .data = new data_t[M*N]{1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 0, 56, 32, 56}
     };
     csr_out_t test2 = {
-        .rowptr= {0, 2, 4, 5, 8},
-        .colind = {0, 2, 1, 3, 0, 1, 2, 4},
-        .data = {1, 5, 2, 6, 3, 4, 7, 8}
+        .rowptr= new int[M+1]{0, 2, 4, 5, 8},
+        .colind = new int[M*N]{0, 2, 1, 3, 0, 1, 2, 4},
+        .data = new data_t[M*N]{1, 5, 2, 6, 3, 4, 7, 8}
     };
 
     // Test extract_row
@@ -331,34 +352,35 @@ void basic_test() {
     //test_accumulate(test, test2);
 
     // Test outer_product
-    csr_out_t out = outer_product(A, B);
+    csr_out_t out = new_csr_out_t();
+    outer_product(A.colptr, A.rowind, A.data, B.rowptr, B.colind, B.data, out.rowptr, out.colind, out.data);
     print_csr_out_t(out);
 }
 
-void synth_test(){
-    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
-    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
-    COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
+// void synth_test(){
+//     COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
+//     COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
+//     COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
 
-    csr_t csr_A = COO_to_CSR(coo_A);
-    csc_t csc_B = COO_to_CSC(coo_B);
-    csr_out_t csr_C = COO_to_CSR_OUT(coo_C);
-    print_COO(coo_C, M, N);
-    std::cout << "----------------" << std::endl;
+//     csr_t csr_A = COO_to_CSR(coo_A);
+//     csc_t csc_B = COO_to_CSC(coo_B);
+//     csr_out_t csr_C = COO_to_CSR_OUT(coo_C);
+//     print_COO(coo_C, M, N);
+//     std::cout << "----------------" << std::endl;
 
-    csr_out_t out = outer_product(csc_B, csr_A);
-    print_csr_out_t(out);
-    std::cout << "----------------" << std::endl;
-    cout << "CSR_OUT == CSR_OUT: ? " << endl;
-    if(compare_csr_out_t(out, csr_C)){
-        cout << "TRUE" << endl;
-    } else {
-        cout << "FALSE" << endl;
-    }
-}
+//     csr_out_t out = outer_product(csc_B, csr_A);
+//     print_csr_out_t(out);
+//     std::cout << "----------------" << std::endl;
+//     cout << "CSR_OUT == CSR_OUT: ? " << endl;
+//     if(compare_csr_out_t(out, csr_C)){
+//         cout << "TRUE" << endl;
+//     } else {
+//         cout << "FALSE" << endl;
+//     }
+// }
 
 int main() {
-    //basic_test();
-    synth_test();
+    basic_test();
+    //synth_test();
     return 0;
 }

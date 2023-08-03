@@ -2,34 +2,37 @@
 #define OUTER_PRODUCT_CSR_H
 
 #define NO_SYNTH
-//#define DEBUG
+#define DEBUG
+
+#include <cstring>
+#include <ap_fixed.h>
 
 #ifdef NO_SYNTH
 #include <iostream>
 #endif
 
-const int M =  10;
-const int P =  10;
-const int N =  10;
+const int M =  4;
+const int P =  5;
+const int N =  5;
 //X is of size MxP, Y is of size PxN, Z is of size MxN
 //X is CSC, Y is CSR, Z is CSR
 
-typedef double data_t;
+typedef ap_fixed<32, 16> data_t;
 struct csc_t {
-    int colptr[P+1];
-    int rowind[M*P];
-    data_t data[M*P];
+    int* colptr;
+    int* rowind;
+    data_t* data;
 };
 struct csr_t {
-    int rowptr[P+1];
-    int colind[M*P];
-    data_t data[M*P];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 
 struct csr_out_t {
-    int rowptr[M+1];
-    int colind[M*N];
-    data_t data[M*N];
+    int* rowptr;
+    int* colind;
+    data_t* data;
 };
 /*
     * Extract a row from a matrix in CSR format
@@ -37,34 +40,41 @@ struct csr_out_t {
     * @param row: the row to be extracted
     * @return data_t*: the row in an array
 */
-data_t* extract_row(csr_t inp_csr, int row);
+void extract_row(csr_t& inp_csr, data_t* out_row, int row);
 /*
     * Extract a column from a matrix in CSC format
     * @param inp_csc: the matrix in CSC format
     * @param col: the column to be extracted
     * @return data_t*: the column in an array
 */
-data_t* extract_col(csc_t inp_csc, int col);
+void extract_col(csc_t& inp_csc, data_t* out_col, int col);
 /*
     * Multiply two matrices in CSR format
-    * @param x_csr: the first matrix in CSR format
-    * @param y_csr: the second matrix in CSR format
-    * @return csr_out_t: the product of the two matrices in CSR format
+    * @param x_rowptr: the row pointer of the first matrix in CSR format
+    * @param x_colind: the column index of the first matrix in CSR format
+    * @param x_data: the data of the first matrix in CSR format
+    * @param y_colptr: the row pointer of the second matrix in CSR format
+    * @param y_rowind: the column index of the second matrix in CSR format
+    * @param y_data: the data of the second matrix in CSR format
+    * @param z_rowptr: the row pointer of the product matrix in CSR format
+    * @param z_colind: the column index of the product matrix in CSR format
+    * @param z_data: the data of the product matrix in CSR format
+    * @return void
 */
-csr_out_t outer_product(csc_t x_csc, csr_t y_csr);
+void outer_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_colptr, int* y_rowind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 /*
     * Multiply a row and a column
     * @param row: the row in an array
     * @param col: the column in an array
     * @return csr_out_t: the product of the row and column
 */
-csr_out_t multiply_row_col(data_t* row, data_t* col);
+void multiply_row_col(data_t* row, data_t* col, csr_out_t& out);
 /*
     * Accumulate two matrices in CSR format
     * @param csr_out_t: the first matrix in CSR format
     * @param csr_out_t: the second matrix in CSR format
     * @return csr_out_t: the sum of the two matrices in CSR format
 */
-csr_out_t accumulate(csr_out_t csr1, csr_out_t csr2);
+void accumulate(csr_out_t& out, csr_out_t& csr1, csr_out_t& csr2);
 
 #endif // OUTER_PRODUCT_CSR_H
