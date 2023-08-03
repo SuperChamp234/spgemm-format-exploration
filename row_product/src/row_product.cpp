@@ -1,9 +1,8 @@
 #include "row_product.hpp"
 
 //extract row from csr and store it in an array
-hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
+void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row)
 {
-    hls::vector<data_t, N> out_row;
     int start_idx;
     int end_idx;
     int col_idx;
@@ -11,7 +10,6 @@ hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
     memcpy(&start_idx, &inp_csr.rowptr[row], sizeof(int));
     memcpy(&end_idx, &inp_csr.rowptr[row+1], sizeof(int));
     int j = start_idx;
-    #pragma HLS unroll
     for (int i = 0; i < N; i++)
     {
         memcpy(&col_idx, &inp_csr.colind[j], sizeof(int));
@@ -29,45 +27,43 @@ hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
             out_row[i] = 0;
         }
     }
-    return out_row;
 }
 
-data_t extract_element(csr_t_1 inp_csr, int row, int col)
+void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data)
 {
     int start_idx;
     int end_idx;
     int col_idx;
-    data_t data;
     memcpy(&start_idx, &inp_csr.rowptr[row], sizeof(int));
     memcpy(&end_idx, &inp_csr.rowptr[row+1], sizeof(int));
+    bool found = false;
 
     for (int j = start_idx; j < end_idx; j++)
     {
         memcpy(&col_idx, &inp_csr.colind[j], sizeof(int));
         if (col_idx == col)
         {
-            memcpy(&data, &inp_csr.data[j], sizeof(data_t));
-            return data;
+            memcpy(&out_data, &inp_csr.data[j], sizeof(data_t));
+            found = true;
         }
     }
-    
-    return 0; // Return 0 if the column index is not found
+    if (!found)
+    {
+        data_t zero = data_t(0);
+        memcpy(&out_data, &zero, sizeof(data_t));
+    }
 }
 
 
 //multiply row with a scalar
-hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scalar)
+void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row)
 {
-    #pragma HLS array_partition variable=row complete
     row *= scalar;
-    return row;
 }
 
 //add two rows
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2)
 {
-    #pragma HLS array_partition variable=row1 complete
-    #pragma HLS array_partition variable=row2 complete
     row1 += row2;
 }
 
@@ -129,20 +125,20 @@ void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, in
     csr.rowptr[0] = 0;
     hls::vector<data_t, N> extracted_row = data_t(0);
     hls::vector<data_t, N> buffer_row = data_t(0);
-    hls::vector<data_t, N> mult_row = data_t(0);
     data_t extracted_scalar = data_t(0);
     //C[I,:] = Sum(A[I,K]*B[K,:])
     //iterate over the rows of Y
+    #pragma hls dataflow
     for (int i = 0; i < M; i++)
     {
         for (int k = 0; k < N; k++)
         {
-            extracted_scalar = extract_element(x, i, k);
+            extract_element(x, i, k, extracted_scalar);
             if (extracted_scalar != 0)
-            {
-                extracted_row = extract_row(y, k);
-                mult_row = row_scalar_mult(extracted_row, extracted_scalar);
-                row_add(buffer_row, mult_row);
+            {                
+                extract_row(y, k, extracted_row);
+                row_scalar_mult(extracted_scalar, extracted_row);
+                row_add(buffer_row, extracted_row);
             }
         }
         append_row(&csr, buffer_row, i);

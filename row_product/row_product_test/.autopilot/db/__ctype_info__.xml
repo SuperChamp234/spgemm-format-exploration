@@ -24,7 +24,7 @@
 <CType>
 <TypeName>void</TypeName>
 <TypeWidth>8</TypeWidth>
-<PhysicalWidth>64</PhysicalWidth>
+<PhysicalWidth>32</PhysicalWidth>
 </CType>
 <CFractionWidth>0</CFractionWidth>
 <InvalidType>0</InvalidType>
@@ -54,7 +54,7 @@
 <CType>
 <TypeName>void</TypeName>
 <TypeWidth>8</TypeWidth>
-<PhysicalWidth>64</PhysicalWidth>
+<PhysicalWidth>32</PhysicalWidth>
 </CType>
 <CFractionWidth>0</CFractionWidth>
 <InvalidType>0</InvalidType>
@@ -84,7 +84,7 @@
 <CType>
 <TypeName>void</TypeName>
 <TypeWidth>8</TypeWidth>
-<PhysicalWidth>64</PhysicalWidth>
+<PhysicalWidth>32</PhysicalWidth>
 </CType>
 <CFractionWidth>0</CFractionWidth>
 <InvalidType>0</InvalidType>

@@ -9,9 +9,7 @@
 # 1 "<command-line>" 2
 # 1 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 # 1 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 1
-
-
-
+# 31 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/include/ap_fixed.h" 1
 # 55 "/home/leoh/tools/Vitis_HLS/2020.2/include/ap_fixed.h"
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/include/ap_common.h" 1
@@ -60142,7 +60140,7 @@ inline bool operator!=(
 
 }
 # 396 "/home/leoh/tools/Vitis_HLS/2020.2/include/ap_fixed.h" 2
-# 5 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
+# 32 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/include/hls_vector.h" 1
 
 
@@ -60304,15 +60302,15 @@ public:
 };
 
 }
-# 6 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
-# 15 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 33 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
+# 42 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 const int M = 5;
 const int P = 5;
 const int N = 5;
 
 
 
-typedef double data_t;
+typedef ap_fixed<32, 16> data_t;
 
 struct csr_t_1 {
     int* rowptr;
@@ -60331,24 +60329,30 @@ struct csr_out_t {
     int* colind;
     data_t* data;
 };
-# 48 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
-# 57 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row);
-# 66 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scalar);
-# 75 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 76 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row);
+# 86 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data);
+
+
+
+
+
+
+
+void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row);
+
+
+
+
+
+
+
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
-# 84 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 111 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
-
-
-
-
-
-
-
-data_t extract_element(csr_t_1 inp_csr, int row_idx, int col_idx);
+# 126 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 2 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 2
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/vector" 1 3
 # 58 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/vector" 3
@@ -63958,1846 +63962,6 @@ namespace std __attribute__ ((__visibility__ ("default")))
 }
 # 70 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/vector" 2 3
 # 3 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 2
-# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 1 3
-# 36 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-       
-# 37 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-
-
-
-
-# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cstdio" 1 3
-# 39 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cstdio" 3
-       
-# 40 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cstdio" 3
-# 42 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 2 3
-# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/x86_64-pc-linux-gnu/bits/basic_file.h" 1 3
-# 37 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/x86_64-pc-linux-gnu/bits/basic_file.h" 3
-       
-# 38 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/x86_64-pc-linux-gnu/bits/basic_file.h" 3
-
-
-# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/x86_64-pc-linux-gnu/bits/c++io.h" 1 3
-# 35 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/x86_64-pc-linux-gnu/bits/c++io.h" 3
-# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cstdio" 1 3
-# 39 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cstdio" 3
-       
-# 40 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cstdio" 3
-# 36 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/x86_64-pc-linux-gnu/bits/c++io.h" 2 3
-
-
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-  typedef __gthread_mutex_t __c_lock;
-
-
-  typedef FILE __c_file;
-
-
-}
-# 41 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/x86_64-pc-linux-gnu/bits/basic_file.h" 2 3
-
-
-
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-
-  template<typename _CharT>
-    class __basic_file;
-
-
-  template<>
-    class __basic_file<char>
-    {
-
-      __c_file* _M_cfile;
-
-
-      bool _M_cfile_created;
-
-    public:
-      __basic_file(__c_lock* __lock = 0) throw ();
-
-
-      __basic_file(__basic_file&& __rv, __c_lock* __lock = 0) noexcept
-      : _M_cfile(__rv._M_cfile), _M_cfile_created(__rv._M_cfile_created)
-      {
- __rv._M_cfile = nullptr;
- __rv._M_cfile_created = false;
-      }
-
-      __basic_file& operator=(const __basic_file&) = delete;
-      __basic_file& operator=(__basic_file&&) = delete;
-
-      void
-      swap(__basic_file& __f) noexcept
-      {
- std::swap(_M_cfile, __f._M_cfile);
- std::swap(_M_cfile_created, __f._M_cfile_created);
-      }
-
-
-      __basic_file*
-      open(const char* __name, ios_base::openmode __mode, int __prot = 0664);
-
-      __basic_file*
-      sys_open(__c_file* __file, ios_base::openmode);
-
-      __basic_file*
-      sys_open(int __fd, ios_base::openmode __mode) throw ();
-
-      __basic_file*
-      close();
-
-      __attribute__ ((__pure__)) bool
-      is_open() const throw ();
-
-      __attribute__ ((__pure__)) int
-      fd() throw ();
-
-      __attribute__ ((__pure__)) __c_file*
-      file() throw ();
-
-      ~__basic_file();
-
-      streamsize
-      xsputn(const char* __s, streamsize __n);
-
-      streamsize
-      xsputn_2(const char* __s1, streamsize __n1,
-        const char* __s2, streamsize __n2);
-
-      streamsize
-      xsgetn(char* __s, streamsize __n);
-
-      streamoff
-      seekoff(streamoff __off, ios_base::seekdir __way) throw ();
-
-      int
-      sync();
-
-      streamsize
-      showmanyc();
-    };
-
-
-}
-# 43 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 2 3
-
-
-
-
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-# 71 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-  template<typename _CharT, typename _Traits>
-    class basic_filebuf : public basic_streambuf<_CharT, _Traits>
-    {
-
-      template<typename _Tp>
- using __chk_state = __and_<is_copy_assignable<_Tp>,
-       is_copy_constructible<_Tp>,
-       is_default_constructible<_Tp>>;
-
-      static_assert(__chk_state<typename _Traits::state_type>::value,
-      "state_type must be CopyAssignable, CopyConstructible"
-      " and DefaultConstructible");
-
-      static_assert(is_same<typename _Traits::pos_type,
-       fpos<typename _Traits::state_type>>::value,
-      "pos_type must be fpos<state_type>");
-
-    public:
-
-      typedef _CharT char_type;
-      typedef _Traits traits_type;
-      typedef typename traits_type::int_type int_type;
-      typedef typename traits_type::pos_type pos_type;
-      typedef typename traits_type::off_type off_type;
-
-      typedef basic_streambuf<char_type, traits_type> __streambuf_type;
-      typedef basic_filebuf<char_type, traits_type> __filebuf_type;
-      typedef __basic_file<char> __file_type;
-      typedef typename traits_type::state_type __state_type;
-      typedef codecvt<char_type, char, __state_type> __codecvt_type;
-
-      friend class ios_base;
-
-    protected:
-
-
-      __c_lock _M_lock;
-
-
-      __file_type _M_file;
-
-
-      ios_base::openmode _M_mode;
-
-
-      __state_type _M_state_beg;
-
-
-
-
-      __state_type _M_state_cur;
-
-
-
-      __state_type _M_state_last;
-
-
-      char_type* _M_buf;
-
-
-
-
-
-
-      size_t _M_buf_size;
-
-
-      bool _M_buf_allocated;
-# 147 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      bool _M_reading;
-      bool _M_writing;
-
-
-
-
-
-
-
-      char_type _M_pback;
-      char_type* _M_pback_cur_save;
-      char_type* _M_pback_end_save;
-      bool _M_pback_init;
-
-
-
-      const __codecvt_type* _M_codecvt;
-
-
-
-
-
-
-      char* _M_ext_buf;
-
-
-
-
-      streamsize _M_ext_buf_size;
-
-
-
-
-
-
-      const char* _M_ext_next;
-      char* _M_ext_end;
-
-
-
-
-
-
-      void
-      _M_create_pback()
-      {
- if (!_M_pback_init)
-   {
-     _M_pback_cur_save = this->gptr();
-     _M_pback_end_save = this->egptr();
-     this->setg(&_M_pback, &_M_pback, &_M_pback + 1);
-     _M_pback_init = true;
-   }
-      }
-
-
-
-
-
-
-      void
-      _M_destroy_pback() throw()
-      {
- if (_M_pback_init)
-   {
-
-     _M_pback_cur_save += this->gptr() != this->eback();
-     this->setg(_M_buf, _M_pback_cur_save, _M_pback_end_save);
-     _M_pback_init = false;
-   }
-      }
-
-    public:
-
-
-
-
-
-
-
-      basic_filebuf();
-
-
-      basic_filebuf(const basic_filebuf&) = delete;
-      basic_filebuf(basic_filebuf&&);
-
-
-
-
-
-      virtual
-      ~basic_filebuf()
-      { this->close(); }
-
-
-      basic_filebuf& operator=(const basic_filebuf&) = delete;
-      basic_filebuf& operator=(basic_filebuf&&);
-      void swap(basic_filebuf&);
-
-
-
-
-
-
-      bool
-      is_open() const throw()
-      { return _M_file.is_open(); }
-# 296 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      __filebuf_type*
-      open(const char* __s, ios_base::openmode __mode);
-# 306 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      __filebuf_type*
-      open(const std::string& __s, ios_base::openmode __mode)
-      { return open(__s.c_str(), __mode); }
-# 323 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      __filebuf_type*
-      close();
-
-    protected:
-      void
-      _M_allocate_internal_buffer();
-
-      void
-      _M_destroy_internal_buffer() throw();
-
-
-      virtual streamsize
-      showmanyc();
-
-
-
-
-
-
-      virtual int_type
-      underflow();
-
-      virtual int_type
-      pbackfail(int_type __c = _Traits::eof());
-# 355 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      virtual int_type
-      overflow(int_type __c = _Traits::eof());
-
-
-
-      bool
-      _M_convert_to_external(char_type*, streamsize);
-# 375 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      virtual __streambuf_type*
-      setbuf(char_type* __s, streamsize __n);
-
-      virtual pos_type
-      seekoff(off_type __off, ios_base::seekdir __way,
-       ios_base::openmode __mode = ios_base::in | ios_base::out);
-
-      virtual pos_type
-      seekpos(pos_type __pos,
-       ios_base::openmode __mode = ios_base::in | ios_base::out);
-
-
-      pos_type
-      _M_seek(off_type __off, ios_base::seekdir __way, __state_type __state);
-
-      int
-      _M_get_ext_pos(__state_type &__state);
-
-      virtual int
-      sync();
-
-      virtual void
-      imbue(const locale& __loc);
-
-      virtual streamsize
-      xsgetn(char_type* __s, streamsize __n);
-
-      virtual streamsize
-      xsputn(const char_type* __s, streamsize __n);
-
-
-      bool
-      _M_terminate_output();
-# 421 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      _M_set_buffer(streamsize __off)
-      {
- const bool __testin = _M_mode & ios_base::in;
- const bool __testout = (_M_mode & ios_base::out
-    || _M_mode & ios_base::app);
-
- if (__testin && __off > 0)
-   this->setg(_M_buf, _M_buf, _M_buf + __off);
- else
-   this->setg(_M_buf, _M_buf, _M_buf);
-
- if (__testout && __off == 0 && _M_buf_size > 1 )
-   this->setp(_M_buf, _M_buf + _M_buf_size - 1);
- else
-   this->setp(0, 0);
-      }
-    };
-# 454 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-  template<typename _CharT, typename _Traits>
-    class basic_ifstream : public basic_istream<_CharT, _Traits>
-    {
-    public:
-
-      typedef _CharT char_type;
-      typedef _Traits traits_type;
-      typedef typename traits_type::int_type int_type;
-      typedef typename traits_type::pos_type pos_type;
-      typedef typename traits_type::off_type off_type;
-
-
-      typedef basic_filebuf<char_type, traits_type> __filebuf_type;
-      typedef basic_istream<char_type, traits_type> __istream_type;
-
-    private:
-      __filebuf_type _M_filebuf;
-
-    public:
-# 481 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      basic_ifstream() : __istream_type(), _M_filebuf()
-      { this->init(&_M_filebuf); }
-# 494 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      explicit
-      basic_ifstream(const char* __s, ios_base::openmode __mode = ios_base::in)
-      : __istream_type(), _M_filebuf()
-      {
- this->init(&_M_filebuf);
- this->open(__s, __mode);
-      }
-# 510 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      explicit
-      basic_ifstream(const std::string& __s,
-       ios_base::openmode __mode = ios_base::in)
-      : __istream_type(), _M_filebuf()
-      {
- this->init(&_M_filebuf);
- this->open(__s, __mode);
-      }
-
-      basic_ifstream(const basic_ifstream&) = delete;
-
-      basic_ifstream(basic_ifstream&& __rhs)
-      : __istream_type(std::move(__rhs)),
-      _M_filebuf(std::move(__rhs._M_filebuf))
-      { __istream_type::set_rdbuf(&_M_filebuf); }
-# 533 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      ~basic_ifstream()
-      { }
-
-
-
-
-      basic_ifstream&
-      operator=(const basic_ifstream&) = delete;
-
-      basic_ifstream&
-      operator=(basic_ifstream&& __rhs)
-      {
- __istream_type::operator=(std::move(__rhs));
- _M_filebuf = std::move(__rhs._M_filebuf);
- return *this;
-      }
-
-      void
-      swap(basic_ifstream& __rhs)
-      {
- __istream_type::swap(__rhs);
- _M_filebuf.swap(__rhs._M_filebuf);
-      }
-# 565 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      __filebuf_type*
-      rdbuf() const
-      { return const_cast<__filebuf_type*>(&_M_filebuf); }
-
-
-
-
-
-      bool
-      is_open()
-      { return _M_filebuf.is_open(); }
-
-
-
-      bool
-      is_open() const
-      { return _M_filebuf.is_open(); }
-# 594 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      open(const char* __s, ios_base::openmode __mode = ios_base::in)
-      {
- if (!_M_filebuf.open(__s, __mode | ios_base::in))
-   this->setstate(ios_base::failbit);
- else
-
-
-   this->clear();
-      }
-# 614 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      open(const std::string& __s, ios_base::openmode __mode = ios_base::in)
-      {
- if (!_M_filebuf.open(__s, __mode | ios_base::in))
-   this->setstate(ios_base::failbit);
- else
-
-
-   this->clear();
-      }
-# 632 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      close()
-      {
- if (!_M_filebuf.close())
-   this->setstate(ios_base::failbit);
-      }
-    };
-# 655 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-  template<typename _CharT, typename _Traits>
-    class basic_ofstream : public basic_ostream<_CharT,_Traits>
-    {
-    public:
-
-      typedef _CharT char_type;
-      typedef _Traits traits_type;
-      typedef typename traits_type::int_type int_type;
-      typedef typename traits_type::pos_type pos_type;
-      typedef typename traits_type::off_type off_type;
-
-
-      typedef basic_filebuf<char_type, traits_type> __filebuf_type;
-      typedef basic_ostream<char_type, traits_type> __ostream_type;
-
-    private:
-      __filebuf_type _M_filebuf;
-
-    public:
-# 682 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      basic_ofstream(): __ostream_type(), _M_filebuf()
-      { this->init(&_M_filebuf); }
-# 696 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      explicit
-      basic_ofstream(const char* __s,
-       ios_base::openmode __mode = ios_base::out|ios_base::trunc)
-      : __ostream_type(), _M_filebuf()
-      {
- this->init(&_M_filebuf);
- this->open(__s, __mode);
-      }
-# 714 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      explicit
-      basic_ofstream(const std::string& __s,
-       ios_base::openmode __mode = ios_base::out|ios_base::trunc)
-      : __ostream_type(), _M_filebuf()
-      {
- this->init(&_M_filebuf);
- this->open(__s, __mode);
-      }
-
-      basic_ofstream(const basic_ofstream&) = delete;
-
-      basic_ofstream(basic_ofstream&& __rhs)
-      : __ostream_type(std::move(__rhs)),
-      _M_filebuf(std::move(__rhs._M_filebuf))
-      { __ostream_type::set_rdbuf(&_M_filebuf); }
-# 737 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      ~basic_ofstream()
-      { }
-
-
-
-
-      basic_ofstream&
-      operator=(const basic_ofstream&) = delete;
-
-      basic_ofstream&
-      operator=(basic_ofstream&& __rhs)
-      {
- __ostream_type::operator=(std::move(__rhs));
- _M_filebuf = std::move(__rhs._M_filebuf);
- return *this;
-      }
-
-      void
-      swap(basic_ofstream& __rhs)
-      {
- __ostream_type::swap(__rhs);
- _M_filebuf.swap(__rhs._M_filebuf);
-      }
-# 769 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      __filebuf_type*
-      rdbuf() const
-      { return const_cast<__filebuf_type*>(&_M_filebuf); }
-
-
-
-
-
-      bool
-      is_open()
-      { return _M_filebuf.is_open(); }
-
-
-
-      bool
-      is_open() const
-      { return _M_filebuf.is_open(); }
-# 798 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      open(const char* __s,
-    ios_base::openmode __mode = ios_base::out | ios_base::trunc)
-      {
- if (!_M_filebuf.open(__s, __mode | ios_base::out))
-   this->setstate(ios_base::failbit);
- else
-
-
-   this->clear();
-      }
-# 819 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      open(const std::string& __s,
-    ios_base::openmode __mode = ios_base::out | ios_base::trunc)
-      {
- if (!_M_filebuf.open(__s, __mode | ios_base::out))
-   this->setstate(ios_base::failbit);
- else
-
-
-   this->clear();
-      }
-# 838 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      close()
-      {
- if (!_M_filebuf.close())
-   this->setstate(ios_base::failbit);
-      }
-    };
-# 861 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-  template<typename _CharT, typename _Traits>
-    class basic_fstream : public basic_iostream<_CharT, _Traits>
-    {
-    public:
-
-      typedef _CharT char_type;
-      typedef _Traits traits_type;
-      typedef typename traits_type::int_type int_type;
-      typedef typename traits_type::pos_type pos_type;
-      typedef typename traits_type::off_type off_type;
-
-
-      typedef basic_filebuf<char_type, traits_type> __filebuf_type;
-      typedef basic_ios<char_type, traits_type> __ios_type;
-      typedef basic_iostream<char_type, traits_type> __iostream_type;
-
-    private:
-      __filebuf_type _M_filebuf;
-
-    public:
-# 889 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      basic_fstream()
-      : __iostream_type(), _M_filebuf()
-      { this->init(&_M_filebuf); }
-# 901 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      explicit
-      basic_fstream(const char* __s,
-      ios_base::openmode __mode = ios_base::in | ios_base::out)
-      : __iostream_type(0), _M_filebuf()
-      {
- this->init(&_M_filebuf);
- this->open(__s, __mode);
-      }
-
-
-
-
-
-
-
-      explicit
-      basic_fstream(const std::string& __s,
-      ios_base::openmode __mode = ios_base::in | ios_base::out)
-      : __iostream_type(0), _M_filebuf()
-      {
- this->init(&_M_filebuf);
- this->open(__s, __mode);
-      }
-
-      basic_fstream(const basic_fstream&) = delete;
-
-      basic_fstream(basic_fstream&& __rhs)
-      : __iostream_type(std::move(__rhs)),
-      _M_filebuf(std::move(__rhs._M_filebuf))
-      { __iostream_type::set_rdbuf(&_M_filebuf); }
-# 939 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      ~basic_fstream()
-      { }
-
-
-
-
-      basic_fstream&
-      operator=(const basic_fstream&) = delete;
-
-      basic_fstream&
-      operator=(basic_fstream&& __rhs)
-      {
- __iostream_type::operator=(std::move(__rhs));
- _M_filebuf = std::move(__rhs._M_filebuf);
- return *this;
-      }
-
-      void
-      swap(basic_fstream& __rhs)
-      {
- __iostream_type::swap(__rhs);
- _M_filebuf.swap(__rhs._M_filebuf);
-      }
-# 971 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      __filebuf_type*
-      rdbuf() const
-      { return const_cast<__filebuf_type*>(&_M_filebuf); }
-
-
-
-
-
-      bool
-      is_open()
-      { return _M_filebuf.is_open(); }
-
-
-
-      bool
-      is_open() const
-      { return _M_filebuf.is_open(); }
-# 1000 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      open(const char* __s,
-    ios_base::openmode __mode = ios_base::in | ios_base::out)
-      {
- if (!_M_filebuf.open(__s, __mode))
-   this->setstate(ios_base::failbit);
- else
-
-
-   this->clear();
-      }
-# 1021 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      open(const std::string& __s,
-    ios_base::openmode __mode = ios_base::in | ios_base::out)
-      {
- if (!_M_filebuf.open(__s, __mode))
-   this->setstate(ios_base::failbit);
- else
-
-
-   this->clear();
-      }
-# 1040 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 3
-      void
-      close()
-      {
- if (!_M_filebuf.close())
-   this->setstate(ios_base::failbit);
-      }
-    };
-
-
-
-  template <class _CharT, class _Traits>
-    inline void
-    swap(basic_filebuf<_CharT, _Traits>& __x,
-  basic_filebuf<_CharT, _Traits>& __y)
-    { __x.swap(__y); }
-
-
-  template <class _CharT, class _Traits>
-    inline void
-    swap(basic_ifstream<_CharT, _Traits>& __x,
-  basic_ifstream<_CharT, _Traits>& __y)
-    { __x.swap(__y); }
-
-
-  template <class _CharT, class _Traits>
-    inline void
-    swap(basic_ofstream<_CharT, _Traits>& __x,
-  basic_ofstream<_CharT, _Traits>& __y)
-    { __x.swap(__y); }
-
-
-  template <class _CharT, class _Traits>
-    inline void
-    swap(basic_fstream<_CharT, _Traits>& __x,
-  basic_fstream<_CharT, _Traits>& __y)
-    { __x.swap(__y); }
-
-
-
-}
-
-# 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/fstream.tcc" 1 3
-# 37 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/fstream.tcc" 3
-       
-# 38 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/fstream.tcc" 3
-
-
-
-
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-  template<typename _CharT, typename _Traits>
-    void
-    basic_filebuf<_CharT, _Traits>::
-    _M_allocate_internal_buffer()
-    {
-
-
-      if (!_M_buf_allocated && !_M_buf)
- {
-   _M_buf = new char_type[_M_buf_size];
-   _M_buf_allocated = true;
- }
-    }
-
-  template<typename _CharT, typename _Traits>
-    void
-    basic_filebuf<_CharT, _Traits>::
-    _M_destroy_internal_buffer() throw()
-    {
-      if (_M_buf_allocated)
- {
-   delete [] _M_buf;
-   _M_buf = 0;
-   _M_buf_allocated = false;
- }
-      delete [] _M_ext_buf;
-      _M_ext_buf = 0;
-      _M_ext_buf_size = 0;
-      _M_ext_next = 0;
-      _M_ext_end = 0;
-    }
-
-  template<typename _CharT, typename _Traits>
-    basic_filebuf<_CharT, _Traits>::
-    basic_filebuf() : __streambuf_type(), _M_lock(), _M_file(&_M_lock),
-    _M_mode(ios_base::openmode(0)), _M_state_beg(), _M_state_cur(),
-    _M_state_last(), _M_buf(0), _M_buf_size(8192),
-    _M_buf_allocated(false), _M_reading(false), _M_writing(false), _M_pback(),
-    _M_pback_cur_save(0), _M_pback_end_save(0), _M_pback_init(false),
-    _M_codecvt(0), _M_ext_buf(0), _M_ext_buf_size(0), _M_ext_next(0),
-    _M_ext_end(0)
-    {
-      if (has_facet<__codecvt_type>(this->_M_buf_locale))
- _M_codecvt = &use_facet<__codecvt_type>(this->_M_buf_locale);
-    }
-
-
-  template<typename _CharT, typename _Traits>
-    basic_filebuf<_CharT, _Traits>::
-    basic_filebuf(basic_filebuf&& __rhs)
-    : __streambuf_type(__rhs),
-    _M_lock(), _M_file(std::move(__rhs._M_file), &_M_lock),
-    _M_mode(std::__exchange(__rhs._M_mode, ios_base::openmode(0))),
-    _M_state_beg(std::move(__rhs._M_state_beg)),
-    _M_state_cur(std::move(__rhs._M_state_cur)),
-    _M_state_last(std::move(__rhs._M_state_last)),
-    _M_buf(std::__exchange(__rhs._M_buf, nullptr)),
-    _M_buf_size(std::__exchange(__rhs._M_buf_size, 1)),
-    _M_buf_allocated(std::__exchange(__rhs._M_buf_allocated, false)),
-    _M_reading(std::__exchange(__rhs._M_reading, false)),
-    _M_writing(std::__exchange(__rhs._M_writing, false)),
-    _M_pback(__rhs._M_pback),
-    _M_pback_cur_save(std::__exchange(__rhs._M_pback_cur_save, nullptr)),
-    _M_pback_end_save(std::__exchange(__rhs._M_pback_end_save, nullptr)),
-    _M_pback_init(std::__exchange(__rhs._M_pback_init, false)),
-    _M_codecvt(__rhs._M_codecvt),
-    _M_ext_buf(std::__exchange(__rhs._M_ext_buf, nullptr)),
-    _M_ext_buf_size(std::__exchange(__rhs._M_ext_buf_size, 0)),
-    _M_ext_next(std::__exchange(__rhs._M_ext_next, nullptr)),
-    _M_ext_end(std::__exchange(__rhs._M_ext_end, nullptr))
-    {
-      __rhs._M_set_buffer(-1);
-      __rhs._M_state_last = __rhs._M_state_cur = __rhs._M_state_beg;
-    }
-
-  template<typename _CharT, typename _Traits>
-    basic_filebuf<_CharT, _Traits>&
-    basic_filebuf<_CharT, _Traits>::
-    operator=(basic_filebuf&& __rhs)
-    {
-      this->close();
-      __streambuf_type::operator=(__rhs);
-      _M_file.swap(__rhs._M_file);
-      _M_mode = std::__exchange(__rhs._M_mode, ios_base::openmode(0));
-      _M_state_beg = std::move(__rhs._M_state_beg);
-      _M_state_cur = std::move(__rhs._M_state_cur);
-      _M_state_last = std::move(__rhs._M_state_last);
-      _M_buf = std::__exchange(__rhs._M_buf, nullptr);
-      _M_buf_size = std::__exchange(__rhs._M_buf_size, 1);
-      _M_buf_allocated = std::__exchange(__rhs._M_buf_allocated, false);
-      _M_ext_buf = std::__exchange(__rhs._M_ext_buf, nullptr);
-      _M_ext_buf_size = std::__exchange(__rhs._M_ext_buf_size, 0);
-      _M_ext_next = std::__exchange(__rhs._M_ext_next, nullptr);
-      _M_ext_end = std::__exchange(__rhs._M_ext_end, nullptr);
-      _M_reading = std::__exchange(__rhs._M_reading, false);
-      _M_writing = std::__exchange(__rhs._M_writing, false);
-      _M_pback_cur_save = std::__exchange(__rhs._M_pback_cur_save, nullptr);
-      _M_pback_end_save = std::__exchange(__rhs._M_pback_end_save, nullptr);
-      _M_pback_init = std::__exchange(__rhs._M_pback_init, false);
-      __rhs._M_set_buffer(-1);
-      __rhs._M_state_last = __rhs._M_state_cur = __rhs._M_state_beg;
-      return *this;
-    }
-
-  template<typename _CharT, typename _Traits>
-    void
-    basic_filebuf<_CharT, _Traits>::
-    swap(basic_filebuf& __rhs)
-    {
-      __streambuf_type::swap(__rhs);
-      _M_file.swap(__rhs._M_file);
-      std::swap(_M_mode, __rhs._M_mode);
-      std::swap(_M_state_beg, __rhs._M_state_beg);
-      std::swap(_M_state_cur, __rhs._M_state_cur);
-      std::swap(_M_state_last, __rhs._M_state_last);
-      std::swap(_M_buf, __rhs._M_buf);
-      std::swap(_M_buf_size, __rhs._M_buf_size);
-      std::swap(_M_buf_allocated, __rhs._M_buf_allocated);
-      std::swap(_M_ext_buf, __rhs._M_ext_buf);
-      std::swap(_M_ext_buf_size, __rhs._M_ext_buf_size);
-      std::swap(_M_ext_next, __rhs._M_ext_next);
-      std::swap(_M_ext_end, __rhs._M_ext_end);
-      std::swap(_M_reading, __rhs._M_reading);
-      std::swap(_M_writing, __rhs._M_writing);
-      std::swap(_M_pback_cur_save, __rhs._M_pback_cur_save);
-      std::swap(_M_pback_end_save, __rhs._M_pback_end_save);
-      std::swap(_M_pback_init, __rhs._M_pback_init);
-    }
-
-
-  template<typename _CharT, typename _Traits>
-    typename basic_filebuf<_CharT, _Traits>::__filebuf_type*
-    basic_filebuf<_CharT, _Traits>::
-    open(const char* __s, ios_base::openmode __mode)
-    {
-      __filebuf_type *__ret = 0;
-      if (!this->is_open())
- {
-   _M_file.open(__s, __mode);
-   if (this->is_open())
-     {
-       _M_allocate_internal_buffer();
-       _M_mode = __mode;
-
-
-       _M_reading = false;
-       _M_writing = false;
-       _M_set_buffer(-1);
-
-
-       _M_state_last = _M_state_cur = _M_state_beg;
-
-
-       if ((__mode & ios_base::ate)
-    && this->seekoff(0, ios_base::end, __mode)
-    == pos_type(off_type(-1)))
-  this->close();
-       else
-  __ret = this;
-     }
- }
-      return __ret;
-    }
-
-  template<typename _CharT, typename _Traits>
-    typename basic_filebuf<_CharT, _Traits>::__filebuf_type*
-    basic_filebuf<_CharT, _Traits>::
-    close()
-    {
-      if (!this->is_open())
- return 0;
-
-      bool __testfail = false;
-      {
-
- struct __close_sentry
- {
-   basic_filebuf *__fb;
-   __close_sentry (basic_filebuf *__fbi): __fb(__fbi) { }
-   ~__close_sentry ()
-   {
-     __fb->_M_mode = ios_base::openmode(0);
-     __fb->_M_pback_init = false;
-     __fb->_M_destroy_internal_buffer();
-     __fb->_M_reading = false;
-     __fb->_M_writing = false;
-     __fb->_M_set_buffer(-1);
-     __fb->_M_state_last = __fb->_M_state_cur = __fb->_M_state_beg;
-   }
- } __cs (this);
-
- try
-   {
-     if (!_M_terminate_output())
-       __testfail = true;
-   }
- catch(__cxxabiv1::__forced_unwind&)
-   {
-     _M_file.close();
-     throw;
-   }
- catch(...)
-   { __testfail = true; }
-      }
-
-      if (!_M_file.close())
- __testfail = true;
-
-      if (__testfail)
- return 0;
-      else
- return this;
-    }
-
-  template<typename _CharT, typename _Traits>
-    streamsize
-    basic_filebuf<_CharT, _Traits>::
-    showmanyc()
-    {
-      streamsize __ret = -1;
-      const bool __testin = _M_mode & ios_base::in;
-      if (__testin && this->is_open())
- {
-
-
-   __ret = this->egptr() - this->gptr();
-
-
-
-
-
-
-
-   if (__check_facet(_M_codecvt).encoding() >= 0)
-
-     __ret += _M_file.showmanyc() / _M_codecvt->max_length();
- }
-      return __ret;
-    }
-
-  template<typename _CharT, typename _Traits>
-    typename basic_filebuf<_CharT, _Traits>::int_type
-    basic_filebuf<_CharT, _Traits>::
-    underflow()
-    {
-      int_type __ret = traits_type::eof();
-      const bool __testin = _M_mode & ios_base::in;
-      if (__testin)
- {
-   if (_M_writing)
-     {
-       if (overflow() == traits_type::eof())
-  return __ret;
-       _M_set_buffer(-1);
-       _M_writing = false;
-     }
-
-
-
-   _M_destroy_pback();
-
-   if (this->gptr() < this->egptr())
-     return traits_type::to_int_type(*this->gptr());
-
-
-   const size_t __buflen = _M_buf_size > 1 ? _M_buf_size - 1 : 1;
-
-
-   bool __got_eof = false;
-
-   streamsize __ilen = 0;
-   codecvt_base::result __r = codecvt_base::ok;
-   if (__check_facet(_M_codecvt).always_noconv())
-     {
-       __ilen = _M_file.xsgetn(reinterpret_cast<char*>(this->eback()),
-          __buflen);
-       if (__ilen == 0)
-  __got_eof = true;
-     }
-   else
-     {
-
-
-       const int __enc = _M_codecvt->encoding();
-       streamsize __blen;
-       streamsize __rlen;
-       if (__enc > 0)
-  __blen = __rlen = __buflen * __enc;
-       else
-  {
-    __blen = __buflen + _M_codecvt->max_length() - 1;
-    __rlen = __buflen;
-  }
-       const streamsize __remainder = _M_ext_end - _M_ext_next;
-       __rlen = __rlen > __remainder ? __rlen - __remainder : 0;
-
-
-
-       if (_M_reading && this->egptr() == this->eback() && __remainder)
-  __rlen = 0;
-
-
-
-       if (_M_ext_buf_size < __blen)
-  {
-    char* __buf = new char[__blen];
-    if (__remainder)
-      __builtin_memcpy(__buf, _M_ext_next, __remainder);
-
-    delete [] _M_ext_buf;
-    _M_ext_buf = __buf;
-    _M_ext_buf_size = __blen;
-  }
-       else if (__remainder)
-  __builtin_memmove(_M_ext_buf, _M_ext_next, __remainder);
-
-       _M_ext_next = _M_ext_buf;
-       _M_ext_end = _M_ext_buf + __remainder;
-       _M_state_last = _M_state_cur;
-
-       do
-  {
-    if (__rlen > 0)
-      {
-
-
-
-        if (_M_ext_end - _M_ext_buf + __rlen > _M_ext_buf_size)
-   {
-     __throw_ios_failure(("basic_filebuf::underflow " "codecvt::max_length() " "is not valid")
-
-                          );
-   }
-        streamsize __elen = _M_file.xsgetn(_M_ext_end, __rlen);
-        if (__elen == 0)
-   __got_eof = true;
-        else if (__elen == -1)
-   break;
-        _M_ext_end += __elen;
-      }
-
-    char_type* __iend = this->eback();
-    if (_M_ext_next < _M_ext_end)
-      __r = _M_codecvt->in(_M_state_cur, _M_ext_next,
-      _M_ext_end, _M_ext_next,
-      this->eback(),
-      this->eback() + __buflen, __iend);
-    if (__r == codecvt_base::noconv)
-      {
-        size_t __avail = _M_ext_end - _M_ext_buf;
-        __ilen = std::min(__avail, __buflen);
-        traits_type::copy(this->eback(),
-     reinterpret_cast<char_type*>
-     (_M_ext_buf), __ilen);
-        _M_ext_next = _M_ext_buf + __ilen;
-      }
-    else
-      __ilen = __iend - this->eback();
-
-
-
-
-    if (__r == codecvt_base::error)
-      break;
-
-    __rlen = 1;
-  }
-       while (__ilen == 0 && !__got_eof);
-     }
-
-   if (__ilen > 0)
-     {
-       _M_set_buffer(__ilen);
-       _M_reading = true;
-       __ret = traits_type::to_int_type(*this->gptr());
-     }
-   else if (__got_eof)
-     {
-
-
-
-       _M_set_buffer(-1);
-       _M_reading = false;
-
-
-       if (__r == codecvt_base::partial)
-  __throw_ios_failure(("basic_filebuf::underflow " "incomplete character in file")
-                                       );
-     }
-   else if (__r == codecvt_base::error)
-     __throw_ios_failure(("basic_filebuf::underflow " "invalid byte sequence in file")
-                                    );
-   else
-     __throw_ios_failure(("basic_filebuf::underflow " "error reading the file")
-                             );
- }
-      return __ret;
-    }
-
-  template<typename _CharT, typename _Traits>
-    typename basic_filebuf<_CharT, _Traits>::int_type
-    basic_filebuf<_CharT, _Traits>::
-    pbackfail(int_type __i)
-    {
-      int_type __ret = traits_type::eof();
-      const bool __testin = _M_mode & ios_base::in;
-      if (__testin)
- {
-   if (_M_writing)
-     {
-       if (overflow() == traits_type::eof())
-  return __ret;
-       _M_set_buffer(-1);
-       _M_writing = false;
-     }
-
-
-   const bool __testpb = _M_pback_init;
-   const bool __testeof = traits_type::eq_int_type(__i, __ret);
-   int_type __tmp;
-   if (this->eback() < this->gptr())
-     {
-       this->gbump(-1);
-       __tmp = traits_type::to_int_type(*this->gptr());
-     }
-   else if (this->seekoff(-1, ios_base::cur) != pos_type(off_type(-1)))
-     {
-       __tmp = this->underflow();
-       if (traits_type::eq_int_type(__tmp, __ret))
-  return __ret;
-     }
-   else
-     {
-
-
-
-
-
-       return __ret;
-     }
-
-
-
-   if (!__testeof && traits_type::eq_int_type(__i, __tmp))
-     __ret = __i;
-   else if (__testeof)
-     __ret = traits_type::not_eof(__i);
-   else if (!__testpb)
-     {
-       _M_create_pback();
-       _M_reading = true;
-       *this->gptr() = traits_type::to_char_type(__i);
-       __ret = __i;
-     }
- }
-      return __ret;
-    }
-
-  template<typename _CharT, typename _Traits>
-    typename basic_filebuf<_CharT, _Traits>::int_type
-    basic_filebuf<_CharT, _Traits>::
-    overflow(int_type __c)
-    {
-      int_type __ret = traits_type::eof();
-      const bool __testeof = traits_type::eq_int_type(__c, __ret);
-      const bool __testout = (_M_mode & ios_base::out
-         || _M_mode & ios_base::app);
-      if (__testout)
- {
-          if (_M_reading)
-            {
-              _M_destroy_pback();
-              const int __gptr_off = _M_get_ext_pos(_M_state_last);
-              if (_M_seek(__gptr_off, ios_base::cur, _M_state_last)
-                  == pos_type(off_type(-1)))
-                return __ret;
-            }
-   if (this->pbase() < this->pptr())
-     {
-
-       if (!__testeof)
-  {
-    *this->pptr() = traits_type::to_char_type(__c);
-    this->pbump(1);
-  }
-
-
-
-       if (_M_convert_to_external(this->pbase(),
-      this->pptr() - this->pbase()))
-  {
-    _M_set_buffer(0);
-    __ret = traits_type::not_eof(__c);
-  }
-     }
-   else if (_M_buf_size > 1)
-     {
-
-
-
-       _M_set_buffer(0);
-       _M_writing = true;
-       if (!__testeof)
-  {
-    *this->pptr() = traits_type::to_char_type(__c);
-    this->pbump(1);
-  }
-       __ret = traits_type::not_eof(__c);
-     }
-   else
-     {
-
-       char_type __conv = traits_type::to_char_type(__c);
-       if (__testeof || _M_convert_to_external(&__conv, 1))
-  {
-    _M_writing = true;
-    __ret = traits_type::not_eof(__c);
-  }
-     }
- }
-      return __ret;
-    }
-
-  template<typename _CharT, typename _Traits>
-    bool
-    basic_filebuf<_CharT, _Traits>::
-    _M_convert_to_external(_CharT* __ibuf, streamsize __ilen)
-    {
-
-      streamsize __elen;
-      streamsize __plen;
-      if (__check_facet(_M_codecvt).always_noconv())
- {
-   __elen = _M_file.xsputn(reinterpret_cast<char*>(__ibuf), __ilen);
-   __plen = __ilen;
- }
-      else
- {
-
-
-   streamsize __blen = __ilen * _M_codecvt->max_length();
-   char* __buf = static_cast<char*>(__builtin_alloca(__blen));
-
-   char* __bend;
-   const char_type* __iend;
-   codecvt_base::result __r;
-   __r = _M_codecvt->out(_M_state_cur, __ibuf, __ibuf + __ilen,
-    __iend, __buf, __buf + __blen, __bend);
-
-   if (__r == codecvt_base::ok || __r == codecvt_base::partial)
-     __blen = __bend - __buf;
-   else if (__r == codecvt_base::noconv)
-     {
-
-       __buf = reinterpret_cast<char*>(__ibuf);
-       __blen = __ilen;
-     }
-   else
-     __throw_ios_failure(("basic_filebuf::_M_convert_to_external " "conversion error")
-                           );
-
-   __elen = _M_file.xsputn(__buf, __blen);
-   __plen = __blen;
-
-
-   if (__r == codecvt_base::partial && __elen == __plen)
-     {
-       const char_type* __iresume = __iend;
-       streamsize __rlen = this->pptr() - __iend;
-       __r = _M_codecvt->out(_M_state_cur, __iresume,
-        __iresume + __rlen, __iend, __buf,
-        __buf + __blen, __bend);
-       if (__r != codecvt_base::error)
-  {
-    __rlen = __bend - __buf;
-    __elen = _M_file.xsputn(__buf, __rlen);
-    __plen = __rlen;
-  }
-       else
-  __throw_ios_failure(("basic_filebuf::_M_convert_to_external " "conversion error")
-                        );
-     }
- }
-      return __elen == __plen;
-    }
-
-  template<typename _CharT, typename _Traits>
-    streamsize
-    basic_filebuf<_CharT, _Traits>::
-    xsgetn(_CharT* __s, streamsize __n)
-    {
-
-      streamsize __ret = 0;
-      if (_M_pback_init)
- {
-   if (__n > 0 && this->gptr() == this->eback())
-     {
-       *__s++ = *this->gptr();
-       this->gbump(1);
-       __ret = 1;
-       --__n;
-     }
-   _M_destroy_pback();
- }
-      else if (_M_writing)
- {
-    if (overflow() == traits_type::eof())
-      return __ret;
-    _M_set_buffer(-1);
-    _M_writing = false;
-  }
-
-
-
-
-      const bool __testin = _M_mode & ios_base::in;
-      const streamsize __buflen = _M_buf_size > 1 ? _M_buf_size - 1 : 1;
-
-      if (__n > __buflen && __check_facet(_M_codecvt).always_noconv()
-     && __testin)
-   {
-
-     const streamsize __avail = this->egptr() - this->gptr();
-     if (__avail != 0)
-       {
-        traits_type::copy(__s, this->gptr(), __avail);
-         __s += __avail;
-        this->setg(this->eback(), this->gptr() + __avail,
-     this->egptr());
-        __ret += __avail;
-        __n -= __avail;
-       }
-
-
-
-     streamsize __len;
-     for (;;)
-       {
-         __len = _M_file.xsgetn(reinterpret_cast<char*>(__s),
-           __n);
-         if (__len == -1)
-    __throw_ios_failure(("basic_filebuf::xsgetn " "error reading the file")
-                                );
-         if (__len == 0)
-    break;
-
-         __n -= __len;
-         __ret += __len;
-         if (__n == 0)
-    break;
-
-         __s += __len;
-       }
-
-     if (__n == 0)
-       {
-         _M_set_buffer(0);
-         _M_reading = true;
-       }
-     else if (__len == 0)
-       {
-
-
-
-         _M_set_buffer(-1);
-         _M_reading = false;
-       }
-   }
-      else
-   __ret += __streambuf_type::xsgetn(__s, __n);
-
-      return __ret;
-    }
-
-  template<typename _CharT, typename _Traits>
-    streamsize
-    basic_filebuf<_CharT, _Traits>::
-    xsputn(const _CharT* __s, streamsize __n)
-    {
-      streamsize __ret = 0;
-
-
-
-      const bool __testout = (_M_mode & ios_base::out
-         || _M_mode & ios_base::app);
-      if (__check_facet(_M_codecvt).always_noconv()
-     && __testout && !_M_reading)
- {
-
-   const streamsize __chunk = 1ul << 10;
-   streamsize __bufavail = this->epptr() - this->pptr();
-
-
-   if (!_M_writing && _M_buf_size > 1)
-     __bufavail = _M_buf_size - 1;
-
-   const streamsize __limit = std::min(__chunk, __bufavail);
-   if (__n >= __limit)
-     {
-       const streamsize __buffill = this->pptr() - this->pbase();
-       const char* __buf = reinterpret_cast<const char*>(this->pbase());
-       __ret = _M_file.xsputn_2(__buf, __buffill,
-           reinterpret_cast<const char*>(__s),
-           __n);
-       if (__ret == __buffill + __n)
-  {
-    _M_set_buffer(0);
-    _M_writing = true;
-  }
-       if (__ret > __buffill)
-  __ret -= __buffill;
-       else
-  __ret = 0;
-     }
-   else
-     __ret = __streambuf_type::xsputn(__s, __n);
- }
-       else
-  __ret = __streambuf_type::xsputn(__s, __n);
-       return __ret;
-    }
-
-  template<typename _CharT, typename _Traits>
-    typename basic_filebuf<_CharT, _Traits>::__streambuf_type*
-    basic_filebuf<_CharT, _Traits>::
-    setbuf(char_type* __s, streamsize __n)
-    {
-      if (!this->is_open())
- {
-   if (__s == 0 && __n == 0)
-     _M_buf_size = 1;
-   else if (__s && __n > 0)
-     {
-# 787 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/bits/fstream.tcc" 3
-       _M_buf = __s;
-       _M_buf_size = __n;
-     }
- }
-      return this;
-    }
-
-
-
-
-  template<typename _CharT, typename _Traits>
-    typename basic_filebuf<_CharT, _Traits>::pos_type
-    basic_filebuf<_CharT, _Traits>::
-    seekoff(off_type __off, ios_base::seekdir __way, ios_base::openmode)
-    {
-      int __width = 0;
-      if (_M_codecvt)
- __width = _M_codecvt->encoding();
-      if (__width < 0)
- __width = 0;
-
-      pos_type __ret = pos_type(off_type(-1));
-      const bool __testfail = __off != 0 && __width <= 0;
-      if (this->is_open() && !__testfail)
- {
-
-
-
-
-   bool __no_movement = __way == ios_base::cur && __off == 0
-     && (!_M_writing || _M_codecvt->always_noconv());
-
-
-   if (!__no_movement)
-     _M_destroy_pback();
-
-
-
-
-
-
-   __state_type __state = _M_state_beg;
-   off_type __computed_off = __off * __width;
-   if (_M_reading && __way == ios_base::cur)
-     {
-       __state = _M_state_last;
-       __computed_off += _M_get_ext_pos(__state);
-     }
-   if (!__no_movement)
-     __ret = _M_seek(__computed_off, __way, __state);
-   else
-     {
-       if (_M_writing)
-  __computed_off = this->pptr() - this->pbase();
-
-        off_type __file_off = _M_file.seekoff(0, ios_base::cur);
-        if (__file_off != off_type(-1))
-  {
-    __ret = __file_off + __computed_off;
-    __ret.state(__state);
-  }
-     }
- }
-      return __ret;
-    }
-
-
-
-
-
-  template<typename _CharT, typename _Traits>
-    typename basic_filebuf<_CharT, _Traits>::pos_type
-    basic_filebuf<_CharT, _Traits>::
-    seekpos(pos_type __pos, ios_base::openmode)
-    {
-      pos_type __ret = pos_type(off_type(-1));
-      if (this->is_open())
- {
-
-   _M_destroy_pback();
-   __ret = _M_seek(off_type(__pos), ios_base::beg, __pos.state());
- }
-      return __ret;
-    }
-
-  template<typename _CharT, typename _Traits>
-    typename basic_filebuf<_CharT, _Traits>::pos_type
-    basic_filebuf<_CharT, _Traits>::
-    _M_seek(off_type __off, ios_base::seekdir __way, __state_type __state)
-    {
-      pos_type __ret = pos_type(off_type(-1));
-      if (_M_terminate_output())
- {
-   off_type __file_off = _M_file.seekoff(__off, __way);
-   if (__file_off != off_type(-1))
-     {
-       _M_reading = false;
-       _M_writing = false;
-       _M_ext_next = _M_ext_end = _M_ext_buf;
-       _M_set_buffer(-1);
-       _M_state_cur = __state;
-       __ret = __file_off;
-       __ret.state(_M_state_cur);
-     }
- }
-      return __ret;
-    }
-
-
-
-
-  template<typename _CharT, typename _Traits>
-    int basic_filebuf<_CharT, _Traits>::
-    _M_get_ext_pos(__state_type& __state)
-    {
-      if (_M_codecvt->always_noconv())
-        return this->gptr() - this->egptr();
-      else
-        {
-
-
-
-          const int __gptr_off =
-            _M_codecvt->length(__state, _M_ext_buf, _M_ext_next,
-                               this->gptr() - this->eback());
-          return _M_ext_buf + __gptr_off - _M_ext_end;
-        }
-    }
-
-  template<typename _CharT, typename _Traits>
-    bool
-    basic_filebuf<_CharT, _Traits>::
-    _M_terminate_output()
-    {
-
-      bool __testvalid = true;
-      if (this->pbase() < this->pptr())
- {
-   const int_type __tmp = this->overflow();
-   if (traits_type::eq_int_type(__tmp, traits_type::eof()))
-     __testvalid = false;
- }
-
-
-      if (_M_writing && !__check_facet(_M_codecvt).always_noconv()
-   && __testvalid)
- {
-
-
-
-   const size_t __blen = 128;
-   char __buf[__blen];
-   codecvt_base::result __r;
-   streamsize __ilen = 0;
-
-   do
-     {
-       char* __next;
-       __r = _M_codecvt->unshift(_M_state_cur, __buf,
-     __buf + __blen, __next);
-       if (__r == codecvt_base::error)
-  __testvalid = false;
-       else if (__r == codecvt_base::ok ||
-         __r == codecvt_base::partial)
-  {
-    __ilen = __next - __buf;
-    if (__ilen > 0)
-      {
-        const streamsize __elen = _M_file.xsputn(__buf, __ilen);
-        if (__elen != __ilen)
-   __testvalid = false;
-      }
-  }
-     }
-   while (__r == codecvt_base::partial && __ilen > 0 && __testvalid);
-
-   if (__testvalid)
-     {
-
-
-
-
-       const int_type __tmp = this->overflow();
-       if (traits_type::eq_int_type(__tmp, traits_type::eof()))
-  __testvalid = false;
-     }
- }
-      return __testvalid;
-    }
-
-  template<typename _CharT, typename _Traits>
-    int
-    basic_filebuf<_CharT, _Traits>::
-    sync()
-    {
-
-
-      int __ret = 0;
-      if (this->pbase() < this->pptr())
- {
-   const int_type __tmp = this->overflow();
-   if (traits_type::eq_int_type(__tmp, traits_type::eof()))
-     __ret = -1;
- }
-      return __ret;
-    }
-
-  template<typename _CharT, typename _Traits>
-    void
-    basic_filebuf<_CharT, _Traits>::
-    imbue(const locale& __loc)
-    {
-      bool __testvalid = true;
-
-      const __codecvt_type* _M_codecvt_tmp = 0;
-      if (__builtin_expect(has_facet<__codecvt_type>(__loc), true))
- _M_codecvt_tmp = &use_facet<__codecvt_type>(__loc);
-
-      if (this->is_open())
- {
-
-   if ((_M_reading || _M_writing)
-       && __check_facet(_M_codecvt).encoding() == -1)
-     __testvalid = false;
-   else
-     {
-       if (_M_reading)
-  {
-    if (__check_facet(_M_codecvt).always_noconv())
-      {
-        if (_M_codecvt_tmp
-     && !__check_facet(_M_codecvt_tmp).always_noconv())
-   __testvalid = this->seekoff(0, ios_base::cur, _M_mode)
-                 != pos_type(off_type(-1));
-      }
-    else
-      {
-
-        _M_ext_next = _M_ext_buf
-   + _M_codecvt->length(_M_state_last, _M_ext_buf,
-          _M_ext_next,
-          this->gptr() - this->eback());
-        const streamsize __remainder = _M_ext_end - _M_ext_next;
-        if (__remainder)
-   __builtin_memmove(_M_ext_buf, _M_ext_next, __remainder);
-
-        _M_ext_next = _M_ext_buf;
-        _M_ext_end = _M_ext_buf + __remainder;
-        _M_set_buffer(-1);
-        _M_state_last = _M_state_cur = _M_state_beg;
-      }
-  }
-       else if (_M_writing && (__testvalid = _M_terminate_output()))
-  _M_set_buffer(-1);
-     }
- }
-
-      if (__testvalid)
- _M_codecvt = _M_codecvt_tmp;
-      else
- _M_codecvt = 0;
-    }
-
-
-
-
-  extern template class basic_filebuf<char>;
-  extern template class basic_ifstream<char>;
-  extern template class basic_ofstream<char>;
-  extern template class basic_fstream<char>;
-
-
-  extern template class basic_filebuf<wchar_t>;
-  extern template class basic_ifstream<wchar_t>;
-  extern template class basic_ofstream<wchar_t>;
-  extern template class basic_fstream<wchar_t>;
-
-
-
-
-}
-# 1082 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/fstream" 2 3
-# 4 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 2
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/algorithm" 1 3
 # 58 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/algorithm" 3
        
@@ -71242,10 +69406,10 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 }
 # 63 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/algorithm" 2 3
-# 5 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 2
+# 4 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 2
 
 
-# 6 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 5 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 using namespace std;
 
 struct COO_unit
@@ -71263,21 +69427,25 @@ COO assemble_COO_matrix(std::string filePath)
 {
     int M, N, L;
     COO matrix;
-    std::ifstream fin(filePath);
-    while (fin.peek() == '%')
-        fin.ignore(2048, '\n');
-    fin >> M >> N >> L;
-
+    FILE * f = fopen(filePath.c_str(), "r");
+    while (fgetc(f) == '%')
+        fscanf(f, "%*[^\n]\n");
+    fseek(f, -1, 
+# 25 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 3 4
+                1
+# 25 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+                        );
+    fscanf(f, "%d %d %d", &M, &N, &L);
     for (int l = 0; l < L; l++)
     {
         int row, col;
         double data;
-        fin >> row >> col >> data;
+        fscanf(f, "%d %d %lg\n", &row, &col, &data);
         matrix.units.push_back({row - 1, col - 1, data});
     }
     sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
          { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
-    fin.close();
+    fclose(f);
     return matrix;
 }
 
@@ -71287,16 +69455,21 @@ COO assemble_simetric_COO_matrix(std::string filePath)
     vector<int> rows, cols;
     vector<double> data;
     COO matrix;
-    std::ifstream fin(filePath);
-    while (fin.peek() == '%')
-        fin.ignore(2048, '\n');
-    fin >> M >> N >> L;
+    FILE * f = fopen(filePath.c_str(), "r");
+    while (fgetc(f) == '%')
+        fscanf(f, "%*[^\n]\n");
+    fseek(f, -1, 
+# 49 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 3 4
+                1
+# 49 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+                        );
+    fscanf(f, "%d %d %d", &M, &N, &L);
     for (int l = 0; l < L; l++)
     {
 
         int i, j;
         double Aij;
-        fin >> i >> j >> Aij;
+        fscanf(f, "%d %d %lg\n", &i, &j, &Aij);
         matrix.units.push_back({i-1, j-1, Aij});
     }
     for (int l = 0; l < L; l++)
@@ -71306,26 +69479,10 @@ COO assemble_simetric_COO_matrix(std::string filePath)
     }
     sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
          { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
-    fin.close();
+    fclose(f);
     return matrix;
 }
-
-void print_COO(const COO& coo, int numRows, int numCols) {
-    std::vector<std::vector<double>> denseMatrix(numRows, std::vector<double>(numCols, 0.0));
-
-    for (const auto& unit : coo.units) {
-        denseMatrix[unit.row][unit.col] = unit.data;
-    }
-
-    for (const auto& row : denseMatrix) {
-        for (const auto& element : row) {
-            std::cout << element << " ";
-        }
-        std::cout << std::endl;
-    }
-}
-
-
+# 86 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 csr_t_1 COO_to_CSR1(COO matrix)
 {
     csr_t_1 csr;
@@ -71452,7 +69609,8 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
 
-        if (abs(z_csr.data[i] - z_csr2.data[i]) > 0.01)
+        bool almost_equal = z_csr.data[i] - z_csr2.data[i] > 0 ? z_csr.data[i] - z_csr2.data[i] < (data_t)0.01 : z_csr.data[i] - z_csr2.data[i] > (data_t)(-0.01);
+        if (!almost_equal)
         {
             equal = false;
             break;
@@ -71491,12 +69649,12 @@ void test_row_scalar_mult()
 
     hls::vector<data_t, N> row = (data_t)1;
 
-    hls::vector<data_t, N> out_row = row_scalar_mult(row, 2);
+    row_scalar_mult((data_t)2, row);
 
     std::cout << "out_row = ";
     for (int i = 0; i < N; i++)
     {
-        std::cout << out_row[i] << " ";
+        std::cout << row[i] << " ";
     }
     std::cout << std::endl;
 }
@@ -71521,7 +69679,8 @@ void test_extract_row(csr_t_2 inp_csr)
 {
     for (int i = 0; i < N; i++)
     {
-        hls::vector<data_t, N> out_row = extract_row(inp_csr, i);
+        hls::vector<data_t, N> out_row;
+        extract_row(inp_csr, i, out_row);
         std::cout << "out_row[" << i << "] = ";
         for (int j = 0; j < N; j++)
         {
@@ -71534,15 +69693,15 @@ void test_extract_row(csr_t_2 inp_csr)
 
 void test_extract_element(csr_t_1 inp_csr)
 {
-    data_t out_element = extract_element(inp_csr, 2, 3);
-    std::cout << "out_element[2][3] = " << out_element << std::endl;
+    data_t out_data;
+    extract_element(inp_csr, 1,1, out_data);
+    std::cout << "out_data = " << out_data << std::endl;
 }
 
 void test_append_row()
 {
 
-    csr_out_t out_csr;
-    out_csr.rowptr[0] = 0;
+    csr_out_t out_csr = new_csr_out_t();
     hls::vector<data_t, N> row = (data_t)1;
     for (int i = 0; i < M; i++)
     {
@@ -71552,59 +69711,90 @@ void test_append_row()
     print_csr_out_t(out_csr);
 }
 
+#ifndef HLS_FASTSIM
+#ifdef __cplusplus
+extern "C"
+#endif
+void apatb_row_product_sw(int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *);
+# 314 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 void basic_test()
 {
-# 374 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-    csr_out_t z_csr;
-    z_csr.rowptr[0] = 0;
+# 339 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+    csr_t_1 A = {
+        .rowptr = new int[M + 1]{0, 2, 4, 7, 9},
+        .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+        .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+
+    csr_t_2 B = {
+        .rowptr = new int[N+1]{0, 2, 4, 5, 8, 9},
+        .colind = new int[N*P]{0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+        .data = new data_t[N*P]{1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+
+    csr_out_t test = {
+        .rowptr = new int[M + 1]{0, 4, 7, 11, 14},
+        .colind = new int[M*P]{0, 1, 2, 3, 0, 1, 3, 0, 1, 2, 4, 1, 2, 4, -1, -1, -1, -1, -1, -1},
+        .data = new data_t[M*P]{1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 56, 32, 56, 145, -1, -1, -1, -1, -1, -1}};
+    csr_out_t test_2 = {
+        .rowptr = new int[M + 1]{0, 2, 4, 7, 9},
+        .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+        .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+
+
+    test_extract_row(B);
+
+    test_extract_element(A);
+
+    test_append_row();
+
+    test_row_add();
+
+    csr_out_t z_csr = new_csr_out_t();
+    
+#ifndef HLS_FASTSIM
+#define row_product apatb_row_product_sw
+#endif
+# 368 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+row_product(A.rowptr, A.colind, A.data, B.rowptr, B.colind, B.data, z_csr.rowptr, z_csr.colind, z_csr.data);
+#undef row_product
+# 368 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 
     print_csr_out_t(z_csr);
 }
+#endif
+# 370 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+
 
 #ifndef HLS_FASTSIM
 #ifdef __cplusplus
 extern "C"
 #endif
-void apatb_row_product_sw(int *, int *, double *, int *, int *, double *, int *, int *, double *);
-# 380 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+void apatb_row_product_sw(int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *);
+# 372 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 void synth_test()
 {
-# 405 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 397 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
     csr_out_t csr_out = new_csr_out_t();
     COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
     COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
     COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
-
-    cout << "COO A" << endl;
-    print_COO(coo_A, M, P);
-    cout << "-------------------" << endl;
-    cout << "COO B" << endl;
-    print_COO(coo_B , P, N);
-    cout << "-------------------" << endl;
-
-
-
-
-
+# 413 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
     csr_t_1 csr_A = COO_to_CSR1(coo_A);
     csr_t_2 csr_B = COO_to_CSR2(coo_B);
     csr_out_t csr_C = COO_to_CSR3(coo_C);
-    cout << "CSR C" << endl;
-    print_csr_out_t(csr_C);
-# 436 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 428 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
     
 #ifndef HLS_FASTSIM
 #define row_product apatb_row_product_sw
 #endif
-# 436 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-row_product(&csr_A.rowptr[0], &csr_A.colind[0], &csr_A.data[0], &csr_B.rowptr[0], &csr_B.colind[0], &csr_B.data[0], &csr_out.rowptr[0], &csr_out.colind[0], &csr_out.data[0]);
+# 428 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+row_product(csr_A.rowptr, csr_A.colind, csr_A.data, csr_B.rowptr, csr_B.colind, csr_B.data, csr_out.rowptr, csr_out.colind, csr_out.data);
 #undef row_product
-# 436 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 428 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 
 
-    cout << "CSR out" << endl;
-    print_csr_out_t(csr_out);
-    cout << "-------------------" << endl;
+
+
+
 
     cout << "CSR out == CSR C ?" << endl;
     if (compare_csr_out_t(csr_out, csr_C))
@@ -71618,7 +69808,7 @@ row_product(&csr_A.rowptr[0], &csr_A.colind[0], &csr_A.data[0], &csr_B.rowptr[0]
 
 }
 #endif
-# 452 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 444 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 
 
 int main()

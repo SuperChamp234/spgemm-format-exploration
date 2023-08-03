@@ -1,6 +1,5 @@
 #include "row_product.hpp"
 #include <vector>
-#include <fstream>
 #include <algorithm>
 
 using namespace std;
@@ -20,21 +19,21 @@ COO assemble_COO_matrix(std::string filePath)
 {
     int M, N, L;
     COO matrix;
-    std::ifstream fin(filePath);
-    while (fin.peek() == '%')
-        fin.ignore(2048, '\n');
-    fin >> M >> N >> L;
-
+    FILE * f = fopen(filePath.c_str(), "r");
+    while (fgetc(f) == '%')
+        fscanf(f, "%*[^\n]\n");
+    fseek(f, -1, SEEK_CUR);
+    fscanf(f, "%d %d %d", &M, &N, &L);
     for (int l = 0; l < L; l++)
     {
         int row, col;
         double data;
-        fin >> row >> col >> data;
+        fscanf(f, "%d %d %lg\n", &row, &col, &data);
         matrix.units.push_back({row - 1, col - 1, data});
     }
     sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
          { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
-    fin.close();
+    fclose(f);
     return matrix;
 }
 
@@ -44,16 +43,17 @@ COO assemble_simetric_COO_matrix(std::string filePath)
     vector<int> rows, cols;
     vector<double> data;
     COO matrix;
-    std::ifstream fin(filePath);
-    while (fin.peek() == '%')
-        fin.ignore(2048, '\n');
-    fin >> M >> N >> L;
+    FILE * f = fopen(filePath.c_str(), "r");
+    while (fgetc(f) == '%')
+        fscanf(f, "%*[^\n]\n");
+    fseek(f, -1, SEEK_CUR);
+    fscanf(f, "%d %d %d", &M, &N, &L);
     for (int l = 0; l < L; l++)
     {
         // Read (i,j,A[i,j]) triplets:
         int i, j;
         double Aij;
-        fin >> i >> j >> Aij;
+        fscanf(f, "%d %d %lg\n", &i, &j, &Aij);
         matrix.units.push_back({i-1, j-1, Aij});
     }
     for (int l = 0; l < L; l++)
@@ -63,24 +63,24 @@ COO assemble_simetric_COO_matrix(std::string filePath)
     }
     sort(matrix.units.begin(), matrix.units.end(), [](COO_unit a, COO_unit b)
          { return (a.row == b.row) ? (a.col < b.col) : (a.row < b.row); });
-    fin.close();
+    fclose(f);
     return matrix;
 }
 
-void print_COO(const COO& coo, int numRows, int numCols) {
-    std::vector<std::vector<double>> denseMatrix(numRows, std::vector<double>(numCols, 0.0));
+// void print_COO(const COO& coo, int numRows, int numCols) {
+//     std::vector<std::vector<double>> denseMatrix(numRows, std::vector<double>(numCols, 0.0));
 
-    for (const auto& unit : coo.units) {
-        denseMatrix[unit.row][unit.col] = unit.data;
-    }
+//     for (const auto& unit : coo.units) {
+//         denseMatrix[unit.row][unit.col] = unit.data;
+//     }
 
-    for (const auto& row : denseMatrix) {
-        for (const auto& element : row) {
-            std::cout << element << " ";
-        }
-        std::cout << std::endl;
-    }
-}
+//     for (const auto& row : denseMatrix) {
+//         for (const auto& element : row) {
+//             std::cout << element << " ";
+//         }
+//         std::cout << std::endl;
+//     }
+// }
 
 // convert COO matrix to CSR matrix
 csr_t_1 COO_to_CSR1(COO matrix)
@@ -209,7 +209,8 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
         //check data till 2 fixed point precision
-        if (abs(z_csr.data[i] - z_csr2.data[i]) > 0.01)
+        bool almost_equal = z_csr.data[i] - z_csr2.data[i] > 0 ? z_csr.data[i] - z_csr2.data[i] < (data_t)0.01 : z_csr.data[i] - z_csr2.data[i] > (data_t)(-0.01);
+        if (!almost_equal)
         {
             equal = false;
             break;
@@ -248,12 +249,12 @@ void test_row_scalar_mult()
     // init row
     hls::vector<data_t, N> row = (data_t)1;
     // multiply row by 2
-    hls::vector<data_t, N> out_row = row_scalar_mult(row, 2);
+    row_scalar_mult((data_t)2, row);
     // print out_row
     std::cout << "out_row = ";
     for (int i = 0; i < N; i++)
     {
-        std::cout << out_row[i] << " ";
+        std::cout << row[i] << " ";
     }
     std::cout << std::endl;
 }
@@ -278,7 +279,8 @@ void test_extract_row(csr_t_2 inp_csr)
 {
     for (int i = 0; i < N; i++)
     {
-        hls::vector<data_t, N> out_row = extract_row(inp_csr, i);
+        hls::vector<data_t, N> out_row;
+        extract_row(inp_csr, i, out_row);
         std::cout << "out_row[" << i << "] = ";
         for (int j = 0; j < N; j++)
         {
@@ -291,15 +293,15 @@ void test_extract_row(csr_t_2 inp_csr)
 // test extract_element by extracting 2nd element of 3rd row of csr_t_1
 void test_extract_element(csr_t_1 inp_csr)
 {
-    data_t out_element = extract_element(inp_csr, 2, 3);
-    std::cout << "out_element[2][3] = " << out_element << std::endl;
+    data_t out_data;
+    extract_element(inp_csr, 1,1, out_data);
+    std::cout << "out_data = " << out_data << std::endl;
 }
 
 void test_append_row()
 {
     // init empty csr_out_t
-    csr_out_t out_csr;
-    out_csr.rowptr[0] = 0;
+    csr_out_t out_csr = new_csr_out_t();
     hls::vector<data_t, N> row = (data_t)1;
     for (int i = 0; i < M; i++)
     {
@@ -334,46 +336,36 @@ void basic_test()
     // 23 28 74	  0  56
     // 0  32 56   0	145
 
-    // csr_t_1 A = {
-    //     .rowptr = new int[M + 1],
-    //     .colind = new int[M*P],
-    //     .data = new data_t[M*P]};
-    // csr_t_2 B = {
-    //     .rowptr = new int[P + 1],
-    //     .colind = new int[P*N],
-    //     .data = new data_t[P*N]};
+    csr_t_1 A = {
+        .rowptr =  new int[M + 1]{0, 2, 4, 7, 9},
+        .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+        .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
 
-    // A = {
-    //     .rowptr =  {0, 2, 4, 7, 9},
-    //     .colind = {0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-    //     .data = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+    csr_t_2 B = {
+        .rowptr = new int[N+1]{0, 2, 4, 5, 8, 9},
+        .colind = new int[N*P]{0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+        .data = new data_t[N*P]{1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
 
-    // B = {
-    //     .rowptr = {0, 2, 4, 5, 8, 9},
-    //     .colind = {0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-    //     .data = {1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
-
-    // csr_out_t test = {
-    //     .rowptr = {0, 4, 7, 11, 14},
-    //     .colind = {0, 1, 2, 3, 0, 1, 3, 0, 1, 2, 4, 1, 2, 4, -1, -1, -1, -1, -1, -1},
-    //     .data = {1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 56, 32, 56, 145, -1, -1, -1, -1, -1, -1}};
-    // csr_out_t A = {
-    //     .rowptr = {0, 2, 4, 7, 9},
-    //     .colind = {0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-    //     .data = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+    csr_out_t test = {
+        .rowptr = new int[M + 1]{0, 4, 7, 11, 14},
+        .colind = new int[M*P]{0, 1, 2, 3, 0, 1, 3, 0, 1, 2, 4, 1, 2, 4, -1, -1, -1, -1, -1, -1},
+        .data = new data_t[M*P]{1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 56, 32, 56, 145, -1, -1, -1, -1, -1, -1}};
+    csr_out_t test_2 = {
+        .rowptr = new int[M + 1]{0, 2, 4, 7, 9},
+        .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+        .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
 
     // run test_extract_row
-    // test_extract_row(B);
+    test_extract_row(B);
     // run test_extract_element
-    // test_extract_element(A);
+    test_extract_element(A);
     // run test_append_row
-    // test_append_row();
+    test_append_row();
     // test_row_scalar_mult();
-    // test_row_add();
+    test_row_add();
     // run row_product
-    csr_out_t z_csr;
-    z_csr.rowptr[0] = 0;
-    //row_product(A.rowptr, A.colind, A.data, B.rowptr, B.colind, B.data, z_csr.rowptr, z_csr.colind, z_csr.data);
+    csr_out_t z_csr = new_csr_out_t();
+    row_product(A.rowptr, A.colind, A.data, B.rowptr, B.colind, B.data, z_csr.rowptr, z_csr.colind, z_csr.data);
     print_csr_out_t(z_csr);
 }
 
@@ -402,20 +394,19 @@ C:
     */
 
     // read COO matrix from file
-    csr_out_t csr_out = new_csr_out_t();
-    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
-    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
-    COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
+    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
+    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
+    COO coo_C = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/output.mtx");
 
-    cout << "COO A" << endl;
-    print_COO(coo_A, M, P);
-    cout << "-------------------" << endl;
-    cout << "COO B" << endl;
-    print_COO(coo_B , P, N);
-    cout << "-------------------" << endl;
-    //cout << "COO C" << endl;
-    //print_COO(coo_C , M, N);
-    //cout << "-------------------" << endl;
+     cout << "COO A" << endl;
+    // print_COO(coo_A, M, P);
+    // cout << "-------------------" << endl;
+     cout << "COO B" << endl;
+    // print_COO(coo_B , P, N);
+    // cout << "-------------------" << endl;
+     cout << "COO C" << endl;
+    // print_COO(coo_C , M, N);
+    // cout << "-------------------" << endl;
 
     // convert COO to CSR
     csr_t_1 csr_A = COO_to_CSR1(coo_A);
@@ -433,11 +424,12 @@ C:
     //C = A*B
     //init empty csr_out_t
     //run row_product
-    row_product(&csr_A.rowptr[0], &csr_A.colind[0], &csr_A.data[0], &csr_B.rowptr[0], &csr_B.colind[0], &csr_B.data[0], &csr_out.rowptr[0], &csr_out.colind[0], &csr_out.data[0]);
-    
-    cout << "CSR out" << endl;
-    print_csr_out_t(csr_out);
-    cout << "-------------------" << endl;
+    csr_out_t csr_out = new_csr_out_t();
+    row_product(csr_A.rowptr, csr_A.colind, csr_A.data, csr_B.rowptr, csr_B.colind, csr_B.data, csr_out.rowptr, csr_out.colind, csr_out.data);
+
+    //cout << "CSR out" << endl;
+    //print_csr_out_t(csr_out);
+    //cout << "-------------------" << endl;
 
     cout << "CSR out == CSR C ?" << endl;
     if (compare_csr_out_t(csr_out, csr_C))
@@ -453,7 +445,7 @@ C:
 
 int main()
 {
-    // basic_test();
+    //basic_test();
     synth_test();
     return 0;
 }

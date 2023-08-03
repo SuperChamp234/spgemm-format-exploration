@@ -9,9 +9,7 @@
 # 1 "<command-line>" 2
 # 1 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
 # 1 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 1
-
-
-
+# 31 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/include/ap_fixed.h" 1
 # 55 "/home/leoh/tools/Vitis_HLS/2020.2/include/ap_fixed.h"
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/include/ap_common.h" 1
@@ -60142,7 +60140,7 @@ inline bool operator!=(
 
 }
 # 396 "/home/leoh/tools/Vitis_HLS/2020.2/include/ap_fixed.h" 2
-# 5 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
+# 32 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/include/hls_vector.h" 1
 
 
@@ -60304,15 +60302,15 @@ public:
 };
 
 }
-# 6 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
-# 15 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 33 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
+# 42 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 const int M = 5;
 const int P = 5;
 const int N = 5;
 
 
 
-typedef double data_t;
+typedef ap_fixed<32, 16> data_t;
 
 struct csr_t_1 {
     int* rowptr;
@@ -60331,30 +60329,35 @@ struct csr_out_t {
     int* colind;
     data_t* data;
 };
-# 48 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
-# 57 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row);
-# 66 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scalar);
-# 75 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 76 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row);
+# 86 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data);
+
+
+
+
+
+
+
+void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row);
+
+
+
+
+
+
+
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
-# 84 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+# 111 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
-
-
-
-
-
-
-
-data_t extract_element(csr_t_1 inp_csr, int row_idx, int col_idx);
+# 126 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
+void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 2 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp" 2
 
 
-hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
+void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row)
 {
-    hls::vector<data_t, N> out_row;
     int start_idx;
     int end_idx;
     int col_idx;
@@ -60362,7 +60365,6 @@ hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
     memcpy(&start_idx, &inp_csr.rowptr[row], sizeof(int));
     memcpy(&end_idx, &inp_csr.rowptr[row+1], sizeof(int));
     int j = start_idx;
-#pragma HLS unroll
     for (int i = 0; i < N; i++)
     {
         memcpy(&col_idx, &inp_csr.colind[j], sizeof(int));
@@ -60380,45 +60382,43 @@ hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
             out_row[i] = 0;
         }
     }
-    return out_row;
 }
 
-data_t extract_element(csr_t_1 inp_csr, int row, int col)
+void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data)
 {
     int start_idx;
     int end_idx;
     int col_idx;
-    data_t data;
     memcpy(&start_idx, &inp_csr.rowptr[row], sizeof(int));
     memcpy(&end_idx, &inp_csr.rowptr[row+1], sizeof(int));
+    bool found = false;
 
     for (int j = start_idx; j < end_idx; j++)
     {
         memcpy(&col_idx, &inp_csr.colind[j], sizeof(int));
         if (col_idx == col)
         {
-            memcpy(&data, &inp_csr.data[j], sizeof(data_t));
-            return data;
+            memcpy(&out_data, &inp_csr.data[j], sizeof(data_t));
+            found = true;
         }
     }
-
-    return 0;
+    if (!found)
+    {
+        data_t zero = data_t(0);
+        memcpy(&out_data, &zero, sizeof(data_t));
+    }
 }
 
 
 
-hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scalar)
+void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row)
 {
-#pragma HLS array_partition variable=row complete
     row *= scalar;
-    return row;
 }
 
 
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2)
 {
-#pragma HLS array_partition variable=row1 complete
-#pragma HLS array_partition variable=row2 complete
     row1 += row2;
 }
 
@@ -60480,20 +60480,20 @@ void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, in
     csr.rowptr[0] = 0;
     hls::vector<data_t, N> extracted_row = data_t(0);
     hls::vector<data_t, N> buffer_row = data_t(0);
-    hls::vector<data_t, N> mult_row = data_t(0);
     data_t extracted_scalar = data_t(0);
 
 
+#pragma hls dataflow
     for (int i = 0; i < M; i++)
     {
         for (int k = 0; k < N; k++)
         {
-            extracted_scalar = extract_element(x, i, k);
+            extract_element(x, i, k, extracted_scalar);
             if (extracted_scalar != 0)
             {
-                extracted_row = extract_row(y, k);
-                mult_row = row_scalar_mult(extracted_row, extracted_scalar);
-                row_add(buffer_row, mult_row);
+                extract_row(y, k, extracted_row);
+                row_scalar_mult(extracted_scalar, extracted_row);
+                row_add(buffer_row, extracted_row);
             }
         }
         append_row(&csr, buffer_row, i);
@@ -60504,21 +60504,21 @@ void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, in
 #ifdef __cplusplus
 extern "C"
 #endif
-void apatb_row_product_ir(int *, int *, double *, int *, int *, double *, int *, int *, double *);
+void apatb_row_product_ir(int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *);
 #ifdef __cplusplus
 extern "C"
 #endif
-void row_product_hw_stub(int *x_rowptr, int *x_colind, double *x_data, int *y_rowptr, int *y_colind, double *y_data, int *z_rowptr, int *z_colind, double *z_data){
+void row_product_hw_stub(int *x_rowptr, int *x_colind, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *x_data, int *y_rowptr, int *y_colind, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *y_data, int *z_rowptr, int *z_colind, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *z_data){
 row_product(x_rowptr, x_colind, x_data, y_rowptr, y_colind, y_data, z_rowptr, z_colind, z_data);
 return ;
 }
 #ifdef __cplusplus
 extern "C"
 #endif
-void apatb_row_product_sw(int *x_rowptr, int *x_colind, double *x_data, int *y_rowptr, int *y_colind, double *y_data, int *z_rowptr, int *z_colind, double *z_data){
+void apatb_row_product_sw(int *x_rowptr, int *x_colind, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *x_data, int *y_rowptr, int *y_colind, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *y_data, int *z_rowptr, int *z_colind, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *z_data){
 apatb_row_product_ir(x_rowptr, x_colind, x_data, y_rowptr, y_colind, y_data, z_rowptr, z_colind, z_data);
 return ;
 }
 #endif
-# 151 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
+# 147 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
 

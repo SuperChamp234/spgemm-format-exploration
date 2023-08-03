@@ -152,9 +152,7 @@ extern "C" {
 # 2 "<built-in>" 2
 # 1 "row_product/src/row_product.cpp" 2
 # 1 "row_product/src/row_product.hpp" 1
-
-
-
+# 31 "row_product/src/row_product.hpp"
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed.h" 1
 # 55 "/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed.h"
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/ap_common.h" 1
@@ -5571,7 +5569,7 @@ inline bool operator!=(
 
 }
 # 396 "/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed.h" 2
-# 5 "row_product/src/row_product.hpp" 2
+# 32 "row_product/src/row_product.hpp" 2
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_vector.h" 1
 
 
@@ -24869,7 +24867,7 @@ public:
 };
 
 }
-# 6 "row_product/src/row_product.hpp" 2
+# 33 "row_product/src/row_product.hpp" 2
 # 1 "/usr/include/string.h" 1 3 4
 # 26 "/usr/include/string.h" 3 4
 # 1 "/usr/include/bits/libc-header-start.h" 1 3 4
@@ -25273,7 +25271,7 @@ extern "C++" const char *basename (const char *__filename)
      noexcept (true) __asm ("basename") __attribute__ ((__nonnull__ (1)));
 # 539 "/usr/include/string.h" 3 4
 }
-# 7 "row_product/src/row_product.hpp" 2
+# 34 "row_product/src/row_product.hpp" 2
 
 
 
@@ -25288,7 +25286,7 @@ const int N = 5;
 
 
 
-typedef double data_t;
+typedef ap_fixed<32, 16> data_t;
 
 struct csr_t_1 {
     int* rowptr;
@@ -25307,30 +25305,35 @@ struct csr_out_t {
     int* colind;
     data_t* data;
 };
-# 48 "row_product/src/row_product.hpp"
-__attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
-# 57 "row_product/src/row_product.hpp"
-hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row);
-# 66 "row_product/src/row_product.hpp"
-hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scalar);
-# 75 "row_product/src/row_product.hpp"
+# 76 "row_product/src/row_product.hpp"
+void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row);
+# 86 "row_product/src/row_product.hpp"
+void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data);
+
+
+
+
+
+
+
+void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row);
+
+
+
+
+
+
+
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
-# 84 "row_product/src/row_product.hpp"
+# 111 "row_product/src/row_product.hpp"
 void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
-
-
-
-
-
-
-
-data_t extract_element(csr_t_1 inp_csr, int row_idx, int col_idx);
+# 126 "row_product/src/row_product.hpp"
+__attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 2 "row_product/src/row_product.cpp" 2
 
 
-hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
+void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row)
 {
-    hls::vector<data_t, N> out_row;
     int start_idx;
     int end_idx;
     int col_idx;
@@ -25338,8 +25341,7 @@ hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
     memcpy(&start_idx, &inp_csr.rowptr[row], sizeof(int));
     memcpy(&end_idx, &inp_csr.rowptr[row+1], sizeof(int));
     int j = start_idx;
-#pragma HLS unroll
- VITIS_LOOP_15_1: for (int i = 0; i < N; i++)
+    VITIS_LOOP_13_1: for (int i = 0; i < N; i++)
     {
         memcpy(&col_idx, &inp_csr.colind[j], sizeof(int));
         if (j < end_idx && col_idx == i)
@@ -25356,46 +25358,44 @@ hls::vector<data_t, N> extract_row(csr_t_2 inp_csr, int row)
             out_row[i] = 0;
         }
     }
-    return out_row;
 }
 
-data_t extract_element(csr_t_1 inp_csr, int row, int col)
+void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data)
 {
     int start_idx;
     int end_idx;
     int col_idx;
-    data_t data;
     memcpy(&start_idx, &inp_csr.rowptr[row], sizeof(int));
     memcpy(&end_idx, &inp_csr.rowptr[row+1], sizeof(int));
+    bool found = false;
 
-    VITIS_LOOP_44_1: for (int j = start_idx; j < end_idx; j++)
+    VITIS_LOOP_41_1: for (int j = start_idx; j < end_idx; j++)
     {
         memcpy(&col_idx, &inp_csr.colind[j], sizeof(int));
         if (col_idx == col)
         {
-            memcpy(&data, &inp_csr.data[j], sizeof(data_t));
-            return data;
+            memcpy(&out_data, &inp_csr.data[j], sizeof(data_t));
+            found = true;
         }
     }
-
-    return 0;
+    if (!found)
+    {
+        data_t zero = data_t(0);
+        memcpy(&out_data, &zero, sizeof(data_t));
+    }
 }
 
 
 
-hls::vector<data_t, N> row_scalar_mult(hls::vector<data_t, N>& row, data_t scalar)
+void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row)
 {
-#pragma HLS array_partition variable=row complete
- row *= scalar;
-    return row;
+    row *= scalar;
 }
 
 
 void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2)
 {
-#pragma HLS array_partition variable=row1 complete
-#pragma HLS array_partition variable=row2 complete
- row1 += row2;
+    row1 += row2;
 }
 
 
@@ -25408,7 +25408,7 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
     memcpy(&end_idx, &(out_csr->rowptr[row_idx+1]), sizeof(int));
 
     int j = start_idx;
-    VITIS_LOOP_84_1: for (int i = 0; i < N; i++)
+    VITIS_LOOP_80_1: for (int i = 0; i < N; i++)
     {
         if (row[i] != 0)
         {
@@ -25426,7 +25426,7 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
 __attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
 {
 #pragma HLS TOP name=row_product
-# 100 "row_product/src/row_product.cpp"
+# 96 "row_product/src/row_product.cpp"
 
 #pragma HLS INTERFACE s_axilite port=return
 #pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr
@@ -25459,20 +25459,20 @@ __attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, in
     csr.rowptr[0] = 0;
     hls::vector<data_t, N> extracted_row = data_t(0);
     hls::vector<data_t, N> buffer_row = data_t(0);
-    hls::vector<data_t, N> mult_row = data_t(0);
     data_t extracted_scalar = data_t(0);
 
 
-    VITIS_LOOP_136_1: for (int i = 0; i < M; i++)
+#pragma hls dataflow
+ VITIS_LOOP_132_1: for (int i = 0; i < M; i++)
     {
-        VITIS_LOOP_138_2: for (int k = 0; k < N; k++)
+        VITIS_LOOP_134_2: for (int k = 0; k < N; k++)
         {
-            extracted_scalar = extract_element(x, i, k);
+            extract_element(x, i, k, extracted_scalar);
             if (extracted_scalar != 0)
             {
-                extracted_row = extract_row(y, k);
-                mult_row = row_scalar_mult(extracted_row, extracted_scalar);
-                row_add(buffer_row, mult_row);
+                extract_row(y, k, extracted_row);
+                row_scalar_mult(extracted_scalar, extracted_row);
+                row_add(buffer_row, extracted_row);
             }
         }
         append_row(&csr, buffer_row, i);
