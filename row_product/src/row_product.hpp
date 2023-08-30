@@ -122,6 +122,5 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
  * @param z_colind The column index array of the resulting matrix.
  * @param z_data The data array of the resulting matrix.
  */
-void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
-
+void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data,  int* z_rowptr,  int* z_colind,  data_t* z_data);
 #endif

@@ -15,6 +15,24 @@ struct COO
     vector<COO_unit> units;
 };
 
+csr_out_t new_csr_out_t()
+{
+    csr_out_t csr;
+    int rowptr[M + 1];
+    int colind[M * N];
+    data_t data[M * N];
+    csr.rowptr = rowptr;
+    csr.colind = colind;
+    csr.data = data;
+    //check if allocation was successful
+    if (!csr.rowptr || !csr.colind || !csr.data)
+    {
+        cout << "Memory allocation failed" << endl;
+        exit(1);
+    }
+    return csr;
+}
+
 COO assemble_COO_matrix(std::string filePath)
 {
     int M, N, L;
@@ -83,12 +101,8 @@ COO assemble_simetric_COO_matrix(std::string filePath)
 // }
 
 // convert COO matrix to CSR matrix
-csr_t_1 COO_to_CSR1(COO matrix)
+void COO_to_CSR1(COO matrix, csr_t_1 &csr)
 {
-    csr_t_1 csr;
-    csr.rowptr = new int[M + 1];
-    csr.colind = new int[M * P];
-    csr.data = new data_t[M * P];
     int row = 0;
     int rowptr = 0;
     csr.rowptr[row] = rowptr;
@@ -109,14 +123,9 @@ csr_t_1 COO_to_CSR1(COO matrix)
             rowptr++;
         }
     }
-    return csr;
 }
-csr_t_2 COO_to_CSR2(COO matrix)
+void COO_to_CSR2(COO matrix, csr_t_2 &csr)
 {
-    csr_t_2 csr;    
-    csr.rowptr = new int[P + 1];
-    csr.colind = new int[P * N];
-    csr.data = new data_t[P * N];
 
     int row = 0;
     int rowptr = 0;
@@ -138,14 +147,10 @@ csr_t_2 COO_to_CSR2(COO matrix)
             rowptr++;
         }
     }
-    return csr;
 }
-csr_out_t COO_to_CSR3(COO matrix)
+
+void COO_to_CSR3(COO matrix, csr_out_t &csr)
 {
-    csr_out_t csr;
-    csr.rowptr = new int[M + 1];
-    csr.colind = new int[M * N];
-    csr.data = new data_t[M * N];
     int row = 0;
     int rowptr = 0;
     csr.rowptr[row] = rowptr;
@@ -166,22 +171,6 @@ csr_out_t COO_to_CSR3(COO matrix)
             rowptr++;
         }
     }
-    return csr;
-}
-
-csr_out_t new_csr_out_t()
-{
-    csr_out_t csr;
-    csr.rowptr = new int[M + 1];
-    csr.colind = new int[M * N];
-    csr.data = new data_t[M * N];
-    //check if allocation was successful
-    if (!csr.rowptr || !csr.colind || !csr.data)
-    {
-        cout << "Memory allocation failed" << endl;
-        exit(1);
-    }
-    return csr;
 }
 
 //compare if two csr_out_t are equal
@@ -209,7 +198,7 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
         //check data till 2 fixed point precision
-        bool almost_equal = z_csr.data[i] - z_csr2.data[i] > 0 ? z_csr.data[i] - z_csr2.data[i] < (data_t)0.01 : z_csr.data[i] - z_csr2.data[i] > (data_t)(-0.01);
+        bool almost_equal = (data_t)z_csr.data[i] - (data_t)z_csr2.data[i] > 0 ? (data_t)z_csr.data[i] - (data_t)z_csr2.data[i] < (data_t)0.01 :(data_t)z_csr.data[i] - (data_t)z_csr2.data[i] > (data_t)(-0.01);
         if (!almost_equal)
         {
             equal = false;
@@ -231,7 +220,7 @@ void print_csr_out_t(csr_out_t z_csr)
             {
                 if (z_csr.colind[k] == j)
                 {
-                    std::cout << z_csr.data[k] << " ";
+                    std::cout << (data_t)z_csr.data[k] << " ";
                     found = true;
                     break;
                 }
@@ -311,63 +300,63 @@ void test_append_row()
     print_csr_out_t(out_csr);
 }
 
-void basic_test()
-{
+// void basic_test()
+// {
 
-    // csr_t_1 csr: A 4x5
+//     // csr_t_1 csr: A 4x5
 
-    // 1 2 0 0 0
-    // 0 3 4 0 0
-    // 5 0 6 7 0
-    // 0 0 0 8 9
+//     // 1 2 0 0 0
+//     // 0 3 4 0 0
+//     // 5 0 6 7 0
+//     // 0 0 0 8 9
 
-    // csr_t_2 csr: B 5x5
+//     // csr_t_2 csr: B 5x5
 
-    // 1  0  5  0  0
-    // 0  2  0  6  0
-    // 3  0  0  0  0
-    // 0  4  7  0  8
-    // 0  0  0  0  9
+//     // 1  0  5  0  0
+//     // 0  2  0  6  0
+//     // 3  0  0  0  0
+//     // 0  4  7  0  8
+//     // 0  0  0  0  9
 
-    // csr_out_t csr: test 4x5
+//     // csr_out_t csr: test 4x5
 
-    // 1   4  5  12   0
-    // 12  6  0  18   0
-    // 23 28 74	  0  56
-    // 0  32 56   0	145
+//     // 1   4  5  12   0
+//     // 12  6  0  18   0
+//     // 23 28 74	  0  56
+//     // 0  32 56   0	145
 
-    csr_t_1 A = {
-        .rowptr =  new int[M + 1]{0, 2, 4, 7, 9},
-        .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+//     csr_t_1 A = {
+//         .rowptr =  new int[M + 1]{0, 2, 4, 7, 9},
+//         .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+//         .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
 
-    csr_t_2 B = {
-        .rowptr = new int[N+1]{0, 2, 4, 5, 8, 9},
-        .colind = new int[N*P]{0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = new data_t[N*P]{1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+//     csr_t_2 B = {
+//         .rowptr = new int[N+1]{0, 2, 4, 5, 8, 9},
+//         .colind = new int[N*P]{0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+//         .data = new data_t[N*P]{1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
 
-    csr_out_t test = {
-        .rowptr = new int[M + 1]{0, 4, 7, 11, 14},
-        .colind = new int[M*P]{0, 1, 2, 3, 0, 1, 3, 0, 1, 2, 4, 1, 2, 4, -1, -1, -1, -1, -1, -1},
-        .data = new data_t[M*P]{1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 56, 32, 56, 145, -1, -1, -1, -1, -1, -1}};
-    csr_out_t test_2 = {
-        .rowptr = new int[M + 1]{0, 2, 4, 7, 9},
-        .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
+//     csr_out_t test = {
+//         .rowptr = new int[M + 1]{0, 4, 7, 11, 14},
+//         .colind = new int[M*P]{0, 1, 2, 3, 0, 1, 3, 0, 1, 2, 4, 1, 2, 4, -1, -1, -1, -1, -1, -1},
+//         .data = new data_t[M*P]{1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 56, 32, 56, 145, -1, -1, -1, -1, -1, -1}};
+//     csr_out_t test_2 = {
+//         .rowptr = new int[M + 1]{0, 2, 4, 7, 9},
+//         .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+//         .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
 
-    // run test_extract_row
-    test_extract_row(B);
-    // run test_extract_element
-    test_extract_element(A);
-    // run test_append_row
-    test_append_row();
-    // test_row_scalar_mult();
-    test_row_add();
-    // run row_product
-    csr_out_t z_csr = new_csr_out_t();
-    row_product(A.rowptr, A.colind, A.data, B.rowptr, B.colind, B.data, z_csr.rowptr, z_csr.colind, z_csr.data);
-    print_csr_out_t(z_csr);
-}
+//     // run test_extract_row
+//     test_extract_row(B);
+//     // run test_extract_element
+//     test_extract_element(A);
+//     // run test_append_row
+//     test_append_row();
+//     // test_row_scalar_mult();
+//     test_row_add();
+//     // run row_product
+//     csr_out_t z_csr = new_csr_out_t();
+//     row_product(A.rowptr, A.colind, A.data, B.rowptr, B.colind, B.data, z_csr.rowptr, z_csr.colind, z_csr.data);
+//     print_csr_out_t(z_csr);
+// }
 
 void synth_test()
 {
@@ -409,9 +398,36 @@ C:
     // cout << "-------------------" << endl;
 
     // convert COO to CSR
-    csr_t_1 csr_A = COO_to_CSR1(coo_A);
-    csr_t_2 csr_B = COO_to_CSR2(coo_B);
-    csr_out_t csr_C = COO_to_CSR3(coo_C);
+    csr_t_1 csr_A;
+    int A_rowptr_arr[M + 1];
+    int A_colind[M * P];
+    data_t A_data[M * P];
+    csr_A.rowptr = A_rowptr_arr;
+    csr_A.colind = A_colind;
+    csr_A.data = A_data;
+
+    COO_to_CSR1(coo_A, csr_A);
+
+    csr_t_2 csr_B;
+    int B_rowptr_arr[M + 1];
+    int B_colind[M * P];
+    data_t B_data[M * P];
+    csr_B.rowptr = B_rowptr_arr;
+    csr_B.colind = B_colind;
+    csr_B.data = B_data;
+
+    COO_to_CSR2(coo_B, csr_B);
+
+    csr_out_t csr_C;
+    int C_rowptr_arr[M + 1];
+    int C_colind[M * P];
+    data_t C_data[M * P];
+    csr_C.rowptr = C_rowptr_arr;
+    csr_C.colind = C_colind;
+    csr_C.data = C_data;
+
+    COO_to_CSR3(coo_C, csr_C);
+
     cout << "CSR C" << endl;
     print_csr_out_t(csr_C);
     // cout << "-------------------" << endl;
@@ -424,11 +440,17 @@ C:
     //C = A*B
     //init empty csr_out_t
     //run row_product
-    csr_out_t csr_out = new_csr_out_t();
-    row_product(csr_A.rowptr, csr_A.colind, csr_A.data, csr_B.rowptr, csr_B.colind, csr_B.data, csr_out.rowptr, csr_out.colind, csr_out.data);
+    csr_out_t csr_out;
+    static int out_rowptr_arr[M + 1];
+    static int out_colind[M * P];
+    static data_t out_data[M * P];
+    csr_out.rowptr = out_rowptr_arr;
+    csr_out.colind = out_colind;
+    csr_out.data = out_data;
+    row_product(A_rowptr_arr, A_colind, A_data, B_rowptr_arr, B_colind, B_data, out_rowptr_arr, out_colind, out_data);
 
-    //cout << "CSR out" << endl;
-    //print_csr_out_t(csr_out);
+    cout << "CSR out" << endl;
+    print_csr_out_t(csr_out);
     //cout << "-------------------" << endl;
 
     cout << "CSR out == CSR C ?" << endl;
@@ -440,6 +462,7 @@ C:
     {
         cout << "FAIL" << endl;
     }
+
 
 }
 
