@@ -60348,7 +60348,7 @@ void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
 # 110 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
 # 125 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
+void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 2 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp" 2
 
 
@@ -60360,16 +60360,9 @@ void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row)
     for (int i = 0; i < N; i++)
     {
         int col_idx = inp_csr.colind[j];
-        if (j < end_idx && col_idx == i)
-        {
-            data_t data = inp_csr.data[j];
-            out_row[i] = data;
-            j++;
-        }
-        else
-        {
-            out_row[i] = 0;
-        }
+        data_t data = inp_csr.data[j];
+        out_row[i] = (j < end_idx && col_idx == i) ? data : data_t(0);
+        (j < end_idx && col_idx == i) ? j++ : j;
     }
 }
 
@@ -60430,18 +60423,18 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
     out_csr->rowptr[row_idx+1] = j;
 }
 
-void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
+void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
 {
 #pragma HLS INTERFACE s_axilite port=return
-#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr
-#pragma HLS INTERFACE m_axi depth=1024 port=x_colind
-#pragma HLS INTERFACE m_axi depth=1024 port=x_data
-#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
-#pragma HLS INTERFACE m_axi depth=1024 port=y_colind
-#pragma HLS INTERFACE m_axi depth=1024 port=y_data
-#pragma HLS INTERFACE m_axi depth=1024 port=z_rowptr
-#pragma HLS INTERFACE m_axi depth=1024 port=z_colind
-#pragma HLS INTERFACE m_axi depth=1024 port=z_data
+#pragma HLS INTERFACE m_axi depth=25 port=x_rowptr
+#pragma HLS INTERFACE m_axi depth=25 port=x_colind
+#pragma HLS INTERFACE m_axi depth=25 port=x_data
+#pragma HLS INTERFACE m_axi depth=25 port=y_rowptr
+#pragma HLS INTERFACE m_axi depth=25 port=y_colind
+#pragma HLS INTERFACE m_axi depth=25 port=y_data
+#pragma HLS INTERFACE m_axi depth=25 port=z_rowptr
+#pragma HLS INTERFACE m_axi depth=25 port=z_colind
+#pragma HLS INTERFACE m_axi depth=25 port=z_data
 
 
 
@@ -60466,7 +60459,7 @@ void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, in
     data_t extracted_scalar = data_t(0);
 
 
-#pragma hls dataflow
+#pragma HLS dataflow
     for (int i = 0; i < M; i++)
     {
         for (int k = 0; k < N; k++)

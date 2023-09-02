@@ -441,9 +441,9 @@ C:
     //init empty csr_out_t
     //run row_product
     csr_out_t csr_out;
-    static int out_rowptr_arr[M + 1];
-    static int out_colind[M * P];
-    static data_t out_data[M * P];
+    int out_rowptr_arr[M + 1];
+    int out_colind[M * P];
+    data_t out_data[M * P];
     csr_out.rowptr = out_rowptr_arr;
     csr_out.colind = out_colind;
     csr_out.data = out_data;

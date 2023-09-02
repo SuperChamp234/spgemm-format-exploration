@@ -31,7 +31,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>0</coreId>
+						<coreId>544436847</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -64,7 +64,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>129</coreId>
+						<coreId>49</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -97,7 +97,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>129</coreId>
+						<coreId>97</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -130,7 +130,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>132</coreId>
+						<coreId>129</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -163,7 +163,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>177</coreId>
+						<coreId>129</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -196,7 +196,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>1600734514</coreId>
+						<coreId>132</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -229,7 +229,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>132</coreId>
+						<coreId>177</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -262,7 +262,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>433</coreId>
+						<coreId>177</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -295,7 +295,7 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>641</coreId>
+						<coreId>433</coreId>
 					</Obj>
 					<bitwidth>32</bitwidth>
 				</Value>
@@ -364,10 +364,10 @@
 					<Obj>
 						<type>0</type>
 						<id>32</id>
-						<name>_ln134</name>
+						<name>_ln127</name>
 						<fileName>row_product/src/row_product.cpp</fileName>
 						<fileDirectory>/home/leoh/Documents/spgemm-format-exploration</fileDirectory>
-						<lineNumber>134</lineNumber>
+						<lineNumber>127</lineNumber>
 						<contextFuncName>row_product</contextFuncName>
 						<contextNormFuncName>row_product</contextNormFuncName>
 						<inlineStackInfo>
@@ -383,7 +383,7 @@
 											<first>row_product/src/row_product.cpp</first>
 											<second>row_product</second>
 										</first>
-										<second>134</second>
+										<second>127</second>
 									</item>
 								</second>
 							</item>
@@ -420,7 +420,7 @@
 					<Obj>
 						<type>2</type>
 						<id>34</id>
-						<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc</name>
+						<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc</name>
 						<fileName></fileName>
 						<fileDirectory></fileDirectory>
 						<lineNumber>0</lineNumber>
@@ -436,12 +436,12 @@
 						<opType></opType>
 						<implIndex></implIndex>
 						<coreName></coreName>
-						<coreId>1852142194</coreId>
+						<coreId>1869359136</coreId>
 					</Obj>
 					<bitwidth>0</bitwidth>
 				</Value>
 				<const_type>6</const_type>
-				<content>&lt;constant:Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit103_proc&gt;</content>
+				<content>&lt;constant:Block__ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei.exit96_proc&gt;</content>
 			</item>
 		</consts>
 		<blocks class_id="17" tracking_level="0" version="0">
@@ -525,14 +525,14 @@
 			<item class_id_reference="20" object_id="_20">
 				<id>41</id>
 				<edge_type>1</edge_type>
-				<source_obj>6</source_obj>
+				<source_obj>5</source_obj>
 				<sink_obj>31</sink_obj>
 				<is_back_edge>0</is_back_edge>
 			</item>
 			<item class_id_reference="20" object_id="_21">
 				<id>42</id>
 				<edge_type>1</edge_type>
-				<source_obj>5</source_obj>
+				<source_obj>6</source_obj>
 				<sink_obj>31</sink_obj>
 				<is_back_edge>0</is_back_edge>
 			</item>
@@ -658,7 +658,7 @@
 					<item_version>0</item_version>
 					<item class_id="28" tracking_level="1" version="0" object_id="_35">
 						<type>0</type>
-						<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0</name>
+						<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0</name>
 						<ssdmobj_id>31</ssdmobj_id>
 						<pins class_id="29" tracking_level="0" version="0">
 							<count>9</count>
@@ -674,7 +674,7 @@
 								</port>
 								<inst class_id="31" tracking_level="1" version="0" object_id="_38">
 									<type>0</type>
-									<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0</name>
+									<name>Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0</name>
 									<ssdmobj_id>31</ssdmobj_id>
 								</inst>
 							</item>
@@ -724,22 +724,22 @@
 							</item>
 							<item class_id_reference="30" object_id="_47">
 								<port class_id_reference="25" object_id="_48">
-									<name>y_data</name>
+									<name>y_colind</name>
 									<dir>0</dir>
 									<type>1</type>
 									<need_hs>1</need_hs>
-									<top_port class_id_reference="25" object_id_reference="_31"></top_port>
+									<top_port class_id_reference="25" object_id_reference="_30"></top_port>
 									<chan class_id="-1"></chan>
 								</port>
 								<inst class_id_reference="31" object_id_reference="_38"></inst>
 							</item>
 							<item class_id_reference="30" object_id="_49">
 								<port class_id_reference="25" object_id="_50">
-									<name>y_colind</name>
+									<name>y_data</name>
 									<dir>0</dir>
 									<type>1</type>
 									<need_hs>1</need_hs>
-									<top_port class_id_reference="25" object_id_reference="_30"></top_port>
+									<top_port class_id_reference="25" object_id_reference="_31"></top_port>
 									<chan class_id="-1"></chan>
 								</port>
 								<inst class_id_reference="31" object_id_reference="_38"></inst>

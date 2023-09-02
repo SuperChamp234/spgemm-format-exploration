@@ -25328,7 +25328,7 @@ void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
 # 110 "row_product/src/row_product.hpp"
 void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
 # 125 "row_product/src/row_product.hpp"
-__attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
+__attribute__((sdx_kernel("row_product", 0))) void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 2 "row_product/src/row_product.cpp" 2
 
 
@@ -25340,16 +25340,9 @@ void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row)
     VITIS_LOOP_9_1: for (int i = 0; i < N; i++)
     {
         int col_idx = inp_csr.colind[j];
-        if (j < end_idx && col_idx == i)
-        {
-            data_t data = inp_csr.data[j];
-            out_row[i] = data;
-            j++;
-        }
-        else
-        {
-            out_row[i] = 0;
-        }
+        data_t data = inp_csr.data[j];
+        out_row[i] = (j < end_idx && col_idx == i) ? data : data_t(0);
+        (j < end_idx && col_idx == i) ? j++ : j;
     }
 }
 
@@ -25359,7 +25352,7 @@ void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data)
     int end_idx = inp_csr.rowptr[row+1];
     bool found = false;
 
-    VITIS_LOOP_31_1: for (int j = start_idx; j < end_idx; j++)
+    VITIS_LOOP_24_1: for (int j = start_idx; j < end_idx; j++)
     {
         int col_idx = inp_csr.colind[j];
         if (col_idx == col)
@@ -25395,7 +25388,7 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
     int end_idx = out_csr->rowptr[row_idx+1];
 
     int j = start_idx;
-    VITIS_LOOP_67_1: for (int i = 0; i < N; i++)
+    VITIS_LOOP_60_1: for (int i = 0; i < N; i++)
     {
         if (row[i] != 0)
         {
@@ -25410,21 +25403,21 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
     out_csr->rowptr[row_idx+1] = j;
 }
 
-__attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
+__attribute__((sdx_kernel("row_product", 0))) void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
 {
 #pragma HLS TOP name=row_product
-# 83 "row_product/src/row_product.cpp"
+# 76 "row_product/src/row_product.cpp"
 
 #pragma HLS INTERFACE s_axilite port=return
-#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr
-#pragma HLS INTERFACE m_axi depth=1024 port=x_colind
-#pragma HLS INTERFACE m_axi depth=1024 port=x_data
-#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
-#pragma HLS INTERFACE m_axi depth=1024 port=y_colind
-#pragma HLS INTERFACE m_axi depth=1024 port=y_data
-#pragma HLS INTERFACE m_axi depth=1024 port=z_rowptr
-#pragma HLS INTERFACE m_axi depth=1024 port=z_colind
-#pragma HLS INTERFACE m_axi depth=1024 port=z_data
+#pragma HLS INTERFACE m_axi depth=25 port=x_rowptr
+#pragma HLS INTERFACE m_axi depth=25 port=x_colind
+#pragma HLS INTERFACE m_axi depth=25 port=x_data
+#pragma HLS INTERFACE m_axi depth=25 port=y_rowptr
+#pragma HLS INTERFACE m_axi depth=25 port=y_colind
+#pragma HLS INTERFACE m_axi depth=25 port=y_data
+#pragma HLS INTERFACE m_axi depth=25 port=z_rowptr
+#pragma HLS INTERFACE m_axi depth=25 port=z_colind
+#pragma HLS INTERFACE m_axi depth=25 port=z_data
 
 
 
@@ -25449,10 +25442,10 @@ __attribute__((sdx_kernel("row_product", 0))) void row_product(int* x_rowptr, in
     data_t extracted_scalar = data_t(0);
 
 
-#pragma hls dataflow
- VITIS_LOOP_119_1: for (int i = 0; i < M; i++)
+#pragma HLS dataflow
+ VITIS_LOOP_112_1: for (int i = 0; i < M; i++)
     {
-        VITIS_LOOP_121_2: for (int k = 0; k < N; k++)
+        VITIS_LOOP_114_2: for (int k = 0; k < N; k++)
         {
             extract_element(x, i, k, extracted_scalar);
             if (extracted_scalar != 0)

@@ -10,79 +10,59 @@ target triple = "fpga64-xilinx-none"
 ; Function Attrs: noinline
 define void @apatb_row_product_ir(i32* %x_rowptr, i32* %x_colind, %struct.ap_fixed* %x_data, i32* %y_rowptr, i32* %y_colind, %struct.ap_fixed* %y_data, i32* %z_rowptr, i32* %z_colind, %struct.ap_fixed* %z_data) local_unnamed_addr #0 {
 entry:
-  %malloccall = tail call i8* @malloc(i64 4096)
-  %x_rowptr_copy = bitcast i8* %malloccall to [1024 x i32]*
-  %malloccall1 = tail call i8* @malloc(i64 4096)
-  %x_colind_copy = bitcast i8* %malloccall1 to [1024 x i32]*
-  %malloccall2 = tail call i8* @malloc(i64 4096)
-  %x_data_copy = bitcast i8* %malloccall2 to [1024 x %struct.ap_fixed]*
-  %malloccall3 = tail call i8* @malloc(i64 4096)
-  %y_rowptr_copy = bitcast i8* %malloccall3 to [1024 x i32]*
-  %malloccall4 = tail call i8* @malloc(i64 4096)
-  %y_colind_copy = bitcast i8* %malloccall4 to [1024 x i32]*
-  %malloccall5 = tail call i8* @malloc(i64 4096)
-  %y_data_copy = bitcast i8* %malloccall5 to [1024 x %struct.ap_fixed]*
-  %malloccall6 = tail call i8* @malloc(i64 4096)
-  %z_rowptr_copy = bitcast i8* %malloccall6 to [1024 x i32]*
-  %malloccall7 = tail call i8* @malloc(i64 4096)
-  %z_colind_copy = bitcast i8* %malloccall7 to [1024 x i32]*
-  %malloccall8 = tail call i8* @malloc(i64 4096)
-  %z_data_copy = bitcast i8* %malloccall8 to [1024 x %struct.ap_fixed]*
-  %0 = bitcast i32* %x_rowptr to [1024 x i32]*
-  %1 = bitcast i32* %x_colind to [1024 x i32]*
-  %2 = bitcast %struct.ap_fixed* %x_data to [1024 x %struct.ap_fixed]*
-  %3 = bitcast i32* %y_rowptr to [1024 x i32]*
-  %4 = bitcast i32* %y_colind to [1024 x i32]*
-  %5 = bitcast %struct.ap_fixed* %y_data to [1024 x %struct.ap_fixed]*
-  %6 = bitcast i32* %z_rowptr to [1024 x i32]*
-  %7 = bitcast i32* %z_colind to [1024 x i32]*
-  %8 = bitcast %struct.ap_fixed* %z_data to [1024 x %struct.ap_fixed]*
-  call fastcc void @copy_in([1024 x i32]* %0, [1024 x i32]* %x_rowptr_copy, [1024 x i32]* %1, [1024 x i32]* %x_colind_copy, [1024 x %struct.ap_fixed]* %2, [1024 x %struct.ap_fixed]* %x_data_copy, [1024 x i32]* %3, [1024 x i32]* %y_rowptr_copy, [1024 x i32]* %4, [1024 x i32]* %y_colind_copy, [1024 x %struct.ap_fixed]* %5, [1024 x %struct.ap_fixed]* %y_data_copy, [1024 x i32]* %6, [1024 x i32]* %z_rowptr_copy, [1024 x i32]* %7, [1024 x i32]* %z_colind_copy, [1024 x %struct.ap_fixed]* %8, [1024 x %struct.ap_fixed]* %z_data_copy)
-  %9 = getelementptr inbounds [1024 x i32], [1024 x i32]* %x_rowptr_copy, i32 0, i32 0
-  %10 = getelementptr inbounds [1024 x i32], [1024 x i32]* %x_colind_copy, i32 0, i32 0
-  %11 = getelementptr inbounds [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %x_data_copy, i32 0, i32 0
-  %12 = getelementptr inbounds [1024 x i32], [1024 x i32]* %y_rowptr_copy, i32 0, i32 0
-  %13 = getelementptr inbounds [1024 x i32], [1024 x i32]* %y_colind_copy, i32 0, i32 0
-  %14 = getelementptr inbounds [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %y_data_copy, i32 0, i32 0
-  %15 = getelementptr inbounds [1024 x i32], [1024 x i32]* %z_rowptr_copy, i32 0, i32 0
-  %16 = getelementptr inbounds [1024 x i32], [1024 x i32]* %z_colind_copy, i32 0, i32 0
-  %17 = getelementptr inbounds [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %z_data_copy, i32 0, i32 0
+  %x_rowptr_copy = alloca [25 x i32], align 512
+  %x_colind_copy = alloca [25 x i32], align 512
+  %x_data_copy = alloca [25 x %struct.ap_fixed], align 512
+  %y_rowptr_copy = alloca [25 x i32], align 512
+  %y_colind_copy = alloca [25 x i32], align 512
+  %y_data_copy = alloca [25 x %struct.ap_fixed], align 512
+  %z_rowptr_copy = alloca [25 x i32], align 512
+  %z_colind_copy = alloca [25 x i32], align 512
+  %z_data_copy = alloca [25 x %struct.ap_fixed], align 512
+  %0 = bitcast i32* %x_rowptr to [25 x i32]*
+  %1 = bitcast i32* %x_colind to [25 x i32]*
+  %2 = bitcast %struct.ap_fixed* %x_data to [25 x %struct.ap_fixed]*
+  %3 = bitcast i32* %y_rowptr to [25 x i32]*
+  %4 = bitcast i32* %y_colind to [25 x i32]*
+  %5 = bitcast %struct.ap_fixed* %y_data to [25 x %struct.ap_fixed]*
+  %6 = bitcast i32* %z_rowptr to [25 x i32]*
+  %7 = bitcast i32* %z_colind to [25 x i32]*
+  %8 = bitcast %struct.ap_fixed* %z_data to [25 x %struct.ap_fixed]*
+  call fastcc void @copy_in([25 x i32]* %0, [25 x i32]* nonnull align 512 %x_rowptr_copy, [25 x i32]* %1, [25 x i32]* nonnull align 512 %x_colind_copy, [25 x %struct.ap_fixed]* %2, [25 x %struct.ap_fixed]* nonnull align 512 %x_data_copy, [25 x i32]* %3, [25 x i32]* nonnull align 512 %y_rowptr_copy, [25 x i32]* %4, [25 x i32]* nonnull align 512 %y_colind_copy, [25 x %struct.ap_fixed]* %5, [25 x %struct.ap_fixed]* nonnull align 512 %y_data_copy, [25 x i32]* %6, [25 x i32]* nonnull align 512 %z_rowptr_copy, [25 x i32]* %7, [25 x i32]* nonnull align 512 %z_colind_copy, [25 x %struct.ap_fixed]* %8, [25 x %struct.ap_fixed]* nonnull align 512 %z_data_copy)
+  %9 = getelementptr inbounds [25 x i32], [25 x i32]* %x_rowptr_copy, i32 0, i32 0
+  %10 = getelementptr inbounds [25 x i32], [25 x i32]* %x_colind_copy, i32 0, i32 0
+  %11 = getelementptr inbounds [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %x_data_copy, i32 0, i32 0
+  %12 = getelementptr inbounds [25 x i32], [25 x i32]* %y_rowptr_copy, i32 0, i32 0
+  %13 = getelementptr inbounds [25 x i32], [25 x i32]* %y_colind_copy, i32 0, i32 0
+  %14 = getelementptr inbounds [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %y_data_copy, i32 0, i32 0
+  %15 = getelementptr inbounds [25 x i32], [25 x i32]* %z_rowptr_copy, i32 0, i32 0
+  %16 = getelementptr inbounds [25 x i32], [25 x i32]* %z_colind_copy, i32 0, i32 0
+  %17 = getelementptr inbounds [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %z_data_copy, i32 0, i32 0
   call void @apatb_row_product_hw(i32* %9, i32* %10, %struct.ap_fixed* %11, i32* %12, i32* %13, %struct.ap_fixed* %14, i32* %15, i32* %16, %struct.ap_fixed* %17)
-  call fastcc void @copy_out([1024 x i32]* %0, [1024 x i32]* %x_rowptr_copy, [1024 x i32]* %1, [1024 x i32]* %x_colind_copy, [1024 x %struct.ap_fixed]* %2, [1024 x %struct.ap_fixed]* %x_data_copy, [1024 x i32]* %3, [1024 x i32]* %y_rowptr_copy, [1024 x i32]* %4, [1024 x i32]* %y_colind_copy, [1024 x %struct.ap_fixed]* %5, [1024 x %struct.ap_fixed]* %y_data_copy, [1024 x i32]* %6, [1024 x i32]* %z_rowptr_copy, [1024 x i32]* %7, [1024 x i32]* %z_colind_copy, [1024 x %struct.ap_fixed]* %8, [1024 x %struct.ap_fixed]* %z_data_copy)
-  tail call void @free(i8* %malloccall)
-  tail call void @free(i8* %malloccall1)
-  tail call void @free(i8* %malloccall2)
-  tail call void @free(i8* %malloccall3)
-  tail call void @free(i8* %malloccall4)
-  tail call void @free(i8* %malloccall5)
-  tail call void @free(i8* %malloccall6)
-  tail call void @free(i8* %malloccall7)
-  tail call void @free(i8* %malloccall8)
+  call fastcc void @copy_out([25 x i32]* %0, [25 x i32]* nonnull align 512 %x_rowptr_copy, [25 x i32]* %1, [25 x i32]* nonnull align 512 %x_colind_copy, [25 x %struct.ap_fixed]* %2, [25 x %struct.ap_fixed]* nonnull align 512 %x_data_copy, [25 x i32]* %3, [25 x i32]* nonnull align 512 %y_rowptr_copy, [25 x i32]* %4, [25 x i32]* nonnull align 512 %y_colind_copy, [25 x %struct.ap_fixed]* %5, [25 x %struct.ap_fixed]* nonnull align 512 %y_data_copy, [25 x i32]* %6, [25 x i32]* nonnull align 512 %z_rowptr_copy, [25 x i32]* %7, [25 x i32]* nonnull align 512 %z_colind_copy, [25 x %struct.ap_fixed]* %8, [25 x %struct.ap_fixed]* nonnull align 512 %z_data_copy)
   ret void
 }
 
-declare noalias i8* @malloc(i64) local_unnamed_addr
-
 ; Function Attrs: noinline
-define internal fastcc void @copy_in([1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x i32]* readonly, [1024 x i32]* noalias, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias) unnamed_addr #1 {
+define internal fastcc void @copy_in([25 x i32]* readonly, [25 x i32]* noalias align 512, [25 x i32]* readonly, [25 x i32]* noalias align 512, [25 x %struct.ap_fixed]*, [25 x %struct.ap_fixed]* noalias align 512, [25 x i32]* readonly, [25 x i32]* noalias align 512, [25 x i32]* readonly, [25 x i32]* noalias align 512, [25 x %struct.ap_fixed]*, [25 x %struct.ap_fixed]* noalias align 512, [25 x i32]* readonly, [25 x i32]* noalias align 512, [25 x i32]* readonly, [25 x i32]* noalias align 512, [25 x %struct.ap_fixed]*, [25 x %struct.ap_fixed]* noalias align 512) unnamed_addr #1 {
 entry:
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %1, [1024 x i32]* %0)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %3, [1024 x i32]* %2)
-  call fastcc void @onebyonecpy_hls.p0a1024struct.ap_fixed([1024 x %struct.ap_fixed]* %5, [1024 x %struct.ap_fixed]* %4)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %7, [1024 x i32]* %6)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %9, [1024 x i32]* %8)
-  call fastcc void @onebyonecpy_hls.p0a1024struct.ap_fixed([1024 x %struct.ap_fixed]* %11, [1024 x %struct.ap_fixed]* %10)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %13, [1024 x i32]* %12)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %15, [1024 x i32]* %14)
-  call fastcc void @onebyonecpy_hls.p0a1024struct.ap_fixed([1024 x %struct.ap_fixed]* %17, [1024 x %struct.ap_fixed]* %16)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* align 512 %1, [25 x i32]* %0)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* align 512 %3, [25 x i32]* %2)
+  call fastcc void @onebyonecpy_hls.p0a25struct.ap_fixed([25 x %struct.ap_fixed]* align 512 %5, [25 x %struct.ap_fixed]* %4)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* align 512 %7, [25 x i32]* %6)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* align 512 %9, [25 x i32]* %8)
+  call fastcc void @onebyonecpy_hls.p0a25struct.ap_fixed([25 x %struct.ap_fixed]* align 512 %11, [25 x %struct.ap_fixed]* %10)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* align 512 %13, [25 x i32]* %12)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* align 512 %15, [25 x i32]* %14)
+  call fastcc void @onebyonecpy_hls.p0a25struct.ap_fixed([25 x %struct.ap_fixed]* align 512 %17, [25 x %struct.ap_fixed]* %16)
   ret void
 }
 
 ; Function Attrs: argmemonly noinline
-define internal fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* noalias, [1024 x i32]* noalias readonly) unnamed_addr #2 {
+define internal fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* noalias align 512, [25 x i32]* noalias readonly) unnamed_addr #2 {
 entry:
-  %2 = icmp eq [1024 x i32]* %0, null
-  %3 = icmp eq [1024 x i32]* %1, null
+  %2 = icmp eq [25 x i32]* %0, null
+  %3 = icmp eq [25 x i32]* %1, null
   %4 = or i1 %2, %3
   br i1 %4, label %ret, label %copy
 
@@ -91,13 +71,13 @@ copy:                                             ; preds = %entry
 
 for.loop:                                         ; preds = %for.loop, %copy
   %for.loop.idx3 = phi i64 [ 0, %copy ], [ %for.loop.idx.next, %for.loop ]
-  %dst.addr.gep1 = getelementptr [1024 x i32], [1024 x i32]* %0, i64 0, i64 %for.loop.idx3
+  %dst.addr.gep1 = getelementptr [25 x i32], [25 x i32]* %0, i64 0, i64 %for.loop.idx3
   %5 = bitcast i32* %dst.addr.gep1 to i8*
-  %src.addr.gep2 = getelementptr [1024 x i32], [1024 x i32]* %1, i64 0, i64 %for.loop.idx3
+  %src.addr.gep2 = getelementptr [25 x i32], [25 x i32]* %1, i64 0, i64 %for.loop.idx3
   %6 = bitcast i32* %src.addr.gep2 to i8*
   call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 1 %5, i8* align 1 %6, i64 4, i1 false)
   %for.loop.idx.next = add nuw nsw i64 %for.loop.idx3, 1
-  %exitcond = icmp ne i64 %for.loop.idx.next, 1024
+  %exitcond = icmp ne i64 %for.loop.idx.next, 25
   br i1 %exitcond, label %for.loop, label %ret
 
 ret:                                              ; preds = %for.loop, %entry
@@ -108,10 +88,10 @@ ret:                                              ; preds = %for.loop, %entry
 declare void @llvm.memcpy.p0i8.p0i8.i64(i8* nocapture writeonly, i8* nocapture readonly, i64, i1) #3
 
 ; Function Attrs: noinline
-define internal fastcc void @onebyonecpy_hls.p0a1024struct.ap_fixed([1024 x %struct.ap_fixed]* noalias, [1024 x %struct.ap_fixed]* noalias) unnamed_addr #4 {
+define internal fastcc void @onebyonecpy_hls.p0a25struct.ap_fixed([25 x %struct.ap_fixed]* noalias align 512, [25 x %struct.ap_fixed]* noalias) unnamed_addr #4 {
 entry:
-  %2 = icmp eq [1024 x %struct.ap_fixed]* %0, null
-  %3 = icmp eq [1024 x %struct.ap_fixed]* %1, null
+  %2 = icmp eq [25 x %struct.ap_fixed]* %0, null
+  %3 = icmp eq [25 x %struct.ap_fixed]* %1, null
   %4 = or i1 %2, %3
   br i1 %4, label %ret, label %copy
 
@@ -120,8 +100,8 @@ copy:                                             ; preds = %entry
 
 for.loop:                                         ; preds = %for.loop.head, %copy
   %for.loop.idx9 = phi i64 [ 0, %copy ], [ %for.loop.idx.next, %for.loop.head ]
-  %dst.addr = getelementptr [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %0, i64 0, i64 %for.loop.idx9
-  %src.addr = getelementptr [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %1, i64 0, i64 %for.loop.idx9
+  %dst.addr = getelementptr [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %0, i64 0, i64 %for.loop.idx9
+  %src.addr = getelementptr [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %1, i64 0, i64 %for.loop.idx9
   %5 = bitcast %struct.ap_fixed* %src.addr to i8*
   %6 = call i1 @fpga_fifo_exist_4(i8* %5)
   br i1 %6, label %7, label %8
@@ -131,8 +111,8 @@ for.loop:                                         ; preds = %for.loop.head, %cop
   br label %for.loop.head
 
 ; <label>:8:                                      ; preds = %for.loop
-  %src.addr.01 = getelementptr [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %1, i64 0, i64 %for.loop.idx9, i32 0
-  %dst.addr.02 = getelementptr [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %0, i64 0, i64 %for.loop.idx9, i32 0
+  %src.addr.01 = getelementptr [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %1, i64 0, i64 %for.loop.idx9, i32 0
+  %dst.addr.02 = getelementptr [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %0, i64 0, i64 %for.loop.idx9, i32 0
   %9 = bitcast %struct.ap_fixed_base* %src.addr.01 to i8*
   %10 = call i1 @fpga_fifo_exist_4(i8* %9)
   br i1 %10, label %11, label %12
@@ -142,8 +122,8 @@ for.loop:                                         ; preds = %for.loop.head, %cop
   br label %for.loop.head
 
 ; <label>:12:                                     ; preds = %8
-  %src.addr.0.03 = getelementptr [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %1, i64 0, i64 %for.loop.idx9, i32 0, i32 0
-  %dst.addr.0.04 = getelementptr [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %0, i64 0, i64 %for.loop.idx9, i32 0, i32 0
+  %src.addr.0.03 = getelementptr [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %1, i64 0, i64 %for.loop.idx9, i32 0, i32 0
+  %dst.addr.0.04 = getelementptr [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %0, i64 0, i64 %for.loop.idx9, i32 0, i32 0
   %13 = bitcast %struct.ssdm_int* %src.addr.0.03 to i8*
   %14 = call i1 @fpga_fifo_exist_4(i8* %13)
   br i1 %14, label %15, label %16
@@ -153,16 +133,16 @@ for.loop:                                         ; preds = %for.loop.head, %cop
   br label %for.loop.head
 
 ; <label>:16:                                     ; preds = %12
-  %dst.addr.0.0.06.gep7 = getelementptr [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %0, i64 0, i64 %for.loop.idx9, i32 0, i32 0, i32 0
+  %dst.addr.0.0.06.gep7 = getelementptr [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %0, i64 0, i64 %for.loop.idx9, i32 0, i32 0, i32 0
   %17 = bitcast i32* %dst.addr.0.0.06.gep7 to i8*
-  %src.addr.0.0.05.gep8 = getelementptr [1024 x %struct.ap_fixed], [1024 x %struct.ap_fixed]* %1, i64 0, i64 %for.loop.idx9, i32 0, i32 0, i32 0
+  %src.addr.0.0.05.gep8 = getelementptr [25 x %struct.ap_fixed], [25 x %struct.ap_fixed]* %1, i64 0, i64 %for.loop.idx9, i32 0, i32 0, i32 0
   %18 = bitcast i32* %src.addr.0.0.05.gep8 to i8*
   call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 1 %17, i8* align 1 %18, i64 4, i1 false)
   br label %for.loop.head
 
 for.loop.head:                                    ; preds = %16, %15, %11, %7
   %for.loop.idx.next = add nuw nsw i64 %for.loop.idx9, 1
-  %exitcond = icmp ne i64 %for.loop.idx.next, 1024
+  %exitcond = icmp ne i64 %for.loop.idx.next, 25
   br i1 %exitcond, label %for.loop, label %ret
 
 ret:                                              ; preds = %for.loop.head, %entry
@@ -256,47 +236,45 @@ ret:                                              ; preds = %empty
 }
 
 ; Function Attrs: noinline
-define internal fastcc void @copy_out([1024 x i32]*, [1024 x i32]* noalias readonly, [1024 x i32]*, [1024 x i32]* noalias readonly, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias, [1024 x i32]*, [1024 x i32]* noalias readonly, [1024 x i32]*, [1024 x i32]* noalias readonly, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias, [1024 x i32]*, [1024 x i32]* noalias readonly, [1024 x i32]*, [1024 x i32]* noalias readonly, [1024 x %struct.ap_fixed]*, [1024 x %struct.ap_fixed]* noalias) unnamed_addr #6 {
+define internal fastcc void @copy_out([25 x i32]*, [25 x i32]* noalias readonly align 512, [25 x i32]*, [25 x i32]* noalias readonly align 512, [25 x %struct.ap_fixed]*, [25 x %struct.ap_fixed]* noalias align 512, [25 x i32]*, [25 x i32]* noalias readonly align 512, [25 x i32]*, [25 x i32]* noalias readonly align 512, [25 x %struct.ap_fixed]*, [25 x %struct.ap_fixed]* noalias align 512, [25 x i32]*, [25 x i32]* noalias readonly align 512, [25 x i32]*, [25 x i32]* noalias readonly align 512, [25 x %struct.ap_fixed]*, [25 x %struct.ap_fixed]* noalias align 512) unnamed_addr #6 {
 entry:
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %0, [1024 x i32]* %1)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %2, [1024 x i32]* %3)
-  call fastcc void @onebyonecpy_hls.p0a1024struct.ap_fixed([1024 x %struct.ap_fixed]* %4, [1024 x %struct.ap_fixed]* %5)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %6, [1024 x i32]* %7)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %8, [1024 x i32]* %9)
-  call fastcc void @onebyonecpy_hls.p0a1024struct.ap_fixed([1024 x %struct.ap_fixed]* %10, [1024 x %struct.ap_fixed]* %11)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %12, [1024 x i32]* %13)
-  call fastcc void @onebyonecpy_hls.p0a1024i32([1024 x i32]* %14, [1024 x i32]* %15)
-  call fastcc void @onebyonecpy_hls.p0a1024struct.ap_fixed([1024 x %struct.ap_fixed]* %16, [1024 x %struct.ap_fixed]* %17)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* %0, [25 x i32]* align 512 %1)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* %2, [25 x i32]* align 512 %3)
+  call fastcc void @onebyonecpy_hls.p0a25struct.ap_fixed([25 x %struct.ap_fixed]* %4, [25 x %struct.ap_fixed]* align 512 %5)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* %6, [25 x i32]* align 512 %7)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* %8, [25 x i32]* align 512 %9)
+  call fastcc void @onebyonecpy_hls.p0a25struct.ap_fixed([25 x %struct.ap_fixed]* %10, [25 x %struct.ap_fixed]* align 512 %11)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* %12, [25 x i32]* align 512 %13)
+  call fastcc void @onebyonecpy_hls.p0a25i32([25 x i32]* %14, [25 x i32]* align 512 %15)
+  call fastcc void @onebyonecpy_hls.p0a25struct.ap_fixed([25 x %struct.ap_fixed]* %16, [25 x %struct.ap_fixed]* align 512 %17)
   ret void
 }
-
-declare void @free(i8*) local_unnamed_addr
 
 declare void @apatb_row_product_hw(i32*, i32*, %struct.ap_fixed*, i32*, i32*, %struct.ap_fixed*, i32*, i32*, %struct.ap_fixed*)
 
 define void @row_product_hw_stub_wrapper(i32*, i32*, %struct.ap_fixed*, i32*, i32*, %struct.ap_fixed*, i32*, i32*, %struct.ap_fixed*) #7 {
 entry:
-  %9 = bitcast i32* %0 to [1024 x i32]*
-  %10 = bitcast i32* %1 to [1024 x i32]*
-  %11 = bitcast %struct.ap_fixed* %2 to [1024 x %struct.ap_fixed]*
-  %12 = bitcast i32* %3 to [1024 x i32]*
-  %13 = bitcast i32* %4 to [1024 x i32]*
-  %14 = bitcast %struct.ap_fixed* %5 to [1024 x %struct.ap_fixed]*
-  %15 = bitcast i32* %6 to [1024 x i32]*
-  %16 = bitcast i32* %7 to [1024 x i32]*
-  %17 = bitcast %struct.ap_fixed* %8 to [1024 x %struct.ap_fixed]*
-  call void @copy_out([1024 x i32]* null, [1024 x i32]* %9, [1024 x i32]* null, [1024 x i32]* %10, [1024 x %struct.ap_fixed]* null, [1024 x %struct.ap_fixed]* %11, [1024 x i32]* null, [1024 x i32]* %12, [1024 x i32]* null, [1024 x i32]* %13, [1024 x %struct.ap_fixed]* null, [1024 x %struct.ap_fixed]* %14, [1024 x i32]* null, [1024 x i32]* %15, [1024 x i32]* null, [1024 x i32]* %16, [1024 x %struct.ap_fixed]* null, [1024 x %struct.ap_fixed]* %17)
-  %18 = bitcast [1024 x i32]* %9 to i32*
-  %19 = bitcast [1024 x i32]* %10 to i32*
-  %20 = bitcast [1024 x %struct.ap_fixed]* %11 to %struct.ap_fixed*
-  %21 = bitcast [1024 x i32]* %12 to i32*
-  %22 = bitcast [1024 x i32]* %13 to i32*
-  %23 = bitcast [1024 x %struct.ap_fixed]* %14 to %struct.ap_fixed*
-  %24 = bitcast [1024 x i32]* %15 to i32*
-  %25 = bitcast [1024 x i32]* %16 to i32*
-  %26 = bitcast [1024 x %struct.ap_fixed]* %17 to %struct.ap_fixed*
+  %9 = bitcast i32* %0 to [25 x i32]*
+  %10 = bitcast i32* %1 to [25 x i32]*
+  %11 = bitcast %struct.ap_fixed* %2 to [25 x %struct.ap_fixed]*
+  %12 = bitcast i32* %3 to [25 x i32]*
+  %13 = bitcast i32* %4 to [25 x i32]*
+  %14 = bitcast %struct.ap_fixed* %5 to [25 x %struct.ap_fixed]*
+  %15 = bitcast i32* %6 to [25 x i32]*
+  %16 = bitcast i32* %7 to [25 x i32]*
+  %17 = bitcast %struct.ap_fixed* %8 to [25 x %struct.ap_fixed]*
+  call void @copy_out([25 x i32]* null, [25 x i32]* %9, [25 x i32]* null, [25 x i32]* %10, [25 x %struct.ap_fixed]* null, [25 x %struct.ap_fixed]* %11, [25 x i32]* null, [25 x i32]* %12, [25 x i32]* null, [25 x i32]* %13, [25 x %struct.ap_fixed]* null, [25 x %struct.ap_fixed]* %14, [25 x i32]* null, [25 x i32]* %15, [25 x i32]* null, [25 x i32]* %16, [25 x %struct.ap_fixed]* null, [25 x %struct.ap_fixed]* %17)
+  %18 = bitcast [25 x i32]* %9 to i32*
+  %19 = bitcast [25 x i32]* %10 to i32*
+  %20 = bitcast [25 x %struct.ap_fixed]* %11 to %struct.ap_fixed*
+  %21 = bitcast [25 x i32]* %12 to i32*
+  %22 = bitcast [25 x i32]* %13 to i32*
+  %23 = bitcast [25 x %struct.ap_fixed]* %14 to %struct.ap_fixed*
+  %24 = bitcast [25 x i32]* %15 to i32*
+  %25 = bitcast [25 x i32]* %16 to i32*
+  %26 = bitcast [25 x %struct.ap_fixed]* %17 to %struct.ap_fixed*
   call void @row_product_hw_stub(i32* %18, i32* %19, %struct.ap_fixed* %20, i32* %21, i32* %22, %struct.ap_fixed* %23, i32* %24, i32* %25, %struct.ap_fixed* %26)
-  call void @copy_in([1024 x i32]* null, [1024 x i32]* %9, [1024 x i32]* null, [1024 x i32]* %10, [1024 x %struct.ap_fixed]* null, [1024 x %struct.ap_fixed]* %11, [1024 x i32]* null, [1024 x i32]* %12, [1024 x i32]* null, [1024 x i32]* %13, [1024 x %struct.ap_fixed]* null, [1024 x %struct.ap_fixed]* %14, [1024 x i32]* null, [1024 x i32]* %15, [1024 x i32]* null, [1024 x i32]* %16, [1024 x %struct.ap_fixed]* null, [1024 x %struct.ap_fixed]* %17)
+  call void @copy_in([25 x i32]* null, [25 x i32]* %9, [25 x i32]* null, [25 x i32]* %10, [25 x %struct.ap_fixed]* null, [25 x %struct.ap_fixed]* %11, [25 x i32]* null, [25 x i32]* %12, [25 x i32]* null, [25 x i32]* %13, [25 x %struct.ap_fixed]* null, [25 x %struct.ap_fixed]* %14, [25 x i32]* null, [25 x i32]* %15, [25 x i32]* null, [25 x i32]* %16, [25 x %struct.ap_fixed]* null, [25 x %struct.ap_fixed]* %17)
   ret void
 }
 

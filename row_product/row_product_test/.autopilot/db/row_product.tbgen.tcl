@@ -903,37 +903,37 @@ set RtlHierarchyInfo {[
 		"InDataflowNetwork" : "0",
 		"HasNonBlockingOperation" : "0",
 		"InputProcess" : [
-			{"ID" : "11", "Name" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0"}],
+			{"ID" : "11", "Name" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0"}],
 		"OutputProcess" : [
-			{"ID" : "11", "Name" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0"}],
+			{"ID" : "11", "Name" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0"}],
 		"Port" : [
 			{"Name" : "x_rowptr", "Type" : "MAXI", "Direction" : "I",
 				"SubConnect" : [
-					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Port" : "x_rowptr"}]},
+					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Port" : "x_rowptr"}]},
 			{"Name" : "x_colind", "Type" : "MAXI", "Direction" : "I",
 				"SubConnect" : [
-					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Port" : "x_colind"}]},
+					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Port" : "x_colind"}]},
 			{"Name" : "x_data", "Type" : "MAXI", "Direction" : "I",
 				"SubConnect" : [
-					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Port" : "x_data"}]},
+					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Port" : "x_data"}]},
 			{"Name" : "y_rowptr", "Type" : "MAXI", "Direction" : "I",
 				"SubConnect" : [
-					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Port" : "y_rowptr"}]},
+					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Port" : "y_rowptr"}]},
 			{"Name" : "y_colind", "Type" : "MAXI", "Direction" : "I",
 				"SubConnect" : [
-					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Port" : "y_colind"}]},
+					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Port" : "y_colind"}]},
 			{"Name" : "y_data", "Type" : "MAXI", "Direction" : "I",
 				"SubConnect" : [
-					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Port" : "y_data"}]},
+					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Port" : "y_data"}]},
 			{"Name" : "z_rowptr", "Type" : "MAXI", "Direction" : "IO",
 				"SubConnect" : [
-					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Port" : "z_rowptr"}]},
+					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Port" : "z_rowptr"}]},
 			{"Name" : "z_colind", "Type" : "MAXI", "Direction" : "O",
 				"SubConnect" : [
-					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Port" : "z_colind"}]},
+					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Port" : "z_colind"}]},
 			{"Name" : "z_data", "Type" : "MAXI", "Direction" : "O",
 				"SubConnect" : [
-					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Port" : "z_data"}]}]},
+					{"ID" : "11", "SubInstance" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Port" : "z_data"}]}]},
 	{"ID" : "1", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.control_s_axi_U", "Parent" : "0"},
 	{"ID" : "2", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.x_rowptr_m_axi_U", "Parent" : "0"},
 	{"ID" : "3", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.x_colind_m_axi_U", "Parent" : "0"},
@@ -944,8 +944,8 @@ set RtlHierarchyInfo {[
 	{"ID" : "8", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.z_rowptr_m_axi_U", "Parent" : "0"},
 	{"ID" : "9", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.z_colind_m_axi_U", "Parent" : "0"},
 	{"ID" : "10", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.z_data_m_axi_U", "Parent" : "0"},
-	{"ID" : "11", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0", "Parent" : "0", "Child" : ["12", "13", "14", "15", "16"],
-		"CDFG" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc",
+	{"ID" : "11", "Level" : "1", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0", "Parent" : "0", "Child" : ["12", "13", "14", "15", "16"],
+		"CDFG" : "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc",
 		"Protocol" : "ap_ctrl_hs",
 		"ControlExist" : "1", "ap_start" : "1", "ap_ready" : "1", "ap_done" : "1", "ap_continue" : "1", "ap_idle" : "1", "real_start" : "0",
 		"Pipeline" : "None", "UnalignedPipeline" : "0", "RewindPipeline" : "0", "ProcessNetwork" : "0",
@@ -981,14 +981,14 @@ set RtlHierarchyInfo {[
 				"BlockSignal" : [
 					{"Name" : "y_rowptr_blk_n_AR", "Type" : "RtlSignal"},
 					{"Name" : "y_rowptr_blk_n_R", "Type" : "RtlSignal"}]},
-			{"Name" : "y_data", "Type" : "MAXI", "Direction" : "I",
-				"BlockSignal" : [
-					{"Name" : "y_data_blk_n_AR", "Type" : "RtlSignal"},
-					{"Name" : "y_data_blk_n_R", "Type" : "RtlSignal"}]},
 			{"Name" : "y_colind", "Type" : "MAXI", "Direction" : "I",
 				"BlockSignal" : [
 					{"Name" : "y_colind_blk_n_AR", "Type" : "RtlSignal"},
 					{"Name" : "y_colind_blk_n_R", "Type" : "RtlSignal"}]},
+			{"Name" : "y_data", "Type" : "MAXI", "Direction" : "I",
+				"BlockSignal" : [
+					{"Name" : "y_data_blk_n_AR", "Type" : "RtlSignal"},
+					{"Name" : "y_data_blk_n_R", "Type" : "RtlSignal"}]},
 			{"Name" : "z_colind", "Type" : "MAXI", "Direction" : "O",
 				"BlockSignal" : [
 					{"Name" : "z_colind_blk_n_AW", "Type" : "RtlSignal"},
@@ -999,11 +999,11 @@ set RtlHierarchyInfo {[
 					{"Name" : "z_data_blk_n_AW", "Type" : "RtlSignal"},
 					{"Name" : "z_data_blk_n_W", "Type" : "RtlSignal"},
 					{"Name" : "z_data_blk_n_B", "Type" : "RtlSignal"}]}]},
-	{"ID" : "12", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0.mul_32s_32s_48_2_1_U1", "Parent" : "11"},
-	{"ID" : "13", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0.mul_32s_32s_48_2_1_U2", "Parent" : "11"},
-	{"ID" : "14", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0.mul_32s_32s_48_2_1_U3", "Parent" : "11"},
-	{"ID" : "15", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0.mul_32s_32s_48_2_1_U4", "Parent" : "11"},
-	{"ID" : "16", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc_U0.mul_32s_32s_48_2_1_U5", "Parent" : "11"}]}
+	{"ID" : "12", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0.mul_32s_32s_48_2_1_U1", "Parent" : "11"},
+	{"ID" : "13", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0.mul_32s_32s_48_2_1_U2", "Parent" : "11"},
+	{"ID" : "14", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0.mul_32s_32s_48_2_1_U3", "Parent" : "11"},
+	{"ID" : "15", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0.mul_32s_32s_48_2_1_U4", "Parent" : "11"},
+	{"ID" : "16", "Level" : "2", "Path" : "`AUTOTB_DUT_INST.Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0.mul_32s_32s_48_2_1_U5", "Parent" : "11"}]}
 
 
 set ArgLastReadFirstWriteLatency {
@@ -1013,18 +1013,18 @@ set ArgLastReadFirstWriteLatency {
 		x_data {Type I LastRead 40 FirstWrite -1}
 		y_rowptr {Type I LastRead 51 FirstWrite -1}
 		y_colind {Type I LastRead 60 FirstWrite -1}
-		y_data {Type I LastRead 69 FirstWrite -1}
+		y_data {Type I LastRead 60 FirstWrite -1}
 		z_rowptr {Type IO LastRead 37 FirstWrite 1}
 		z_colind {Type O LastRead 36 FirstWrite 35}
 		z_data {Type O LastRead 36 FirstWrite 35}}
-	Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit103_proc {
+	Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc {
 		z_rowptr {Type IO LastRead 37 FirstWrite 1}
 		x_rowptr {Type I LastRead 20 FirstWrite -1}
 		x_colind {Type I LastRead 31 FirstWrite -1}
 		x_data {Type I LastRead 40 FirstWrite -1}
 		y_rowptr {Type I LastRead 51 FirstWrite -1}
-		y_data {Type I LastRead 69 FirstWrite -1}
 		y_colind {Type I LastRead 60 FirstWrite -1}
+		y_data {Type I LastRead 60 FirstWrite -1}
 		z_colind {Type O LastRead 36 FirstWrite 35}
 		z_data {Type O LastRead 36 FirstWrite 35}}}
 

@@ -60352,7 +60352,7 @@ void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
 # 110 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
 # 125 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-void row_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
+void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 2 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 2
 # 1 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/vector" 1 3
 # 58 "/home/leoh/tools/Vitis_HLS/2020.2/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/vector" 3
@@ -69423,6 +69423,24 @@ struct COO
     vector<COO_unit> units;
 };
 
+csr_out_t new_csr_out_t()
+{
+    csr_out_t csr;
+    int rowptr[M + 1];
+    int colind[M * N];
+    data_t data[M * N];
+    csr.rowptr = rowptr;
+    csr.colind = colind;
+    csr.data = data;
+
+    if (!csr.rowptr || !csr.colind || !csr.data)
+    {
+        cout << "Memory allocation failed" << endl;
+        exit(1);
+    }
+    return csr;
+}
+
 COO assemble_COO_matrix(std::string filePath)
 {
     int M, N, L;
@@ -69431,9 +69449,9 @@ COO assemble_COO_matrix(std::string filePath)
     while (fgetc(f) == '%')
         fscanf(f, "%*[^\n]\n");
     fseek(f, -1, 
-# 25 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 3 4
+# 43 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 3 4
                 1
-# 25 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 43 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
                         );
     fscanf(f, "%d %d %d", &M, &N, &L);
     for (int l = 0; l < L; l++)
@@ -69459,9 +69477,9 @@ COO assemble_simetric_COO_matrix(std::string filePath)
     while (fgetc(f) == '%')
         fscanf(f, "%*[^\n]\n");
     fseek(f, -1, 
-# 49 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 3 4
+# 67 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp" 3 4
                 1
-# 49 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 67 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
                         );
     fscanf(f, "%d %d %d", &M, &N, &L);
     for (int l = 0; l < L; l++)
@@ -69482,13 +69500,9 @@ COO assemble_simetric_COO_matrix(std::string filePath)
     fclose(f);
     return matrix;
 }
-# 86 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-csr_t_1 COO_to_CSR1(COO matrix)
+# 104 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+void COO_to_CSR1(COO matrix, csr_t_1 &csr)
 {
-    csr_t_1 csr;
-    csr.rowptr = new int[M + 1];
-    csr.colind = new int[M * P];
-    csr.data = new data_t[M * P];
     int row = 0;
     int rowptr = 0;
     csr.rowptr[row] = rowptr;
@@ -69509,14 +69523,9 @@ csr_t_1 COO_to_CSR1(COO matrix)
             rowptr++;
         }
     }
-    return csr;
 }
-csr_t_2 COO_to_CSR2(COO matrix)
+void COO_to_CSR2(COO matrix, csr_t_2 &csr)
 {
-    csr_t_2 csr;
-    csr.rowptr = new int[P + 1];
-    csr.colind = new int[P * N];
-    csr.data = new data_t[P * N];
 
     int row = 0;
     int rowptr = 0;
@@ -69538,14 +69547,10 @@ csr_t_2 COO_to_CSR2(COO matrix)
             rowptr++;
         }
     }
-    return csr;
 }
-csr_out_t COO_to_CSR3(COO matrix)
+
+void COO_to_CSR3(COO matrix, csr_out_t &csr)
 {
-    csr_out_t csr;
-    csr.rowptr = new int[M + 1];
-    csr.colind = new int[M * N];
-    csr.data = new data_t[M * N];
     int row = 0;
     int rowptr = 0;
     csr.rowptr[row] = rowptr;
@@ -69566,22 +69571,6 @@ csr_out_t COO_to_CSR3(COO matrix)
             rowptr++;
         }
     }
-    return csr;
-}
-
-csr_out_t new_csr_out_t()
-{
-    csr_out_t csr;
-    csr.rowptr = new int[M + 1];
-    csr.colind = new int[M * N];
-    csr.data = new data_t[M * N];
-
-    if (!csr.rowptr || !csr.colind || !csr.data)
-    {
-        cout << "Memory allocation failed" << endl;
-        exit(1);
-    }
-    return csr;
 }
 
 
@@ -69609,7 +69598,7 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
 
-        bool almost_equal = z_csr.data[i] - z_csr2.data[i] > 0 ? z_csr.data[i] - z_csr2.data[i] < (data_t)0.01 : z_csr.data[i] - z_csr2.data[i] > (data_t)(-0.01);
+        bool almost_equal = (data_t)z_csr.data[i] - (data_t)z_csr2.data[i] > 0 ? (data_t)z_csr.data[i] - (data_t)z_csr2.data[i] < (data_t)0.01 :(data_t)z_csr.data[i] - (data_t)z_csr2.data[i] > (data_t)(-0.01);
         if (!almost_equal)
         {
             equal = false;
@@ -69631,7 +69620,7 @@ void print_csr_out_t(csr_out_t z_csr)
             {
                 if (z_csr.colind[k] == j)
                 {
-                    std::cout << z_csr.data[k] << " ";
+                    std::cout << (data_t)z_csr.data[k] << " ";
                     found = true;
                     break;
                 }
@@ -69710,69 +69699,16 @@ void test_append_row()
     std::cout << "out_csr = " << std::endl;
     print_csr_out_t(out_csr);
 }
-
+# 361 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 #ifndef HLS_FASTSIM
 #ifdef __cplusplus
 extern "C"
 #endif
 void apatb_row_product_sw(int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *);
-# 314 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-void basic_test()
-{
-# 339 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-    csr_t_1 A = {
-        .rowptr = new int[M + 1]{0, 2, 4, 7, 9},
-        .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
-
-    csr_t_2 B = {
-        .rowptr = new int[N+1]{0, 2, 4, 5, 8, 9},
-        .colind = new int[N*P]{0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = new data_t[N*P]{1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
-
-    csr_out_t test = {
-        .rowptr = new int[M + 1]{0, 4, 7, 11, 14},
-        .colind = new int[M*P]{0, 1, 2, 3, 0, 1, 3, 0, 1, 2, 4, 1, 2, 4, -1, -1, -1, -1, -1, -1},
-        .data = new data_t[M*P]{1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 56, 32, 56, 145, -1, -1, -1, -1, -1, -1}};
-    csr_out_t test_2 = {
-        .rowptr = new int[M + 1]{0, 2, 4, 7, 9},
-        .colind = new int[M*P]{0, 1, 1, 2, 0, 2, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        .data = new data_t[M*P]{1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
-
-
-    test_extract_row(B);
-
-    test_extract_element(A);
-
-    test_append_row();
-
-    test_row_add();
-
-    csr_out_t z_csr = new_csr_out_t();
-    
-#ifndef HLS_FASTSIM
-#define row_product apatb_row_product_sw
-#endif
-# 368 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-row_product(A.rowptr, A.colind, A.data, B.rowptr, B.colind, B.data, z_csr.rowptr, z_csr.colind, z_csr.data);
-#undef row_product
-# 368 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-
-    print_csr_out_t(z_csr);
-}
-#endif
-# 370 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-
-
-#ifndef HLS_FASTSIM
-#ifdef __cplusplus
-extern "C"
-#endif
-void apatb_row_product_sw(int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *);
-# 372 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 361 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 void synth_test()
 {
-# 397 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 386 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
     COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
     COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
     COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
@@ -69788,25 +69724,58 @@ void synth_test()
 
 
 
-    csr_t_1 csr_A = COO_to_CSR1(coo_A);
-    csr_t_2 csr_B = COO_to_CSR2(coo_B);
-    csr_out_t csr_C = COO_to_CSR3(coo_C);
+    csr_t_1 csr_A;
+    int A_rowptr_arr[M + 1];
+    int A_colind[M * P];
+    data_t A_data[M * P];
+    csr_A.rowptr = A_rowptr_arr;
+    csr_A.colind = A_colind;
+    csr_A.data = A_data;
+
+    COO_to_CSR1(coo_A, csr_A);
+
+    csr_t_2 csr_B;
+    int B_rowptr_arr[M + 1];
+    int B_colind[M * P];
+    data_t B_data[M * P];
+    csr_B.rowptr = B_rowptr_arr;
+    csr_B.colind = B_colind;
+    csr_B.data = B_data;
+
+    COO_to_CSR2(coo_B, csr_B);
+
+    csr_out_t csr_C;
+    int C_rowptr_arr[M + 1];
+    int C_colind[M * P];
+    data_t C_data[M * P];
+    csr_C.rowptr = C_rowptr_arr;
+    csr_C.colind = C_colind;
+    csr_C.data = C_data;
+
+    COO_to_CSR3(coo_C, csr_C);
+
     cout << "CSR C" << endl;
     print_csr_out_t(csr_C);
-# 427 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-    csr_out_t csr_out = new_csr_out_t();
+# 443 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+    csr_out_t csr_out;
+    int out_rowptr_arr[M + 1];
+    int out_colind[M * P];
+    data_t out_data[M * P];
+    csr_out.rowptr = out_rowptr_arr;
+    csr_out.colind = out_colind;
+    csr_out.data = out_data;
     
 #ifndef HLS_FASTSIM
 #define row_product apatb_row_product_sw
 #endif
-# 428 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-row_product(csr_A.rowptr, csr_A.colind, csr_A.data, csr_B.rowptr, csr_B.colind, csr_B.data, csr_out.rowptr, csr_out.colind, csr_out.data);
+# 450 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+row_product(A_rowptr_arr, A_colind, A_data, B_rowptr_arr, B_colind, B_data, out_rowptr_arr, out_colind, out_data);
 #undef row_product
-# 428 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 450 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 
 
-
-
+    cout << "CSR out" << endl;
+    print_csr_out_t(csr_out);
 
 
     cout << "CSR out == CSR C ?" << endl;
@@ -69819,9 +69788,10 @@ row_product(csr_A.rowptr, csr_A.colind, csr_A.data, csr_B.rowptr, csr_B.colind, 
         cout << "FAIL" << endl;
     }
 
+
 }
 #endif
-# 444 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 467 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 
 
 int main()

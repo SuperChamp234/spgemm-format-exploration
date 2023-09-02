@@ -75,15 +75,15 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
 void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr,  int* z_colind,  data_t* z_data)
 {
 #pragma HLS INTERFACE s_axilite port=return
-#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr 
-#pragma HLS INTERFACE m_axi depth=1024 port=x_colind
-#pragma HLS INTERFACE m_axi depth=1024 port=x_data
-#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
-#pragma HLS INTERFACE m_axi depth=1024 port=y_colind
-#pragma HLS INTERFACE m_axi depth=1024 port=y_data
-#pragma HLS INTERFACE m_axi depth=1024 port=z_rowptr
-#pragma HLS INTERFACE m_axi depth=1024 port=z_colind
-#pragma HLS INTERFACE m_axi depth=1024 port=z_data
+#pragma HLS INTERFACE m_axi depth=25 port=x_rowptr 
+#pragma HLS INTERFACE m_axi depth=25 port=x_colind
+#pragma HLS INTERFACE m_axi depth=25 port=x_data
+#pragma HLS INTERFACE m_axi depth=25 port=y_rowptr
+#pragma HLS INTERFACE m_axi depth=25 port=y_colind
+#pragma HLS INTERFACE m_axi depth=25 port=y_data
+#pragma HLS INTERFACE m_axi depth=25 port=z_rowptr
+#pragma HLS INTERFACE m_axi depth=25 port=z_colind
+#pragma HLS INTERFACE m_axi depth=25 port=z_data
 
 
     //init csr_t_1
