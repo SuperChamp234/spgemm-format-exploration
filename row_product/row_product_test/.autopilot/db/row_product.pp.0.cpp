@@ -25280,9 +25280,9 @@ extern "C++" const char *basename (const char *__filename)
 
 
 
-const int M = 5;
-const int P = 5;
-const int N = 5;
+const int M = 494;
+const int P = 494;
+const int N = 494;
 
 
 
@@ -25409,15 +25409,15 @@ __attribute__((sdx_kernel("row_product", 0))) void row_product( int* x_rowptr, i
 # 76 "row_product/src/row_product.cpp"
 
 #pragma HLS INTERFACE s_axilite port=return
-#pragma HLS INTERFACE m_axi depth=25 port=x_rowptr
-#pragma HLS INTERFACE m_axi depth=25 port=x_colind
-#pragma HLS INTERFACE m_axi depth=25 port=x_data
-#pragma HLS INTERFACE m_axi depth=25 port=y_rowptr
-#pragma HLS INTERFACE m_axi depth=25 port=y_colind
-#pragma HLS INTERFACE m_axi depth=25 port=y_data
-#pragma HLS INTERFACE m_axi depth=25 port=z_rowptr
-#pragma HLS INTERFACE m_axi depth=25 port=z_colind
-#pragma HLS INTERFACE m_axi depth=25 port=z_data
+#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=x_colind
+#pragma HLS INTERFACE m_axi depth=1024 port=x_data
+#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=y_colind
+#pragma HLS INTERFACE m_axi depth=1024 port=y_data
+#pragma HLS INTERFACE m_axi depth=1024 port=z_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=z_colind
+#pragma HLS INTERFACE m_axi depth=1024 port=z_data
 
 
 
@@ -25438,14 +25438,16 @@ __attribute__((sdx_kernel("row_product", 0))) void row_product( int* x_rowptr, i
 
     csr.rowptr[0] = 0;
     hls::vector<data_t, N> extracted_row = data_t(0);
-    hls::vector<data_t, N> buffer_row = data_t(0);
-    data_t extracted_scalar = data_t(0);
+#pragma HLS BIND_STORAGE variable=extracted_row type=ram_2p impl=bram
+ hls::vector<data_t, N> buffer_row = data_t(0);
+#pragma HLS BIND_STORAGE variable=buffer_row type=ram_2p impl=bram
+ data_t extracted_scalar = data_t(0);
 
 
 #pragma HLS dataflow
- VITIS_LOOP_112_1: for (int i = 0; i < M; i++)
+ VITIS_LOOP_114_1: for (int i = 0; i < M; i++)
     {
-        VITIS_LOOP_114_2: for (int k = 0; k < N; k++)
+        VITIS_LOOP_116_2: for (int k = 0; k < N; k++)
         {
             extract_element(x, i, k, extracted_scalar);
             if (extracted_scalar != 0)

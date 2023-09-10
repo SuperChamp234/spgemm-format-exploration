@@ -167,9 +167,11 @@
   "Files": {
     "CSource": ["..\/src\/row_product.cpp"],
     "Vhdl": [
-      "impl\/vhdl\/row_product_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc.vhd",
+      "impl\/vhdl\/row_product_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit1072_proc16.vhd",
       "impl\/vhdl\/row_product_control_s_axi.vhd",
       "impl\/vhdl\/row_product_mul_32s_32s_48_2_1.vhd",
+      "impl\/vhdl\/row_product_operator_add_assign.vhd",
+      "impl\/vhdl\/row_product_operator_mul_assign.vhd",
       "impl\/vhdl\/row_product_x_colind_m_axi.vhd",
       "impl\/vhdl\/row_product_x_data_m_axi.vhd",
       "impl\/vhdl\/row_product_x_rowptr_m_axi.vhd",
@@ -182,9 +184,11 @@
       "impl\/vhdl\/row_product.vhd"
     ],
     "Verilog": [
-      "impl\/verilog\/row_product_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc.v",
+      "impl\/verilog\/row_product_Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit1072_proc16.v",
       "impl\/verilog\/row_product_control_s_axi.v",
       "impl\/verilog\/row_product_mul_32s_32s_48_2_1.v",
+      "impl\/verilog\/row_product_operator_add_assign.v",
+      "impl\/verilog\/row_product_operator_mul_assign.v",
       "impl\/verilog\/row_product_x_colind_m_axi.v",
       "impl\/verilog\/row_product_x_data_m_axi.v",
       "impl\/verilog\/row_product_x_rowptr_m_axi.v",
@@ -3033,12 +3037,36 @@
     "Hierarchy": {
       "ModuleName": "row_product",
       "Instances": [{
-          "ModuleName": "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc",
-          "InstanceName": "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc_U0"
+          "ModuleName": "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit1072_proc16",
+          "InstanceName": "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit1072_proc16_U0",
+          "Instances": [
+            {
+              "ModuleName": "operator_mul_assign",
+              "InstanceName": "grp_operator_mul_assign_fu_13259"
+            },
+            {
+              "ModuleName": "operator_add_assign",
+              "InstanceName": "call_ln0_operator_add_assign_fu_13265"
+            }
+          ]
         }]
     },
     "Info": {
-      "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc": {
+      "operator_mul_assign": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "operator_add_assign": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "1",
+        "isOneStateSeq": "0"
+      },
+      "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit1072_proc16": {
         "FunctionProtocol": "ap_ctrl_hs",
         "isTaskLevelControl": "0",
         "isPipelined": "0",
@@ -3054,7 +3082,71 @@
       }
     },
     "Metrics": {
-      "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit96_proc": {
+      "operator_mul_assign": {
+        "Latency": {
+          "LatencyBest": "1",
+          "LatencyAvg": "1",
+          "LatencyWorst": "1",
+          "PipelineII": "1",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "6.912"
+        },
+        "Area": {
+          "DSP": "0",
+          "AVAIL_DSP": "220",
+          "UTIL_DSP": "0",
+          "FF": "81512",
+          "AVAIL_FF": "106400",
+          "UTIL_FF": "76",
+          "LUT": "24714",
+          "AVAIL_LUT": "53200",
+          "UTIL_LUT": "46",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "280",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "operator_add_assign": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "0",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "2.552"
+        },
+        "Area": {
+          "FF": "0",
+          "AVAIL_FF": "106400",
+          "UTIL_FF": "0",
+          "LUT": "19266",
+          "AVAIL_LUT": "53200",
+          "UTIL_LUT": "36",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "280",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "220",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit1072_proc16": {
         "Latency": {
           "LatencyBest": "",
           "LatencyAvg": "",
@@ -3071,66 +3163,43 @@
         "Loops": [
           {
             "Name": "Loop 1",
-            "TripCount": "5",
-            "Latency": "5",
+            "TripCount": "494",
+            "Latency": "494",
             "PipelineII": "1",
             "PipelineDepth": "2"
           },
           {
-            "Name": "Loop 2",
-            "TripCount": "5",
-            "Latency": "5",
-            "PipelineII": "1",
-            "PipelineDepth": "2"
-          },
-          {
-            "Name": "VITIS_LOOP_112_1",
-            "TripCount": "5",
+            "Name": "VITIS_LOOP_114_1",
+            "TripCount": "494",
             "Latency": "",
             "PipelineII": "",
             "PipelineDepth": "",
             "Loops": [
               {
-                "Name": "VITIS_LOOP_114_2",
-                "TripCount": "5",
+                "Name": "VITIS_LOOP_116_2",
+                "TripCount": "494",
                 "Latency": "",
                 "PipelineII": "",
                 "PipelineDepth": "",
-                "Loops": [
-                  {
+                "Loops": [{
                     "Name": "VITIS_LOOP_24_1",
                     "TripCount": "",
                     "Latency": "",
                     "PipelineII": "1",
                     "PipelineDepth": "12"
-                  },
-                  {
-                    "Name": "VITIS_LOOP_9_1",
-                    "TripCount": "5",
-                    "Latency": "50",
-                    "PipelineII": "9",
-                    "PipelineDepth": "11"
-                  },
-                  {
-                    "Name": "VITIS_LOOP_114_2.3",
-                    "TripCount": "5",
-                    "Latency": "10",
-                    "PipelineII": "",
-                    "PipelineDepth": "2"
-                  }
-                ]
+                  }]
               },
               {
                 "Name": "VITIS_LOOP_60_1",
-                "TripCount": "5",
-                "Latency": "12",
+                "TripCount": "494",
+                "Latency": "502",
                 "PipelineII": "1",
-                "PipelineDepth": "9"
+                "PipelineDepth": "10"
               },
               {
-                "Name": "VITIS_LOOP_112_1.3",
-                "TripCount": "5",
-                "Latency": "5",
+                "Name": "VITIS_LOOP_114_1.3",
+                "TripCount": "494",
+                "Latency": "494",
                 "PipelineII": "1",
                 "PipelineDepth": "2"
               }
@@ -3141,12 +3210,12 @@
           "DSP": "0",
           "AVAIL_DSP": "220",
           "UTIL_DSP": "0",
-          "FF": "4540",
+          "FF": "245511",
           "AVAIL_FF": "106400",
-          "UTIL_FF": "4",
-          "LUT": "14967",
+          "UTIL_FF": "230",
+          "LUT": "185002",
           "AVAIL_LUT": "53200",
-          "UTIL_LUT": "28",
+          "UTIL_LUT": "347",
           "BRAM_18K": "0",
           "AVAIL_BRAM": "280",
           "UTIL_BRAM": "0",
@@ -3176,12 +3245,12 @@
           "DSP": "0",
           "AVAIL_DSP": "220",
           "UTIL_DSP": "0",
-          "FF": "9184",
+          "FF": "250155",
           "AVAIL_FF": "106400",
-          "UTIL_FF": "8",
-          "LUT": "20227",
+          "UTIL_FF": "235",
+          "LUT": "190262",
           "AVAIL_LUT": "53200",
-          "UTIL_LUT": "38",
+          "UTIL_LUT": "357",
           "URAM": "0",
           "AVAIL_URAM": "0",
           "UTIL_URAM": "0"
@@ -3192,7 +3261,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-08-31 11:28:15 IST",
+    "Time": "2023-09-07 22:34:59 IST",
     "ToolName": "vivado_hls",
     "ToolVersion": "2020.2"
   }

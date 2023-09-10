@@ -39,9 +39,9 @@
 //#include "mmio.h"
 #endif
 
-const int M = 5;
-const int P = 5;
-const int N = 5;
+const int M = 494;
+const int P = 494;
+const int N = 494;
 //X is of size MxP, Y is of size PxN, Z is of size MxN
 //X is CSC, Y is CSR, Z is CSR
 

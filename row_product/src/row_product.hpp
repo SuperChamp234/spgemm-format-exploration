@@ -45,7 +45,7 @@ const int N = 5;
 //X is of size MxP, Y is of size PxN, Z is of size MxN
 //X is CSC, Y is CSR, Z is CSR
 
-typedef ap_fixed<32, 16> data_t;
+typedef double data_t;
 
 struct csr_t_1 {
     int* rowptr;

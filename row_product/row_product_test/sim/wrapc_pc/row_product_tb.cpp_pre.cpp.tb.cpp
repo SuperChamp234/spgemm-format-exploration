@@ -60304,9 +60304,9 @@ public:
 }
 # 33 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
 # 42 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-const int M = 5;
-const int P = 5;
-const int N = 5;
+const int M = 494;
+const int P = 494;
+const int N = 494;
 
 
 
@@ -69505,14 +69505,16 @@ void COO_to_CSR1(COO matrix, csr_t_1 &csr)
 {
     int row = 0;
     int rowptr = 0;
+    int nnz = 0;
     csr.rowptr[row] = rowptr;
-    for (int i = 0; i <= matrix.units.size(); i++)
+    for (int i = 0; i < matrix.units.size(); i++)
     {
         if (matrix.units[i].row == row)
         {
             csr.colind[rowptr] = matrix.units[i].col;
             csr.data[rowptr] = matrix.units[i].data;
             rowptr++;
+            nnz++;
         }
         else
         {
@@ -69521,22 +69523,26 @@ void COO_to_CSR1(COO matrix, csr_t_1 &csr)
             csr.colind[rowptr] = matrix.units[i].col;
             csr.data[rowptr] = matrix.units[i].data;
             rowptr++;
+            nnz++;
         }
     }
+    csr.rowptr[M] = nnz;
 }
 void COO_to_CSR2(COO matrix, csr_t_2 &csr)
 {
 
     int row = 0;
     int rowptr = 0;
+    int nnz = 0;
     csr.rowptr[row] = rowptr;
-    for (int i = 0; i <= matrix.units.size(); i++)
+    for (int i = 0; i < matrix.units.size(); i++)
     {
         if (matrix.units[i].row == row)
         {
             csr.colind[rowptr] = matrix.units[i].col;
             csr.data[rowptr] = matrix.units[i].data;
             rowptr++;
+            nnz++;
         }
         else
         {
@@ -69545,8 +69551,10 @@ void COO_to_CSR2(COO matrix, csr_t_2 &csr)
             csr.colind[rowptr] = matrix.units[i].col;
             csr.data[rowptr] = matrix.units[i].data;
             rowptr++;
+            nnz++;
         }
     }
+    csr.rowptr[M] = nnz;
 }
 
 void COO_to_CSR3(COO matrix, csr_out_t &csr)
@@ -69554,13 +69562,15 @@ void COO_to_CSR3(COO matrix, csr_out_t &csr)
     int row = 0;
     int rowptr = 0;
     csr.rowptr[row] = rowptr;
-    for (int i = 0; i <= matrix.units.size(); i++)
+    int nnz = 0;
+    for (int i = 0; i < matrix.units.size(); i++)
     {
         if (matrix.units[i].row == row)
         {
             csr.colind[rowptr] = matrix.units[i].col;
             csr.data[rowptr] = matrix.units[i].data;
             rowptr++;
+            nnz++;
         }
         else
         {
@@ -69569,12 +69579,14 @@ void COO_to_CSR3(COO matrix, csr_out_t &csr)
             csr.colind[rowptr] = matrix.units[i].col;
             csr.data[rowptr] = matrix.units[i].data;
             rowptr++;
+            nnz++;
         }
     }
+    csr.rowptr[M] = nnz;
 }
 
 
-bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
+bool compare_csr_out_t(csr_out_t &z_csr, csr_out_t &z_csr2)
 {
     bool equal = true;
     for (int i = 0; i < M; i++)
@@ -69595,21 +69607,11 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
         }
     }
     cout << "colind is equal: " << equal << endl;
-    for (int i = 0; i < z_csr.rowptr[M]; i++)
-    {
-
-        bool almost_equal = (data_t)z_csr.data[i] - (data_t)z_csr2.data[i] > 0 ? (data_t)z_csr.data[i] - (data_t)z_csr2.data[i] < (data_t)0.01 :(data_t)z_csr.data[i] - (data_t)z_csr2.data[i] > (data_t)(-0.01);
-        if (!almost_equal)
-        {
-            equal = false;
-            break;
-        }
-    }
-    cout << "data is equal: " << equal << endl;
+# 225 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
     return equal;
 }
 
-void print_csr_out_t(csr_out_t z_csr)
+void print_csr_out_t(csr_out_t &z_csr)
 {
     for (int i = 0; i < M; i++)
     {
@@ -69699,19 +69701,19 @@ void test_append_row()
     std::cout << "out_csr = " << std::endl;
     print_csr_out_t(out_csr);
 }
-# 361 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 377 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 #ifndef HLS_FASTSIM
 #ifdef __cplusplus
 extern "C"
 #endif
 void apatb_row_product_sw(int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *, int *, int *, ap_fixed<32, 16, AP_TRN, AP_WRAP, 0> *);
-# 361 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 377 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 void synth_test()
 {
-# 386 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
-    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
-    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
-    COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
+# 402 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
+    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
+    COO coo_C = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/output.mtx");
 
      cout << "COO A" << endl;
 
@@ -69755,12 +69757,11 @@ void synth_test()
     COO_to_CSR3(coo_C, csr_C);
 
     cout << "CSR C" << endl;
-    print_csr_out_t(csr_C);
-# 443 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 459 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
     csr_out_t csr_out;
-    int out_rowptr_arr[M + 1];
-    int out_colind[M * P];
-    data_t out_data[M * P];
+    static int out_rowptr_arr[M + 1];
+    static int out_colind[M * P];
+    static data_t out_data[M * P];
     csr_out.rowptr = out_rowptr_arr;
     csr_out.colind = out_colind;
     csr_out.data = out_data;
@@ -69768,14 +69769,14 @@ void synth_test()
 #ifndef HLS_FASTSIM
 #define row_product apatb_row_product_sw
 #endif
-# 450 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 466 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 row_product(A_rowptr_arr, A_colind, A_data, B_rowptr_arr, B_colind, B_data, out_rowptr_arr, out_colind, out_data);
 #undef row_product
-# 450 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 466 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 
 
     cout << "CSR out" << endl;
-    print_csr_out_t(csr_out);
+
 
 
     cout << "CSR out == CSR C ?" << endl;
@@ -69791,7 +69792,7 @@ row_product(A_rowptr_arr, A_colind, A_data, B_rowptr_arr, B_colind, B_data, out_
 
 }
 #endif
-# 467 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
+# 483 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product_tb.cpp"
 
 
 int main()

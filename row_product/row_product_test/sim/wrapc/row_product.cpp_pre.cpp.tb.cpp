@@ -60304,9 +60304,9 @@ public:
 }
 # 33 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp" 2
 # 42 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-const int M = 5;
-const int P = 5;
-const int N = 5;
+const int M = 494;
+const int P = 494;
+const int N = 494;
 
 
 
@@ -60430,15 +60430,15 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
 void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
 {
 #pragma HLS INTERFACE s_axilite port=return
-#pragma HLS INTERFACE m_axi depth=25 port=x_rowptr
-#pragma HLS INTERFACE m_axi depth=25 port=x_colind
-#pragma HLS INTERFACE m_axi depth=25 port=x_data
-#pragma HLS INTERFACE m_axi depth=25 port=y_rowptr
-#pragma HLS INTERFACE m_axi depth=25 port=y_colind
-#pragma HLS INTERFACE m_axi depth=25 port=y_data
-#pragma HLS INTERFACE m_axi depth=25 port=z_rowptr
-#pragma HLS INTERFACE m_axi depth=25 port=z_colind
-#pragma HLS INTERFACE m_axi depth=25 port=z_data
+#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=x_colind
+#pragma HLS INTERFACE m_axi depth=1024 port=x_data
+#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=y_colind
+#pragma HLS INTERFACE m_axi depth=1024 port=y_data
+#pragma HLS INTERFACE m_axi depth=1024 port=z_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=z_colind
+#pragma HLS INTERFACE m_axi depth=1024 port=z_data
 
 
 
@@ -60459,7 +60459,9 @@ void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, i
 
     csr.rowptr[0] = 0;
     hls::vector<data_t, N> extracted_row = data_t(0);
+#pragma HLS BIND_STORAGE variable=extracted_row type=ram_2p impl=bram
     hls::vector<data_t, N> buffer_row = data_t(0);
+#pragma HLS BIND_STORAGE variable=buffer_row type=ram_2p impl=bram
     data_t extracted_scalar = data_t(0);
 
 
@@ -60500,5 +60502,5 @@ apatb_row_product_ir(x_rowptr, x_colind, x_data, y_rowptr, y_colind, y_data, z_r
 return ;
 }
 #endif
-# 127 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
+# 129 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
 

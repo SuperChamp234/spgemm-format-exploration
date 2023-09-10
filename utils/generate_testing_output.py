@@ -27,7 +27,7 @@ def main():
     B = A * A
 
     #store the result in matrix market format
-    MMFileFixedFormat().write(output_file, B, field='real', precision=9)
+    MMFileFixedFormat().write(output_file, B, field='real', precision=4)
 
 if __name__ == "__main__":
     main()
