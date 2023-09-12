@@ -5,6 +5,20 @@
                 <option name="name" value="row_product"/>
             </pragma>
         </directive>
+        <directive functionName="row_product" label="" functionLabel="">
+            <pragma name="BIND_STORAGE">
+                <option name="variable" value="extracted_row" positionalBoolean="4"/>
+                <option name="ram_1wnr" value="" positionalBoolean="type"/>
+                <option name="bram" value="" positionalBoolean="impl"/>
+            </pragma>
+        </directive>
+        <directive functionName="row_product" label="" functionLabel="">
+            <pragma name="BIND_STORAGE">
+                <option name="variable" value="buffer_row" positionalBoolean="4"/>
+                <option name="ram_1wnr" value="" positionalBoolean="type"/>
+                <option name="bram" value="" positionalBoolean="impl"/>
+            </pragma>
+        </directive>
     </sourceFile>
 </AutoPilot:ProjectResources>
 

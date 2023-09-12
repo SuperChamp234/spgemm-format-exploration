@@ -1,4 +1,5 @@
 row_product_mul_32s_32s_48_2_1
+row_product_extracted_row_V
 row_product_control_s_axi
 row_product_x_rowptr_m_axi
 row_product_x_colind_m_axi
@@ -9,7 +10,4 @@ row_product_y_data_m_axi
 row_product_z_rowptr_m_axi
 row_product_z_colind_m_axi
 row_product_z_data_m_axi
-operator_mul_assign
-operator_add_assign
-Block_ZN8ap_fixedILi32ELi16EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2Ei_exit1072_proc16
 row_product

@@ -6,7 +6,7 @@ int clock_counter = 0;
 #endif
 
 //extract row from csr and store it in an array
-void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row)
+void extract_row(csr_t_2 inp_csr, int row, data_t* out_row)
 {
     int start_idx = inp_csr.rowptr[row];
     int end_idx = inp_csr.rowptr[row+1];
@@ -49,21 +49,32 @@ void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data)
 
 
 //multiply row with a scalar
-void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row)
+void row_scalar_mult(data_t scalar, data_t* row)
 {
-    row *= scalar;
+    for (int i = 0; i < N; i++)
+    {
+        #ifdef ROW_SCALAR_MULT
+            clock_counter++;
+        #endif
+        row[i] *= scalar;
+    }
 }
 
 //add two rows
-void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2)
+void row_add(data_t* row1, data_t* row2)
 {
-    row1 += row2;
+    for (int i = 0; i < N; i++)
+    {
+        #ifdef ROW_ADD
+            clock_counter++;
+        #endif
+        row1[i] += row2[i];
+    }
 }
 
 //append a row array to a csr_out_t by updating the rowptr and colind and data
-void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
+void append_row(csr_out_t* out_csr, data_t* row, int row_idx)
 {
-    #pragma HLS array_partition variable=row complete
     int start_idx = out_csr->rowptr[row_idx];
     int end_idx = out_csr->rowptr[row_idx+1];
     
@@ -86,16 +97,27 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
     out_csr->rowptr[row_idx+1] = j;
 }
 
+void setZero(data_t* row)
+{
+    for (int i = 0; i < N; i++)
+    {
+        #ifdef SET_ZERO
+            clock_counter++;
+        #endif
+        row[i] = data_t(0);
+    }
+}
+
 void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr,  int* z_colind,  data_t* z_data)
 {
 #pragma HLS INTERFACE s_axilite port=return
-#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr 
 #pragma HLS INTERFACE m_axi depth=1024 port=x_colind
 #pragma HLS INTERFACE m_axi depth=1024 port=x_data
-#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr 
 #pragma HLS INTERFACE m_axi depth=1024 port=y_colind
 #pragma HLS INTERFACE m_axi depth=1024 port=y_data
 #pragma HLS INTERFACE m_axi depth=1024 port=z_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
 #pragma HLS INTERFACE m_axi depth=1024 port=z_colind
 #pragma HLS INTERFACE m_axi depth=1024 port=z_data
 
@@ -117,14 +139,13 @@ void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, i
     csr.data = z_data;
 
     csr.rowptr[0] = 0;
-    hls::vector<data_t, N> extracted_row = data_t(0);
-#pragma HLS BIND_STORAGE variable=extracted_row type=ram_2p impl=bram
-    hls::vector<data_t, N> buffer_row = data_t(0);
-#pragma HLS BIND_STORAGE variable=buffer_row type=ram_2p impl=bram
+    data_t extracted_row[N];
+    setZero(extracted_row);
+    data_t buffer_row[N];
+    setZero(buffer_row);
     data_t extracted_scalar = data_t(0);
     //C[I,:] = Sum(A[I,K]*B[K,:])
     //iterate over the rows of Y
-    #pragma HLS dataflow
     for (int i = 0; i < M; i++)
     {
         #ifdef MAIN_EACH_ROW
@@ -144,7 +165,8 @@ void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, i
             }
         }
         append_row(&csr, buffer_row, i);
-        buffer_row = data_t(0);
+        //set buffer_row to 0
+        setZero(buffer_row);
     }
     #ifdef CLOCK
         std::cout << "Clock counter: " << clock_counter << std::endl;

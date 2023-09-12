@@ -60330,7 +60330,7 @@ struct csr_out_t {
     data_t* data;
 };
 # 75 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row);
+void extract_row(csr_t_2 inp_csr, int row, data_t* out_row);
 # 85 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data);
 
@@ -60340,7 +60340,7 @@ void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data);
 
 
 
-void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row);
+void row_scalar_mult(data_t scalar, data_t* row);
 
 
 
@@ -60348,21 +60348,29 @@ void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row);
 
 
 
-void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
+void row_add(data_t* row1, data_t* row2);
 # 110 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
-void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
+void append_row(csr_out_t* out_csr, data_t* row, int row_idx);
 # 125 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.hpp"
 void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data);
 # 2 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp" 2
 
 
-void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row)
+
+
+
+
+
+void extract_row(csr_t_2 inp_csr, int row, data_t* out_row)
 {
     int start_idx = inp_csr.rowptr[row];
     int end_idx = inp_csr.rowptr[row+1];
     int j = start_idx;
     for (int i = 0; i < N; i++)
     {
+
+
+
         int col_idx = inp_csr.colind[j];
         data_t data = inp_csr.data[j];
         out_row[i] = (j < end_idx && col_idx == i) ? data : data_t(0);
@@ -60378,6 +60386,9 @@ void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data)
 
     for (int j = start_idx; j < end_idx; j++)
     {
+
+
+
         int col_idx = inp_csr.colind[j];
         if (col_idx == col)
         {
@@ -60393,27 +60404,41 @@ void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data)
 
 
 
-void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row)
+void row_scalar_mult(data_t scalar, data_t* row)
 {
-    row *= scalar;
+    for (int i = 0; i < N; i++)
+    {
+
+
+
+        row[i] *= scalar;
+    }
 }
 
 
-void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2)
+void row_add(data_t* row1, data_t* row2)
 {
-    row1 += row2;
+    for (int i = 0; i < N; i++)
+    {
+
+
+
+        row1[i] += row2[i];
+    }
 }
 
 
-void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
+void append_row(csr_out_t* out_csr, data_t* row, int row_idx)
 {
-#pragma HLS array_partition variable=row complete
     int start_idx = out_csr->rowptr[row_idx];
     int end_idx = out_csr->rowptr[row_idx+1];
 
     int j = start_idx;
     for (int i = 0; i < N; i++)
     {
+
+
+
         if (row[i] != 0)
         {
             int col_idx = i;
@@ -60427,16 +60452,27 @@ void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx)
     out_csr->rowptr[row_idx+1] = j;
 }
 
+void setZero(data_t* row)
+{
+    for (int i = 0; i < N; i++)
+    {
+
+
+
+        row[i] = data_t(0);
+    }
+}
+
 void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, int* y_colind, data_t* y_data, int* z_rowptr, int* z_colind, data_t* z_data)
 {
 #pragma HLS INTERFACE s_axilite port=return
-#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr
 #pragma HLS INTERFACE m_axi depth=1024 port=x_colind
 #pragma HLS INTERFACE m_axi depth=1024 port=x_data
-#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=x_rowptr
 #pragma HLS INTERFACE m_axi depth=1024 port=y_colind
 #pragma HLS INTERFACE m_axi depth=1024 port=y_data
 #pragma HLS INTERFACE m_axi depth=1024 port=z_rowptr
+#pragma HLS INTERFACE m_axi depth=1024 port=y_rowptr
 #pragma HLS INTERFACE m_axi depth=1024 port=z_colind
 #pragma HLS INTERFACE m_axi depth=1024 port=z_data
 
@@ -60458,18 +60494,23 @@ void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, i
     csr.data = z_data;
 
     csr.rowptr[0] = 0;
-    hls::vector<data_t, N> extracted_row = data_t(0);
-#pragma HLS BIND_STORAGE variable=extracted_row type=ram_2p impl=bram
-    hls::vector<data_t, N> buffer_row = data_t(0);
-#pragma HLS BIND_STORAGE variable=buffer_row type=ram_2p impl=bram
+    data_t extracted_row[N];
+    setZero(extracted_row);
+    data_t buffer_row[N];
+    setZero(buffer_row);
     data_t extracted_scalar = data_t(0);
 
 
-#pragma HLS dataflow
     for (int i = 0; i < M; i++)
     {
+
+
+
         for (int k = 0; k < N; k++)
         {
+
+
+
             extract_element(x, i, k, extracted_scalar);
             if (extracted_scalar != 0)
             {
@@ -60479,8 +60520,12 @@ void row_product( int* x_rowptr, int* x_colind, data_t* x_data, int* y_rowptr, i
             }
         }
         append_row(&csr, buffer_row, i);
-        buffer_row = data_t(0);
+
+        setZero(buffer_row);
     }
+
+
+
 }
 #ifndef HLS_FASTSIM
 #ifdef __cplusplus
@@ -60502,5 +60547,5 @@ apatb_row_product_ir(x_rowptr, x_colind, x_data, y_rowptr, y_colind, y_data, z_r
 return ;
 }
 #endif
-# 129 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
+# 174 "/home/leoh/Documents/spgemm-format-exploration/row_product/src/row_product.cpp"
 

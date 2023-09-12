@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -Wextra -pedantic -std=c++17
+CFLAGS = -pedantic -std=c++17
 SRC_DIR = ../src
 TB = $(SRC_DIR)/row_product_tb.cpp
 SRC = $(SRC_DIR)/row_product.cpp
@@ -25,6 +25,9 @@ valgrind_report.rpt: row_product_tb
 
 run: row_product_tb
 	./row_product_tb
+
+debug: $(TB) $(SRC) $(INCLUDE)
+	$(CC) $(CFLAGS) -ggdb -I$(vitis_include) -o row_product_tb $(TB) $(SRC)
 
 .PHONY: clean
 clean: 

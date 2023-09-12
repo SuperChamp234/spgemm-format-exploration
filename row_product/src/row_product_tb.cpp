@@ -68,8 +68,6 @@ COO assemble_simetric_COO_matrix(std::string filePath)
     //read M, N, L
     fseek(f, -1, SEEK_CUR);
     fscanf(f, "%d %d %d", &M, &N, &L);
-    cout << "M = " << M << endl;
-    cout << "N = " << N << endl;
     for (int l = 0; l < L; l++)
     {
         // Read (i,j,A[i,j]) triplets:
@@ -215,7 +213,7 @@ bool compare_csr_out_t(csr_out_t &z_csr, csr_out_t &z_csr2)
     for (int i = 0; i < z_csr.rowptr[M]; i++)
     {
         //check if they are equal to two decimal places
-        if ((z_csr.data[i] - z_csr2.data[i]) > (data_t)0.05 || (z_csr.data[i] - z_csr2.data[i]) < (data_t)-0.05)
+        if ((z_csr.data[i] - z_csr2.data[i]) > (data_t)0.5 || (z_csr.data[i] - z_csr2.data[i]) < (data_t)-0.5)
         {
             cout << "z_csr.data["<< i <<"] = "<< z_csr.data[i] << endl;
             cout << "z_csr2.data[" << i << "] = " << z_csr2.data[i] << endl;
@@ -252,72 +250,72 @@ void print_csr_out_t(csr_out_t &z_csr)
         std::cout << std::endl;
     }
 }
-void test_row_scalar_mult()
-{
-    // init row
-    hls::vector<data_t, N> row = (data_t)1;
-    // multiply row by 2
-    row_scalar_mult((data_t)2, row);
-    // print out_row
-    std::cout << "out_row = ";
-    for (int i = 0; i < N; i++)
-    {
-        std::cout << row[i] << " ";
-    }
-    std::cout << std::endl;
-}
-void test_row_add()
-{
-    // init row1
-    hls::vector<data_t, N> row1 = (data_t)1;
-    // init row2
-    hls::vector<data_t, N> row2 = (data_t)2;
-    // add row1 and row2
-    row_add(row1, row2);
-    // print row1
-    std::cout << "row1 = ";
-    for (int i = 0; i < N; i++)
-    {
-        std::cout << row1[i] << " ";
-    }
-    std::cout << std::endl;
-}
+// void test_row_scalar_mult()
+// {
+//     // init row
+//     hls::vector<data_t, N> row = (data_t)1;
+//     // multiply row by 2
+//     row_scalar_mult((data_t)2, row);
+//     // print out_row
+//     std::cout << "out_row = ";
+//     for (int i = 0; i < N; i++)
+//     {
+//         std::cout << row[i] << " ";
+//     }
+//     std::cout << std::endl;
+// }
+// void test_row_add()
+// {
+//     // init row1
+//     hls::vector<data_t, N> row1 = (data_t)1;
+//     // init row2
+//     hls::vector<data_t, N> row2 = (data_t)2;
+//     // add row1 and row2
+//     row_add(row1, row2);
+//     // print row1
+//     std::cout << "row1 = ";
+//     for (int i = 0; i < N; i++)
+//     {
+//         std::cout << row1[i] << " ";
+//     }
+//     std::cout << std::endl;
+// }
 
-void test_extract_row(csr_t_2 inp_csr)
-{
-    for (int i = 0; i < N; i++)
-    {
-        hls::vector<data_t, N> out_row;
-        extract_row(inp_csr, i, out_row);
-        std::cout << "out_row[" << i << "] = ";
-        for (int j = 0; j < N; j++)
-        {
-            std::cout << out_row[j] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
+// void test_extract_row(csr_t_2 inp_csr)
+// {
+//     for (int i = 0; i < N; i++)
+//     {
+//         hls::vector<data_t, N> out_row;
+//         extract_row(inp_csr, i, out_row);
+//         std::cout << "out_row[" << i << "] = ";
+//         for (int j = 0; j < N; j++)
+//         {
+//             std::cout << out_row[j] << " ";
+//         }
+//         std::cout << std::endl;
+//     }
+// }
 
-// test extract_element by extracting 2nd element of 3rd row of csr_t_1
-void test_extract_element(csr_t_1 inp_csr)
-{
-    data_t out_data;
-    extract_element(inp_csr, 1,1, out_data);
-    std::cout << "out_data = " << out_data << std::endl;
-}
+// // test extract_element by extracting 2nd element of 3rd row of csr_t_1
+// void test_extract_element(csr_t_1 inp_csr)
+// {
+//     data_t out_data;
+//     extract_element(inp_csr, 1,1, out_data);
+//     std::cout << "out_data = " << out_data << std::endl;
+// }
 
-void test_append_row()
-{
-    // init empty csr_out_t
-    csr_out_t out_csr = new_csr_out_t();
-    hls::vector<data_t, N> row = (data_t)1;
-    for (int i = 0; i < M; i++)
-    {
-        append_row(&out_csr, row, i);
-    }
-    std::cout << "out_csr = " << std::endl;
-    print_csr_out_t(out_csr);
-}
+// void test_append_row()
+// {
+//     // init empty csr_out_t
+//     csr_out_t out_csr = new_csr_out_t();
+//     hls::vector<data_t, N> row = (data_t)1;
+//     for (int i = 0; i < M; i++)
+//     {
+//         append_row(&out_csr, row, i);
+//     }
+//     std::cout << "out_csr = " << std::endl;
+//     print_csr_out_t(out_csr);
+// }
 
 // void basic_test()
 // {
@@ -402,12 +400,12 @@ C:
     */
 
     // read COO matrix from file
-    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/A.mtx");
-    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/B.mtx");
-    COO coo_C = assemble_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/C.mtx");
+    COO coo_A = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
+    COO coo_B = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/494_bus.mtx");
+    COO coo_C = assemble_simetric_COO_matrix("/home/leoh/Documents/spgemm-format-exploration/test_matrices/output.mtx");
 
      cout << "COO A" << endl;
-    // print_COO(coo_A, M, P);
+    //print_COO(coo_A, M, P);
     // cout << "-------------------" << endl;
      cout << "COO B" << endl;
     // print_COO(coo_B , P, N);

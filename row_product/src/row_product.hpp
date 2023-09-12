@@ -39,13 +39,13 @@
 //#include "mmio.h"
 #endif
 
-const int M = 5;
-const int P = 5;
-const int N = 5;
+const int M = 494;
+const int P = 494;
+const int N = 494;
 //X is of size MxP, Y is of size PxN, Z is of size MxN
 //X is CSC, Y is CSR, Z is CSR
 
-typedef double data_t;
+typedef ap_fixed<32, 16> data_t;
 
 struct csr_t_1 {
     int* rowptr;
@@ -72,7 +72,7 @@ struct csr_out_t {
  * @param row The row to be extracted.
  * @param out_row The output vector to store the extracted row.
  */
-void extract_row(csr_t_2 inp_csr, int row, hls::vector<data_t, N>& out_row);
+void extract_row(csr_t_2 inp_csr, int row, data_t* out_row);
 
 /**
  * @brief Extracts an element from a CSR matrix.
@@ -90,7 +90,7 @@ void extract_element(csr_t_1 inp_csr, int row, int col, data_t& out_data);
  * @param scalar The scalar to multiply the row with.
  * @param row The row to be multiplied.
  */
-void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row);
+void row_scalar_mult(data_t scalar, data_t* row);
 
 /**
  * @brief Adds two rows.
@@ -98,7 +98,7 @@ void row_scalar_mult(data_t scalar, hls::vector<data_t, N>& row);
  * @param row1 The first row to be added.
  * @param row2 The second row to be added.
  */
-void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
+void row_add(data_t* row1, data_t* row2);
 
 /**
  * @brief Appends a row to a CSR matrix.
@@ -107,7 +107,7 @@ void row_add(hls::vector<data_t, N>& row1, hls::vector<data_t, N>& row2);
  * @param row The row to be appended.
  * @param row_idx The index of the row to be appended.
  */
-void append_row(csr_out_t* out_csr, hls::vector<data_t, N>& row, int row_idx);
+void append_row(csr_out_t* out_csr, data_t* row, int row_idx);
 
 /**
  * @brief Performs row product of two matrices in CSR format.

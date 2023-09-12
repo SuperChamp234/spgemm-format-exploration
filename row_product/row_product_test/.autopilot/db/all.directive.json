@@ -18,6 +18,50 @@
           "label": "",
           "functionLabel": "",
           "pragma": {
+            "name": "BIND_STORAGE",
+            "option": [
+              {
+                "name": "variable",
+                "value": "extracted_row"
+              },
+              {
+                "name": "type",
+                "value": "ram_1wnr"
+              },
+              {
+                "name": "impl",
+                "value": "bram"
+              }
+            ]
+          }
+        },
+        {
+          "functionName": "row_product",
+          "label": "",
+          "functionLabel": "",
+          "pragma": {
+            "name": "BIND_STORAGE",
+            "option": [
+              {
+                "name": "variable",
+                "value": "buffer_row"
+              },
+              {
+                "name": "type",
+                "value": "ram_1wnr"
+              },
+              {
+                "name": "impl",
+                "value": "bram"
+              }
+            ]
+          }
+        },
+        {
+          "functionName": "row_product",
+          "label": "",
+          "functionLabel": "",
+          "pragma": {
             "name": "TOP",
             "option": [{
                 "name": "name",
