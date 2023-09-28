@@ -40,14 +40,14 @@ struct csr_out_t {
     * @param row: the row to be extracted
     * @return data_t*: the row in an array
 */
-void extract_row(csr_t& inp_csr, data_t* out_row, int row);
+void extract_row(csr_t inp_csr, data_t* out_row, int row);
 /*
     * Extract a column from a matrix in CSC format
     * @param inp_csc: the matrix in CSC format
     * @param col: the column to be extracted
     * @return data_t*: the column in an array
 */
-void extract_col(csc_t& inp_csc, data_t* out_col, int col);
+void extract_col(csc_t inp_csc, data_t* out_col, int col);
 /*
     * Multiply two matrices in CSR format
     * @param x_rowptr: the row pointer of the first matrix in CSR format
@@ -68,13 +68,13 @@ void outer_product(int* x_rowptr, int* x_colind, data_t* x_data, int* y_colptr, 
     * @param col: the column in an array
     * @return csr_out_t: the product of the row and column
 */
-void multiply_row_col(data_t* row, data_t* col, csr_out_t& out);
+void multiply_row_col(data_t* row, data_t* col, csr_out_t out);
 /*
     * Accumulate two matrices in CSR format
     * @param csr_out_t: the first matrix in CSR format
     * @param csr_out_t: the second matrix in CSR format
     * @return csr_out_t: the sum of the two matrices in CSR format
 */
-void accumulate(csr_out_t& out, csr_out_t& csr1, csr_out_t& csr2);
+void accumulate(csr_out_t out, csr_out_t csr1, csr_out_t csr2);
 
 #endif // OUTER_PRODUCT_CSR_H

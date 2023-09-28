@@ -201,22 +201,6 @@ bool compare_csr_out_t(csr_out_t z_csr, csr_out_t z_csr2)
     return equal;
 }
 
-csr_out_t new_csr_out_t()
-{
-    csr_out_t csr;
-    csr.rowptr = new int[M + 1];
-    csr.colind = new int[M * N];
-    csr.data = new data_t[M * N];
-    //check if allocation was successful
-    if (!csr.rowptr || !csr.colind || !csr.data)
-    {
-        cout << "Memory allocation failed" << endl;
-        exit(1);
-    }
-    return csr;
-}
-
-
 void test_extract_row(csr_t test_case){
     for (int i = 0; i < N; i++) {
         std::cout << "row " << i << std::endl;
@@ -269,7 +253,10 @@ void print_csr_out_t(csr_out_t z_csr)
 void test_mult(csr_t test_case1, csc_t test_case2){
     data_t row [N];
     data_t col [M];
-    csr_out_t out = new_csr_out_t();
+    int out_rowptr[M+1];
+    int out_colind[M*N];
+    data_t out_data[M*N];
+    csr_out_t out = {out_rowptr, out_colind, out_data};
     for(int i = 0; i < P; i++){
         extract_col(test_case2, col, i);
         extract_row(test_case1, row, i);
@@ -283,6 +270,7 @@ void test_mult(csr_t test_case1, csc_t test_case2){
             std::cout << col[j] << " ";
         }
         std::cout << std::endl;
+        std::cout << std::endl;
         multiply_row_col(row, col, out);
         print_csr_out_t(out);
         std::cout << "----------------" << std::endl;
@@ -290,9 +278,18 @@ void test_mult(csr_t test_case1, csc_t test_case2){
 }
 
 void test_accumulate(csr_out_t test_case1, csr_out_t test_case2){
-    csr_out_t out = new_csr_out_t();
+    cout << "test_case1" << endl;
+    print_csr_out_t(test_case1);
+    cout << "test_case2" << endl;
+    print_csr_out_t(test_case2);
+    cout << "out" << endl << endl;
+    int out_rowptr[M+1];
+    int out_colind[M*N];
+    data_t out_data[M*N];
+    csr_out_t out = {out_rowptr, out_colind, out_data};
     accumulate(out, test_case1, test_case2);
     print_csr_out_t(out);
+    std::cout << "----------------" << std::endl;
 }
 
 void basic_test() {
@@ -321,40 +318,56 @@ void basic_test() {
 // 23 28 74	  0  56
 // 0  32 56   0	145
 
-    csc_t A = {
-        .colptr= new int[P+1]{0, 2, 4, 6, 8, 9},
-        .rowind= new int[M*P]{0, 2, 0, 1, 1, 2, 2, 3, 3},
-        .data= new data_t[M*P]{1, 5, 2, 3, 4, 6, 7, 8, 9}
-    };
-    csr_t B = {
-        .rowptr= new int[P+1]{0, 2, 4, 5, 8, 9},
-        .colind = new int[N*P]{0, 2, 1, 3, 0, 1, 2, 4, 4},
-        .data = new data_t[N*P]{1, 5, 2, 6, 3, 4, 7, 8, 9}
-    };
-    csr_out_t test = {
-        .rowptr= new int[M+1]{0, 4, 7, 11, 14},
-        .colind = new int[M*N]{0, 1, 2, 3, 0, 1, 3, 0, 1, 2, 4, 1, 2, 4},
-        .data = new data_t[M*N]{1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 0, 56, 32, 56}
-    };
-    csr_out_t test2 = {
-        .rowptr= new int[M+1]{0, 2, 4, 5, 8},
-        .colind = new int[M*N]{0, 2, 1, 3, 0, 1, 2, 4},
-        .data = new data_t[M*N]{1, 5, 2, 6, 3, 4, 7, 8}
-    };
-
+    int A_colptr[P+1]=    {0, 2, 4, 6, 8, 9};
+    int A_rowind[M*P]=    {0, 2, 0, 1, 1, 2, 2, 3, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    data_t A_data[M*P] =  {1, 5, 2, 3, 4, 6, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    csc_t A = {A_colptr, A_rowind, A_data};
+    int B_rowptr[P+1]=    {0, 2, 4, 5, 8, 9};
+    int B_colind[N*P]=    {0, 2, 1, 3, 0, 1, 2, 4, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    data_t B_data[N*P]=   {1, 5, 2, 6, 3, 4, 7, 8, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    csr_t B = {B_rowptr, B_colind, B_data};
+    int test_rowptr[M+1]= {0, 4, 7, 11, 14};
+    int test_colind[M*N]= {0, 1, 2, 3, 0, 1, 3, 0, 1,  2,  4,  1,  2,  4, -1, -1, -1, -1, -1, -1};
+    data_t test_data[M*N]={1, 4, 5, 12, 12, 6, 18, 23, 28, 74, 0, 56, 32, 56, -1, -1, -1, -1, -1};
+    csr_out_t test = {test_rowptr, test_colind, test_data};
+    // csr_out_t test2 = {
+    //     .rowptr= new int[M+1]{0, 2, 4, 5, 8},
+    //     .colind = new int[M*N]{0, 2, 1, 3, 0, 1, 2, 4},
+    //     .data = new data_t[M*N]{1, 5, 2, 6, 3, 4, 7, 8}
+    // };
+    int test_rowptr2[M+1]= {0, 2, 4, 5, 8};
+    int test_colind2[M*N]= {0, 2, 1, 3, 0, 1, 2, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    data_t test_data2[M*N]={1, 5, 2, 6, 3, 4, 7, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    csr_out_t test2 = {test_rowptr2, test_colind2, test_data2};
     // Test extract_row
-    //test_extract_row(B);
+    test_extract_row(B);
     // Test extract_col
-    //test_extract_col(A);
+    test_extract_col(A);
     // Test multiply_row_col
-    //test_mult(B, A);
+    test_mult(B, A);
     // Test accumulate
-    //test_accumulate(test, test2);
+    test_accumulate(test, test2);
 
     // Test outer_product
-    csr_out_t out = new_csr_out_t();
-    outer_product(A.colptr, A.rowind, A.data, B.rowptr, B.colind, B.data, out.rowptr, out.colind, out.data);
-    print_csr_out_t(out);
+    static int out_rowptr[M+1]; 
+    static int out_colind[M*N];
+    static data_t out_data[M*N];
+    csr_out_t out = {out_rowptr, out_colind, out_data};
+    outer_product(A_colptr, A_rowind, A_data, B_rowptr, B_colind, B_data, out_rowptr, out_colind, out_data);
+    print_csr_out_t({out_rowptr, out_colind, out_data});
+    cout<< "----------------" << endl;
+    //print each out_rowptr, out_colind, out_data
+    for(int i = 0; i < M+1; i++){
+        cout << out_rowptr[i] << " ";
+    }
+    cout << endl;
+    for(int i = 0; i < M*N; i++){
+        cout << out_colind[i] << " ";
+    }
+    cout << endl;
+    for(int i = 0; i < M*N; i++){
+        cout << out_data[i] << " ";
+    }
 }
 
 // void synth_test(){
