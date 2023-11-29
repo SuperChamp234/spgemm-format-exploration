@@ -20,4 +20,6 @@ obj/outer_product_tb.o: ../../../src/outer_product_tb.cpp \
  /home/leoh/tools/Vitis_HLS/2020.2/include/ap_int_ref.h \
  /home/leoh/tools/Vitis_HLS/2020.2/include/ap_int_special.h \
  /home/leoh/tools/Vitis_HLS/2020.2/include/ap_fixed_ref.h \
- /home/leoh/tools/Vitis_HLS/2020.2/include/ap_fixed_special.h
+ /home/leoh/tools/Vitis_HLS/2020.2/include/ap_fixed_special.h \
+ /home/leoh/tools/Vitis_HLS/2020.2/include/hls_stream.h \
+ /home/leoh/tools/Vitis_HLS/2020.2/include/hls_stream_thread_unsafe.h
