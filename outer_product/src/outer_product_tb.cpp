@@ -1,4 +1,5 @@
 #include "outer_product.hpp"
+#include <gmp.h> 
 #include <vector>
 #include <fstream>
 #include <algorithm>
@@ -482,7 +483,7 @@ void synth_test(){
 }
 
 int main() {
-    //basic_test();
-    synth_test();
+    basic_test();
+    //synth_test();
     return 0;
 }

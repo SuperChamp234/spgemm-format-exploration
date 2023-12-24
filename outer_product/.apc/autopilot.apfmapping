@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
   <source>
-    <originFiles name="outer_product.h" path="/home/leoh/spgemm-format-exploration/outer_product.h"/>
-    <originFiles name="mmio.cpp" path="/home/leoh/spgemm-format-exploration/mmio.cpp"/>
-    <originFiles name="mmio.h" path="/home/leoh/spgemm-format-exploration/mmio.h"/>
+    <originFiles name="outer_product.hpp" path="/home/leoh/spgemm-format-exploration/outer_product/src/outer_product.hpp"/>
     <originFiles name="outer_product.cpp" path="/home/leoh/spgemm-format-exploration/outer_product/src/outer_product.cpp"/>
   </source>
   <testbench>

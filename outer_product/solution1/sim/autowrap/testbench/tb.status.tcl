@@ -1,1 +1,0 @@
-set ::AESL_AUTOSIM::gTopFileName outer_product.cpp_pre.cpp.tb.cpp

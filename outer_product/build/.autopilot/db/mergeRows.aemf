@@ -1,0 +1,1631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1701273549027">
+  <ports id="1" name="colind1" type="PortType" originalName="colind1" coreName="FIFO_SRL" coreId="0" bitwidth="32" iftype="IfTypeRom">
+    <dataOutputObjs>nbreadreq</dataOutputObjs>
+    <dataOutputObjs>read</dataOutputObjs>
+    <dataOutputObjs>nbreadreq</dataOutputObjs>
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="2" name="colind2" type="PortType" originalName="colind2" coreName="FIFO_SRL" coreId="49" bitwidth="32" iftype="IfTypeRom">
+    <dataOutputObjs>nbreadreq</dataOutputObjs>
+    <dataOutputObjs>read</dataOutputObjs>
+    <dataOutputObjs>nbreadreq</dataOutputObjs>
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="3" name="data1" type="PortType" originalName="data1" coreName="FIFO_SRL" coreId="132" bitwidth="32" iftype="IfTypeRom">
+    <dataOutputObjs>read</dataOutputObjs>
+    <dataOutputObjs>read</dataOutputObjs>
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="4" name="data2" type="PortType" originalName="data2" coreName="FIFO_SRL" coreId="177" bitwidth="32" iftype="IfTypeRom">
+    <dataOutputObjs>read</dataOutputObjs>
+    <dataOutputObjs>read</dataOutputObjs>
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="5" name="merged_colind" type="PortType" originalName="merged_colind" coreName="FIFO_SRL" coreId="257" bitwidth="32" direction="DirOut" iftype="IfTypeRom">
+    <dataInputObjs>write</dataInputObjs>
+    <dataInputObjs>write</dataInputObjs>
+    <dataInputObjs>write</dataInputObjs>
+    <dataInputObjs>write</dataInputObjs>
+    <dataInputObjs>write</dataInputObjs>
+  </ports>
+  <ports id="6" name="merged_data" type="PortType" originalName="merged_data" coreName="FIFO_SRL" coreId="273" bitwidth="32" direction="DirOut" iftype="IfTypeRom">
+    <dataInputObjs>write</dataInputObjs>
+    <dataInputObjs>write</dataInputObjs>
+    <dataInputObjs>write</dataInputObjs>
+    <dataInputObjs>write</dataInputObjs>
+    <dataInputObjs>write</dataInputObjs>
+  </ports>
+  <ports id="16" name="ap_return" direction="DirOut">
+    <dataInputObjs>ret</dataInputObjs>
+  </ports>
+  <edges id="143" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.0/@node_objs.2"/>
+  <edges id="146" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="147" source_obj="//@regions.0/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="148" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.15" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="151" source_obj="//@ports.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.1"/>
+  <edges id="154" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.2"/>
+  <edges id="156" source_obj="//@regions.0/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="157" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="158" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.2" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="160" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="162" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="163" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="164" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="165" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@blocks.1/@node_objs.0"/>
+  <edges id="167" source_obj="//@ports.1" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.0"/>
+  <edges id="169" source_obj="//@regions.0/@basic_blocks.2/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.1"/>
+  <edges id="170" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.3" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.1"/>
+  <edges id="171" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.4" sink_obj="//@regions.0/@basic_blocks.2/@node_objs.1"/>
+  <edges id="173" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.0"/>
+  <edges id="175" source_obj="//@regions.0/@basic_blocks.3/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.1"/>
+  <edges id="176" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.1"/>
+  <edges id="177" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.4" sink_obj="//@regions.0/@basic_blocks.3/@node_objs.1"/>
+  <edges id="179" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.4/@node_objs.0"/>
+  <edges id="181" source_obj="//@regions.0/@basic_blocks.4/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.4/@node_objs.1"/>
+  <edges id="182" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.5" sink_obj="//@regions.0/@basic_blocks.4/@node_objs.1"/>
+  <edges id="183" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.6" sink_obj="//@regions.0/@basic_blocks.4/@node_objs.1"/>
+  <edges id="186" source_obj="//@ports.0" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.0"/>
+  <edges id="187" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.7" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.1"/>
+  <edges id="189" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.0"/>
+  <edges id="190" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.7" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.1"/>
+  <edges id="191" source_obj="//@regions.0/@basic_blocks.5/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.7/@node_objs.0"/>
+  <edges id="192" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.5" sink_obj="//@regions.0/@basic_blocks.7/@node_objs.0"/>
+  <edges id="193" source_obj="//@regions.0/@basic_blocks.6/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.7/@node_objs.0"/>
+  <edges id="194" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.6" sink_obj="//@regions.0/@basic_blocks.7/@node_objs.0"/>
+  <edges id="196" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.7/@node_objs.1"/>
+  <edges id="198" source_obj="//@regions.0/@basic_blocks.7/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.7/@node_objs.2"/>
+  <edges id="199" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.8" sink_obj="//@regions.0/@basic_blocks.7/@node_objs.2"/>
+  <edges id="200" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.9" sink_obj="//@regions.0/@basic_blocks.7/@node_objs.2"/>
+  <edges id="202" source_obj="//@ports.1" sink_obj="//@regions.0/@basic_blocks.8/@node_objs.0"/>
+  <edges id="203" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.10" sink_obj="//@regions.0/@basic_blocks.8/@node_objs.1"/>
+  <edges id="205" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.9/@node_objs.0"/>
+  <edges id="206" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.10" sink_obj="//@regions.0/@basic_blocks.9/@node_objs.1"/>
+  <edges id="207" source_obj="//@regions.0/@basic_blocks.8/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.10/@node_objs.0"/>
+  <edges id="208" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.8" sink_obj="//@regions.0/@basic_blocks.10/@node_objs.0"/>
+  <edges id="209" source_obj="//@regions.0/@basic_blocks.9/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.10/@node_objs.0"/>
+  <edges id="210" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.9" sink_obj="//@regions.0/@basic_blocks.10/@node_objs.0"/>
+  <edges id="211" source_obj="//@regions.0/@basic_blocks.7/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.10/@node_objs.1"/>
+  <edges id="212" source_obj="//@regions.0/@basic_blocks.10/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.10/@node_objs.1"/>
+  <edges id="213" source_obj="//@regions.0/@basic_blocks.10/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.10/@node_objs.2"/>
+  <edges id="214" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.11" sink_obj="//@regions.0/@basic_blocks.10/@node_objs.2"/>
+  <edges id="215" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.14" sink_obj="//@regions.0/@basic_blocks.10/@node_objs.2"/>
+  <edges id="218" source_obj="//@regions.0/@basic_blocks.14/@node_objs.0" sink_obj="//@ports.4"/>
+  <edges id="219" source_obj="//@regions.0/@basic_blocks.7/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.14/@node_objs.0"/>
+  <edges id="221" source_obj="//@ports.2" sink_obj="//@regions.0/@basic_blocks.14/@node_objs.1"/>
+  <edges id="223" source_obj="//@regions.0/@basic_blocks.14/@node_objs.2" sink_obj="//@ports.5"/>
+  <edges id="224" source_obj="//@regions.0/@basic_blocks.14/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.14/@node_objs.2"/>
+  <edges id="226" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.14/@node_objs.3"/>
+  <edges id="227" source_obj="//@regions.0/@basic_blocks.10/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.14/@node_objs.3"/>
+  <edges id="228" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.15" sink_obj="//@regions.0/@basic_blocks.14/@node_objs.4"/>
+  <edges id="229" source_obj="//@regions.0/@basic_blocks.7/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.11/@node_objs.0"/>
+  <edges id="230" source_obj="//@regions.0/@basic_blocks.10/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.11/@node_objs.0"/>
+  <edges id="231" source_obj="//@regions.0/@basic_blocks.11/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.11/@node_objs.1"/>
+  <edges id="232" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.12" sink_obj="//@regions.0/@basic_blocks.11/@node_objs.1"/>
+  <edges id="233" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.13" sink_obj="//@regions.0/@basic_blocks.11/@node_objs.1"/>
+  <edges id="235" source_obj="//@regions.0/@basic_blocks.13/@node_objs.0" sink_obj="//@ports.4"/>
+  <edges id="236" source_obj="//@regions.0/@basic_blocks.10/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.0"/>
+  <edges id="238" source_obj="//@ports.3" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.1"/>
+  <edges id="240" source_obj="//@regions.0/@basic_blocks.13/@node_objs.2" sink_obj="//@ports.5"/>
+  <edges id="241" source_obj="//@regions.0/@basic_blocks.13/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.2"/>
+  <edges id="243" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.3"/>
+  <edges id="244" source_obj="//@regions.0/@basic_blocks.7/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.3"/>
+  <edges id="245" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.15" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.4"/>
+  <edges id="247" source_obj="//@regions.0/@basic_blocks.12/@node_objs.0" sink_obj="//@ports.4"/>
+  <edges id="248" source_obj="//@regions.0/@basic_blocks.7/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.12/@node_objs.0"/>
+  <edges id="250" source_obj="//@ports.2" sink_obj="//@regions.0/@basic_blocks.12/@node_objs.1"/>
+  <edges id="252" source_obj="//@ports.3" sink_obj="//@regions.0/@basic_blocks.12/@node_objs.2"/>
+  <edges id="253" source_obj="//@regions.0/@basic_blocks.12/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.12/@node_objs.3"/>
+  <edges id="254" source_obj="//@regions.0/@basic_blocks.12/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.12/@node_objs.3"/>
+  <edges id="256" source_obj="//@regions.0/@basic_blocks.12/@node_objs.4" sink_obj="//@ports.5"/>
+  <edges id="257" source_obj="//@regions.0/@basic_blocks.12/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.12/@node_objs.4"/>
+  <edges id="258" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.15" sink_obj="//@regions.0/@basic_blocks.12/@node_objs.5"/>
+  <edges id="259" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.15/@node_objs.0"/>
+  <edges id="260" source_obj="//@regions.1/@basic_blocks.5/@node_objs.4" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="261" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.5" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="262" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0"/>
+  <edges id="263" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.0"/>
+  <edges id="265" source_obj="//@ports.0" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.1"/>
+  <edges id="267" source_obj="//@regions.1/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.2"/>
+  <edges id="268" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.2"/>
+  <edges id="269" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.2" sink_obj="//@regions.1/@basic_blocks.0/@node_objs.2"/>
+  <edges id="271" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.0"/>
+  <edges id="273" source_obj="//@regions.1/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.1"/>
+  <edges id="274" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.1"/>
+  <edges id="275" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.2" sink_obj="//@regions.1/@basic_blocks.1/@node_objs.1"/>
+  <edges id="276" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@blocks.2/@node_objs.0"/>
+  <edges id="278" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.2/@node_objs.0"/>
+  <edges id="280" source_obj="//@regions.1/@basic_blocks.2/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.2/@node_objs.1"/>
+  <edges id="281" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.3" sink_obj="//@regions.1/@basic_blocks.2/@node_objs.1"/>
+  <edges id="282" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.4" sink_obj="//@regions.1/@basic_blocks.2/@node_objs.1"/>
+  <edges id="284" source_obj="//@ports.0" sink_obj="//@regions.1/@basic_blocks.3/@node_objs.0"/>
+  <edges id="285" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.5" sink_obj="//@regions.1/@basic_blocks.3/@node_objs.1"/>
+  <edges id="287" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.4/@node_objs.0"/>
+  <edges id="288" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.5" sink_obj="//@regions.1/@basic_blocks.4/@node_objs.1"/>
+  <edges id="289" source_obj="//@regions.1/@basic_blocks.3/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.5/@node_objs.0"/>
+  <edges id="290" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.3" sink_obj="//@regions.1/@basic_blocks.5/@node_objs.0"/>
+  <edges id="291" source_obj="//@regions.1/@basic_blocks.4/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.5/@node_objs.0"/>
+  <edges id="292" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.4" sink_obj="//@regions.1/@basic_blocks.5/@node_objs.0"/>
+  <edges id="294" source_obj="//@regions.1/@basic_blocks.5/@node_objs.1" sink_obj="//@ports.4"/>
+  <edges id="295" source_obj="//@regions.1/@basic_blocks.5/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.5/@node_objs.1"/>
+  <edges id="297" source_obj="//@ports.2" sink_obj="//@regions.1/@basic_blocks.5/@node_objs.2"/>
+  <edges id="299" source_obj="//@regions.1/@basic_blocks.5/@node_objs.3" sink_obj="//@ports.5"/>
+  <edges id="300" source_obj="//@regions.1/@basic_blocks.5/@node_objs.2" sink_obj="//@regions.1/@basic_blocks.5/@node_objs.3"/>
+  <edges id="301" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.5/@node_objs.4"/>
+  <edges id="303" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@regions.1/@basic_blocks.5/@node_objs.5"/>
+  <edges id="304" source_obj="//@regions.2/@basic_blocks.5/@node_objs.4" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="305" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.5" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0" is_back_edge="1"/>
+  <edges id="306" source_obj="//@regions.1/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0"/>
+  <edges id="307" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.0"/>
+  <edges id="309" source_obj="//@ports.1" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.1"/>
+  <edges id="311" source_obj="//@regions.2/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.2"/>
+  <edges id="312" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.1" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.2"/>
+  <edges id="313" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.2" sink_obj="//@regions.2/@basic_blocks.0/@node_objs.2"/>
+  <edges id="315" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.0"/>
+  <edges id="317" source_obj="//@regions.2/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.1"/>
+  <edges id="318" edge_type="CtrlEdge" source_obj="//@blocks.3" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.1"/>
+  <edges id="319" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.2" sink_obj="//@regions.2/@basic_blocks.1/@node_objs.1"/>
+  <edges id="321" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.2/@basic_blocks.2/@node_objs.0"/>
+  <edges id="323" source_obj="//@regions.2/@basic_blocks.2/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.2/@node_objs.1"/>
+  <edges id="324" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.3" sink_obj="//@regions.2/@basic_blocks.2/@node_objs.1"/>
+  <edges id="325" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.4" sink_obj="//@regions.2/@basic_blocks.2/@node_objs.1"/>
+  <edges id="327" source_obj="//@ports.1" sink_obj="//@regions.2/@basic_blocks.3/@node_objs.0"/>
+  <edges id="328" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.5" sink_obj="//@regions.2/@basic_blocks.3/@node_objs.1"/>
+  <edges id="330" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.2/@basic_blocks.4/@node_objs.0"/>
+  <edges id="331" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.5" sink_obj="//@regions.2/@basic_blocks.4/@node_objs.1"/>
+  <edges id="332" source_obj="//@regions.2/@basic_blocks.3/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.5/@node_objs.0"/>
+  <edges id="333" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.3" sink_obj="//@regions.2/@basic_blocks.5/@node_objs.0"/>
+  <edges id="334" source_obj="//@regions.2/@basic_blocks.4/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.5/@node_objs.0"/>
+  <edges id="335" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.4" sink_obj="//@regions.2/@basic_blocks.5/@node_objs.0"/>
+  <edges id="337" source_obj="//@regions.2/@basic_blocks.5/@node_objs.1" sink_obj="//@ports.4"/>
+  <edges id="338" source_obj="//@regions.2/@basic_blocks.5/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.5/@node_objs.1"/>
+  <edges id="340" source_obj="//@ports.3" sink_obj="//@regions.2/@basic_blocks.5/@node_objs.2"/>
+  <edges id="342" source_obj="//@regions.2/@basic_blocks.5/@node_objs.3" sink_obj="//@ports.5"/>
+  <edges id="343" source_obj="//@regions.2/@basic_blocks.5/@node_objs.2" sink_obj="//@regions.2/@basic_blocks.5/@node_objs.3"/>
+  <edges id="344" source_obj="//@regions.2/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.5/@node_objs.4"/>
+  <edges id="346" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@regions.2/@basic_blocks.5/@node_objs.5"/>
+  <edges id="347" source_obj="//@regions.2/@basic_blocks.0/@node_objs.0" sink_obj="//@blocks.3/@node_objs.0"/>
+  <edges id="547" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@regions.0/@basic_blocks.0"/>
+  <edges id="548" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.2"/>
+  <edges id="549" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1"/>
+  <edges id="550" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.2"/>
+  <edges id="551" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@blocks.1"/>
+  <edges id="552" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.2" sink_obj="//@regions.0/@basic_blocks.4"/>
+  <edges id="553" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.2" sink_obj="//@regions.0/@basic_blocks.3"/>
+  <edges id="554" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.3" sink_obj="//@regions.0/@basic_blocks.4"/>
+  <edges id="555" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.3" sink_obj="//@blocks.1"/>
+  <edges id="556" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.1/@basic_blocks.0"/>
+  <edges id="557" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@regions.1/@basic_blocks.2"/>
+  <edges id="558" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.0" sink_obj="//@regions.1/@basic_blocks.1"/>
+  <edges id="559" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@regions.1/@basic_blocks.2"/>
+  <edges id="560" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.1" sink_obj="//@blocks.2"/>
+  <edges id="561" edge_type="CtrlEdge" source_obj="//@blocks.2" sink_obj="//@regions.2/@basic_blocks.0"/>
+  <edges id="562" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@regions.2/@basic_blocks.2"/>
+  <edges id="563" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.0" sink_obj="//@regions.2/@basic_blocks.1"/>
+  <edges id="564" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.1" sink_obj="//@regions.2/@basic_blocks.2"/>
+  <edges id="565" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.1" sink_obj="//@blocks.3"/>
+  <edges id="566" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.2" sink_obj="//@regions.2/@basic_blocks.4"/>
+  <edges id="567" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.2" sink_obj="//@regions.2/@basic_blocks.3"/>
+  <edges id="568" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.3" sink_obj="//@regions.2/@basic_blocks.5"/>
+  <edges id="569" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.4" sink_obj="//@regions.2/@basic_blocks.5"/>
+  <edges id="570" edge_type="CtrlEdge" source_obj="//@regions.2/@basic_blocks.5" sink_obj="//@regions.2/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="571" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.2" sink_obj="//@regions.1/@basic_blocks.4"/>
+  <edges id="572" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.2" sink_obj="//@regions.1/@basic_blocks.3"/>
+  <edges id="573" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.3" sink_obj="//@regions.1/@basic_blocks.5"/>
+  <edges id="574" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.4" sink_obj="//@regions.1/@basic_blocks.5"/>
+  <edges id="575" edge_type="CtrlEdge" source_obj="//@regions.1/@basic_blocks.5" sink_obj="//@regions.1/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="576" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.4" sink_obj="//@regions.0/@basic_blocks.6"/>
+  <edges id="577" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.4" sink_obj="//@regions.0/@basic_blocks.5"/>
+  <edges id="578" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.5" sink_obj="//@regions.0/@basic_blocks.7"/>
+  <edges id="579" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.6" sink_obj="//@regions.0/@basic_blocks.7"/>
+  <edges id="580" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.7" sink_obj="//@regions.0/@basic_blocks.9"/>
+  <edges id="581" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.7" sink_obj="//@regions.0/@basic_blocks.8"/>
+  <edges id="582" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.8" sink_obj="//@regions.0/@basic_blocks.10"/>
+  <edges id="583" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.9" sink_obj="//@regions.0/@basic_blocks.10"/>
+  <edges id="584" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.10" sink_obj="//@regions.0/@basic_blocks.14"/>
+  <edges id="585" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.10" sink_obj="//@regions.0/@basic_blocks.11"/>
+  <edges id="586" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.11" sink_obj="//@regions.0/@basic_blocks.13"/>
+  <edges id="587" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.11" sink_obj="//@regions.0/@basic_blocks.12"/>
+  <edges id="588" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.12" sink_obj="//@regions.0/@basic_blocks.15"/>
+  <edges id="589" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.13" sink_obj="//@regions.0/@basic_blocks.15"/>
+  <edges id="590" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.14" sink_obj="//@regions.0/@basic_blocks.15"/>
+  <edges id="591" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.15" sink_obj="//@regions.0/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="592" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.0"/>
+  <edges id="593" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.3/@node_objs.0"/>
+  <edges id="594" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.0"/>
+  <edges id="595" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.4/@node_objs.0"/>
+  <edges id="596" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.3"/>
+  <edges id="597" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.2/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.8/@node_objs.0"/>
+  <edges id="598" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.2/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.3/@node_objs.0"/>
+  <edges id="599" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.3/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.9/@node_objs.0"/>
+  <edges id="600" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.3/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.14/@node_objs.3"/>
+  <edges id="601" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.3/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.4/@node_objs.0"/>
+  <edges id="602" edge_type="VirtEdge" source_obj="//@regions.1/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.1/@basic_blocks.3/@node_objs.0"/>
+  <edges id="603" edge_type="VirtEdge" source_obj="//@regions.1/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.4/@node_objs.0"/>
+  <edges id="604" edge_type="VirtEdge" source_obj="//@regions.2/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.2/@basic_blocks.3/@node_objs.0"/>
+  <edges id="605" edge_type="VirtEdge" source_obj="//@regions.2/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.4/@node_objs.0"/>
+  <edges id="606" edge_type="VirtEdge" source_obj="//@regions.2/@basic_blocks.2/@node_objs.0" sink_obj="//@regions.2/@basic_blocks.4/@node_objs.0"/>
+  <edges id="607" edge_type="VirtEdge" source_obj="//@regions.1/@basic_blocks.2/@node_objs.0" sink_obj="//@regions.1/@basic_blocks.4/@node_objs.0"/>
+  <edges id="608" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.4/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.6/@node_objs.0"/>
+  <edges id="609" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.4/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.3"/>
+  <edges id="610" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.6/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.3"/>
+  <edges id="611" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.7/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.9/@node_objs.0"/>
+  <edges id="612" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.7/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.14/@node_objs.3"/>
+  <edges id="613" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.9/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.14/@node_objs.3"/>
+  <edges id="2147483647" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.5/@node_objs.0"/>
+  <edges id="2147483647" source_obj="//@regions.0/@basic_blocks.5/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.13/@node_objs.3"/>
+  <edges id="2147483647" source_obj="//@regions.0/@basic_blocks.13/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0" is_back_edge="1"/>
+  <edges source_obj="//@blocks.3/@node_objs.0" sink_obj="//@ports.6"/>
+  <blocks id="20" name="block_20" type="BlockType">
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>block_27</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="13" name="colind1_buff" lineNumber="106" originalName="colind1_buff" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." rtlName="colind1_buff_fifo_U" coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="mergeRows" bitwidth="32" opcode="alloca" m_display="0" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="106" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+      <dataOutputObjs>nbreadreq</dataOutputObjs>
+      <dataOutputObjs>nbreadreq</dataOutputObjs>
+      <dataOutputObjs>read</dataOutputObjs>
+      <dataOutputObjs>write</dataOutputObjs>
+      <dataOutputObjs>nbreadreq</dataOutputObjs>
+      <dataOutputObjs>nbreadreq</dataOutputObjs>
+      <dataOutputObjs>read</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="16" name="colind2_buff" lineNumber="107" originalName="colind2_buff" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." rtlName="colind2_buff_fifo_U" coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="mergeRows" bitwidth="32" opcode="alloca" m_display="0" m_topoIndex="2" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="107" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+      <dataOutputObjs>nbreadreq</dataOutputObjs>
+      <dataOutputObjs>nbreadreq</dataOutputObjs>
+      <dataOutputObjs>read</dataOutputObjs>
+      <dataOutputObjs>write</dataOutputObjs>
+      <dataOutputObjs>nbreadreq</dataOutputObjs>
+      <dataOutputObjs>nbreadreq</dataOutputObjs>
+      <dataOutputObjs>read</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="19" name="br_ln110" lineNumber="110" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="0" contextFuncName="mergeRows" opcode="br" m_display="0" m_delay="1.03" m_topoIndex="3" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="110" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+      <controlInputObjs>block_27</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+      <validLinenumbers>106</validLinenumbers>
+      <validLinenumbers>107</validLinenumbers>
+      <validLinenumbers>110</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="38" name=".critedge.preheader" type="BlockType">
+    <controlInputObjs>block_30</controlInputObjs>
+    <controlInputObjs>block_36</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>.critedge</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="37" name="br_ln0" coreId="0" opcode="br" nodeLabel="4.0" m_display="0" m_delay="1.03" m_topoIndex="45" m_clusterGroupNumber="-1">
+      <controlInputObjs>.critedge</controlInputObjs>
+    </node_objs>
+  </blocks>
+  <blocks id="49" name=".preheader.preheader" type="BlockType">
+    <controlInputObjs>block_47</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <controlOutputObjs>phi</controlOutputObjs>
+    <controlOutputObjs>.preheader</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="48" name="br_ln0" coreId="0" opcode="br" nodeLabel="7.0" m_display="0" m_delay="1.03" m_topoIndex="63" m_clusterGroupNumber="-1">
+      <controlInputObjs>.preheader</controlInputObjs>
+    </node_objs>
+  </blocks>
+  <blocks id="60" name="block_60" type="BlockType">
+    <controlInputObjs>block_58</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="59" name="_ln194" lineNumber="194" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="0" contextFuncName="mergeRows" opcode="ret" nodeLabel="9.0" m_display="0" m_topoIndex="75" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="194" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+      <dataInputObjs>phi</dataInputObjs>
+      <dataOutputObjs>ap_return</dataOutputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+      <validLinenumbers>194</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <regions anchor_node="-1" region_type="8" interval="2" typeName="Pipeline" id="498" pipe_depth="4" RegionName="VITIS_LOOP_110_1">
+    <basic_blocks id="27" name="block_27" type="BlockType">
+      <controlInputObjs>block_20</controlInputObjs>
+      <controlInputObjs>block_139</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>._crit_edge</controlOutputObjs>
+      <controlOutputObjs>block_30</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="21" name="merge_data_size_0" lineNumber="154" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="113" contextFuncName="mergeRows" bitwidth="32" opcode="phi" nodeLabel="3.0" m_display="0" m_topoIndex="31" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="154" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <controlInputObjs>block_20</controlInputObjs>
+        <controlInputObjs>block_139</controlInputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="24" name="tmp" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="1.0" m_display="0" m_topoIndex="4" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>colind1</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="25" name="add_ln154" lineNumber="154" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." rtlName="add_ln154_fu_246_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="mergeRows" bitwidth="32" opcode="add" nodeLabel="3.0" m_display="0" m_delay="1.63" m_topoIndex="32" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="154" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="26" name="br_ln110" lineNumber="110" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="1701999731" contextFuncName="mergeRows" opcode="br" nodeLabel="1.0" m_display="0" m_topoIndex="5" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="110" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>block_30</controlInputObjs>
+        <controlInputObjs>._crit_edge</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>154</validLinenumbers>
+        <validLinenumbers>110</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="30" name="block_30" type="BlockType">
+      <controlInputObjs>block_27</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>._crit_edge</controlOutputObjs>
+      <controlOutputObjs>.critedge.preheader</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="28" name="tmp_1" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="2.0" m_display="1" m_isLCDNode="true" m_isStartOfPath="true" m_topoIndex="6" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataInputObjs>write</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <dataOutputObjs>read</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="29" name="br_ln110" lineNumber="110" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="2273881337" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_topoIndex="7" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="110" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>.critedge.preheader</controlInputObjs>
+        <controlInputObjs>._crit_edge</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>110</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="33" name="._crit_edge" type="BlockType">
+      <controlInputObjs>block_27</controlInputObjs>
+      <controlInputObjs>block_30</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.critedge113</controlOutputObjs>
+      <controlOutputObjs>block_36</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="31" name="tmp_2" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="2.0" m_display="0" m_topoIndex="8" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>colind2</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="32" name="br_ln110" lineNumber="110" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="132" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_topoIndex="9" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="110" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>block_36</controlInputObjs>
+        <controlInputObjs>.critedge113</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>110</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="36" name="block_36" type="BlockType">
+      <controlInputObjs>._crit_edge</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.critedge113</controlOutputObjs>
+      <controlOutputObjs>.critedge.preheader</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="34" name="tmp_3" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="2.0" m_display="0" m_topoIndex="10" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="35" name="br_ln110" lineNumber="110" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="0" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_topoIndex="11" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="110" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>.critedge.preheader</controlInputObjs>
+        <controlInputObjs>.critedge113</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>110</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="95" name=".critedge113" type="BlockType">
+      <controlInputObjs>._crit_edge</controlInputObjs>
+      <controlInputObjs>block_36</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_101</controlOutputObjs>
+      <controlOutputObjs>block_98</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="93" name="tmp_4" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="2.0" m_display="0" m_topoIndex="12" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="94" name="br_ln115" lineNumber="115" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="2273890480" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_topoIndex="13" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="115" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>block_98</controlInputObjs>
+        <controlInputObjs>block_101</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>115</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="98" name="block_98" type="BlockType">
+      <controlInputObjs>.critedge113</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>block_105</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="96" name="tmp_25" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="2.0" m_display="1" m_delay="2.93" m_isLCDNode="true" m_topoIndex="14" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>colind1</dataInputObjs>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="97" name="br_ln118" lineNumber="118" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="0" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_delay="1.03" m_topoIndex="15" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="118" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <controlInputObjs>block_105</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>118</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="101" name="block_101" type="BlockType">
+      <controlInputObjs>.critedge113</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>block_105</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="99" name="tmp_26" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="2.0" m_display="0" m_delay="2.93" m_topoIndex="16" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="100" name="br_ln0" coreId="1668246628" opcode="br" nodeLabel="2.0" m_display="0" m_delay="1.03" m_topoIndex="17" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_105</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="105" name="block_105" type="BlockType">
+      <controlInputObjs>block_98</controlInputObjs>
+      <controlInputObjs>block_101</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_111</controlOutputObjs>
+      <controlOutputObjs>block_108</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="102" name="colind1_peek_3" originalName="tmp" coreId="2273790624" bitwidth="32" opcode="phi" nodeLabel="2.0" m_display="0" m_topoIndex="18" m_clusterGroupNumber="-1">
+        <dataInputObjs>read</dataInputObjs>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+        <controlInputObjs>block_98</controlInputObjs>
+        <controlInputObjs>block_101</controlInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="103" name="tmp_8" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="2.0" m_display="0" m_topoIndex="19" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="104" name="br_ln123" lineNumber="123" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="0" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_topoIndex="20" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="123" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>block_108</controlInputObjs>
+        <controlInputObjs>block_111</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>123</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="108" name="block_108" type="BlockType">
+      <controlInputObjs>block_105</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>block_115</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="106" name="tmp_27" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="2.0" m_display="0" m_delay="2.93" m_topoIndex="21" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>colind2</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="107" name="br_ln126" lineNumber="126" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="2274136409" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_delay="1.03" m_topoIndex="22" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="126" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <controlInputObjs>block_115</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>126</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="111" name="block_111" type="BlockType">
+      <controlInputObjs>block_105</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>block_115</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="109" name="tmp_28" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="2.0" m_display="0" m_delay="2.93" m_topoIndex="23" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="110" name="br_ln0" coreId="0" opcode="br" nodeLabel="2.0" m_display="0" m_delay="1.03" m_topoIndex="24" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_115</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="115" name="block_115" type="BlockType">
+      <controlInputObjs>block_108</controlInputObjs>
+      <controlInputObjs>block_111</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_137</controlOutputObjs>
+      <controlOutputObjs>block_118</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="112" name="colind2_peek_3" originalName="tmp" coreId="0" bitwidth="32" opcode="phi" nodeLabel="2.0" m_display="0" m_topoIndex="25" m_clusterGroupNumber="-1">
+        <dataInputObjs>read</dataInputObjs>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+        <controlInputObjs>block_108</controlInputObjs>
+        <controlInputObjs>block_111</controlInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="113" name="icmp_ln132" lineNumber="132" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." rtlName="icmp_ln132_fu_234_p2" opType="icmp" coreId="2273863040" contextFuncName="mergeRows" bitwidth="1" opcode="icmp" nodeLabel="2.0" m_display="0" m_delay="1.57" m_topoIndex="26" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="132" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="114" name="br_ln132" lineNumber="132" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="0" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_topoIndex="27" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="132" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>block_118</controlInputObjs>
+        <controlInputObjs>block_137</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>132</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="118" name="block_118" type="BlockType">
+      <controlInputObjs>block_115</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_131</controlOutputObjs>
+      <controlOutputObjs>_ZN13ap_fixed_baseILi33ELi17ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi16ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="116" name="icmp_ln140" lineNumber="140" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." rtlName="icmp_ln140_fu_240_p2" opType="icmp" coreId="66" contextFuncName="mergeRows" bitwidth="1" opcode="icmp" nodeLabel="2.0" m_display="0" m_delay="1.57" m_topoIndex="28" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="140" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="117" name="br_ln140" lineNumber="140" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="49" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_topoIndex="29" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="140" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>_ZN13ap_fixed_baseILi33ELi17ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi16ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i</controlInputObjs>
+        <controlInputObjs>block_131</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>140</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="125" name="_ZN13ap_fixed_baseILi33ELi17ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi16ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i" type="BlockType">
+      <controlInputObjs>block_118</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_139</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="119" name="merged_colind_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="11.0" m_display="0" m_delay="2.93" m_topoIndex="82" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>merged_colind</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="120" name="tmp_29" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="3.0" m_display="0" m_delay="2.93" m_topoIndex="33" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>data1</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="121" name="tmp_30" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="3.0" m_display="0" m_delay="2.93" m_topoIndex="34" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>data2</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="122" name="add_ln703" lineNumber="703" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" fileDirectory=".." rtlName="add_ln703_fu_264_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="operator_assign_33_17_true_AP_TRN_AP_WRAP_0" bitwidth="32" opcode="add" nodeLabel="11.0" m_display="0" m_delay="1.63" m_topoIndex="83" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h" linenumber="703" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="operator=&amp;lt;33, 17, true, AP_TRN, AP_WRAP, 0&amp;gt;"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="123" name="merged_data_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="11.0" m_display="0" m_delay="2.93" m_topoIndex="84" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataOutputObjs>merged_data</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="124" name="br_ln0" coreId="543519849" opcode="br" nodeLabel="11.0" m_display="0" m_topoIndex="85" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_139</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/ap_fixed_base.h">
+        <validLinenumbers>703</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>174</validLinenumbers>
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="131" name="block_131" type="BlockType">
+      <controlInputObjs>block_118</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_139</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="126" name="merged_colind_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="3.0" m_display="0" m_delay="2.93" m_topoIndex="35" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>merged_colind</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="127" name="tmp_19" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="3.0" m_display="0" m_delay="2.93" m_topoIndex="36" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>data2</dataInputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="128" name="merged_data_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="3.0" m_display="0" m_delay="2.93" m_topoIndex="37" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>merged_data</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="129" name="colind1_buff_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="3.0" m_display="1" m_delay="2.93" m_isLCDNode="true" m_topoIndex="38" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>nbreadreq</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="130" name="br_ln147" lineNumber="147" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="1030185332" contextFuncName="mergeRows" opcode="br" nodeLabel="3.0" m_display="0" m_topoIndex="39" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="147" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <controlInputObjs>block_139</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>174</validLinenumbers>
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>147</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="137" name="block_137" type="BlockType">
+      <controlInputObjs>block_115</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_139</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="132" name="merged_colind_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="3.0" m_display="0" m_delay="2.93" m_topoIndex="40" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>merged_colind</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="133" name="tmp_17" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="3.0" m_display="0" m_delay="2.93" m_topoIndex="41" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>data1</dataInputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="134" name="merged_data_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="3.0" m_display="0" m_delay="2.93" m_topoIndex="42" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>merged_data</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="135" name="colind2_buff_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="3.0" m_display="0" m_delay="2.93" m_topoIndex="43" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataInputObjs>phi</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="136" name="br_ln139" lineNumber="139" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="13" contextFuncName="mergeRows" opcode="br" nodeLabel="3.0" m_display="0" m_topoIndex="44" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="139" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <controlInputObjs>block_139</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>174</validLinenumbers>
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>139</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="139" name="block_139" type="BlockType">
+      <controlInputObjs>_ZN13ap_fixed_baseILi33ELi17ELb1EL9ap_q_mode5EL9ap_o_mode3ELi0EEC2ILi32ELi16ELb1ELS0_5ELS1_3ELi0EEERKS_IXT_EXT0_EXT1_EXT2_EXT3_EXT4_EE.exit.i</controlInputObjs>
+      <controlInputObjs>block_131</controlInputObjs>
+      <controlInputObjs>block_137</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_27</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="138" name="br_ln110" lineNumber="110" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="1668637807" contextFuncName="mergeRows" opcode="br" nodeLabel="2.0" m_display="0" m_topoIndex="30" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="110" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <controlInputObjs>block_27</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>110</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="499" pipe_depth="2" RegionName="VITIS_LOOP_158_2">
+    <basic_blocks id="44" name=".critedge" type="BlockType">
+      <controlInputObjs>.critedge.preheader</controlInputObjs>
+      <controlInputObjs>block_92</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.critedge114</controlOutputObjs>
+      <controlOutputObjs>block_47</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="39" name="merge_data_size_2" lineNumber="174" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="132" contextFuncName="mergeRows" bitwidth="32" opcode="phi" nodeLabel="6.0" m_display="0" m_topoIndex="56" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <controlInputObjs>block_92</controlInputObjs>
+        <controlInputObjs>.critedge.preheader</controlInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="42" name="tmp_7" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="5.0" m_display="0" m_topoIndex="46" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>colind1</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="43" name="br_ln158" lineNumber="158" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="469" contextFuncName="mergeRows" opcode="br" nodeLabel="5.0" m_display="0" m_topoIndex="47" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="158" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>block_47</controlInputObjs>
+        <controlInputObjs>.critedge114</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>174</validLinenumbers>
+        <validLinenumbers>158</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="47" name="block_47" type="BlockType">
+      <controlInputObjs>.critedge</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.critedge114</controlOutputObjs>
+      <controlOutputObjs>.preheader.preheader</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="45" name="tmp_9" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="5.0" m_display="0" m_topoIndex="48" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="46" name="br_ln158" lineNumber="158" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="0" contextFuncName="mergeRows" opcode="br" nodeLabel="5.0" m_display="0" m_topoIndex="49" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="158" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>.preheader.preheader</controlInputObjs>
+        <controlInputObjs>.critedge114</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>158</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="79" name=".critedge114" type="BlockType">
+      <controlInputObjs>.critedge</controlInputObjs>
+      <controlInputObjs>block_47</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_85</controlOutputObjs>
+      <controlOutputObjs>block_82</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="77" name="tmp_s" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="5.0" m_display="0" m_topoIndex="50" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="78" name="br_ln163" lineNumber="163" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="609" contextFuncName="mergeRows" opcode="br" nodeLabel="5.0" m_display="0" m_topoIndex="51" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="163" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>block_82</controlInputObjs>
+        <controlInputObjs>block_85</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>163</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="82" name="block_82" type="BlockType">
+      <controlInputObjs>.critedge114</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>block_92</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="80" name="tmp_31" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="5.0" m_display="0" m_delay="2.93" m_topoIndex="52" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>colind1</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="81" name="br_ln166" lineNumber="166" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="2273343184" contextFuncName="mergeRows" opcode="br" nodeLabel="5.0" m_display="0" m_delay="1.03" m_topoIndex="53" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="166" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <controlInputObjs>block_92</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>166</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="85" name="block_85" type="BlockType">
+      <controlInputObjs>.critedge114</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>block_92</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="83" name="tmp_32" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="5.0" m_display="0" m_delay="2.93" m_topoIndex="54" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="84" name="br_ln0" coreId="0" opcode="br" nodeLabel="5.0" m_display="0" m_delay="1.03" m_topoIndex="55" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_92</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="92" name="block_92" type="BlockType">
+      <controlInputObjs>block_82</controlInputObjs>
+      <controlInputObjs>block_85</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.critedge</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="86" name="colind1_peek_1" originalName="tmp" coreId="2274108656" bitwidth="32" opcode="phi" nodeLabel="6.0" m_display="0" m_topoIndex="57" m_clusterGroupNumber="-1">
+        <dataInputObjs>read</dataInputObjs>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+        <controlInputObjs>block_82</controlInputObjs>
+        <controlInputObjs>block_85</controlInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="87" name="merged_colind_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="6.0" m_display="0" m_delay="2.93" m_topoIndex="58" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>merged_colind</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="88" name="tmp_18" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="6.0" m_display="0" m_delay="2.93" m_topoIndex="59" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>data1</dataInputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="89" name="merged_data_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="6.0" m_display="0" m_delay="2.93" m_topoIndex="60" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>merged_data</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="90" name="add_ln174" lineNumber="174" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." rtlName="add_ln174_fu_252_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="mergeRows" bitwidth="32" opcode="add" nodeLabel="6.0" m_display="0" m_delay="1.63" m_topoIndex="61" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="91" name="br_ln158" lineNumber="158" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="2273859472" contextFuncName="mergeRows" opcode="br" nodeLabel="6.0" m_display="0" m_topoIndex="62" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="158" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <controlInputObjs>.critedge</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>174</validLinenumbers>
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>174</validLinenumbers>
+        <validLinenumbers>158</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" id="500" pipe_depth="2" RegionName="VITIS_LOOP_176_3">
+    <basic_blocks id="55" name=".preheader" type="BlockType">
+      <controlInputObjs>.preheader.preheader</controlInputObjs>
+      <controlInputObjs>block_76</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.critedge115</controlOutputObjs>
+      <controlOutputObjs>block_58</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="50" name="merge_data_size_3" lineNumber="192" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="2818572432" contextFuncName="mergeRows" bitwidth="32" opcode="phi" nodeLabel="10.0" m_display="0" m_topoIndex="64" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="192" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>ret</dataOutputObjs>
+        <controlInputObjs>block_76</controlInputObjs>
+        <controlInputObjs>.preheader.preheader</controlInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="53" name="tmp_5" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="8.0" m_display="0" m_topoIndex="65" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>colind2</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="54" name="br_ln176" lineNumber="176" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="49" contextFuncName="mergeRows" opcode="br" nodeLabel="8.0" m_display="0" m_topoIndex="66" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="176" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>block_58</controlInputObjs>
+        <controlInputObjs>.critedge115</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>192</validLinenumbers>
+        <validLinenumbers>176</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="58" name="block_58" type="BlockType">
+      <controlInputObjs>.preheader</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.critedge115</controlOutputObjs>
+      <controlOutputObjs>block_60</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="56" name="tmp_6" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="8.0" m_display="0" m_topoIndex="67" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="57" name="br_ln176" lineNumber="176" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="49" contextFuncName="mergeRows" opcode="br" nodeLabel="8.0" m_display="0" m_topoIndex="68" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="176" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>block_60</controlInputObjs>
+        <controlInputObjs>.critedge115</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>176</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="63" name=".critedge115" type="BlockType">
+      <controlInputObjs>.preheader</controlInputObjs>
+      <controlInputObjs>block_58</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>block_69</controlOutputObjs>
+      <controlOutputObjs>block_66</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="61" name="tmp_10" lineNumber="136" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="empty" bitwidth="1" opcode="nbreadreq" nodeLabel="8.0" m_display="0" m_topoIndex="69" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="136" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="empty"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="62" name="br_ln181" lineNumber="181" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="2273885424" contextFuncName="mergeRows" opcode="br" nodeLabel="8.0" m_display="0" m_topoIndex="70" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="181" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>nbreadreq</dataInputObjs>
+        <controlInputObjs>block_66</controlInputObjs>
+        <controlInputObjs>block_69</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>136</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>181</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="66" name="block_66" type="BlockType">
+      <controlInputObjs>.critedge115</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>block_76</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="64" name="tmp_33" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="8.0" m_display="0" m_delay="2.93" m_topoIndex="71" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>colind2</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="65" name="br_ln184" lineNumber="184" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="2273344776" contextFuncName="mergeRows" opcode="br" nodeLabel="8.0" m_display="0" m_delay="1.03" m_topoIndex="72" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="184" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <controlInputObjs>block_76</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>184</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="69" name="block_69" type="BlockType">
+      <controlInputObjs>.critedge115</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>block_76</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="67" name="tmp_34" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="8.0" m_display="0" m_delay="2.93" m_topoIndex="73" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="68" name="br_ln0" coreId="2274139376" opcode="br" nodeLabel="8.0" m_display="0" m_delay="1.03" m_topoIndex="74" m_clusterGroupNumber="-1">
+        <controlInputObjs>block_76</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="76" name="block_76" type="BlockType">
+      <controlInputObjs>block_66</controlInputObjs>
+      <controlInputObjs>block_69</controlInputObjs>
+      <controlOutputObjs>phi</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.preheader</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="70" name="colind2_peek_1" originalName="tmp" coreId="4294967295" bitwidth="32" opcode="phi" nodeLabel="10.0" m_display="0" m_topoIndex="76" m_clusterGroupNumber="-1">
+        <dataInputObjs>read</dataInputObjs>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+        <controlInputObjs>block_66</controlInputObjs>
+        <controlInputObjs>block_69</controlInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="71" name="merged_colind_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="10.0" m_display="0" m_delay="2.93" m_topoIndex="77" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>merged_colind</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="72" name="tmp_24" lineNumber="145" originalName="tmp" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="read" bitwidth="32" opcode="read" nodeLabel="10.0" m_display="0" m_delay="2.93" m_topoIndex="78" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="read"/>
+        <dataInputObjs>data2</dataInputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="73" name="merged_data_write_ln174" lineNumber="174" fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="FIFO_SRL" implIndex="srl" control="auto" opType="fifo" coreId="81" contextFuncName="write" opcode="write" nodeLabel="10.0" m_display="0" m_delay="2.93" m_topoIndex="79" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h" linenumber="174" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="write"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>merged_data</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="74" name="add_ln192" lineNumber="192" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." rtlName="add_ln192_fu_258_p2" coreName="Adder" implIndex="fabric" control="auto" opType="add" coreId="1" contextFuncName="mergeRows" bitwidth="32" opcode="add" nodeLabel="10.0" m_display="0" m_delay="1.63" m_topoIndex="80" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="192" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <dataInputObjs>phi</dataInputObjs>
+        <dataOutputObjs>phi</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="75" name="br_ln176" lineNumber="176" fileName="outer_product/src/outer_product.cpp" fileDirectory=".." coreId="0" contextFuncName="mergeRows" opcode="br" nodeLabel="10.0" m_display="0" m_topoIndex="81" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="outer_product/src/outer_product.cpp" linenumber="176" fileDirectory="/home/leoh/spgemm-format-exploration" functionName="mergeRows"/>
+        <controlInputObjs>.preheader</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="/home/leoh/tools/Vitis_HLS/2020.2/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>174</validLinenumbers>
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="outer_product/src/outer_product.cpp">
+        <validLinenumbers>192</validLinenumbers>
+        <validLinenumbers>176</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <ScheduleInfo time="0"/>
+  <ScheduleInfo time="1"/>
+  <ScheduleInfo time="2"/>
+  <ScheduleInfo time="3"/>
+  <ScheduleInfo time="4"/>
+  <ScheduleInfo time="5"/>
+  <ScheduleInfo time="6"/>
+  <ScheduleInfo time="7"/>
+  <ScheduleInfo time="8"/>
+  <ScheduleInfo time="9"/>
+  <ScheduleInfo time="10"/>
+  <ScheduleInfo time="11"/>
+  <regnodes realName="tmp_34_reg_374">
+    <nodeIds>67</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln154_reg_315">
+    <nodeIds>25</nodeIds>
+  </regnodes>
+  <regnodes realName="colind1_peek_3_reg_152">
+    <nodeIds>102</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln140_reg_311">
+    <nodeIds>116</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_10_reg_365">
+    <nodeIds>61</nodeIds>
+  </regnodes>
+  <regnodes realName="merge_data_size_0_reg_180">
+    <nodeIds>21</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_reg_283">
+    <nodeIds>24</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln132_reg_307">
+    <nodeIds>113</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_4_reg_299">
+    <nodeIds>93</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_30_reg_325">
+    <nodeIds>121</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_8_reg_303">
+    <nodeIds>103</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_29_reg_320">
+    <nodeIds>120</nodeIds>
+  </regnodes>
+  <regnodes realName="colind2_peek_1_reg_224">
+    <nodeIds>70</nodeIds>
+  </regnodes>
+  <regnodes realName="colind2_buff_reg_276">
+    <nodeIds>16</nodeIds>
+  </regnodes>
+  <regnodes realName="colind2_peek_3_reg_166">
+    <nodeIds>112</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_3_reg_295">
+    <nodeIds>34</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_6_reg_361">
+    <nodeIds>56</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_2_reg_291">
+    <nodeIds>31</nodeIds>
+  </regnodes>
+  <regnodes realName="colind1_peek_1_reg_203">
+    <nodeIds>86</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_1_reg_287">
+    <nodeIds>28</nodeIds>
+  </regnodes>
+  <regnodes realName="merge_data_size_2_reg_192">
+    <nodeIds>39</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln174_reg_352">
+    <nodeIds>90</nodeIds>
+  </regnodes>
+  <regnodes realName="merge_data_size_3_reg_213">
+    <nodeIds>50</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_31_reg_342">
+    <nodeIds>80</nodeIds>
+  </regnodes>
+  <regnodes realName="add_ln192_reg_379">
+    <nodeIds>74</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_9_reg_334">
+    <nodeIds>45</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_s_reg_338">
+    <nodeIds>77</nodeIds>
+  </regnodes>
+  <regnodes realName="colind1_buff_reg_269">
+    <nodeIds>13</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_32_reg_347">
+    <nodeIds>83</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_7_reg_330">
+    <nodeIds>42</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_5_reg_357">
+    <nodeIds>53</nodeIds>
+  </regnodes>
+  <regnodes realName="tmp_33_reg_369">
+    <nodeIds>64</nodeIds>
+  </regnodes>
+  <expressionNodes realName="add_ln703_fu_264">
+    <nodeIds>122</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="colind2_peek_3_phi_fu_171">
+    <nodeIds>112</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="colind1_peek_1_phi_fu_206">
+    <nodeIds>86</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln192_fu_258">
+    <nodeIds>74</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="colind1_peek_3_phi_fu_157">
+    <nodeIds>102</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="merge_data_size_2_phi_fu_195">
+    <nodeIds>39</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln132_fu_234">
+    <nodeIds>113</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln140_fu_240">
+    <nodeIds>116</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="colind1_buff_fu_52">
+    <nodeIds>13</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln154_fu_246">
+    <nodeIds>25</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="colind2_peek_1_phi_fu_227">
+    <nodeIds>70</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="merge_data_size_3_phi_fu_216">
+    <nodeIds>50</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="colind2_buff_fu_56">
+    <nodeIds>16</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln174_fu_252">
+    <nodeIds>90</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="merge_data_size_0_phi_fu_184">
+    <nodeIds>21</nodeIds>
+  </expressionNodes>
+  <ioNodes realName="grp_nbreadreq_fu_68">
+    <nodeIds>28</nodeIds>
+    <nodeIds>93</nodeIds>
+    <nodeIds>45</nodeIds>
+    <nodeIds>77</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_nbreadreq_fu_75">
+    <nodeIds>31</nodeIds>
+    <nodeIds>53</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_nbreadreq_fu_60">
+    <nodeIds>24</nodeIds>
+    <nodeIds>42</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_read_fu_90">
+    <nodeIds>96</nodeIds>
+    <nodeIds>80</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_nbreadreq_fu_83">
+    <nodeIds>34</nodeIds>
+    <nodeIds>103</nodeIds>
+    <nodeIds>56</nodeIds>
+    <nodeIds>61</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_read_fu_101">
+    <nodeIds>106</nodeIds>
+    <nodeIds>64</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_read_fu_112">
+    <nodeIds>120</nodeIds>
+    <nodeIds>133</nodeIds>
+    <nodeIds>88</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_read_fu_107">
+    <nodeIds>109</nodeIds>
+    <nodeIds>67</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_read_fu_118">
+    <nodeIds>121</nodeIds>
+    <nodeIds>127</nodeIds>
+    <nodeIds>72</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_read_fu_96">
+    <nodeIds>99</nodeIds>
+    <nodeIds>83</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_write_fu_124">
+    <nodeIds>126</nodeIds>
+    <nodeIds>132</nodeIds>
+    <nodeIds>87</nodeIds>
+    <nodeIds>71</nodeIds>
+    <nodeIds>119</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_write_fu_131">
+    <nodeIds>128</nodeIds>
+    <nodeIds>134</nodeIds>
+    <nodeIds>89</nodeIds>
+    <nodeIds>73</nodeIds>
+    <nodeIds>123</nodeIds>
+  </ioNodes>
+  <ioNodes realName="write_ln174_write_fu_139">
+    <nodeIds>129</nodeIds>
+  </ioNodes>
+  <ioNodes realName="write_ln174_write_fu_146">
+    <nodeIds>135</nodeIds>
+  </ioNodes>
+  <ioPorts name="colind1">
+    <contents name="nbreadreq">
+      <nodeIds>24</nodeIds>
+      <nodeIds>42</nodeIds>
+    </contents>
+    <contents name="read">
+      <nodeIds>96</nodeIds>
+      <nodeIds>80</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="colind2">
+    <contents name="nbreadreq">
+      <nodeIds>31</nodeIds>
+      <nodeIds>53</nodeIds>
+    </contents>
+    <contents name="read">
+      <nodeIds>106</nodeIds>
+      <nodeIds>64</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="data1">
+    <contents name="read">
+      <nodeIds>133</nodeIds>
+      <nodeIds>120</nodeIds>
+      <nodeIds>88</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="data2">
+    <contents name="read">
+      <nodeIds>127</nodeIds>
+      <nodeIds>121</nodeIds>
+      <nodeIds>72</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="merged_colind">
+    <contents name="write">
+      <nodeIds>132</nodeIds>
+      <nodeIds>126</nodeIds>
+      <nodeIds>119</nodeIds>
+      <nodeIds>87</nodeIds>
+      <nodeIds>71</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="merged_data">
+    <contents name="write">
+      <nodeIds>134</nodeIds>
+      <nodeIds>128</nodeIds>
+      <nodeIds>123</nodeIds>
+      <nodeIds>89</nodeIds>
+      <nodeIds>73</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="ap_return">
+    <contents name="ret">
+      <nodeIds>59</nodeIds>
+    </contents>
+  </ioPorts>
+  <fsm>
+    <states id="1">
+      <operations id="7" stage="1" latency="1"/>
+      <operations id="8" stage="1" latency="1"/>
+      <operations id="9" stage="1" latency="1"/>
+      <operations id="10" stage="1" latency="1"/>
+      <operations id="11" stage="1" latency="1"/>
+      <operations id="12" stage="1" latency="1"/>
+      <operations id="13" stage="1" latency="1"/>
+      <operations id="14" stage="1" latency="1"/>
+      <operations id="15" stage="1" latency="1"/>
+      <operations id="16" stage="1" latency="1"/>
+      <operations id="17" stage="1" latency="1"/>
+      <operations id="18" stage="1" latency="1"/>
+      <operations id="19" stage="1" latency="1"/>
+    </states>
+    <states id="2">
+      <operations id="24" stage="1" latency="1"/>
+      <operations id="26" stage="1" latency="1"/>
+    </states>
+    <states id="3">
+      <operations id="28" stage="1" latency="1"/>
+      <operations id="29" stage="1" latency="1"/>
+      <operations id="31" stage="1" latency="1"/>
+      <operations id="32" stage="1" latency="1"/>
+      <operations id="34" stage="1" latency="1"/>
+      <operations id="35" stage="1" latency="1"/>
+      <operations id="93" stage="1" latency="1"/>
+      <operations id="94" stage="1" latency="1"/>
+      <operations id="96" stage="1" latency="1"/>
+      <operations id="97" stage="1" latency="1"/>
+      <operations id="99" stage="1" latency="1"/>
+      <operations id="100" stage="1" latency="1"/>
+      <operations id="102" stage="1" latency="1"/>
+      <operations id="103" stage="1" latency="1"/>
+      <operations id="104" stage="1" latency="1"/>
+      <operations id="106" stage="1" latency="1"/>
+      <operations id="107" stage="1" latency="1"/>
+      <operations id="109" stage="1" latency="1"/>
+      <operations id="110" stage="1" latency="1"/>
+      <operations id="112" stage="1" latency="1"/>
+      <operations id="113" stage="1" latency="1"/>
+      <operations id="114" stage="1" latency="1"/>
+      <operations id="116" stage="1" latency="1"/>
+      <operations id="117" stage="1" latency="1"/>
+      <operations id="138" stage="1" latency="1"/>
+    </states>
+    <states id="4">
+      <operations id="21" stage="1" latency="1"/>
+      <operations id="22" stage="1" latency="1"/>
+      <operations id="23" stage="1" latency="1"/>
+      <operations id="25" stage="1" latency="1"/>
+      <operations id="120" stage="1" latency="1"/>
+      <operations id="121" stage="1" latency="1"/>
+      <operations id="126" stage="1" latency="1"/>
+      <operations id="127" stage="1" latency="1"/>
+      <operations id="128" stage="1" latency="1"/>
+      <operations id="129" stage="1" latency="1"/>
+      <operations id="130" stage="1" latency="1"/>
+      <operations id="132" stage="1" latency="1"/>
+      <operations id="133" stage="1" latency="1"/>
+      <operations id="134" stage="1" latency="1"/>
+      <operations id="135" stage="1" latency="1"/>
+      <operations id="136" stage="1" latency="1"/>
+    </states>
+    <states id="5">
+      <operations id="37" stage="1" latency="1"/>
+    </states>
+    <states id="6">
+      <operations id="42" stage="1" latency="1"/>
+      <operations id="43" stage="1" latency="1"/>
+      <operations id="45" stage="1" latency="1"/>
+      <operations id="46" stage="1" latency="1"/>
+      <operations id="77" stage="1" latency="1"/>
+      <operations id="78" stage="1" latency="1"/>
+      <operations id="80" stage="1" latency="1"/>
+      <operations id="81" stage="1" latency="1"/>
+      <operations id="83" stage="1" latency="1"/>
+      <operations id="84" stage="1" latency="1"/>
+    </states>
+    <states id="7">
+      <operations id="39" stage="1" latency="1"/>
+      <operations id="40" stage="1" latency="1"/>
+      <operations id="41" stage="1" latency="1"/>
+      <operations id="86" stage="1" latency="1"/>
+      <operations id="87" stage="1" latency="1"/>
+      <operations id="88" stage="1" latency="1"/>
+      <operations id="89" stage="1" latency="1"/>
+      <operations id="90" stage="1" latency="1"/>
+      <operations id="91" stage="1" latency="1"/>
+    </states>
+    <states id="8">
+      <operations id="48" stage="1" latency="1"/>
+    </states>
+    <states id="9">
+      <operations id="50" stage="1" latency="1"/>
+      <operations id="51" stage="1" latency="1"/>
+      <operations id="52" stage="1" latency="1"/>
+      <operations id="53" stage="1" latency="1"/>
+      <operations id="54" stage="1" latency="1"/>
+      <operations id="56" stage="1" latency="1"/>
+      <operations id="57" stage="1" latency="1"/>
+      <operations id="61" stage="1" latency="1"/>
+      <operations id="62" stage="1" latency="1"/>
+      <operations id="64" stage="1" latency="1"/>
+      <operations id="65" stage="1" latency="1"/>
+      <operations id="67" stage="1" latency="1"/>
+      <operations id="68" stage="1" latency="1"/>
+    </states>
+    <states id="10">
+      <operations id="59" stage="1" latency="1"/>
+    </states>
+    <states id="11">
+      <operations id="70" stage="1" latency="1"/>
+      <operations id="71" stage="1" latency="1"/>
+      <operations id="72" stage="1" latency="1"/>
+      <operations id="73" stage="1" latency="1"/>
+      <operations id="74" stage="1" latency="1"/>
+      <operations id="75" stage="1" latency="1"/>
+    </states>
+    <states id="12">
+      <operations id="119" stage="1" latency="1"/>
+      <operations id="122" stage="1" latency="1"/>
+      <operations id="123" stage="1" latency="1"/>
+      <operations id="124" stage="1" latency="1"/>
+    </states>
+    <transitions inState="1" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="5" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="8" outState="9">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="2" outState="3">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="3" outState="4">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="12" outState="2">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="5">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="4" outState="12">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="6" outState="7">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="7" outState="8">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="7" outState="6">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="11" outState="9">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="9" outState="10">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="9" outState="11">
+      <condition id="-1"/>
+    </transitions>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="mergeRows" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="-1" mMaxLatency="-1">
+      <subRegions>2</subRegions>
+      <subRegions>3</subRegions>
+      <subRegions>4</subRegions>
+      <subRegions>5</subRegions>
+      <subRegions>6</subRegions>
+      <subRegions>7</subRegions>
+      <subRegions>8</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="2" mTag="Entry" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>20</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="3" mTag="VITIS_LOOP_110_1" mII="2" mDepth="4" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="-1" mMaxLatency="-1" mType="1">
+      <basicBlocks>27</basicBlocks>
+      <basicBlocks>30</basicBlocks>
+      <basicBlocks>33</basicBlocks>
+      <basicBlocks>36</basicBlocks>
+      <basicBlocks>95</basicBlocks>
+      <basicBlocks>98</basicBlocks>
+      <basicBlocks>101</basicBlocks>
+      <basicBlocks>105</basicBlocks>
+      <basicBlocks>108</basicBlocks>
+      <basicBlocks>111</basicBlocks>
+      <basicBlocks>115</basicBlocks>
+      <basicBlocks>118</basicBlocks>
+      <basicBlocks>125</basicBlocks>
+      <basicBlocks>131</basicBlocks>
+      <basicBlocks>137</basicBlocks>
+      <basicBlocks>139</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="4" mTag="Region 1" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>38</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="5" mTag="VITIS_LOOP_158_2" mII="1" mDepth="2" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="-1" mMaxLatency="-1" mType="1">
+      <basicBlocks>44</basicBlocks>
+      <basicBlocks>47</basicBlocks>
+      <basicBlocks>79</basicBlocks>
+      <basicBlocks>82</basicBlocks>
+      <basicBlocks>85</basicBlocks>
+      <basicBlocks>92</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="6" mTag="Region 2" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>49</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="7" mTag="VITIS_LOOP_176_3" mII="1" mDepth="2" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="-1" mMaxLatency="-1" mType="1">
+      <basicBlocks>55</basicBlocks>
+      <basicBlocks>58</basicBlocks>
+      <basicBlocks>63</basicBlocks>
+      <basicBlocks>66</basicBlocks>
+      <basicBlocks>69</basicBlocks>
+      <basicBlocks>76</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="8" mTag="Return" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>60</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>

@@ -1,0 +1,58 @@
+<profile>
+
+<section name = "Vitis HLS Report for 'outer_product'" level="0">
+<item name = "Date">Wed Nov 29 21:29:07 2023
+</item>
+<item name = "Version">2020.2 (Build 3064766 on Wed Nov 18 09:12:47 MST 2020)</item>
+<item name = "Project">outer_product</item>
+<item name = "Solution">build (Vivado IP Flow Target)</item>
+<item name = "Product family">virtex7</item>
+<item name = "Target device">xc7vx485t-ffg1157-1</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00 ns, 7.300 ns, 2.70 ns</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="8">, min, max, min, max, min, max, Type</keys>
+<column name="">?, ?, ?, ?, ?, ?, none</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
+<column name="grp_accumulate_fu_629">accumulate, ?, ?, ?, ?, ?, ?, none</column>
+<column name="grp_multiply_row_col_fu_645">multiply_row_col, 64, 84, 0.640 us, 0.840 us, 64, 84, none</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+<column name="- VITIS_LOOP_325_1">5, 5, 1, 1, 1, 5, yes</column>
+<column name="- VITIS_LOOP_332_2">20, 20, 1, 1, 1, 20, yes</column>
+<column name="- VITIS_LOOP_399_1">?, ?, ?, -, -, 6, no</column>
+<column name=" + VITIS_LOOP_28_1">48, 80, 12 ~ 20, -, -, 4, no</column>
+<column name=" + VITIS_LOOP_9_1">50, 50, 10, -, -, 5, no</column>
+<column name=" + VITIS_LOOP_325_1">5, 5, 1, -, -, 5, no</column>
+<column name=" + VITIS_LOOP_332_2">20, 20, 1, -, -, 20, no</column>
+<column name=" + VITIS_LOOP_344_1">15, 15, 3, -, -, 5, no</column>
+<column name=" + VITIS_LOOP_351_2">60, 60, 3, -, -, 20, no</column>
+<column name=" + VITIS_LOOP_344_1">15, 15, 3, -, -, 5, no</column>
+<column name=" + VITIS_LOOP_351_2">60, 60, 3, -, -, 20, no</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+</profile>

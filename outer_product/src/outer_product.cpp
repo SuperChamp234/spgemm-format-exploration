@@ -256,7 +256,7 @@ void print_csr_out_t_t(csr_out_t z_csr)
 }
 #endif
 
-void accumulate(csr_out_t csr1, csr_out_t csr2, csr_out_t out_csr)
+void accumulate(csr_out_t& csr1, csr_out_t& csr2, csr_out_t& out_csr)
 {
     int nnz = 0;
     for (int i = 0; i < M; i++)

@@ -37,9 +37,9 @@
 			<location>/home/leoh/spgemm-format-exploration/outer_product/.apc/.tb</location>
 		</link>
 		<link>
-			<name>solution1/constraints</name>
+			<name>build/constraints</name>
 			<type>2</type>
-			<location>/home/leoh/spgemm-format-exploration/outer_product/solution1/.tcls</location>
+			<location>/home/leoh/spgemm-format-exploration/outer_product/build/.tcls</location>
 		</link>
 		<link>
 			<name>source/outer_product.cpp</name>
@@ -47,24 +47,29 @@
 			<location>/home/leoh/spgemm-format-exploration/outer_product/src/outer_product.cpp</location>
 		</link>
 		<link>
+			<name>source/outer_product.hpp</name>
+			<type>1</type>
+			<location>/home/leoh/spgemm-format-exploration/outer_product/src/outer_product.hpp</location>
+		</link>
+		<link>
 			<name>testbench/outer_product_tb.cpp</name>
 			<type>1</type>
 			<location>/home/leoh/spgemm-format-exploration/outer_product/src/outer_product_tb.cpp</location>
 		</link>
 		<link>
-			<name>solution1/constraints/.xml.directive</name>
+			<name>build/constraints/.xml.directive</name>
 			<type>1</type>
-			<location>/home/leoh/spgemm-format-exploration/outer_product/solution1/solution1.directive</location>
+			<location>/home/leoh/spgemm-format-exploration/outer_product/build/build.directive</location>
 		</link>
 		<link>
-			<name>solution1/constraints/directives.tcl</name>
+			<name>build/constraints/directives.tcl</name>
 			<type>1</type>
-			<location>/home/leoh/spgemm-format-exploration/outer_product/solution1/directives.tcl</location>
+			<location>/home/leoh/spgemm-format-exploration/outer_product/build/directives.tcl</location>
 		</link>
 		<link>
-			<name>solution1/constraints/script.tcl</name>
+			<name>build/constraints/script.tcl</name>
 			<type>1</type>
-			<location>/home/leoh/spgemm-format-exploration/outer_product/solution1/script.tcl</location>
+			<location>/home/leoh/spgemm-format-exploration/outer_product/build/script.tcl</location>
 		</link>
 	</linkedResources>
 </projectDescription>

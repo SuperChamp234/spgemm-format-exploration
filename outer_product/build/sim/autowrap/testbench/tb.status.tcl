@@ -1,0 +1,1 @@
+set ::AESL_AUTOSIM::gTopFileName /home/leoh/spgemm-format-exploration/outer_product/build/./sim/autowrap/testbench/outer_product.cpp_pre.cpp.tb.cpp
